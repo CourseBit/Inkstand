@@ -75,6 +75,19 @@ class Course
     private $category;
 
     /**
+     * @ORM\OneToMany(targetEntity="Module", mappedBy="course")
+     */
+    protected $modules;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->modules = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
      * Get courseId
      *
      * @return integer 
@@ -251,7 +264,7 @@ class Course
      * @param \Inkstand\Bundle\CourseBundle\Entity\CourseCategory $category
      * @return Course
      */
-    public function setCategory(\CourseBit\CourseBundle\Entity\CourseCategory $category = null)
+    public function setCategory(\Inkstand\Bundle\CourseBundle\Entity\CourseCategory $category = null)
     {
         $this->category = $category;
 
@@ -266,5 +279,38 @@ class Course
     public function getCategory()
     {
         return $this->category;
+    }
+
+    /**
+     * Add modules
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Module $modules
+     * @return Course
+     */
+    public function addModule(\Inkstand\Bundle\CourseBundle\Entity\Module $modules)
+    {
+        $this->modules[] = $modules;
+
+        return $this;
+    }
+
+    /**
+     * Remove modules
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Module $modules
+     */
+    public function removeModule(\Inkstand\Bundle\CourseBundle\Entity\Module $modules)
+    {
+        $this->modules->removeElement($modules);
+    }
+
+    /**
+     * Get modules
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getModules()
+    {
+        return $this->modules;
     }
 }
