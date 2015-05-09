@@ -12,7 +12,7 @@ class ModuleType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) {
 
-        $builder->add('moduleId', 'hidden');
+        //$builder->add('moduleId', 'hidden');
         $builder->add('courseId', 'hidden');
         $builder->add('name', 'text', array(
             'attr' => array('class' => 'form-control'),

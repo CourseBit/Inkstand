@@ -5,7 +5,21 @@
 {% block main_content %}
 	<h1>Welcome to the Course:view page</h1>
 	{% for module in course.modules %}
-		<section>{{ module.name }}</section>
+		<hr>
+		<section>
+			<h3>{{ module.name }}</h3>
+			<p>{{ module.description}}</p>
+			<ul class="list-unstyled">
+				{% for item in module.items %}
+					<li>
+						<a href=""><i class="fa fw fa-link"></i> {{ item.name }}</a>
+					</li>
+				{% endfor %}
+			</ul>
+			<a class="btn btn-default btn-xs" href="">{% trans %}Edit{% endtrans %}</a>
+			<a class="btn btn-danger btn-xs" href="">{% trans %}Delete{% endtrans %}</a>
+		</section>
 	{% endfor %}
-	<a href="{{ path('inkstand_course_module_add', {'courseId': course.courseId}) }}"></a>
+	<hr>
+	<a class="btn btn-default" href="{{ path('inkstand_course_module_add', {'courseId': course.courseId}) }}">{% trans %}Add new module{% endtrans %}</a>
 {% endblock %}
