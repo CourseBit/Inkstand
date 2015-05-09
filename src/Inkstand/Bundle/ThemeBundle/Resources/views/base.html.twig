@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>{% block title %}Welcome!{% endblock %}</title>
+	{% stylesheets 
+		'@InkstandThemeBundle/Resources/public/bower_components/font-awesome/css/font-awesome.css'
+		'@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.min.css'
+		'@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css'
+		'@InkstandThemeBundle/Resources/public/css/*'
+	filter='cssrewrite' 
+	%}
+	<link rel="stylesheet" href="{{ asset_url }}" />
+	{% endstylesheets %}
+	{% block stylesheets %}{% endblock %}
+	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+	</head>
+	<body>
+		<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
+			<a class="navmenu-brand visible-md visible-lg" href="#">Inkstand LMS</a>
+			<ul class="nav navmenu-nav">
+				<li><a href="{{ path('inkstand_course_index') }}">Courses</a></li>
+			</ul>
+		</div>
+
+		<div class="navbar navbar-default navbar-fixed-top hidden-md hidden-lg">
+			<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a class="navbar-brand" href="#">Inkstand LMS</a>
+		</div>
+		<div class="container-fluid">
+			<div class="row">
+				<nav style="display:block !important" class="navbar navbar-default navbar-static-top">
+					<div class="container-fluid">
+						<div class="navbar-header navbar-header-full">
+							<ul class="nav navbar-nav navbar-right">
+								<li class="active"><a href="#">Link <span class="sr-only">(current)</span></a></li>
+								<li><a href="#">Link</a></li>
+								{% if app.user %}
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{ app.user.username }} <img class="navbar-img" src="https://s3.amazonaws.com/uifaces/faces/twitter/kerem/128.jpg"> <span class="caret"></span></a>
+									<ul class="dropdown-menu" role="menu">
+										<li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+										<li class="divider"></li>
+										<li><a href="#">Separated link</a></li>
+										<li class="divider"></li>
+										<li><a href="#">One more separated link</a></li>
+									</ul>
+								</li>
+								{% endif %}
+							</ul>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div class="container-fluid">
+			{% if pageHeader is defined %}
+				<div class="page-header page-header-sm">
+					<h1>{{ pageHeader }}</h1>
+				</div>
+			{% endif %}
+
+			{% if breadcrumbs is defined %}
+				<ol class="breadcrumb bg-transparent">
+					{% for breadcrumb in breadcrumbs %}
+						<li><a href="{{ path(breadcrumb.route, breadcrumb.parameters) }}">{{ breadcrumb.title }}</a></li>
+					{% endfor %}
+				</ol>
+			{% endif %}
+
+			{% for flashMessage in app.session.flashbag.get('success') %}
+			    <span class="alert alert-success">{{ flashMessage }}</span>
+			{% endfor %}
+
+			<div class="row">
+				<div class="col-lg-8">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<div class="content" id="short-para" style="display: block;">
+								{% block main_content %}{% endblock %}
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-lg-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">Homepade</div>
+						<div class="panel-body">
+							Panel content
+						</div>
+					</div>
+				</div>
+			</div>
+
+		</div><!-- /.container -->
+		{% javascripts 
+			'@InkstandThemeBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
+			'@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.min.js'
+			'@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js'
+			'@InkstandThemeBundle/Resources/public/js/custom.js'
+		%}
+			<script src="{{ asset_url }}"></script>
+		{% endjavascripts %}
+		{% block javascripts %}{% endblock %}
+	</body>
+</html>

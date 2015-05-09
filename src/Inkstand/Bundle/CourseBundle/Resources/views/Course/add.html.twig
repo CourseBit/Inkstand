@@ -1,0 +1,9 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCourseBundle:Course:add{% endblock %}
+
+{% block main_content %}
+{{ form_start(courseForm) }}
+{{ form_widget(courseForm) }}
+{{ form_end(courseForm) }}
+{% endblock %}

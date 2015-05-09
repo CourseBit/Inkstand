@@ -1,0 +1,65 @@
+<?php
+
+namespace Inkstand\Bundle\CourseBundle\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Course
+ *
+ * @ORM\Table()
+ * @ORM\Entity(repositoryClass="Inkstand\Bundle\CourseBundle\Entity\CourseRepository")
+ */
+class Course
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="course_id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $courseId;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="identifier", type="string", length=255)
+     */
+    private $identifier;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", length=255)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="featured_image", type="string", length=255)
+     */
+    private $featuredImage;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="category_id", type="integer")
+     */
+    private $categoryId;
+}

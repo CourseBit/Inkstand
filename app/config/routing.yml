@@ -1,0 +1,26 @@
+inkstand_user:
+    resource: "@InkstandUserBundle/Resources/config/routing.yml"
+    prefix:   /
+
+inkstand_theme:
+    resource: "@InkstandThemeBundle/Resources/config/routing.yml"
+    prefix:   /
+
+inkstand_course:
+    resource: "@InkstandCourseBundle/Resources/config/routing.php"
+    prefix:   /
+
+inkstand_course_category:
+    resource: "@InkstandCourseBundle/Controller/CourseCategoryController.php"
+    type:     annotation
+
+inkstand_course_metric:
+    resource: "@InkstandCourseBundle/Controller/CourseMetricController.php"
+    type:     annotation
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
+app:
+    resource: "@AppBundle/Controller/"
+    type:     annotation

@@ -1,0 +1,12 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCourseBundle:CourseCategory:view{% endblock %}
+
+{% block main_content %}
+<p>Here are a list of courses under this category:</p>
+<ul>
+	{% for course in category.courses %}
+		<li>{{ course.name }}</li>
+	{% endfor %}
+</ul>
+{% endblock %}

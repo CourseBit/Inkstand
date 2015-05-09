@@ -1,0 +1,11 @@
+parameters:
+    course_category_service.class: Inkstand\Bundle\CourseBundle\Service\CourseCategoryService
+services:
+    course_category_service:
+        class:     "%course_category_service.class%"
+        arguments: [@doctrine.orm.entity_manager]
+    inkstand_course.form.type.task:
+        class: Inkstand\Bundle\CourseBundle\Form\Type\CourseType
+        arguments: [@course_category_service]
+        tags:
+            - { name: form.type, alias: course }

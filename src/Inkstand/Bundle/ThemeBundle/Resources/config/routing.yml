@@ -1,0 +1,3 @@
+inkstand_theme_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: InkstandThemeBundle:Default:index }
