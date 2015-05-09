@@ -1,0 +1,13 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCourseBundle:Module:add{% endblock %}
+
+{% block main_content %}
+
+{% set courseName = course.name %}
+<p class="text-muted">{% trans %}Adding new module to <b>%courseName%</b>{% endtrans %}</p>
+
+{{ form_start(moduleForm) }}
+{{ form_widget(moduleForm) }}
+{{ form_end(moduleForm) }}
+{% endblock %}

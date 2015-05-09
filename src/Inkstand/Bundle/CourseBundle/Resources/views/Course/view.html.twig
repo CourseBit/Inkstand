@@ -3,8 +3,9 @@
 {% block title %}InkstandCourseBundle:Course:view{% endblock %}
 
 {% block main_content %}
-<h1>Welcome to the Course:view page</h1>
-{% for module in course.modules %}
-	<section>{{ module.name }}</section>
-{% endfor %}
+	<h1>Welcome to the Course:view page</h1>
+	{% for module in course.modules %}
+		<section>{{ module.name }}</section>
+	{% endfor %}
+	<a href="{{ path('inkstand_course_module_add', {'courseId': course.courseId}) }}"></a>
 {% endblock %}

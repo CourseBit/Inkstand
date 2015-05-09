@@ -18,6 +18,10 @@ inkstand_course_metric:
     resource: "@InkstandCourseBundle/Controller/CourseMetricController.php"
     type:     annotation
 
+inkstand_course_module:
+    resource: "@InkstandCourseBundle/Controller/ModuleController.php"
+    type:     annotation
+
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"
 

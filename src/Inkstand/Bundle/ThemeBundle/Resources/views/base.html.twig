@@ -75,9 +75,7 @@
 				</ol>
 			{% endif %}
 
-			{% for flashMessage in app.session.flashbag.get('success') %}
-			    <span class="alert alert-success">{{ flashMessage }}</span>
-			{% endfor %}
+			{{ include('InkstandThemeBundle::flash-messages.html.twig') }}
 
 			<div class="row">
 				<div class="col-lg-8">

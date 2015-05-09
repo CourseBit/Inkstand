@@ -35,7 +35,7 @@ class CourseController extends Controller
 		}
 
 		if(is_null($course)) {
-			throw new NotFoundHttpException('Course could not be found');
+			throw new NotFoundHttpException($this->get('translator')->trans('Course could not be found'));
 		}
 
 		return $this->render('InkstandCourseBundle:Course:view.html.twig', array(
