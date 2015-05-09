@@ -44,7 +44,8 @@ class CourseController extends Controller
 				array('title' => 'Home', 'route' => '_demo_login', 'parameters' => array()),
 				array('title' => 'Courses', 'route' => '_demo_login', 'parameters' => array()),
 				array('title' => $course->getName(), 'route' => 'inkstand_course_view', 'parameters' => array('slug' => $course->getSlug()))
-			)
+			),
+			'pageHeader' => 'Course view'
 		)); 
 	}
 

@@ -11,9 +11,11 @@ use Inkstand\Bundle\CourseBundle\Entity\Module;
 use Inkstand\Bundle\CourseBundle\Form\Type\ModuleType;
 
 /**
- * inkstand_course_module_add  /course/module/add/{courseId}
- * inkstand_course_module_edit /course/module/edit/{moduleId}
- *
+ * inkstand_course_module_add       /course/module/add/{courseId}
+ * inkstand_course_module_edit      /course/module/edit/{moduleId}
+ * inkstand_course_module_delete    /course/module/delete/{moduleId}
+ * inkstand_course_module_move      /course/module/move/{moduleId}
+ * inkstand_course_module_duplicate /course/module/duplicate/{moduleId}
  */
 class ModuleController extends Controller
 {
@@ -114,5 +116,32 @@ class ModuleController extends Controller
 			'moduleForm' => $moduleForm->createView(),
 			'pageHeader' => 'Edit Course Module'
 		));
+	}
+
+	/**
+	 * @Route("/course/module/delete/{moduleId}", name="inkstand_course_module_delete")
+	 * @param int $moduleId ID of module to delete
+	 */
+	public function deleteAction()
+	{
+
+	}
+
+	/**
+	 * @Route("/course/module/move/{moduleId}", name="inkstand_course_module_move")
+	 * @param int $moduleId ID of module to move
+	 */
+	public function moveAction()
+	{
+
+	}
+
+	/**
+	 * @Route("/course/module/duplicate/{moduleId}", name="inkstand_course_module_duplicate")
+	 * @param int $moduleId ID of module to duplicate
+	 */
+	public function duplicateAction()
+	{
+
 	}
 }

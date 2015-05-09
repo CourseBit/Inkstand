@@ -1,15 +1,27 @@
 {% for flashMessage in app.session.flashbag.get('success') %}
-    <p class="alert alert-success">{{ flashMessage }}</p>
+    <div class="alert alert-success">
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    	{{ flashMessage }}
+    </div>
 {% endfor %}
 
 {% for flashMessage in app.session.flashbag.get('error') %}
-    <p class="alert alert-danger">{{ flashMessage }}</p>
+    <div class="alert alert-error">
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    	{{ flashMessage }}
+    </div>
 {% endfor %}
 
 {% for flashMessage in app.session.flashbag.get('info') %}
-    <p class="alert alert-info">{{ flashMessage }}</p>
+    <div class="alert alert-info">
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    	{{ flashMessage }}
+    </div>
 {% endfor %}
 
 {% for flashMessage in app.session.flashbag.get('warning') %}
-    <p class="alert alert-warning">{{ flashMessage }}</p>
+    <div class="alert alert-warning">
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+    	{{ flashMessage }}
+    </div>
 {% endfor %}
