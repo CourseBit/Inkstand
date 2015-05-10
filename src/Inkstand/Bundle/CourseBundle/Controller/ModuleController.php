@@ -122,9 +122,56 @@ class ModuleController extends Controller
 	 * @Route("/course/module/delete/{moduleId}", name="inkstand_course_module_delete")
 	 * @param int $moduleId ID of module to delete
 	 */
-	public function deleteAction()
+	public function deleteAction($moduleId)
 	{
+		$request = $this->getRequest();
 
+		$module = $this->getDoctrine()
+		    ->getRepository('InkstandCourseBundle:Module')
+		    ->findOneByModuleId($moduleId);
+
+		if(empty($module)) {
+			throw new NotFoundHttpException($this->get('translator')->trans('Module could not be found'));
+		}
+
+		$course = $this->getDoctrine()
+		    ->getRepository('InkstandCourseBundle:Course')
+		    ->findOneByCourseId($module->getCourseId());
+
+		if(empty($course)) {
+			throw $this->createException($this->get('translator')->trans('Module is not associated with a course'));
+		}
+
+		$deleteForm = $this->createFormBuilder()
+			->add('delete', 'submit', array(
+				'label' => $this->get('translator')->trans('Delete'),
+			))
+			->add('cancel', 'submit', array(
+				'label' => $this->get('translator')->trans('Cancel'),
+			))
+			->getForm();
+
+		if($this->getRequest()->isMethod('POST')) {
+
+			$deleteForm->handleRequest($request);
+
+			if($deleteForm->get('delete')->isClicked()) {
+				$em = $this->getDoctrine()->getManager();
+		        $em->remove($module);
+		        $em->flush();
+
+		        $session = $this->getRequest()->getSession();
+	        	$session->getFlashBag()->add('success', 'Course module "' . $module->getName() . '" deleted');
+
+	        	return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $course->getSlug())));
+			}
+		}
+
+		return $this->render('InkstandCourseBundle:Module:delete.html.twig', array(
+			'module' => $module,
+			'course' => $course,
+			'deleteForm' => $deleteForm->createView()
+		));
 	}
 
 	/**

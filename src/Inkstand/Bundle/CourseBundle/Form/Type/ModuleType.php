@@ -10,9 +10,8 @@ use Symfony\Component\Form\FormEvent;
 
 class ModuleType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options) {
-
-        //$builder->add('moduleId', 'hidden');
+    public function buildForm(FormBuilderInterface $builder, array $options) 
+    {
         $builder->add('courseId', 'hidden');
         $builder->add('name', 'text', array(
             'attr' => array('class' => 'form-control'),

@@ -49,9 +49,9 @@ class Module
     private $course;
 
     /**
-     * @ORM\OneToMany(targetEntity="Item", mappedBy="module")
+     * @ORM\OneToMany(targetEntity="Activity", mappedBy="module", cascade={"remove"})
      */
-    protected $items;
+    protected $activities;
 
     /**
      * Get moduleId
@@ -159,39 +159,39 @@ class Module
      */
     public function __construct()
     {
-        $this->items = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
-     * Add items
+     * Add activity
      *
-     * @param \Inkstand\Bundle\CourseBundle\Entity\Item $items
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Activity $activity
      * @return Module
      */
-    public function addItem(\Inkstand\Bundle\CourseBundle\Entity\Item $items)
+    public function addActivity(\Inkstand\Bundle\CourseBundle\Entity\Activity $activity)
     {
-        $this->items[] = $items;
+        $this->activities[] = $activity;
 
         return $this;
     }
 
     /**
-     * Remove items
+     * Remove activities
      *
-     * @param \Inkstand\Bundle\CourseBundle\Entity\Item $items
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Activity $activities
      */
-    public function removeItem(\Inkstand\Bundle\CourseBundle\Entity\Item $items)
+    public function removeActivity(\Inkstand\Bundle\CourseBundle\Entity\Activity $activities)
     {
-        $this->items->removeElement($items);
+        $this->activities->removeElement($activities);
     }
 
     /**
-     * Get items
+     * Get activities
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getItems()
+    public function getActivities()
     {
-        return $this->items;
+        return $this->activities;
     }
 }

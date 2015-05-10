@@ -1,0 +1,26 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCourseBundle:Module:delete{% endblock %}
+
+{% block main_content %}
+
+{% set courseName = course.name %}
+{% set moduleName = module.name %}
+<p class="text-muted">{% trans %}Deleting module <b>%moduleName%</b> in course <b>%courseName%</b>{% endtrans %}</p>
+
+{% if module.activities|length > 0 %}
+	<div class="alert alert-warning">{% trans %}<b>Warning!</b> Deleting this module will also delete the following activities:{% endtrans %}
+		<ul>
+			{% for activity in module.activities %}
+				<li>{{ activity.name }}</li>
+			{% endfor %}
+		</ul>
+		<hr>
+		<button class="btn btn-default">Move activties</button>
+	</div>
+{% endif %}
+
+{{ form_start(deleteForm) }}
+{{ form_widget(deleteForm) }}
+{{ form_end(deleteForm) }}
+{% endblock %}

@@ -5,21 +5,21 @@ namespace Inkstand\Bundle\CourseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Item
+ * Activity
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="Inkstand\Bundle\CourseBundle\Entity\ItemRepository")
+ * @ORM\Entity(repositoryClass="Inkstand\Bundle\CourseBundle\Entity\ActivityRepository")
  */
-class Item
+class Activity
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="item_id", type="integer")
+     * @ORM\Column(name="activity_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $itemId;
+    private $activityId;
 
     /**
      * @var integer
@@ -45,31 +45,31 @@ class Item
     /**
      * @var integer
      *
-     * @ORM\Column(name="item_type_id", type="integer")
+     * @ORM\Column(name="activity_type_id", type="integer")
      */
-    private $itemTypeId;
+    private $activityTypeId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Module", inversedBy="items")
+     * @ORM\ManyToOne(targetEntity="Module", inversedBy="activities")
      * @ORM\JoinColumn(name="module_id", referencedColumnName="module_id")
      */
     private $module;
 
     /**
-     * Get itemId
+     * Get activityId
      *
      * @return integer 
      */
-    public function getItemId()
+    public function getActivityId()
     {
-        return $this->itemId;
+        return $this->activityId;
     }
 
     /**
      * Set moduleId
      *
      * @param integer $moduleId
-     * @return Item
+     * @return Activity
      */
     public function setModuleId($moduleId)
     {
@@ -92,7 +92,7 @@ class Item
      * Set name
      *
      * @param string $name
-     * @return Item
+     * @return Activity
      */
     public function setName($name)
     {
@@ -115,7 +115,7 @@ class Item
      * Set description
      *
      * @param string $description
-     * @return Item
+     * @return Activity
      */
     public function setDescription($description)
     {
@@ -135,25 +135,48 @@ class Item
     }
 
     /**
-     * Set itemTypeId
+     * Set activityTypeId
      *
-     * @param integer $itemTypeId
-     * @return Item
+     * @param integer $activityTypeId
+     * @return Activity
      */
-    public function setItemTypeId($itemTypeId)
+    public function setActivityTypeId($activityTypeId)
     {
-        $this->itemTypeId = $itemTypeId;
+        $this->activityTypeId = $activityTypeId;
 
         return $this;
     }
 
     /**
-     * Get itemTypeId
+     * Get activityTypeId
      *
      * @return integer 
      */
-    public function getItemTypeId()
+    public function getActivityTypeId()
     {
-        return $this->itemTypeId;
+        return $this->activityTypeId;
+    }
+
+    /**
+     * Set module
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Module $module
+     * @return Activity
+     */
+    public function setModule(\Inkstand\Bundle\CourseBundle\Entity\Module $module = null)
+    {
+        $this->module = $module;
+
+        return $this;
+    }
+
+    /**
+     * Get module
+     *
+     * @return \Inkstand\Bundle\CourseBundle\Entity\Module 
+     */
+    public function getModule()
+    {
+        return $this->module;
     }
 }
