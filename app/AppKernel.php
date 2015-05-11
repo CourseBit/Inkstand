@@ -21,6 +21,7 @@ class AppKernel extends Kernel
             new Inkstand\Bundle\ThemeBundle\InkstandThemeBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Inkstand\Bundle\UserBundle\InkstandUserBundle(),
+            new Inkstand\Bundle\StandardModulesBundle\InkstandStandardModulesBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
@@ -29,6 +30,7 @@ class AppKernel extends Kernel
             $bundles[] = new Symfony\Bundle\WebProfilerBundle\WebProfilerBundle();
             $bundles[] = new Sensio\Bundle\DistributionBundle\SensioDistributionBundle();
             $bundles[] = new Sensio\Bundle\GeneratorBundle\SensioGeneratorBundle();
+            $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
         }
 
         return $bundles;

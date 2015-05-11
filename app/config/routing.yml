@@ -1,3 +1,7 @@
+inkstand_standard_modules:
+    resource: "@InkstandStandardModulesBundle/Resources/config/routing.yml"
+    prefix:   /
+
 inkstand_user:
     resource: "@InkstandUserBundle/Resources/config/routing.yml"
     prefix:   /

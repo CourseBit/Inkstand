@@ -56,7 +56,7 @@ class Activity
     private $module;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ActivityType", inversedBy="activities")
+     * @ORM\ManyToOne(targetEntity="Activity", inversedBy="activities")
      * @ORM\JoinColumn(name="activity_type_id", referencedColumnName="activity_type_id")
      */
     private $activityType;
@@ -184,28 +184,5 @@ class Activity
     public function getModule()
     {
         return $this->module;
-    }
-
-    /**
-     * Set activityType
-     *
-     * @param \Inkstand\Bundle\CourseBundle\Entity\Activity $activityType
-     * @return Activity
-     */
-    public function setActivityType(\Inkstand\Bundle\CourseBundle\Entity\Activity $activityType = null)
-    {
-        $this->activityType = $activityType;
-
-        return $this;
-    }
-
-    /**
-     * Get activityType
-     *
-     * @return \Inkstand\Bundle\CourseBundle\Entity\Activity 
-     */
-    public function getActivityType()
-    {
-        return $this->activityType;
     }
 }
