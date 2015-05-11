@@ -124,7 +124,7 @@ class ModuleController extends Controller
 	 */
 	public function deleteAction()
 	{
-
+		$request = $this->getRequest();
 	}
 
 	/**
