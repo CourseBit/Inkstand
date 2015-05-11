@@ -50,7 +50,7 @@ class CourseType extends AbstractType
             ->add('featuredImage', 'text', array(
                 'attr' => array('class' => 'form-control'),
                 'label_attr' => array('class' => 'col-sm-2 control-label')
-            ));
+            ))
             
             ->add('save', 'submit');
     }
