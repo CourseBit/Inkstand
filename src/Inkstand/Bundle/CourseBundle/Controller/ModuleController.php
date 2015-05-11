@@ -125,6 +125,7 @@ class ModuleController extends Controller
 	public function deleteAction($moduleId)
 	{
 		$request = $this->getRequest();
+<<<<<<< HEAD
 
 		$module = $this->getDoctrine()
 		    ->getRepository('InkstandCourseBundle:Module')
@@ -172,6 +173,8 @@ class ModuleController extends Controller
 			'course' => $course,
 			'deleteForm' => $deleteForm->createView()
 		));
+=======
+>>>>>>> 832550daab9f900b585ccb16a2ae7618392ed1f7
 	}
 
 	/**
