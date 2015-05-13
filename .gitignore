@@ -9,4 +9,4 @@
 /composer.phar
 /vendor/
 /web/bundles/
-*.php~
+**/*.php~
