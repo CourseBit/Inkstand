@@ -29,9 +29,23 @@ class ActivityType
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Activity", mappedBy="activityType")
+     * @var string
+     *
+     * @ORM\Column(name="bundle_name", type="string", length=255)
+     */
+    private $bundleName;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Activity", mappedBy="module", cascade={"remove"})
      */
     private $activities;
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get activityTypeId
@@ -65,14 +79,6 @@ class ActivityType
     {
         return $this->name;
     }
-    
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
-    }
 
     /**
      * Add activities
@@ -105,5 +111,28 @@ class ActivityType
     public function getActivities()
     {
         return $this->activities;
+    }
+
+    /**
+     * Set bundleName
+     *
+     * @param string $bundleName
+     * @return ActivityType
+     */
+    public function setBundleName($bundleName)
+    {
+        $this->bundleName = $bundleName;
+
+        return $this;
+    }
+
+    /**
+     * Get bundleName
+     *
+     * @return string 
+     */
+    public function getBundleName()
+    {
+        return $this->bundleName;
     }
 }

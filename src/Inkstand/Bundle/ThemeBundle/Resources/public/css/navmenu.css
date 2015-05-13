@@ -35,7 +35,7 @@ body {
 
 @media (min-width: 992px) {
   body {
-    padding: 0 0 0 300px;
+    padding: 0 0 0 200px;
   }
   .navmenu {
     padding-top: 0;

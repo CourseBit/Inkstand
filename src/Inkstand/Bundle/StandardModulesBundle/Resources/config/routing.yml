@@ -1,3 +1,0 @@
-inkstand_standard_modules_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: InkstandStandardModulesBundle:Default:index }

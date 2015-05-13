@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
- * @ORM\DiscriminatorColumn(name="activity_type_id", type="integer")
+ * @ORM\DiscriminatorColumn(name="activity_type_discriminator", type="string")
  */
 class Activity
 {
@@ -19,6 +19,13 @@ class Activity
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $activityId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="activity_type_id", type="integer")
+     */
+    private $activityTypeId;
 
     /**
      * @var integer
@@ -37,6 +44,13 @@ class Activity
     /**
      * @var string
      *
+     * @ORM\Column(name="slug", type="string", length=255)
+     */
+    private $slug;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -51,7 +65,7 @@ class Activity
      * @ORM\ManyToOne(targetEntity="ActivityType", inversedBy="activities")
      * @ORM\JoinColumn(name="activity_type_id", referencedColumnName="activity_type_id")
      */
-    private $activityType;
+    protected $activityType;
 
     /**
      * Get activityId
@@ -61,6 +75,29 @@ class Activity
     public function getActivityId()
     {
         return $this->activityId;
+    }
+
+    /**
+     * Set activityTypeId
+     *
+     * @param integer $activityTypeId
+     * @return Activity
+     */
+    public function setActivityTypeId($activityTypeId)
+    {
+        $this->activityTypeId = $activityTypeId;
+
+        return $this;
+    }
+
+    /**
+     * Get activityTypeId
+     *
+     * @return integer 
+     */
+    public function getActivityTypeId()
+    {
+        return $this->activityTypeId;
     }
 
     /**
@@ -133,29 +170,6 @@ class Activity
     }
 
     /**
-     * Set activityTypeId
-     *
-     * @param integer $activityTypeId
-     * @return Activity
-     */
-    public function setActivityTypeId($activityTypeId)
-    {
-        $this->activityTypeId = $activityTypeId;
-
-        return $this;
-    }
-
-    /**
-     * Get activityTypeId
-     *
-     * @return integer 
-     */
-    public function getActivityTypeId()
-    {
-        return $this->activityTypeId;
-    }
-
-    /**
      * Set module
      *
      * @param \Inkstand\Bundle\CourseBundle\Entity\Module $module
@@ -181,10 +195,10 @@ class Activity
     /**
      * Set activityType
      *
-     * @param \Inkstand\Bundle\CourseBundle\Entity\Activity $activityType
+     * @param \Inkstand\Bundle\CourseBundle\Entity\ActivityType $activityType
      * @return Activity
      */
-    public function setActivityType(\Inkstand\Bundle\CourseBundle\Entity\Activity $activityType = null)
+    public function setActivityType(\Inkstand\Bundle\CourseBundle\Entity\ActivityType $activityType = null)
     {
         $this->activityType = $activityType;
 
@@ -194,10 +208,33 @@ class Activity
     /**
      * Get activityType
      *
-     * @return \Inkstand\Bundle\CourseBundle\Entity\Activity 
+     * @return \Inkstand\Bundle\CourseBundle\Entity\ActivityType 
      */
     public function getActivityType()
     {
         return $this->activityType;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Activity
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

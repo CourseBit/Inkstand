@@ -38,8 +38,13 @@ class CourseController extends Controller
 			throw new NotFoundHttpException($this->get('translator')->trans('Course could not be found'));
 		}
 
+		$activityTypes = $this->getDoctrine()
+			->getRepository('InkstandCourseBundle:ActivityType')
+		    ->findAll();
+
 		return $this->render('InkstandCourseBundle:Course:view.html.twig', array(
 			'course' => $course,
+			'activityTypes' => $activityTypes,
 			'breadcrumbs' => array(
 				array('title' => 'Home', 'route' => '_demo_login', 'parameters' => array()),
 				array('title' => 'Courses', 'route' => '_demo_login', 'parameters' => array()),

@@ -1,17 +1,18 @@
 <?php
 
-namespace Inkstand\Bundle\DataFixtures\ORM;
+namespace Inkstand\Activity\ExternalLinkBundle\DataFixtures\ORM;
 
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Inkstand\Bundle\CourseBundle\Entity\ActivityType;
 
-class LoadModulesTypeData implements FixtureInterface
+class LoadExternalLinkTypeData implements FixtureInterface
 {
 	public function load(ObjectManager $manager)
 	{
 		$externalLinkType = new ActivityType();
-		$externalLinkType->setName('external_link');
+		$externalLinkType->setName('External Link');
+		$externalLinkType->setBundleName('InkstandExternalLinkBundle');
 
 		$manager->persist($externalLinkType);
 		$manager->flush();

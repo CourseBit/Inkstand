@@ -6,10 +6,6 @@ inkstand_external_link:
     resource: "@InkstandExternalLinkBundle/Resources/config/routing.yml"
     prefix:   /
 
-inkstand_standard_modules:
-    resource: "@InkstandStandardModulesBundle/Resources/config/routing.yml"
-    prefix:   /
-
 inkstand_user:
     resource: "@InkstandUserBundle/Resources/config/routing.yml"
     prefix:   /
@@ -33,6 +29,11 @@ inkstand_course_metric:
 inkstand_course_module:
     resource: "@InkstandCourseBundle/Controller/ModuleController.php"
     type:     annotation
+
+inkstand_course_activty:
+    resource: "@InkstandCourseBundle/Controller/ActivityController.php"
+    type:     annotation
+
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

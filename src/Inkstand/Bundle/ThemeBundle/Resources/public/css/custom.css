@@ -13,3 +13,8 @@
 	margin-top:0;
 	font-size:28px;
 }
+
+/* Make the navmenu narrower */
+.navmenu-fixed-left {
+	width:200px;
+}

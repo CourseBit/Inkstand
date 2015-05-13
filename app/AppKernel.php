@@ -21,7 +21,6 @@ class AppKernel extends Kernel
             new Inkstand\Bundle\ThemeBundle\InkstandThemeBundle(),
             new FOS\UserBundle\FOSUserBundle(),
             new Inkstand\Bundle\UserBundle\InkstandUserBundle(),
-            new Inkstand\Bundle\StandardModulesBundle\InkstandStandardModulesBundle(),
             new Inkstand\Activity\ExternalLinkBundle\InkstandExternalLinkBundle(),
             new Inkstand\Activity\ForumBundle\InkstandForumBundle(),
         );

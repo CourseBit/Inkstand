@@ -22,7 +22,7 @@
 		<ul class="list-unstyled">
 			{% for activity in module.activities %}
 				<li>
-					<a href=""><i class="fa fw fa-link"></i> {{ activity.name }}</a>
+					<a href="{{ path('inkstand_course_activity_view', {'slug':activity.activityId}) }}"><i class="fa fw fa-link"></i> {{ activity.name }}</a>
 					<div class="btn-group">
 						<button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
 							<i class="fa fa-cog"></i> <span class="hidden-xs">{% trans %}Manage Activity{% endtrans %}</span> <span class="caret"></span>
