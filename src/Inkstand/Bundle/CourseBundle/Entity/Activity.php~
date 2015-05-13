@@ -5,10 +5,9 @@ namespace Inkstand\Bundle\CourseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Activity
- *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Inkstand\Bundle\CourseBundle\Entity\ActivityRepository")
+ * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="activity_type_id", type="integer")
  */
 class Activity
 {
@@ -43,23 +42,10 @@ class Activity
     private $description;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="activity_type_id", type="integer")
-     */
-    private $activityTypeId;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Module", inversedBy="activities")
      * @ORM\JoinColumn(name="module_id", referencedColumnName="module_id")
      */
     private $module;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Activity", inversedBy="activities")
-     * @ORM\JoinColumn(name="activity_type_id", referencedColumnName="activity_type_id")
-     */
-    private $activityType;
 
     /**
      * Get activityId
@@ -184,5 +170,28 @@ class Activity
     public function getModule()
     {
         return $this->module;
+    }
+
+    /**
+     * Set activityType
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Activity $activityType
+     * @return Activity
+     */
+    public function setActivityType(\Inkstand\Bundle\CourseBundle\Entity\Activity $activityType = null)
+    {
+        $this->activityType = $activityType;
+
+        return $this;
+    }
+
+    /**
+     * Get activityType
+     *
+     * @return \Inkstand\Bundle\CourseBundle\Entity\Activity 
+     */
+    public function getActivityType()
+    {
+        return $this->activityType;
     }
 }

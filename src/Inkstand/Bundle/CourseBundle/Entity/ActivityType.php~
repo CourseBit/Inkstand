@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ActivityType
  *
- * @ORM\Table()
+ * @ORM\Table(name="activity_type")
  * @ORM\Entity(repositoryClass="Inkstand\Bundle\CourseBundle\Entity\ActivityTypeRepository")
  */
 class ActivityType
@@ -64,5 +64,46 @@ class ActivityType
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->activities = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add activities
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Activity $activities
+     * @return ActivityType
+     */
+    public function addActivity(\Inkstand\Bundle\CourseBundle\Entity\Activity $activities)
+    {
+        $this->activities[] = $activities;
+
+        return $this;
+    }
+
+    /**
+     * Remove activities
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Activity $activities
+     */
+    public function removeActivity(\Inkstand\Bundle\CourseBundle\Entity\Activity $activities)
+    {
+        $this->activities->removeElement($activities);
+    }
+
+    /**
+     * Get activities
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getActivities()
+    {
+        return $this->activities;
     }
 }

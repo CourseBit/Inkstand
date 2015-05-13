@@ -1,0 +1,3 @@
+inkstand_external_link_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: InkstandExternalLinkBundle:Default:index }

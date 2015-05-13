@@ -1,0 +1,3 @@
+inkstand_forum_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: InkstandForumBundle:Default:index }

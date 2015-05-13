@@ -1,0 +1,4 @@
+services:
+#    inkstand_external_link.example:
+#        class: Inkstand\Activity\ExternalLinkBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]

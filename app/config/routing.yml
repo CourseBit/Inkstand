@@ -1,3 +1,11 @@
+inkstand_forum:
+    resource: "@InkstandForumBundle/Resources/config/routing.yml"
+    prefix:   /
+
+inkstand_external_link:
+    resource: "@InkstandExternalLinkBundle/Resources/config/routing.yml"
+    prefix:   /
+
 inkstand_standard_modules:
     resource: "@InkstandStandardModulesBundle/Resources/config/routing.yml"
     prefix:   /

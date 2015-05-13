@@ -22,6 +22,8 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Inkstand\Bundle\UserBundle\InkstandUserBundle(),
             new Inkstand\Bundle\StandardModulesBundle\InkstandStandardModulesBundle(),
+            new Inkstand\Activity\ExternalLinkBundle\InkstandExternalLinkBundle(),
+            new Inkstand\Activity\ForumBundle\InkstandForumBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

@@ -5,10 +5,9 @@ namespace Inkstand\Bundle\CourseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Activity
- *
- * @ORM\Table()
- * @ORM\Entity(repositoryClass="Inkstand\Bundle\CourseBundle\Entity\ActivityRepository")
+ * @ORM\Entity
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="activity_type_id", type="integer")
  */
 class Activity
 {
@@ -41,13 +40,6 @@ class Activity
      * @ORM\Column(name="description", type="text")
      */
     private $description;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="activity_type_id", type="integer")
-     */
-    private $activityTypeId;
 
     /**
      * @ORM\ManyToOne(targetEntity="Module", inversedBy="activities")
