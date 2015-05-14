@@ -14,5 +14,33 @@ use Inkstand\Bundle\CourseBundle\Entity\Activity;
  */
 class ExternalLink extends Activity
 {
-	
+
+    /**
+     * @var \Inkstand\Bundle\CourseBundle\Entity\ActivityType
+     */
+    protected $activityType;
+
+
+    /**
+     * Set activityType
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\ActivityType $activityType
+     * @return ExternalLink
+     */
+    public function setActivityType(\Inkstand\Bundle\CourseBundle\Entity\ActivityType $activityType = null)
+    {
+        $this->activityType = $activityType;
+
+        return $this;
+    }
+
+    /**
+     * Get activityType
+     *
+     * @return \Inkstand\Bundle\CourseBundle\Entity\ActivityType 
+     */
+    public function getActivityType()
+    {
+        return $this->activityType;
+    }
 }

@@ -1,0 +1,46 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandForumBundle:Forum:view{% endblock %}
+
+{% block main_content %}
+	<div class="btn-group">
+		<a href="" class="btn btn-primary btn-sm">{% trans %}New Topic{% endtrans %}</a>
+	</div>
+	<hr>
+	<div class="table-responsive">
+		<table class="table">
+			<thead>
+				<tr>
+					<th class="text-muted">{% trans %}Topic{% endtrans %}</th>
+					<th class="text-muted">{% trans %}Author{% endtrans %}</th>
+					<th class="text-muted text-center">{% trans %}Posts{% endtrans %}</th>
+					<th class="text-muted text-center">{% trans %}Views{% endtrans %}</th>
+					<th class="text-muted text-center">{% trans %}Active{% endtrans %}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="active">
+					<td><a href="{{ path('inkstand_forum_discussion_view', {'slug':'test'}) }}"><b>Why is Joey so naughty?</b></a></td>
+					<td><a href="#"><img width="25" src="http://www.coursebit.net/wp-content/uploads/2014/09/about_catherine.png"> <b>Catherine Conradt</b></a></td>
+					<td class="text-center"><b>5</b></td>
+					<td class="text-center text-muted"><b>1014</b></td>
+					<td class="text-center text-muted"><b>10m</b></td>
+				</tr>
+				<tr>
+					<td><a href="#">Why is my mom so emotional?</a></td>
+					<td><a href="#"><img width="25" src="http://www.coursebit.net/wp-content/uploads/2014/09/about_catherine.png"> Joseph Conradt II</a></td>
+					<td class="text-center">1</td>
+					<td class="text-center text-muted">5603</td>
+					<td class="text-center text-muted">2h</td>
+				</tr>
+				<tr>
+					<td><a href="#">I am the best programmer ever</a></td>
+					<td><a href="#"><img width="25" src="http://www.coursebit.net/wp-content/uploads/2014/09/about_joe2.png"> Joseph Conradt</a></td>
+					<td class="text-center">0</td>
+					<td class="text-center text-muted">14</td>
+					<td class="text-center text-muted">3w</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

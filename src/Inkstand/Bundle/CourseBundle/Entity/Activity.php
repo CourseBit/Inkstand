@@ -35,6 +35,13 @@ class Activity
     private $moduleId;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="preferences_id", type="integer", nullable=true)
+     */
+    private $preferencesId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -62,7 +69,7 @@ class Activity
     private $module;
 
     /**
-     * @ORM\ManyToOne(targetEntity="ActivityType", inversedBy="activities")
+     * @ORM\ManyToOne(targetEntity="Inkstand\Bundle\CourseBundle\Entity\ActivityType", inversedBy="activities")
      * @ORM\JoinColumn(name="activity_type_id", referencedColumnName="activity_type_id")
      */
     protected $activityType;
@@ -124,6 +131,29 @@ class Activity
     }
 
     /**
+     * Set preferencesId
+     *
+     * @param integer $preferencesId
+     * @return Activity
+     */
+    public function setPreferencesId($preferencesId)
+    {
+        $this->preferencesId = $preferencesId;
+
+        return $this;
+    }
+
+    /**
+     * Get preferencesId
+     *
+     * @return integer 
+     */
+    public function getPreferencesId()
+    {
+        return $this->preferencesId;
+    }
+
+    /**
      * Set name
      *
      * @param string $name
@@ -144,6 +174,29 @@ class Activity
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set slug
+     *
+     * @param string $slug
+     * @return Activity
+     */
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
+
+        return $this;
+    }
+
+    /**
+     * Get slug
+     *
+     * @return string 
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 
     /**
@@ -213,28 +266,5 @@ class Activity
     public function getActivityType()
     {
         return $this->activityType;
-    }
-
-    /**
-     * Set slug
-     *
-     * @param string $slug
-     * @return Activity
-     */
-    public function setSlug($slug)
-    {
-        $this->slug = $slug;
-
-        return $this;
-    }
-
-    /**
-     * Get slug
-     *
-     * @return string 
-     */
-    public function getSlug()
-    {
-        return $this->slug;
     }
 }

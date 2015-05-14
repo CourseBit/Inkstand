@@ -7,6 +7,8 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
+use Inkstand\Bundle\CourseBundle\Form\Type\ActivityType;
+
 /**
  * inkstand_course_activity_view /course/activity/view/{slug}
  * inkstand_course_activity_add  /course/activity/add/{activityTypeId}
@@ -59,7 +61,48 @@ class ActivityController extends Controller
 		if($activityType === null) {
 			throw new NotFoundHttpException($this->get('translator')->trans('Activity Type could not be found'));
 		}
+	}
 
-		
+	/**
+	 * @Route("/course/activity/edit/{activityId}", name="inkstand_course_activity_edit")
+	 * @param int $activityId ID of activity to edit
+	 */
+	public function editAction($activityId)
+	{
+		$request = $this->getRequest();
+
+		$activity = $this->getDoctrine()
+		    ->getRepository('InkstandCourseBundle:Activity')
+		    ->findOneByActivityId($activityId);
+
+		if(empty($activity)) {
+			throw new NotFoundHttpException($this->get('translator')->trans('Activity could not be found'));
+		}
+
+		$activityForm = $this->createForm(new ActivityType(), $activity, array(
+			'action' => $this->generateUrl('inkstand_course_activity_edit', array('activityId' => $activity->getActivityId())),
+			'method' => 'POST'
+		));
+
+		dump($request);
+
+		$activityForm->handleRequest($request);
+
+		if ($activityForm->isValid()) {
+	        $em = $this->getDoctrine()->getManager();
+	        $em->persist($activity);
+	        $em->flush();
+	 
+	        $session = $this->getRequest()->getSession();
+	        $session->getFlashBag()->add('success', 'Course activity "' . $activity->getName() . '" edited');
+	 		
+	        //return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $course->getSlug())));
+	    }
+
+	    return $this->render('InkstandCourseBundle:Activity:edit.html.twig', array(
+	    	'activity' => $activity,
+			'activityForm' => $activityForm->createView(),
+			'pageHeader' => 'Edit Course Activity'
+		));
 	}
 }

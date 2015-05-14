@@ -34,6 +34,9 @@ inkstand_course_activty:
     resource: "@InkstandCourseBundle/Controller/ActivityController.php"
     type:     annotation
 
+inkstand_activity_forum:
+    resource: "@InkstandForumBundle/Controller/ForumDiscussionController.php"
+    type:     annotation
 
 fos_user:
     resource: "@FOSUserBundle/Resources/config/routing/all.xml"

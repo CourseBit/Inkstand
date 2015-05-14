@@ -5,21 +5,21 @@ namespace Inkstand\Activity\ForumBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * ForumThread
+ * ForumDiscussion
  *
- * @ORM\Table(name="forum_thread")
+ * @ORM\Table(name="forum_discussion")
  * @ORM\Entity
  */
-class ForumThread
+class ForumDiscussion
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="forum_thread_id", type="integer")
+     * @ORM\Column(name="forum_discussion_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $forumThreadId;
+    private $forumDiscussionId;
 
     /**
      * @var integer
@@ -50,13 +50,13 @@ class ForumThread
 
 
     /**
-     * Get forumThreadId
+     * Get forumDiscussionId
      *
      * @return integer 
      */
-    public function getForumThreadId()
+    public function getForumDiscussionId()
     {
-        return $this->forumThreadId;
+        return $this->forumDiscussionId;
     }
 
     /**

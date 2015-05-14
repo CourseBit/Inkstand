@@ -9,8 +9,13 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
 class ForumController extends Controller
 {
+	/**
+	 * View a forum activity. 
+     *
+	 * This method is called from InkstandCourseBundle:Activity:view
+	 */
 	public function viewAction($activity) 
 	{
-		die("Viewing forum");
+		return $this->render('InkstandForumBundle:Forum:view.html.twig', array());
 	}
 }
