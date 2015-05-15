@@ -6,7 +6,7 @@ Development is in early prototyping phases. Installation can be done for evaluat
 
 ## Release Date
 
-Inkstand is developed in my free time, however I plan on releaseing a beta version of Inkstand in **November 2015**. 
+Inkstand is developed in my free time, however I plan on releasing a beta version of Inkstand in **November 2015**. 
 
  - Version 0.5: November 2015 **Beta**
  - Version 1.0: May 2016 **Stable**
@@ -21,7 +21,7 @@ Inkstand aims to be the modern solution for online learning.
  - Easy application flow that does not require many "click-throughs" to get to content.
  - Robust features that do not clutter the learning experience.
  - Flexible system that can be extended modularly.
- - Free to download and install on most hosting. While Inkstand uses modern tools, my goal is to create a distibution that requires little technical knowledge to install and can be setup on shared hosting.
+ - Free to download and install on most hosting. While Inkstand uses modern tools, my goal is to create a distribution that requires little technical knowledge to install and can be setup on shared hosting.
  - Solid performance and quick page load times. 
  
 ## Contributing
