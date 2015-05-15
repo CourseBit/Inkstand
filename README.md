@@ -17,9 +17,9 @@ Inkstand is developed in my free time, however I plan on releaseing a beta versi
 Inkstand aims to be the modern solution for online learning. 
 
  - Enhanced user learning experience on any device.
+ - Full library of learning activities (discussion forums, quizzes, SCORM, etc.)
  - Easy application flow that does not require many "click-throughs" to get to content.
  - Robust features that do not clutter the learning experience.
- - Full library of learning activities (discussion forums, quizzes, SCORM, etc.)
  - Flexible system that can be extended modularly.
  - Free to download and install on most hosting. While Inkstand uses modern tools, my goal is to create a distibution that requires little technical knowledge to install and can be setup on shared hosting.
  - Solid performance and quick page load times. 
