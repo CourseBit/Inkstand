@@ -1,0 +1,23 @@
+inkstand_course:
+    resource: "@InkstandCourseBundle/Controller/CourseController.php"
+    type:     annotation
+
+inkstand_course_category:
+    resource: "@InkstandCourseBundle/Controller/CourseCategoryController.php"
+    type:     annotation
+
+inkstand_course_metric:
+    resource: "@InkstandCourseBundle/Controller/CourseMetricController.php"
+    type:     annotation
+
+inkstand_course_module:
+    resource: "@InkstandCourseBundle/Controller/ModuleController.php"
+    type:     annotation
+
+inkstand_course_activty:
+    resource: "@InkstandCourseBundle/Controller/ActivityController.php"
+    type:     annotation
+
+inkstand_activity_forum:
+    resource: "@InkstandForumBundle/Controller/ForumDiscussionController.php"
+    type:     annotation

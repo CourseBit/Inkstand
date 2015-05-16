@@ -56,6 +56,13 @@ class Activity
     private $description;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="sort_order", type="integer")
+     */
+    private $sortOrder;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Module", inversedBy="activities")
      * @ORM\JoinColumn(name="module_id", referencedColumnName="module_id")
      */

@@ -12,12 +12,23 @@ use Inkstand\Bundle\CourseBundle\Form\Type\CourseType;
 
 class CourseController extends Controller
 {
+	/**
+	 * Course index page
+	 * 
+	 * @Route("/course", name="inkstand_course_index")
+	 */
 	public function indexAction()
 	{
 
 		return $this->render('InkstandCourseBundle:Course:index.html.twig', array());    
 	}
 
+	/**
+	 * View a course
+	 * 
+	 * @param mixed $slug Either the course_id or course_slug 
+	 * @Route("/course/view/{slug}", name="inkstand_course_view")
+	 */
 	public function viewAction($slug)
 	{
 		$course = null;
@@ -52,6 +63,11 @@ class CourseController extends Controller
 		)); 
 	}
 
+	/**
+	 * Add a course
+	 * 
+	 * @Route("/course/add", name="inkstand_course_add")
+	 */
 	public function addAction()
 	{
 		$request = $this->getRequest();

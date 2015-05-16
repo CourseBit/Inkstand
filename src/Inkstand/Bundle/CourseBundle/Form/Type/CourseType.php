@@ -21,18 +21,10 @@ class CourseType extends AbstractType
     {
         $builder
             ->add('courseId', 'hidden')
-            ->add('name', 'text', array(
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-sm-2 control-label')
-            ))
-            ->add('slug', 'text', array(
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-sm-2 control-label')
-            ))
+            ->add('name', 'text')
+            ->add('slug', 'text')
             ->add('categoryId', 'choice', array(
                 'choices' => $this->courseCategoryService->getFormattedList(),
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-sm-2 control-label'),
                 'label' => 'Category'
             ))
             ->add('identifier', 'text', array(
@@ -49,7 +41,7 @@ class CourseType extends AbstractType
             ))
             ->add('featuredImage', 'text', array(
                 'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-sm-2 control-label')
+                'label_attr' => array('class' => 'col-sm-2 control-label'),
             ))
             
             ->add('save', 'submit');
