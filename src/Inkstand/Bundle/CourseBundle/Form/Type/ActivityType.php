@@ -12,6 +12,13 @@ use Inkstand\Activity\ForumBundle\Form\Type\ForumPreferencesType;
 
 class ActivityType extends AbstractType
 {
+    private $preferences;
+
+    public function __construct($preferences) 
+    {
+        $this->preferences = $preferences;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
         $builder->add('activityTypeId', 'hidden');
@@ -30,13 +37,17 @@ class ActivityType extends AbstractType
             'attr' => array('class' => 'wysiwyg form-control'),
             'label_attr' => array('class' => 'col-sm-2 control-label')
         ));
-        $builder->add('forumPreferences', new ForumPreferencesType());
-        $builder->add('save', 'submit');
+        $builder->add('preferences', new \Inkstand\Activity\ForumBundle\Form\Type\ForumPreferencesType());
+        $builder->add('save', 'submit', array(
+            'attr' => array('class' => 'btn btn-primary')
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-
+        $resolver->setDefaults(array(
+            'data_class' => 'Inkstand\Bundle\CourseBundle\Entity\Activity',
+        ));
     }
 
     public function getParent()

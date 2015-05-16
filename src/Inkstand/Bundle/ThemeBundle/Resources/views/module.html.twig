@@ -28,7 +28,7 @@
 							<i class="fa fa-cog"></i> <span class="hidden-xs">{% trans %}Manage Activity{% endtrans %}</span> <span class="caret"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
-							<li><a href="#"><i class="fa fa-fw fa-pencil"></i> {% trans %}Edit{% endtrans %}</a></li>
+							<li><a href="{{ path('inkstand_course_activity_edit', {'activityId':activity.activityId}) }}"><i class="fa fa-fw fa-pencil"></i> {% trans %}Edit{% endtrans %}</a></li>
 							<li><a href="#"><i class="fa fa-fw fa-arrows"></i> {% trans %}Move{% endtrans %}</a></li>
 							<li><a href="#"><i class="fa fa-fw fa-copy"></i> {% trans %}Duplicate{% endtrans %}</a></li>
 							<li class="divider"></li>

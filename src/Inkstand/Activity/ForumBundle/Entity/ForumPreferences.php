@@ -24,9 +24,9 @@ class ForumPreferences
     /**
      * @var integer
      *
-     * @ORM\Column(name="forum_id", type="integer", nullable=true)
+     * @ORM\Column(name="activity_id", type="integer")
      */
-    private $forumId;
+    private $activityId;
 
     /**
      * @var string
@@ -34,12 +34,6 @@ class ForumPreferences
      * @ORM\Column(name="locked", type="boolean")
      */
     private $locked;
-
-    /**  
-     * @ORM\OneToOne(targetEntity="Forum")
-     * @ORM\JoinColumn(name="forum_id", referencedColumnName="preferences_id")
-     */
-    private $forum;
 
     /**
      * Get forumPreferencesId
@@ -49,29 +43,6 @@ class ForumPreferences
     public function getForumPreferencesId()
     {
         return $this->forumPreferencesId;
-    }
-
-    /**
-     * Set forumId
-     *
-     * @param integer $forumId
-     * @return ForumPreferences
-     */
-    public function setForumId($forumId)
-    {
-        $this->forumId = $forumId;
-
-        return $this;
-    }
-
-    /**
-     * Get forumId
-     *
-     * @return integer 
-     */
-    public function getForumId()
-    {
-        return $this->forumId;
     }
 
     /**
@@ -98,25 +69,25 @@ class ForumPreferences
     }
 
     /**
-     * Set forum
+     * Set activityId
      *
-     * @param \Inkstand\Activity\ForumBundle\Entity\Forum $forum
+     * @param integer $activityId
      * @return ForumPreferences
      */
-    public function setForum(\Inkstand\Activity\ForumBundle\Entity\Forum $forum = null)
+    public function setActivityId($activityId)
     {
-        $this->forum = $forum;
+        $this->activityId = $activityId;
 
         return $this;
     }
 
     /**
-     * Get forum
+     * Get activityId
      *
-     * @return \Inkstand\Activity\ForumBundle\Entity\Forum 
+     * @return integer 
      */
-    public function getForum()
+    public function getActivityId()
     {
-        return $this->forum;
+        return $this->activityId;
     }
 }

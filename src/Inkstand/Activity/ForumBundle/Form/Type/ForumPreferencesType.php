@@ -12,18 +12,20 @@ class ForumPreferencesType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options) 
     {
-        $builder->add('forumId', 'hidden');
+        $builder->add('activityId', 'hidden');
         $builder->add('locked', 'choice', array(
-            'choices'  => array('1' => 'Yes'),
-            'required' => false,
-            'multiple' => true,
+            'choices'  => array('1' => 'Yes', '0' => 'No'),
+            // 'required' => false,
+            // 'multiple' => true,
             'expanded' => true,
         ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
-
+        $resolver->setDefaults(array(
+            'data_class' => 'Inkstand\Activity\ForumBundle\Entity\ForumPreferences',
+        ));
     }
 
     public function getParent()

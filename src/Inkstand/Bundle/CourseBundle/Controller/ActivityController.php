@@ -79,24 +79,36 @@ class ActivityController extends Controller
 			throw new NotFoundHttpException($this->get('translator')->trans('Activity could not be found'));
 		}
 
-		$activityForm = $this->createForm(new ActivityType(), $activity, array(
+		$activityReflection = new \ReflectionClass($activity);
+
+		// Get activity preferences. If none exist, create new preferences entity
+		$preferences = $this->getDoctrine()
+			->getRepository(sprintf('%s:%sPreferences', $activity->getActivityType()->getBundleName(), $activityReflection->getShortName()))
+			->findOneByActivityId($activity->getActivityId());
+
+		if($preferences == null) {
+			$preferences = new \Inkstand\Activity\ForumBundle\Entity\ForumPreferences();
+		}
+
+		$activity->setPreferences($preferences);
+
+		$activityForm = $this->createForm(new ActivityType($preferences), $activity, array(
 			'action' => $this->generateUrl('inkstand_course_activity_edit', array('activityId' => $activity->getActivityId())),
 			'method' => 'POST'
 		));
-
-		dump($request);
 
 		$activityForm->handleRequest($request);
 
 		if ($activityForm->isValid()) {
 	        $em = $this->getDoctrine()->getManager();
 	        $em->persist($activity);
+	        $em->persist($preferences);
 	        $em->flush();
 	 
 	        $session = $this->getRequest()->getSession();
 	        $session->getFlashBag()->add('success', 'Course activity "' . $activity->getName() . '" edited');
 	 		
-	        //return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $course->getSlug())));
+	        return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $activity->getModule()->getCourse()->getSlug())));
 	    }
 
 	    return $this->render('InkstandCourseBundle:Activity:edit.html.twig', array(

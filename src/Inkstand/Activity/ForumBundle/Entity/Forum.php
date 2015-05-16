@@ -24,17 +24,29 @@ class Forum extends Activity
      */
     protected $activityType;
 
-    /**  
-     * @ORM\OneToOne(targetEntity="ForumPreferences")
-     * @ORM\JoinColumn(name="preferences_id", referencedColumnName="forum_preferences_id")
+    /**
+     * ForumPreferences
      */
-    private $forumPreferences;
+    private $preferences;
+
     /**
      * Constructor
      */
     public function __construct()
     {
         $this->forumDiscussions = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    public function setPreferences(\Inkstand\Activity\ForumBundle\Entity\ForumPreferences $preferences)
+    {
+        $this->preferences = $preferences;
+
+        return $this;
+    }
+
+    public function getPreferences()
+    {
+        return $this->preferences;
     }
 
     /**
@@ -68,28 +80,5 @@ class Forum extends Activity
     public function getForumDiscussions()
     {
         return $this->forumDiscussions;
-    }
-
-    /**
-     * Set forumPreferences
-     *
-     * @param \Inkstand\Activity\ForumBundle\Entity\ForumPreferences $forumPreferences
-     * @return Forum
-     */
-    public function setForumPreferences(\Inkstand\Activity\ForumBundle\Entity\ForumPreferences $forumPreferences = null)
-    {
-        $this->forumPreferences = $forumPreferences;
-
-        return $this;
-    }
-
-    /**
-     * Get forumPreferences
-     *
-     * @return \Inkstand\Activity\ForumBundle\Entity\ForumPreferences 
-     */
-    public function getForumPreferences()
-    {
-        return $this->forumPreferences;
     }
 }

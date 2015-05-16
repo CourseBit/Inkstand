@@ -35,13 +35,6 @@ class Activity
     private $moduleId;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="preferences_id", type="integer", nullable=true)
-     */
-    private $preferencesId;
-
-    /**
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
@@ -128,29 +121,6 @@ class Activity
     public function getModuleId()
     {
         return $this->moduleId;
-    }
-
-    /**
-     * Set preferencesId
-     *
-     * @param integer $preferencesId
-     * @return Activity
-     */
-    public function setPreferencesId($preferencesId)
-    {
-        $this->preferencesId = $preferencesId;
-
-        return $this;
-    }
-
-    /**
-     * Get preferencesId
-     *
-     * @return integer 
-     */
-    public function getPreferencesId()
-    {
-        return $this->preferencesId;
     }
 
     /**
