@@ -1,0 +1,15 @@
+button.add:                   Add
+button.save:                  Save
+button.delete:                Delete
+button.cancel:                Cancel
+name:                         Name
+slug:                         Slug                 
+identifier:                   Identifier
+description:                  Description
+
+# Course Form
+course.form.name.placeholder: My New Course
+course.form.slug.placeholder: my-new-course
+course.form.slug.help:        Used for a human friendly course URL.
+course.form.identifier.help:  Unique identifier for course (e.g. CS101)
+course.form.add:              Add Course

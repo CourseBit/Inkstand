@@ -21,30 +21,54 @@ class CourseType extends AbstractType
     {
         $builder
             ->add('courseId', 'hidden')
-            ->add('name', 'text')
-            ->add('slug', 'text')
+            ->add('name', 'text', array(
+                'label' => 'name',
+                'attr' => array(
+                    'placeholder' => 'course.form.name.placeholder',
+                )
+            ))
+            ->add('slug', 'text', array(
+                'label' => 'slug',
+                'help_text' => 'course.form.slug.help',
+                'input_addon' => '/course/view/',     
+                'attr' => array(
+                    'placeholder' => 'course.form.slug.placeholder',
+                )
+            ))
             ->add('categoryId', 'choice', array(
                 'choices' => $this->courseCategoryService->getFormattedList(),
                 'label' => 'Category'
             ))
-            ->add('identifier', 'text', array(
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-sm-2 control-label')
-            ))
             ->add('description', 'textarea', array(
-                'attr' => array('class' => 'wysiwyg form-control'),
-                'label_attr' => array('class' => 'col-sm-2 control-label')
+                'attr' => array('class' => 'wysiwyg'),
             ))
-            ->add('abbreviation', 'text', array(
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-sm-2 control-label')
+            ->add('identifier', 'text', array(
+                'label' => 'identifier',
+                'help_text' => 'course.form.identifier.help'
             ))
-            ->add('featuredImage', 'text', array(
-                'attr' => array('class' => 'form-control'),
-                'label_attr' => array('class' => 'col-sm-2 control-label'),
-            ))
-            
-            ->add('save', 'submit');
+
+            ->add('actions', 'form_actions', array(
+                'buttons' => array(
+                    'save' => array(
+                        'type' => 'submit', 
+                        'options' => array(
+                            'label' => 'course.form.add',
+                            'attr' => array(
+                                'class' => 'btn btn-primary'
+                            )
+                        )
+                    ),
+                    'cancel' => array(
+                        'type' => 'submit', 
+                        'options' => array(
+                            'label' => 'button.cancel',
+                            'attr' => array(
+                                'class' => 'btn btn-default'
+                            )
+                        )
+                    ),
+                )
+            ));
     }
 
     public function getName()

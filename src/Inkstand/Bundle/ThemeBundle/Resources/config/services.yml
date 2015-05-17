@@ -2,3 +2,15 @@ services:
 #    inkstand_theme.example:
 #        class: Inkstand\Bundle\ThemeBundle\Example
 #        arguments: [@service_id, "plain_value", %parameter%]
+    theme_bundle.help_text_extension:
+        class: Inkstand\Bundle\ThemeBundle\Form\Extension\HelpTextExtension
+        tags:
+            - { name: form.type_extension, alias: form }
+    theme_bundle.input_addon_extension:
+        class: Inkstand\Bundle\ThemeBundle\Form\Extension\InputAddonExtension
+        tags:
+            - { name: form.type_extension, alias: form }
+    theme_bundle.form_actions_type:
+        class: Inkstand\Bundle\ThemeBundle\Form\Type\FormActionsType
+        tags:
+            - { name: form.type, alias: form_actions }

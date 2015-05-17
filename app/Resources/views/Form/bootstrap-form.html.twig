@@ -2,6 +2,12 @@
 
 {# Widgets #}
 
+{% block form_actions_widget %}
+    {% for button in form.children %}
+        {{ form_widget(button) }}&nbsp; {# this needs to be here due to https://github.com/twbs/bootstrap/issues/3245 #}
+    {% endfor  %}
+{% endblock %}
+
 {% block form_widget_simple -%}
     {% if type is not defined or 'file' != type %}
         {% set attr = attr|merge({class: (attr.class|default('') ~ ' form-control')|trim}) %}
@@ -177,6 +183,10 @@
 {% endblock checkbox_radio_label %}
 
 {# Rows #}
+
+{% block form_actions_row %}
+    {{ block('button_row')  }}
+{% endblock %}
 
 {% block form_row -%}
     <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">

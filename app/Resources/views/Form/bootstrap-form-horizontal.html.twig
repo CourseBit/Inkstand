@@ -24,13 +24,31 @@ col-sm-2
 
 {# Rows #}
 
+{% block form_actions_row %}
+    <div class="form-group">
+        <div class="{{ block('form_group_class') }} pull-right">
+            {{ block('button_row')  }}
+        </div>
+    </div>
+{% endblock %}
+
 {% block form_row -%}
 {% spaceless %}
     <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
         {{ form_label(form) }}
         <div class="{{ block('form_group_class') }}">
-            {{ form_widget(form) }}
+            {% if input_addon is defined and input_addon is not null %}
+                <div class="input-group">
+                    <div class="input-group-addon">{{ input_addon }}</div>
+                    {{ form_widget(form) }}
+                </div>
+            {% else %}
+                {{ form_widget(form) }}
+            {% endif %}
             {{ form_errors(form) }}
+            {% if help_text is defined and help_text is not null -%}
+                <p class="help-block">{{ help_text|trans }}</p>
+            {% endif %}
         </div>
     </div>
 {% endspaceless %}

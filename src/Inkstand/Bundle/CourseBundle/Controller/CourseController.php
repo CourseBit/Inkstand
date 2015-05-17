@@ -72,14 +72,31 @@ class CourseController extends Controller
 	{
 		$request = $this->getRequest();
 
+		$course = new Course();
 
-
-		$courseForm = $this->createForm('course', new Course(), array(
+		$courseForm = $this->createForm('course', $course, array(
 			'action' => $this->generateUrl('inkstand_course_add'),
 			'method' => 'POST'
 		));
 
-		
+		$courseForm->handleRequest($request);
+
+		// Add category entity to course
+		$courseCategory = $this->getDoctrine()
+	        ->getRepository('InkstandCourseBundle:CourseCategory')
+	        ->findOneByCategoryId($course->getCategoryId());
+	    $course->setCategory($courseCategory);
+
+		if($courseForm->isValid()) {
+			$em = $this->getDoctrine()->getManager();
+			$em->persist($course);
+			$em->flush();
+
+			$session = $this->getRequest()->getSession();
+	        $session->getFlashBag()->add('success', 'Course "' . $course->getName() . '" added');
+	 		
+	        return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $course->getSlug())));
+	    }
 
 		return $this->render('InkstandCourseBundle:Course:add.html.twig', array(
 			'courseForm' => $courseForm->createView(),

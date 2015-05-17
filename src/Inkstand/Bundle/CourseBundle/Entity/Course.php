@@ -29,7 +29,7 @@ class Course
     protected $name;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=50, nullable=true)
      */
     private $abbreviation;
 
@@ -43,7 +43,7 @@ class Course
     /**
      * @var string
      *
-     * @ORM\Column(name="identifier", type="string", length=255)
+     * @ORM\Column(name="identifier", type="string", length=255, nullable=true)
      */
     private $identifier;
 
@@ -57,7 +57,7 @@ class Course
     /**
      * @var string
      *
-     * @ORM\Column(name="featured_image", type="string", length=255)
+     * @ORM\Column(name="featured_image", type="string", length=255, nullable=true)
      */
     private $featuredImage;
 
