@@ -37,7 +37,8 @@ class CourseType extends AbstractType
             ))
             ->add('categoryId', 'choice', array(
                 'choices' => $this->courseCategoryService->getFormattedList(),
-                'label' => 'Category'
+                'label' => 'course.category',
+                'placeholder' => 'course.form.category.placeholder'
             ))
             ->add('description', 'textarea', array(
                 'attr' => array('class' => 'wysiwyg'),

@@ -25,7 +25,12 @@
 		<div class="navmenu navmenu-default navmenu-fixed-left offcanvas-sm">
 			<a class="navmenu-brand visible-md visible-lg" href="#">Inkstand LMS</a>
 			<ul class="nav navmenu-nav">
-				<li><a href="{{ path('inkstand_course_index') }}">Courses</a></li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Course <b class="caret"></b></a>
+					<ul class="dropdown-menu navmenu-nav" role="menu">
+						<li><a href="{{ path('inkstand_course_manage') }}">Manage courses</a></li>
+					</ul>
+				</li>
 			</ul>
 		</div>
 
