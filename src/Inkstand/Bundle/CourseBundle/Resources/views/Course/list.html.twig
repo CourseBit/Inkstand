@@ -1,0 +1,25 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCourseBundle:Course:list{% endblock %}
+
+{% block main_content %}
+	{{ knp_menu_render('main') }}
+	<table class="table datatable">
+		<thead>
+			<tr>
+				<th>Name</th>
+				<th>Category</th>
+				<th>slug</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% for course in courses %}
+				<tr>
+					<td>{{ course.name }}</td>
+					<td>{{ course.category.name }}</td>
+					<td>{{ course.slug }}</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+{% endblock %}	

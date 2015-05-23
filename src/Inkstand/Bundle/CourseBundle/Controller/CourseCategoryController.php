@@ -22,7 +22,7 @@ class CourseCategoryController extends Controller
 	 * View a single course category
 	 * 
 	 * @param mixed $slug Required route parameter. Either the category_id or category_slug 
-	 * @Route("/category/{slug}")
+	 * @Route("/category/view{slug}")
 	 */
 	public function viewAction($slug) {
 

@@ -1,0 +1,3 @@
+inkstand_home:
+    resource: "@InkstandCoreBundle/Controller/HomeController.php"
+    type:     annotation

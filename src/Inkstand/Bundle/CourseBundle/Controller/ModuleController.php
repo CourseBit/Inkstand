@@ -134,9 +134,7 @@ class ModuleController extends Controller
 			throw new NotFoundHttpException($this->get('translator')->trans('Module could not be found'));
 		}
 
-		$course = $this->getDoctrine()
-		    ->getRepository('InkstandCourseBundle:Course')
-		    ->findOneByCourseId($module->getCourseId());
+		$course = $module->getCourse();
 
 		if(empty($course)) {
 			throw $this->createException($this->get('translator')->trans('Module is not associated with a course'));

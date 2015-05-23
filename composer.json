@@ -23,7 +23,8 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "sensio/generator-bundle": "~2.5",
         "friendsofsymfony/user-bundle": "~2.0@dev",
-        "doctrine/doctrine-fixtures-bundle": "~2.2"
+        "doctrine/doctrine-fixtures-bundle": "~2.2",
+        "knplabs/knp-menu-bundle": "^2.0"
     },
     "require-dev": {
     },

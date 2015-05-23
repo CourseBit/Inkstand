@@ -13,3 +13,11 @@ course.form.slug.placeholder: my-new-course
 course.form.slug.help:        Used for a human friendly course URL.
 course.form.identifier.help:  Unique identifier for course (e.g. CS101)
 course.form.add:              Add Course
+course.form.update:           Update Course
+course.form.delete:           Delete Course
+
+# Course general
+course.edited:                Course "%name%" edited
+course.added:                 Course "%name%" added
+course.deleted:               Course "%name%" deleted
+course.notfound:              Course could not be found

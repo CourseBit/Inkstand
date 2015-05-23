@@ -19,8 +19,9 @@ class CourseType extends AbstractType
 
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $submitLabel = empty($options['data']->getCourseId()) ? 'course.form.add' : 'course.form.update';
+
         $builder
-            ->add('courseId', 'hidden')
             ->add('name', 'text', array(
                 'label' => 'name',
                 'attr' => array(
@@ -52,7 +53,7 @@ class CourseType extends AbstractType
                     'save' => array(
                         'type' => 'submit', 
                         'options' => array(
-                            'label' => 'course.form.add',
+                            'label' => $submitLabel,
                             'attr' => array(
                                 'class' => 'btn btn-primary'
                             )

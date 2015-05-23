@@ -1,0 +1,12 @@
+services:
+    menu_builder:
+        class: Inkstand\Bundle\CoreBundle\Menu\MenuBuilder
+        arguments: ["@knp_menu.factory"]
+
+    main_menu:
+        class: Knp\Menu\MenuItem # the service definition requires setting the class
+        factory_service: menu_builder
+        factory_method: createMainMenu
+        arguments: ["@request_stack"]
+        tags:
+            - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
