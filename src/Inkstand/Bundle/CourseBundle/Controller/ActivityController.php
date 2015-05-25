@@ -12,34 +12,26 @@ use Inkstand\Bundle\CourseBundle\Form\Type\ActivityType;
 
 /**
  * inkstand_course_activity_view /course/activity/view/{slug}
- * inkstand_course_activity_add  /course/activity/add/{activityTypeId}
+ * inkstand_course_activity_add  /course/activity/add/{activityTypeId}/{moduleId}
  */
 class ActivityController extends Controller
 {
 	/**
+     * View an activity. This controller will forward to the activity's specific controller
+     *
 	 * @Route("/course/activity/view/{slug}", name="inkstand_course_activity_view")
 	 * @param mixed $slug Slug of activity
+     * @return null
 	 */
 	public function viewAction($slug) 
 	{
-		$activity = null;
-
-		if(is_numeric($slug)) {
-			$activity = $this->getDoctrine()
-				->getRepository('InkstandCourseBundle:Activity')
-			    ->findOneByActivityId($slug);
-		} else {
-			$activity = $this->getDoctrine()
-				->getRepository('InkstandCourseBundle:Activity')
-			    ->findOneBySlug($slug);
-		}
+		$activity = $this->get('activity_service')->findOneBySlug($slug);
 
 		if($activity === null) {
-			throw new NotFoundHttpException($this->get('translator')->trans('Activity could not be found'));
+			throw new NotFoundHttpException($this->get('translator')->trans('activity.notfound'));
 		}
 
 		$activityReflection = new \ReflectionClass($activity);
-
 
 		$controller = sprintf('%s:%s:view', $activity->getActivityType()->getBundleName(), $activityReflection->getShortName());
 
@@ -58,34 +50,32 @@ class ActivityController extends Controller
 	 */
 	public function addAction(Request $request, $activityTypeId, $moduleId)
 	{
-		$activityType = $this->getDoctrine()
-			->getRepository('InkstandCourseBundle:ActivityType')
-			->findOneByActivityTypeId($activityTypeId);
+		$activityType = $this->get('activity_type_service')->findOneByActivityTypeId($activityTypeId);
+        $module = $this->get('module_service')->findOneByModuleId($moduleId);
 
 		if($activityType === null) {
-			throw new NotFoundHttpException($this->get('translator')->trans('Activity Type could not be found'));
+			throw new NotFoundHttpException($this->get('translator')->trans('activity.notfound'));
 		}
 
+        if($module === null) {
+            throw new NotFoundHttpException($this->get('translator')->trans('module.notfound'));
+        }
+
+        // Each activity bundle must have a service for its activity. That is how a new activity entity is retrieved
         $activityService = $this->get(sprintf('%s_service', strtolower($activityType->getName())));
 
         $activity = $activityService->getNewEntity();
 
-        $activityType = $this->getDoctrine()
-            ->getRepository('InkstandCourseBundle:ActivityType')
-            ->findOneByActivityTypeId($activityTypeId);
         $activity->setActivityTypeId($activityTypeId);
         $activity->setActivityType($activityType);
-        $activity->setSortOrder(1);
-
-
-        $module = $this->getDoctrine()
-            ->getRepository('InkstandCourseBundle:Module')
-            ->findOneByModuleId($moduleId);
         $activity->setModuleId($moduleId);
         $activity->setModule($module);
 
-        $preferences = $activityService->getNewPreferences();
+        // TODO: What about sort order?
+        $activity->setSortOrder(1);
 
+        // Also get a new preferences entity. e.g. ForumPreferences
+        $preferences = $activityService->getNewPreferences();
         $activity->setPreferences($preferences);
 
         $activityForm = $this->createForm(new ActivityType($preferences), $activity, array(
@@ -107,7 +97,7 @@ class ActivityController extends Controller
 
 
             $session = $request->getSession();
-            $session->getFlashBag()->add('success', 'Course activity "' . $activity->getName() . '" edited');
+            $session->getFlashBag()->add('success', $this->get('translator')->trans('activity.added', array('name' => $activity->getName())));
 
             return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $activity->getModule()->getCourse()->getSlug())));
         }

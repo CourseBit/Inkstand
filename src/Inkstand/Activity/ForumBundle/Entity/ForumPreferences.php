@@ -36,6 +36,20 @@ class ForumPreferences
     private $locked;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="one_discussion_per_user", type="boolean")
+     */
+    private $oneDiscussionPerUser;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="forum_type", type="string")
+     */
+    private $forumType;
+
+    /**
      * Get forumPreferencesId
      *
      * @return integer 
@@ -43,6 +57,29 @@ class ForumPreferences
     public function getForumPreferencesId()
     {
         return $this->forumPreferencesId;
+    }
+
+    /**
+     * Set activityId
+     *
+     * @param integer $activityId
+     * @return ForumPreferences
+     */
+    public function setActivityId($activityId)
+    {
+        $this->activityId = $activityId;
+
+        return $this;
+    }
+
+    /**
+     * Get activityId
+     *
+     * @return integer 
+     */
+    public function getActivityId()
+    {
+        return $this->activityId;
     }
 
     /**
@@ -69,25 +106,48 @@ class ForumPreferences
     }
 
     /**
-     * Set activityId
+     * Set oneDiscussionPerUser
      *
-     * @param integer $activityId
+     * @param boolean $oneDiscussionPerUser
      * @return ForumPreferences
      */
-    public function setActivityId($activityId)
+    public function setOneDiscussionPerUser($oneDiscussionPerUser)
     {
-        $this->activityId = $activityId;
+        $this->oneDiscussionPerUser = $oneDiscussionPerUser;
 
         return $this;
     }
 
     /**
-     * Get activityId
+     * Get oneDiscussionPerUser
      *
-     * @return integer 
+     * @return boolean 
      */
-    public function getActivityId()
+    public function getOneDiscussionPerUser()
     {
-        return $this->activityId;
+        return $this->oneDiscussionPerUser;
+    }
+
+    /**
+     * Set forumType
+     *
+     * @param string $forumType
+     * @return ForumPreferences
+     */
+    public function setForumType($forumType)
+    {
+        $this->forumType = $forumType;
+
+        return $this;
+    }
+
+    /**
+     * Get forumType
+     *
+     * @return string 
+     */
+    public function getForumType()
+    {
+        return $this->forumType;
     }
 }

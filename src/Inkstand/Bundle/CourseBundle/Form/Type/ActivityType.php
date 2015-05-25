@@ -38,8 +38,28 @@ class ActivityType extends AbstractType
             'label_attr' => array('class' => 'col-sm-2 control-label')
         ));
         $builder->add('preferences', new \Inkstand\Activity\ForumBundle\Form\Type\ForumPreferencesType());
-        $builder->add('save', 'submit', array(
-            'attr' => array('class' => 'btn btn-primary')
+        $builder->add('actions', 'form_actions', array(
+            'buttons' => array(
+                'save' => array(
+                    'type' => 'submit',
+                    'options' => array(
+                        'label' => $submitLabel,
+                        'attr' => array(
+                            'class' => 'btn btn-primary'
+                        )
+                    )
+                ),
+                'save'
+                'cancel' => array(
+                    'type' => 'submit',
+                    'options' => array(
+                        'label' => 'button.cancel',
+                        'attr' => array(
+                            'class' => 'btn btn-default'
+                        )
+                    )
+                ),
+            )
         ));
     }
 

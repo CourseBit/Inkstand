@@ -30,3 +30,10 @@ course.form.delete:               Delete Course
 
 # Category general
 course.category:                  Category
+
+# Activity general
+activity.notfound:                Activity could not be found
+activity.added:                   Activity "%name%" added
+
+# Module general
+module.notfound:                  Module could not be found

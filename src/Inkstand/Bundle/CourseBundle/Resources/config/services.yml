@@ -1,8 +1,9 @@
 parameters:
     course_category_service.class: Inkstand\Bundle\CourseBundle\Service\CourseCategoryService
     course_service.class:          Inkstand\Bundle\CourseBundle\Service\CourseService
-
-    course_controller.class:       Inkstand\Bundle\CourseBundle\Controller\CourseController
+    activity_service.class:        Inkstand\Bundle\CourseBundle\Service\ActivityService
+    activity_type_service.class:   Inkstand\Bundle\CourseBundle\Service\ActivityTypeService
+    module_service.class:          Inkstand\Bundle\CourseBundle\Service\ModuleService
 
 services:
     # Entity services
@@ -11,6 +12,15 @@ services:
         arguments: [@doctrine.orm.entity_manager]
     course_service:
         class:     "%course_service.class%"
+        arguments: [@doctrine.orm.entity_manager]
+    activity_service:
+        class:     "%activity_service.class%"
+        arguments: [@doctrine.orm.entity_manager]
+    activity_type_service:
+        class:     "%activity_type_service.class%"
+        arguments: [@doctrine.orm.entity_manager]
+    module_service:
+        class:     "%module_service.class%"
         arguments: [@doctrine.orm.entity_manager]
 
     # Form types

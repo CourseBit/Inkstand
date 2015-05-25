@@ -19,6 +19,18 @@ class ForumPreferencesType extends AbstractType
             // 'multiple' => true,
             'expanded' => true,
         ));
+        $builder->add('forumType', 'choice', array(
+            'choices'  => array(
+                'full' => 'Full discussions',
+                'single' => 'Single discussion'
+            ),
+        ));
+        $builder->add('oneDiscussionPerUser', 'choice', array(
+            'choices'  => array('1' => 'Yes', '0' => 'No'),
+            // 'required' => false,
+            // 'multiple' => true,
+            'expanded' => true,
+        ));
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)
