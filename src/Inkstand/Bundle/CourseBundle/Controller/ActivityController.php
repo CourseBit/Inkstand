@@ -4,6 +4,7 @@ namespace Inkstand\Bundle\CourseBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -49,18 +50,73 @@ class ActivityController extends Controller
 	}
 
 	/**
-	 * @Route("/course/activity/add/{activityTypeId}", name="inkstand_course_activity_add")
+	 * @Route("/course/activity/add/{activityTypeId}/{moduleId}", name="inkstand_course_activity_add")
+     * @Template
+     * @param Request $request
 	 * @param mixed $activityTypeId ID of activity type to be added to course
+     * @return array
 	 */
-	public function addAction($activityTypeId) 
+	public function addAction(Request $request, $activityTypeId, $moduleId)
 	{
 		$activityType = $this->getDoctrine()
 			->getRepository('InkstandCourseBundle:ActivityType')
-			->findOneByActivityId($activityTypeId);
+			->findOneByActivityTypeId($activityTypeId);
 
 		if($activityType === null) {
 			throw new NotFoundHttpException($this->get('translator')->trans('Activity Type could not be found'));
 		}
+
+        $activityService = $this->get(sprintf('%s_service', strtolower($activityType->getName())));
+
+        $activity = $activityService->getNewEntity();
+
+        $activityType = $this->getDoctrine()
+            ->getRepository('InkstandCourseBundle:ActivityType')
+            ->findOneByActivityTypeId($activityTypeId);
+        $activity->setActivityTypeId($activityTypeId);
+        $activity->setActivityType($activityType);
+        $activity->setSortOrder(1);
+
+
+        $module = $this->getDoctrine()
+            ->getRepository('InkstandCourseBundle:Module')
+            ->findOneByModuleId($moduleId);
+        $activity->setModuleId($moduleId);
+        $activity->setModule($module);
+
+        $preferences = $activityService->getNewPreferences();
+
+        $activity->setPreferences($preferences);
+
+        $activityForm = $this->createForm(new ActivityType($preferences), $activity, array(
+            'action' => $this->generateUrl('inkstand_course_activity_add', array('activityTypeId' => $activityTypeId, 'moduleId' => $moduleId)),
+            'method' => 'POST'
+        ));
+
+        $activityForm->handleRequest($request);
+
+        if ($activityForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($activity);
+            $em->flush();
+
+            $preferences->setActivityId($activity->getActivityId());
+
+            $em->persist($preferences);
+            $em->flush();
+
+
+            $session = $request->getSession();
+            $session->getFlashBag()->add('success', 'Course activity "' . $activity->getName() . '" edited');
+
+            return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $activity->getModule()->getCourse()->getSlug())));
+        }
+
+        return array(
+            'activity' => $activity,
+            'activityForm' => $activityForm->createView(),
+            'pageHeader' => 'Edit Course Activity'
+        );
 	}
 
 	/**

@@ -19,7 +19,7 @@
 				<div class="modal-body">
 					<div class="list-group">
 						{% for activityType in activityTypes %}
-							<a class="list-group-item" href="{{ path('inkstand_course_activity_add', {'activityTypeId':activityType.activityTypeId}) }}">{{ activityType.name }}</a>
+							<a class="list-group-item" href="{{ path('inkstand_course_activity_add', {'activityTypeId':activityType.activityTypeId, 'moduleId':2}) }}">{{ activityType.name }}</a>
 						{% endfor %}
 					</div>
 				</div>

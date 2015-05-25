@@ -244,4 +244,27 @@ class Activity
     {
         return $this->activityType;
     }
+
+    /**
+     * Set sortOrder
+     *
+     * @param integer $sortOrder
+     * @return Activity
+     */
+    public function setSortOrder($sortOrder)
+    {
+        $this->sortOrder = $sortOrder;
+
+        return $this;
+    }
+
+    /**
+     * Get sortOrder
+     *
+     * @return integer 
+     */
+    public function getSortOrder()
+    {
+        return $this->sortOrder;
+    }
 }
