@@ -1,14 +1,13 @@
-{% extends "InkstandThemeBundle::base.html.twig" %}
+{% extends "InkstandCourseBundle::course.html.twig" %}
 
 {% block title %}InkstandCourseBundle:Course:view{% endblock %}
 
 {% block main_content %}
-	<h1>{{ course.name }}</h1>
+    {{ parent() }}
 	{% for module in course.modules %}
-		<hr>
 		{{ include('InkstandThemeBundle::module.html.twig', {'module':module}) }}
+        <hr class="line-bold">
 	{% endfor %}
-	<hr>
 	<a class="btn btn-default btn-primary" href="{{ path('inkstand_course_module_add', {'courseId': course.courseId}) }}">{% trans %}Add new module{% endtrans %}</a>
 	<div id="modal-activity-list" class="modal fade">
 		<div class="modal-dialog">

@@ -1,9 +1,10 @@
-{% extends "InkstandThemeBundle::base.html.twig" %}
+{% extends "InkstandCourseBundle::course.html.twig" %}
 
 {% block title %}InkstandCourseBundle:Course:edit{% endblock %}
 
 {% block main_content %}
-{{ form_start(courseForm) }}
-{{ form_widget(courseForm) }}
-{{ form_end(courseForm) }}
+    {{ parent() }}
+    {{ form_start(courseForm) }}
+    {{ form_widget(courseForm) }}
+    {{ form_end(courseForm) }}
 {% endblock %}

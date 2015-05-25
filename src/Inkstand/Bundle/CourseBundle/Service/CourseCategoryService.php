@@ -13,10 +13,18 @@ class CourseCategoryService
 		$this->repository = $this->entityManager->getRepository('InkstandCourseBundle:CourseCategory');
 	}
 
+    /**
+     * @param $categoryId
+     */
+    public function findOneByCategoryId($categoryId)
+    {
+       return $this->repository->findOneByCategoryId($categoryId);
+    }
+
 	/**
 	 * Get a formatted list of categories
 	 *
-	 * Ideal use is for creating a dropdown of categories, because it formats them into an array recursively, 
+	 * Ideal use is for creating a dropdown of categories, because it formats them into an array recursively,
 	 * displaying the full path to each category in addition to its name. e.g. Toplevel / Sublevel / MyCategory  
 	 *
 	 * @param string $delimiter String to glue category names together

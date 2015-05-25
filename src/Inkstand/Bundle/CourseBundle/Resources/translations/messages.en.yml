@@ -1,23 +1,32 @@
-button.add:                   Add
-button.save:                  Save
-button.delete:                Delete
-button.cancel:                Cancel
-name:                         Name
-slug:                         Slug                 
-identifier:                   Identifier
-description:                  Description
-
-# Course Form
-course.form.name.placeholder: My New Course
-course.form.slug.placeholder: my-new-course
-course.form.slug.help:        Used for a human friendly course URL.
-course.form.identifier.help:  Unique identifier for course (e.g. CS101)
-course.form.add:              Add Course
-course.form.update:           Update Course
-course.form.delete:           Delete Course
+# General
+button.add:                       Add
+button.save:                      Save
+button.delete:                    Delete
+button.cancel:                    Cancel
+name:                             Name
+slug:                             Slug                 
+identifier:                       Identifier
+description:                      Description
+manage:                           Manage
 
 # Course general
-course.edited:                Course "%name%" edited
-course.added:                 Course "%name%" added
-course.deleted:               Course "%name%" deleted
-course.notfound:              Course could not be found
+course:                           Course
+course.edited:                    Course "%name%" edited
+course.added:                     Course "%name%" added
+course.deleted:                   Course "%name%" deleted
+course.notfound:                  Course could not be found
+courseware:                       Courseware
+course.update.settings:           Update course settings
+
+# Course Form
+course.form.name.placeholder:     My New Course
+course.form.slug.placeholder:     my-new-course
+course.form.slug.help:            Used for a human friendly course URL.
+course.form.category.placeholder: Choose Category...
+course.form.identifier.help:      Unique identifier for course (e.g. CS101)
+course.form.add:                  Add Course
+course.form.update:               Update Course
+course.form.delete:               Delete Course
+
+# Category general
+course.category:                  Category

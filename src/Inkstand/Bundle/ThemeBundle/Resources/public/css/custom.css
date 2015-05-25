@@ -22,3 +22,7 @@ body {
 .navmenu-fixed-left {
 	width:200px;
 }
+
+hr.line-bold {
+    border-top-width:3px;
+}

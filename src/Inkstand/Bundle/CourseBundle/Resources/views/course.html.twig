@@ -1,0 +1,18 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block main_content %}
+    <ul class="nav nav-pills" style="margin-bottom:15px">
+
+        <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_course_view' %}active{% endif %}">
+            <a href="{{ path("inkstand_course_view", {"slug":course.slug}) }}">{% trans %}courseware{% endtrans %}</a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_course_gradebook' %}active{% endif %}">
+            <a href="{{ path("inkstand_course_edit", {"courseId":course.courseId}) }}">Gradebook</a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_course_edit' %}active{% endif %}">
+            <a href="{{ path("inkstand_course_edit", {"courseId":course.courseId}) }}"><i class="fa fa-wrench"></i> {% trans %}manage{% endtrans %}</a>
+        </li>
+    </ul>
+    <hr>
+{% endblock %}
+
