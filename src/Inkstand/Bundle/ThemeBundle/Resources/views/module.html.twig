@@ -19,13 +19,13 @@
 	</div>		
 	<div class="module-content">
 		<p>{{ module.description}}</p>
-		<ul class="list-unstyled">
+		<ul class="list-unstyled activities">
 			{% for activity in module.activities %}
-				<li>
+				<li class="activity">
 					<a href="{{ path('inkstand_course_activity_view', {'slug':activity.activityId}) }}"><i class="fa fw fa-link"></i> {{ activity.name }}</a>
 					<div class="btn-group">
-						<button type="button" class="btn btn-xs btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-							<i class="fa fa-cog"></i> <span class="hidden-xs">{% trans %}Manage Activity{% endtrans %}</span> <span class="caret"></span>
+						<button type="button" class="btn btn-xs btn-warning dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+							<i class="fa fa-cog"></i> <span class="hidden-xs"></span>
 						</button>
 						<ul class="dropdown-menu" role="menu">
 							<li><a href="{{ path('inkstand_course_activity_edit', {'activityId':activity.activityId}) }}"><i class="fa fa-fw fa-pencil"></i> {% trans %}Edit{% endtrans %}</a></li>

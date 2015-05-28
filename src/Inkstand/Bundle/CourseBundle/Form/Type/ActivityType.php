@@ -43,13 +43,12 @@ class ActivityType extends AbstractType
                 'save' => array(
                     'type' => 'submit',
                     'options' => array(
-                        'label' => $submitLabel,
+                        'label' => 'button.save',
                         'attr' => array(
                             'class' => 'btn btn-primary'
                         )
                     )
                 ),
-                'save'
                 'cancel' => array(
                     'type' => 'submit',
                     'options' => array(

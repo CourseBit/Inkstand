@@ -26,3 +26,12 @@ body {
 hr.line-bold {
     border-top-width:3px;
 }
+
+/* Course activity styles */
+ul.activities li.activity {
+    padding:5px 0;
+    border-bottom:1px solid #eee;
+}
+ul.activities li.activity:last-child {
+    border:none
+}

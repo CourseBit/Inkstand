@@ -95,9 +95,8 @@ class ActivityController extends Controller
             $em->persist($preferences);
             $em->flush();
 
-
             $session = $request->getSession();
-            $session->getFlashBag()->add('success', $this->get('translator')->trans('activity.added', array('name' => $activity->getName())));
+            $session->getFlashBag()->add('success', $this->get('translator')->trans('activity.added', array('%name%' => $activity->getName())));
 
             return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $activity->getModule()->getCourse()->getSlug())));
         }
@@ -105,18 +104,19 @@ class ActivityController extends Controller
         return array(
             'activity' => $activity,
             'activityForm' => $activityForm->createView(),
-            'pageHeader' => 'Edit Course Activity'
+            'pageHeading' => 'activity.edit'
         );
 	}
 
 	/**
 	 * @Route("/course/activity/edit/{activityId}", name="inkstand_course_activity_edit")
+     * @Template
+     * @param Request $request
 	 * @param int $activityId ID of activity to edit
+     * @return array
 	 */
-	public function editAction($activityId)
+	public function editAction(Request $request, $activityId)
 	{
-		$request = $this->getRequest();
-
 		$activity = $this->getDoctrine()
 		    ->getRepository('InkstandCourseBundle:Activity')
 		    ->findOneByActivityId($activityId);
@@ -151,16 +151,16 @@ class ActivityController extends Controller
 	        $em->persist($preferences);
 	        $em->flush();
 	 
-	        $session = $this->getRequest()->getSession();
+	        $session = $request->getSession();
 	        $session->getFlashBag()->add('success', 'Course activity "' . $activity->getName() . '" edited');
 	 		
 	        return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $activity->getModule()->getCourse()->getSlug())));
 	    }
 
-	    return $this->render('InkstandCourseBundle:Activity:edit.html.twig', array(
+	    return array(
 	    	'activity' => $activity,
 			'activityForm' => $activityForm->createView(),
 			'pageHeader' => 'Edit Course Activity'
-		));
+		);
 	}
 }
