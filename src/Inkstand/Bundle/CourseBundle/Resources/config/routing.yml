@@ -6,6 +6,10 @@ inkstand_course_category:
     resource: "@InkstandCourseBundle/Controller/CourseCategoryController.php"
     type:     annotation
 
+inkstand_course_catalog:
+    resource: "@InkstandCourseBundle/Controller/CourseCatalogController.php"
+    type:     annotation
+
 inkstand_course_metric:
     resource: "@InkstandCourseBundle/Controller/CourseMetricController.php"
     type:     annotation

@@ -21,6 +21,11 @@ class CourseCategoryService
        return $this->repository->findOneByCategoryId($categoryId);
     }
 
+    public function findAll()
+    {
+    	return $this->repository->findAll();
+    }
+
 	/**
 	 * Get a formatted list of categories
 	 *
