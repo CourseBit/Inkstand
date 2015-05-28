@@ -20,40 +20,6 @@
 	<link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
 	</head>
 	<body>
-		<div class="navmenu navmenu-inverse navmenu-fixed-left offcanvas-sm">
-			<a class="navmenu-brand visible-md visible-lg" href="#">Inkstand LMS</a>
-			<ul class="nav navmenu-nav">
-				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Course <b class="caret"></b></a>
-					<ul class="dropdown-menu navmenu-nav" role="menu">
-						<li><a href="{{ path('inkstand_course_catalog_index') }}">View catalog</a></li>
-						<li><a href="{{ path('inkstand_course_manage') }}">Manage courses</a></li>
-					</ul>
-				</li>
-			</ul>
-		</div>
-
-		<div class="navbar navbar-inverse navbar-fixed-top hidden-md hidden-lg">
-			<button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-			</button>
-			<a class="navbar-brand" href="#">Inkstand LMS</a>
-		</div>
-		<div class="container-fluid">
-			<div class="row">
-				<nav style="display:block !important" class="navbar navbar-default navbar-static-top">
-					<div class="container-fluid">
-						<div class="navbar-header navbar-header-full">
-							<ul class="nav navbar-nav navbar-right">
-								
-							</ul>
-						</div>
-					</div>
-				</nav>
-			</div>
-		</div>
 		<div class="container-fluid">
 			{% if pageHeading is defined %}
 				<div class="page-header page-header-sm">
@@ -71,25 +37,7 @@
 
 			{{ include('InkstandThemeBundle::flash-messages.html.twig') }}
 
-			<div class="row">
-				<div class="col-lg-8">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<div class="content" id="short-para" style="display: block;">
-								{% block main_content %}{% endblock %}
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">Homepade</div>
-						<div class="panel-body">
-							Panel content
-						</div>
-					</div>
-				</div>
-			</div>
+			{% block main_content %}{% endblock %}
 
 		</div><!-- /.container -->
 		{% javascripts 

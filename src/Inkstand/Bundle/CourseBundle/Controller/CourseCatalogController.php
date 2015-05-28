@@ -11,7 +11,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Inkstand\Bundle\CourseBundle\Entity\Course;
 
 /**
- * inkstand_course_catalog_index  /course/catalog
+ * inkstand_course_catalog_index  /course/catalog/{categoryId}
  */
 class CourseCatalogController extends Controller
 {
@@ -33,9 +33,9 @@ class CourseCatalogController extends Controller
 		} else {
 			$category = $this->get('course_category_service')->findOneByCategoryId($categoryId);
 
-			// return array(
-			// 	'category' => $category
-			// );
+			if($category == null) {
+				throw new NotFoundHttpException($this->get('translator')->trans('category.notfound'));
+			}
 		}
 
 		return array(

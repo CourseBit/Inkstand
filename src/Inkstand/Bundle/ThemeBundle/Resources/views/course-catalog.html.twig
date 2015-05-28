@@ -1,0 +1,22 @@
+{% if category is defined and category is not null %}
+	<h3>{{ category.name }}</h3>
+	{% if category.courses|length == 0 %}
+		<p class="alert alert-info clearfix">There are no courses in this category. <a class="btn btn-default pull-right" href="{{ path('inkstand_course_add') }}">Add Course</a></p>
+	{% else %}
+		<ul>
+			{% for course in category.courses %}
+				<li>
+					<a href="{{ path('inkstand_course_view', {"slug":course.slug}) }}">{{ course.name }}</a>
+				</li>
+			{% endfor %}
+		</ul>
+	{% endif %}
+{% elseif categories is defined and categories is not null %}
+	<ul>
+		{% for category in categories %}
+			<li>
+				<a href="{{ path('inkstand_course_catalog_index', {"categoryId":category.categoryId}) }}">{{ category.name }}</a>
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

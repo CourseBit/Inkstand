@@ -1,0 +1,20 @@
+{% extends "InkstandThemeBundle::minimal.html.twig" %}
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-sm-4 col-sm-offset-4">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    {% if error %}
+                        <p class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</p>
+                    {% endif %}
+                    {{ form_start(userLoginForm) }}
+                    {{ form_widget(userLoginForm) }}
+                    {{ form_end(userLoginForm) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main_content %}
