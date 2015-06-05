@@ -2,6 +2,10 @@ body {
 	overflow-x:hidden;
 }
 
+body.layout-minimal {
+    padding-top:100px;
+}
+
 /* Contextual backgrounds
 ----------------------------- */
 .bg-transparent {

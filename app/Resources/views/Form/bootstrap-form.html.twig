@@ -188,6 +188,14 @@
     {{ block('button_row')  }}
 {% endblock %}
 
+{% block submit_row -%}
+    {% spaceless %}
+        <div class="form-group">
+            {{ form_widget(form) }}
+        </div>
+    {% endspaceless %}
+{% endblock submit_row %}
+
 {% block form_row -%}
     <div class="form-group{% if (not compound or force_error|default(false)) and not valid %} has-error{% endif %}">
         {{ form_label(form) }}

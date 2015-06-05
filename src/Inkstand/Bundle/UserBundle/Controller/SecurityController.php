@@ -15,15 +15,15 @@ class SecurityController extends BaseController
             ->add('_csrf_token', 'hidden')
             ->add('_username', 'text')
             ->add('_password', 'password')
-            ->add('_remember_me', 'checkbox')
-            ->add('_submit', 'submit')
+            ->add('_remember_me', 'checkbox', array(
+                'required' => false
+            ))
+            ->add('_submit', 'submit', array(
+                'attr' => array('class' => 'btn btn-primary')
+            ))
             ->getForm();
 
-        //$userLoginForm->get('_csrf_token')->setValue();
-
         $data['userLoginForm'] = $userLoginForm->createView();
-
-        dump($data);
 
         return $this->render('InkstandUserBundle:Security:login.html.twig', $data);
     }

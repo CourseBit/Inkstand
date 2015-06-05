@@ -34,14 +34,11 @@ body {
 }
 
 @media (min-width: 992px) {
-  body {
+  body.layout-base {
     padding: 0 0 0 200px;
   }
   .navmenu {
     padding-top: 0;
-  }
-  .navbar {
-    display: none !important; /* IE8 fix */
   }
 }
 

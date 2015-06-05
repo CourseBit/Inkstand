@@ -1,0 +1,14 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h3>Register new account</h3><hr>
+                {{ form_start(userForm) }}
+                {{ form_widget(userForm) }}
+                {{ form_end(userForm) }}
+            </div>
+        </div>
+    </div>
+</div>

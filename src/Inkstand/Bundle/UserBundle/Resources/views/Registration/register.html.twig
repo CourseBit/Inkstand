@@ -1,0 +1,7 @@
+{% extends "InkstandThemeBundle::minimal.html.twig" %}
+
+{% form_theme userForm ':Form:bootstrap-form.html.twig' %}
+
+{% block main_content %}
+{% include "InkstandUserBundle:Registration:register_content.html.twig" %}
+{% endblock main_content %}
