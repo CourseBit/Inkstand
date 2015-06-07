@@ -4,6 +4,7 @@ parameters:
     activity_service.class:        Inkstand\Bundle\CourseBundle\Service\ActivityService
     activity_type_service.class:   Inkstand\Bundle\CourseBundle\Service\ActivityTypeService
     module_service.class:          Inkstand\Bundle\CourseBundle\Service\ModuleService
+    enrollment_service.class:      Inkstand\Bundle\CourseBundle\Service\EnrollmentService
 
 services:
     # Entity services
@@ -21,6 +22,9 @@ services:
         arguments: [@doctrine.orm.entity_manager]
     module_service:
         class:     "%module_service.class%"
+        arguments: [@doctrine.orm.entity_manager]
+    enrollment_service:
+        class:     "%enrollment_service.class%"
         arguments: [@doctrine.orm.entity_manager]
 
     # Form types

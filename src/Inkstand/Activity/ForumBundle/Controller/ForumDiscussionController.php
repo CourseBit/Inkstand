@@ -14,12 +14,14 @@ class ForumDiscussionController extends Controller
 {
 	/**
 	 * @Route("/forum/discussion/view/{slug}", name="inkstand_forum_discussion_view")
-	 * @param mixed $slug Discussion slug or ID 
+     * @Template
+	 * @param mixed $slug Discussion slug or ID
+     * @return array
 	 */
 	public function viewAction($slug)
 	{
 
 
-		return $this->render('InkstandForumBundle:ForumDiscussion:view.html.twig', array());
+		return array();
 	}
 }
