@@ -137,4 +137,16 @@ class EnrollmentService
         $this->entityManager->flush();
         $this->entityManager->clear();
     }
+
+    /**
+     * Check if a user is enrolled to a course
+     *
+     * @param $user
+     * @param $course
+     * @return boolean
+     */
+    public function isUserEnrolled($user, $course)
+    {
+        return $this->repository->findOneByUserAndCourse($user, $course) != null;
+    }
 }

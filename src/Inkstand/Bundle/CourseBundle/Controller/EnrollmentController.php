@@ -20,6 +20,16 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class EnrollmentController extends Controller
 {
     /**
+     * @Route("/course/enrollment/{courseId}", name="inkstand_course_enrollment")
+     * @Template
+     */
+    public function enrollmentAction($courseId)
+    {
+        $course = $this->get('course_service')->findOneByCourseId($courseId);
+        return array();
+    }
+
+    /**
      * @Route("/course/enroll/{courseId}", name="inkstand_course_enroll")
      * @Template
      */

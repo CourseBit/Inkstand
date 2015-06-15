@@ -9,6 +9,9 @@
         <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_course_gradebook' %}active{% endif %}">
             <a href="{{ path("inkstand_course_edit", {"courseId":course.courseId}) }}">Gradebook</a>
         </li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_course_enrollment' %}active{% endif %}">
+            <a href="{{ path("inkstand_course_enrollment", {"courseId":course.courseId}) }}">Enrollment</a>
+        </li>
         <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_course_edit' %}active{% endif %}">
             <a href="{{ path("inkstand_course_edit", {"courseId":course.courseId}) }}"><i class="fa fa-wrench"></i> {% trans %}manage{% endtrans %}</a>
         </li>
