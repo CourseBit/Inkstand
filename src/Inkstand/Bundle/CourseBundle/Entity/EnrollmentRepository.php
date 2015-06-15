@@ -3,6 +3,7 @@
 namespace Inkstand\Bundle\CourseBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Query;
 
 /**
  * EnrollmentRepository
@@ -12,4 +13,20 @@ use Doctrine\ORM\EntityRepository;
  */
 class EnrollmentRepository extends EntityRepository
 {
+    public function findOneByUserAndCourse($user, $course, $toArray = false)
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+
+        $queryBuilder->select('e')
+            ->from($this->_entityName, 'e')
+            ->where('e.userId = :userId')
+            ->andWhere('e.courseId = :courseId');
+
+        $queryBuilder->setParameter('userId', $user->getId());
+        $queryBuilder->setParameter('courseId', $course->getCourseId());
+
+        $hydrationMode = $toArray ? Query::HYDRATE_ARRAY : Query::HYDRATE_OBJECT;
+
+        return $queryBuilder->getQuery()->getOneOrNullResult($hydrationMode);
+    }
 }

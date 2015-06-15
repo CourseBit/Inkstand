@@ -22,6 +22,10 @@ inkstand_course_activty:
     resource: "@InkstandCourseBundle/Controller/ActivityController.php"
     type:     annotation
 
+inkstand_course_enrollment:
+    resource: "@InkstandCourseBundle/Controller/EnrollmentController.php"
+    type:     annotation
+
 inkstand_activity_forum:
     resource: "@InkstandForumBundle/Controller/ForumDiscussionController.php"
     type:     annotation

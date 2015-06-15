@@ -25,7 +25,7 @@ services:
         arguments: [@doctrine.orm.entity_manager]
     enrollment_service:
         class:     "%enrollment_service.class%"
-        arguments: [@doctrine.orm.entity_manager]
+        arguments: [@doctrine.orm.entity_manager, @event_dispatcher]
 
     # Form types
     inkstand_course.form.type.task:

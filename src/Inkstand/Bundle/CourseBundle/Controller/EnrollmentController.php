@@ -2,6 +2,8 @@
 
 namespace Inkstand\Bundle\CourseBundle\Controller;
 
+use Inkstand\Bundle\CourseBundle\Entity\Enrollment;
+use Inkstand\Bundle\CourseBundle\Event\EnrollmentEvent;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -24,6 +26,22 @@ class EnrollmentController extends Controller
 	public function enrollAction($courseId)
     {
         $course = $this->get('course_service')->findOneByCourseId($courseId);
+
+//        $enrollmentService = $this->get('enrollment_service');
+//
+//        $user = $this->getUser();
+//
+//        $enrollmentService->enrollUser($user,$course);
+
+
+        $event = new EnrollmentEvent(new Enrollment());
+        $eventDispatcher = $this->get('event_dispatcher');
+
+//        $eventDispatcher->addListener('inkstand.course.enroll_pre', function() {
+//           echo("here2");
+//        });
+
+        $eventDispatcher->dispatch('inkstand.course.enroll_pre', $event);
 
         return array(
             'course' => $course

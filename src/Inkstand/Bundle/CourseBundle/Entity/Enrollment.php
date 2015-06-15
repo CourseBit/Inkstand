@@ -129,10 +129,10 @@ class Enrollment
     /**
      * Set user
      *
-     * @param \Inkstand\Bundle\CourseBundle\Entity\User $user
+     * @param \Inkstand\Bundle\UserBundle\Entity\User $user
      * @return Enrollment
      */
-    public function setUser(\Inkstand\Bundle\CourseBundle\Entity\User $user = null)
+    public function setUser(\Inkstand\Bundle\UserBundle\Entity\User $user = null)
     {
         $this->user = $user;
 
@@ -142,7 +142,7 @@ class Enrollment
     /**
      * Get user
      *
-     * @return \Inkstand\Bundle\CourseBundle\Entity\User 
+     * @return \Inkstand\Bundle\UserBundle\Entity\User
      */
     public function getUser()
     {
