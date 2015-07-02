@@ -1,4 +1,16 @@
+parameters:
+    widget_service.class:        Inkstand\Bundle\CoreBundle\Service\WidgetService
+    page_template_service.class: Inkstand\Bundle\CoreBundle\Service\PageTemplateService
+
 services:
+    widget_service:
+        class: "%widget_service.class%"
+        arguments: [@event_dispatcher]
+
+    page_template_service:
+        class: "%page_template_service.class%"
+        arguments: [@doctrine.orm.entity_manager, @widget_service]
+
     menu_builder:
         class: Inkstand\Bundle\CoreBundle\Menu\MenuBuilder
         arguments: ["@knp_menu.factory"]

@@ -33,3 +33,9 @@ services:
         arguments: [@course_category_service]
         tags:
             - { name: form.type, alias: course }
+
+
+    widget_listener:
+        class: Inkstand\Bundle\CourseBundle\EventListener\WidgetListener
+        tags:
+            - { name: kernel.event_listener, event: inkstand.core.widget_register, method: onWidgetRegister }

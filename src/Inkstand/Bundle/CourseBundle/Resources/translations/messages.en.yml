@@ -38,3 +38,6 @@ activity.edit:                    Edit Activity
 
 # Module general
 module.notfound:                  Module could not be found
+
+# Widget
+course_widget.name:               Course Widget

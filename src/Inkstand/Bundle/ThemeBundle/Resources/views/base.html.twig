@@ -81,14 +81,11 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-lg-4">
-					<div class="panel panel-default">
-						<div class="panel-heading">Homepade</div>
-						<div class="panel-body">
-							Panel content
-						</div>
-					</div>
-				</div>
+
+                {% for widget in page_template_service.getWidgetsForTemplate(1) %}
+                    {{ include(widget.partial) }}
+                {% endfor %}
+
 			</div>
 
 		</div><!-- /.container -->

@@ -1,0 +1,22 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCoreBundle:Widget:list{% endblock %}
+
+{% block main_content %}
+    {% if widgets is empty %}
+        <p class="alert alert-info">{% trans %}widget.nowidgets{% endtrans %}</p>
+    {% else %}
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>{% trans %}widget.name{% endtrans %}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for widget in widgets %}
+                    <td>{{ widget.name|trans }}</td>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+{% endblock %}

@@ -1,3 +1,7 @@
 inkstand_home:
     resource: "@InkstandCoreBundle/Controller/HomeController.php"
     type:     annotation
+
+inkstand_widget:
+    resource: "@InkstandCoreBundle/Controller/WidgetController.php"
+    type:     annotation

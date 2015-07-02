@@ -32,6 +32,9 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: [':Form:bootstrap-form-horizontal.html.twig']
+    globals:
+        # Used for rendering widgets in base layouts
+        page_template_service: "@page_template_service"
 
 # Assetic Configuration
 assetic:

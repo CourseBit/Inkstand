@@ -2,6 +2,8 @@
 
 namespace Inkstand\Bundle\CoreBundle\Controller;
 
+use Inkstand\Bundle\CoreBundle\Event\DashboardEvent;
+use Inkstand\Bundle\CoreBundle\Event\DashboardEvents;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -32,7 +34,9 @@ class HomeController extends Controller
 	 */
 	public function dashboardAction()
 	{
-		$this->denyAccessUnlessGranted('ROLE_ADMIN');
+        $widgetService = $this->get('widget_service');
+        $widgets = $widgetService->getWidgets();
+
 		return array();
 	}
 }
