@@ -27,6 +27,7 @@ class PageTemplateService
         foreach($pageTemplateWidgets as $pageTemplateWidget) {
             $widgets[] = $this->widgetService->getWidgetById($pageTemplateWidget->getWidgetId());
         }
+        dump($widgets);
         return $widgets;
     }
 }

@@ -41,3 +41,4 @@ module.notfound:                  Module could not be found
 
 # Widget
 course_widget.name:               Course Widget
+calendar_widget.name:             Calendar Widget

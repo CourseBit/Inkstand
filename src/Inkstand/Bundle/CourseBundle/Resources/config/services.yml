@@ -35,7 +35,7 @@ services:
             - { name: form.type, alias: course }
 
 
-    widget_listener:
+    course_widget_listener:
         class: Inkstand\Bundle\CourseBundle\EventListener\WidgetListener
         tags:
             - { name: kernel.event_listener, event: inkstand.core.widget_register, method: onWidgetRegister }

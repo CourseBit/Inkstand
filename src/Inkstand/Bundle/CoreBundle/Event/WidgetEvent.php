@@ -17,6 +17,8 @@ class WidgetEvent extends Event
     public function registerWidget(WidgetInterface $widget)
     {
         $this->widgets[$widget->getId()] = $widget;
+        dump($widget);
+        dump($this->widgets);
     }
 
     /**

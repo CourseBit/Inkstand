@@ -22,3 +22,8 @@ services:
         arguments: ["@request_stack"]
         tags:
             - { name: knp_menu.menu, alias: main } # The alias is what is used to retrieve the menu
+
+    core_widget_listener:
+            class: Inkstand\Bundle\CoreBundle\EventListener\WidgetListener
+            tags:
+                - { name: kernel.event_listener, event: inkstand.core.widget_register, method: onWidgetRegister }
