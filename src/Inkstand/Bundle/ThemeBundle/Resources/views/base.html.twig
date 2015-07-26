@@ -24,12 +24,19 @@
 			<a class="navmenu-brand visible-md visible-lg" href="#">Inkstand LMS</a>
 			<ul class="nav navmenu-nav">
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown">Course <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-graduation-cap"></i> Course <b class="caret"></b></a>
 					<ul class="dropdown-menu navmenu-nav" role="menu">
 						<li><a href="{{ path('inkstand_course_catalog_index') }}">View catalog</a></li>
 						<li><a href="{{ path('inkstand_course_manage') }}">Manage courses</a></li>
 					</ul>
 				</li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i> Users <b class="caret"></b></a>
+                    <ul class="dropdown-menu navmenu-nav" role="menu">
+                        <li><a href="{{ path('inkstand_user_add') }}">Add user</a></li>
+                        <li><a href="{{ path('inkstand_user_list') }}">Manage users</a></li>
+                    </ul>
+                </li>
 			</ul>
 		</div>
 

@@ -1,0 +1,20 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandUserBundle:User:list{% endblock %}
+
+{% block main_content %}
+    {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+        {% block grid_head %}
+            <th>Username</th>
+            <th>Email</th>
+        {% endblock %}
+        {% block grid_body %}
+            {% for user in users %}
+                <tr>
+                    <td>{{ user.username }}</td>
+                    <td>{{ user.email }}</td>
+                </tr>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

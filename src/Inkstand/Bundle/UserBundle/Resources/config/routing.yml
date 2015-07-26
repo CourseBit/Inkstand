@@ -1,0 +1,3 @@
+inkstand_user:
+    resource: "@InkstandUserBundle/Controller/UserController.php"
+    type:     annotation

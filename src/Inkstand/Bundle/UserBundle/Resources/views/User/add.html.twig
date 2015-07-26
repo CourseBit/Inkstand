@@ -1,0 +1,9 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandUserBundle:User:add{% endblock %}
+
+{% block main_content %}
+    {{ form_start(userForm) }}
+    {{ form_widget(userForm) }}
+    {{ form_end(userForm) }}
+{% endblock %}

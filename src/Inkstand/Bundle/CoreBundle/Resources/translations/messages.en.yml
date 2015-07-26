@@ -1,3 +1,8 @@
+# General
+email:            Email
+yes:              Yes
+no:               No
+
 # Widget
 widget.name:      Name
 widget.nowidgets: No widgets installed.

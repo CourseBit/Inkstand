@@ -1,0 +1,6 @@
+# User strings
+user.username:                  Username
+user.enabled:                   Enabled
+user.form.add:                  Create User
+user.form.edit:                 Update User
+user.added:                     User %name% created.

@@ -1,4 +1,7 @@
+parameters:
+    user_service.class: Inkstand\Bundle\UserBundle\Service\UserService
+
 services:
-#    inkstand_user.example:
-#        class: Inkstand\Bundle\UserBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    user_service:
+        class: "%user_service.class%"
+        arguments: [@doctrine.orm.entity_manager]
