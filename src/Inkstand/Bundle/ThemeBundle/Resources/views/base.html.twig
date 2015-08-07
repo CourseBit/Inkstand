@@ -62,11 +62,9 @@
 			</div>
 		</div>
 		<div class="container-fluid">
-			{% if pageHeading is defined %}
 				<div class="page-header page-header-sm">
-					<h1>{{ pageHeading }}</h1>
+					<h1>{% block page_header %}{% endblock %}</h1>
 				</div>
-			{% endif %}
 
 			{% if breadcrumbs is defined %}
 				<ol class="breadcrumb bg-transparent">

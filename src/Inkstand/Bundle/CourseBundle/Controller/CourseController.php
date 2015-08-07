@@ -13,14 +13,14 @@ use Inkstand\Bundle\CourseBundle\Entity\Course;
 /**
  * inkstand_course_index  /course
  * inkstand_course_view   /course/view/{slug}
- * inkstand_course_add    /course/add/{categoryId} 
+ * inkstand_course_add    /course/add/{categoryId}
  * inkstand_course_manage /course/manage
  */
 class CourseController extends Controller
 {
 	/**
 	 * Course index page
-	 * 
+	 *
 	 * @Route("/course", name="inkstand_course_index")
 	 * @Template
 	 */
@@ -110,7 +110,7 @@ class CourseController extends Controller
 
 			$session = $request->getSession();
 	        $session->getFlashBag()->add('success', $this->get('translator')->trans('course.added', array('%name%' => $course->getName())));
-	 		
+
 	        return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $course->getSlug())));
 	    }
 
@@ -153,7 +153,7 @@ class CourseController extends Controller
 
 			$session = $request->getSession();
 	        $session->getFlashBag()->add('success', $this->get('translator')->trans('course.edited', array('%name%' => $course->getName())));
-	 		
+
 	        return $this->redirect($this->generateUrl('inkstand_course_view', array('slug' => $course->getSlug())));
 	    }
 

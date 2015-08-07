@@ -31,4 +31,14 @@ class UserService
     {
         return $this->userRepository->findAll();
     }
+
+    /**
+     * Return a single user by userId
+     *
+     * @return
+     */
+     public function findOneByUserId($userId)
+     {
+         return $this->userRepository->findOneById($userId);
+     }
 }

@@ -1,6 +1,13 @@
 # User strings
-user.username:                  Username
-user.enabled:                   Enabled
-user.form.add:                  Create User
-user.form.edit:                 Update User
-user.added:                     User %name% created.
+user.username:         Username
+user.enabled:          Enabled
+user.password:         Password
+user.newpassword:      New Password
+user.newpassword.desc: Enter new password to change user's password
+user.form.add:         Add User
+user.form.add.another: Add User and Add Another
+user.added:            User %name% created.
+user.add:              Add User
+user.edit:             Edit User
+user.notfound:         User could not be found
+user.edited:           User "%name%" edited
