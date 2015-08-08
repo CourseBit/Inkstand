@@ -15,8 +15,14 @@ class PackageEvents
 
     public static function postPackageInstall(PackageEvent $packageEvent)
     {
-        $packageEvent->getIO()->write('HELLO WORLD!!!!!!!!!!!!!!!!!');
-        self::bootSymfony();
+        $installedPackage = $packageEvent->getOperation()->getPackage();
+
+        print_r($installedPackage);die;
+
+        $kernel = self::bootKernel();
+        $container = $kernel->getContainer();
+        //die("hello");
+        //$container->get('plugin_service')->install();
     }
 
     public static function prePackageUpdate(PackageEvent $packageEvent)
@@ -39,7 +45,7 @@ class PackageEvents
 
     }
 
-    public static function bootSymfony()
+    public static function bootKernel()
     {
         $loader = require_once __DIR__ . '/../../../../app/bootstrap.php.cache';
         Debug::enable();
@@ -48,9 +54,6 @@ class PackageEvents
 
         $kernel = new \AppKernel('dev', true);
         $kernel->loadClassCache();
-        $request = Request::createFromGlobals();
-        $response = $kernel->handle($request);
-        $response->send();
-        $kernel->terminate($request, $response);
+        return $kernel;
     }
 }
