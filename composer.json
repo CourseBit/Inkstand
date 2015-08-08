@@ -24,7 +24,9 @@
         "sensio/generator-bundle": "~2.5",
         "friendsofsymfony/user-bundle": "~2.0@dev",
         "doctrine/doctrine-fixtures-bundle": "~2.2",
-        "knplabs/knp-menu-bundle": "^2.0"
+        "knplabs/knp-menu-bundle": "^2.0",
+        "monolog/monolog": "^1.15",
+        "pimple/pimple": "^3.0"
     },
     "require-dev": {
     },
@@ -49,6 +51,24 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
+        ],
+        "pre-package-install": [
+            "Inkstand\\Component\\Composer\\PackageEvents::postPackageInstall"
+        ],
+        "post-package-install": [
+            "Inkstand\\Component\\Composer\\PackageEvents::postPackageInstall"
+        ],
+        "pre-package-update": [
+            "Inkstand\\Component\\Composer\\PackageEvents::postPackageInstall"
+        ],
+        "post-package-update": [
+            "Inkstand\\Component\\Composer\\PackageEvents::postPackageInstall"
+        ],
+        "pre-package-uninstall": [
+            "Inkstand\\Component\\Composer\\PackageEvents::postPackageInstall"
+        ],
+        "post-package-uninstall": [
+            "Inkstand\\Component\\Composer\\PackageEvents::postPackageInstall"
         ]
     },
     "config": {
