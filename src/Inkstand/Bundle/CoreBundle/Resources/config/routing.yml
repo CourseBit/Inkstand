@@ -5,3 +5,7 @@ inkstand_home:
 inkstand_widget:
     resource: "@InkstandCoreBundle/Controller/WidgetController.php"
     type:     annotation
+
+inkstand_plugin:
+    resource: "@InkstandCoreBundle/Controller/PluginController.php"
+    type:     annotation

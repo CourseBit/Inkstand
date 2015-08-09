@@ -7,12 +7,14 @@
 {% block main_content %}
     {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
         {% block grid_head %}
+            <th>Name</th>
             <th>Enabled</th>
             <th>Version</th>
         {% endblock %}
         {% block grid_body %}
             {% for plugin in plugins %}
                 <tr>
+                    <td>{{ plugin.bundleTitle }}</td>
                     <td>{{ plugin.enabled }}</td>
                     <td>{{ plugin.version }}</td>
                 </tr>

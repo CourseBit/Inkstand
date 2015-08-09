@@ -24,9 +24,51 @@ class Plugin
     /**
      * @var string
      *
+     * @ORM\Column(name="name", type="string", length=255)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="string", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="homepage", type="string", nullable=true)
+     */
+    private $homepage;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="authors", type="json_array", nullable=true)
+     */
+    private $authors;
+
+    /**
+     * @var array
+     *
+     * @ORM\Column(name="support", type="json_array", nullable=true)
+     */
+    private $support;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="bundle_class", type="string", length=255)
      */
     private $bundleClass;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bundle_title", type="string", length=255)
+     */
+    private $bundleTitle;
 
     /**
      * @var integer
@@ -50,7 +92,7 @@ class Plugin
      */
     public function getPluginId()
     {
-        return $this->pluginIdId;
+        return $this->pluginId;
     }
 
     /**
@@ -120,5 +162,143 @@ class Plugin
     public function getVersion()
     {
         return $this->version;
+    }
+
+    /**
+     * Set name
+     *
+     * @param string $name
+     * @return Plugin
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string 
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set description
+     *
+     * @param string $description
+     * @return Plugin
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Get description
+     *
+     * @return string 
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * Set homepage
+     *
+     * @param string $homepage
+     * @return Plugin
+     */
+    public function setHomepage($homepage)
+    {
+        $this->homepage = $homepage;
+
+        return $this;
+    }
+
+    /**
+     * Get homepage
+     *
+     * @return string 
+     */
+    public function getHomepage()
+    {
+        return $this->homepage;
+    }
+
+    /**
+     * Set authors
+     *
+     * @param array $authors
+     * @return Plugin
+     */
+    public function setAuthors($authors)
+    {
+        $this->authors = $authors;
+
+        return $this;
+    }
+
+    /**
+     * Get authors
+     *
+     * @return array 
+     */
+    public function getAuthors()
+    {
+        return $this->authors;
+    }
+
+    /**
+     * Set support
+     *
+     * @param array $support
+     * @return Plugin
+     */
+    public function setSupport($support)
+    {
+        $this->support = $support;
+
+        return $this;
+    }
+
+    /**
+     * Get support
+     *
+     * @return array 
+     */
+    public function getSupport()
+    {
+        return $this->support;
+    }
+
+    /**
+     * Set bundleTitle
+     *
+     * @param string $bundleTitle
+     * @return Plugin
+     */
+    public function setBundleTitle($bundleTitle)
+    {
+        $this->bundleTitle = $bundleTitle;
+
+        return $this;
+    }
+
+    /**
+     * Get bundleTitle
+     *
+     * @return string 
+     */
+    public function getBundleTitle()
+    {
+        return $this->bundleTitle;
     }
 }
