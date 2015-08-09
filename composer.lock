@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "076c4631097763e9362b1171abfbd539",
+    "hash": "7cae3b392532f8f0e31d61c833d6eddf",
     "packages": [
         {
             "name": "coursebit/inkstand-plugin-test",
@@ -12,10 +12,18 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CourseBit/InkstandPluginTest.git",
-                "reference": "27637a5afdcd4548f898b8eb7968109714097a1c"
+                "reference": "cf27971cd598053d4a979e02a1d54e7ecd2d4c28"
             },
             "type": "library",
-            "time": "2015-08-08 22:37:10"
+            "extra": {
+                "bundle_class": "Inkstand\\Bundle\\InkstandPluginTest\\InkstandPluginTestBundle"
+            },
+            "autoload": {
+                "psr-4": {
+                    "Inkstand\\Bundle\\InkstandPluginTest\\": ""
+                }
+            },
+            "time": "2015-08-09 00:44:05"
         },
         {
             "name": "doctrine/annotations",

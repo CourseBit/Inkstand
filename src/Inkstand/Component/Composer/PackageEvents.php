@@ -3,6 +3,7 @@
 namespace Inkstand\Component\Composer;
 
 use Composer\Installer\PackageEvent;
+use Symfony\Component\Config\Definition\Exception\Exception;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Debug\Debug;
 
@@ -16,13 +17,16 @@ class PackageEvents
     public static function postPackageInstall(PackageEvent $packageEvent)
     {
         $installedPackage = $packageEvent->getOperation()->getPackage();
+        $extra = $installedPackage->getExtra();
 
-        print_r($installedPackage);die;
+        // Check if composer package is an Inkstand bundle
+        if(!array_key_exists('bundle_class', $extra)) {
+            return;
+        }
 
         $kernel = self::bootKernel();
         $container = $kernel->getContainer();
-        //die("hello");
-        //$container->get('plugin_service')->install();
+        $container->get('plugin_service')->install($installedPackage);
     }
 
     public static function prePackageUpdate(PackageEvent $packageEvent)
@@ -54,6 +58,7 @@ class PackageEvents
 
         $kernel = new \AppKernel('dev', true);
         $kernel->loadClassCache();
+        $kernel->boot();
         return $kernel;
     }
 }

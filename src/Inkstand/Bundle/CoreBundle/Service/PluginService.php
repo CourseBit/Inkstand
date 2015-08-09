@@ -3,6 +3,7 @@
 namespace Inkstand\Bundle\CoreBundle\Service;
 
 use Inkstand\Bundle\CoreBundle\Entity\Plugin;
+use Composer\Package\CompletePackage;
 
 class PluginService
 {
@@ -12,18 +13,15 @@ class PluginService
     public function __construct($entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->repository = $entityManager->getRespository('InkstandCoreBundle:Plugin');
+        $this->repository = $entityManager->getRepository('InkstandCoreBundle:Plugin');
     }
 
-    public function install($bundleClass, $enabled = 1)
+    public function install(CompletePackage $package)
     {
-        if(!class_exists($bundleClass)) {
-            throw new \Exception('Bundle class does not exist: ' . $bundleClass);
-        }
-
         $plugin = new Plugin();
-        $plugin->setBundleClass($bundleClass);
-        $plugin->setEnabled($enabled);
+        $plugin->setBundleClass($package->getExtra()['bundle_class']);
+        $plugin->setEnabled(1);
+        $plugin->setVersion($package->getVersion());
         $this->entityManager->persist($plugin);
         $this->entityManager->flush();
     }

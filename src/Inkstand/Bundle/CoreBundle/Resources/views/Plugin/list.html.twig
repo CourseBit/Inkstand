@@ -1,0 +1,22 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCoreBundle:Plugin:list{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block main_content %}
+    {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+        {% block grid_head %}
+            <th>Enabled</th>
+            <th>Version</th>
+        {% endblock %}
+        {% block grid_body %}
+            {% for plugin in plugins %}
+                <tr>
+                    <td>{{ plugin.enabled }}</td>
+                    <td>{{ plugin.version }}</td>
+                </tr>
+            {% endfor %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}
