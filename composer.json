@@ -10,8 +10,8 @@
     },
     "repositories": [
         {
-            "url": "https://github.com/CourseBit/InkstandPluginTest.git",
-            "type": "git"
+            "url": "http://plugins.inkstand.org/",
+            "type": "composer"
         }
     ],
     "require": {
@@ -32,8 +32,7 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "knplabs/knp-menu-bundle": "^2.0",
         "monolog/monolog": "^1.15",
-        "pimple/pimple": "^3.0",
-        "coursebit/inkstand-plugin-test": "dev-master"
+        "pimple/pimple": "^3.0"
     },
     "require-dev": {
     },
