@@ -25,4 +25,21 @@ class PluginController extends Controller
             'plugins' => $plugins
         );
     }
+
+    /**
+     * #Route("/admin/plugin/update/{pluginId}", name="inkstand_plugin_update")
+     * @Template
+     * @throws \Exception
+     * @return array
+     */
+    public function updateAction($pluginId)
+    {
+        $plugin = $this->get('plugin_service')->findOneByPluginId($pluginId);
+
+        if($plugin == null) {
+            throw new \Exception('Plugin not found.');
+        }
+
+        
+    }
 }

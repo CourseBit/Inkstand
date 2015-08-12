@@ -41,4 +41,12 @@ class PluginService
     {
         return $this->repository->findAll();
     }
+
+    /**
+     * Returns plugin by pluginId
+     */
+    public function findOneByPluginId($pluginId)
+    {
+        return $this->repository->findOneByPluginId($pluginId);
+    }
 }

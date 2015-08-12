@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "7cae3b392532f8f0e31d61c833d6eddf",
+    "hash": "db52be92c7d892afb32d4bb2165e4e51",
     "packages": [
         {
             "name": "coursebit/inkstand-plugin-test",
@@ -12,7 +12,13 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/CourseBit/InkstandPluginTest.git",
-                "reference": "1544a838c0fae36e22056cb93492335607c73d89"
+                "reference": "3d0aebb030fc15ec308d4c062026bcf1a6bbb9ef"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/CourseBit/InkstandPluginTest/zipball/3d0aebb030fc15ec308d4c062026bcf1a6bbb9ef",
+                "reference": "3d0aebb030fc15ec308d4c062026bcf1a6bbb9ef",
+                "shasum": ""
             },
             "type": "library",
             "extra": {
@@ -24,6 +30,7 @@
                     "Inkstand\\Bundle\\InkstandPluginTest\\": ""
                 }
             },
+            "notification-url": "https://packagist.org/downloads/",
             "authors": [
                 {
                     "name": "Joseph Conradt",
@@ -33,17 +40,8 @@
                 }
             ],
             "description": "This plugin is used for testing the plugin management within Inkstand LMS",
-            "homepage": "htts://www.coursebit.net",
-            "support": {
-                "email": "joseph.conradt@coursebit.net",
-                "issues": "https://github.com/CourseBit/InkstandPluginTest/issues",
-                "forum": "https://stackoverflow.com",
-                "wiki": "https://github.com/CourseBit/InkstandPluginTest/wiki",
-                "irc": "irc://irc.freenode.org/composer",
-                "source": "https://github.com/CourseBit/InkstandPluginTest",
-                "docs": "http://www.coursebit.net"
-            },
-            "time": "2015-08-09 01:59:24"
+            "homepage": "http://www.coursebit.net",
+            "time": "2015-08-10 03:28:28"
         },
         {
             "name": "doctrine/annotations",
@@ -861,12 +859,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfSymfony/FOSUserBundle.git",
-                "reference": "c2e68acfb2b5786cd455fd9ae3b6d7f255f12646"
+                "reference": "3906465fbaa9d71de3404b8c3667e451d07f9984"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/c2e68acfb2b5786cd455fd9ae3b6d7f255f12646",
-                "reference": "c2e68acfb2b5786cd455fd9ae3b6d7f255f12646",
+                "url": "https://api.github.com/repos/FriendsOfSymfony/FOSUserBundle/zipball/3906465fbaa9d71de3404b8c3667e451d07f9984",
+                "reference": "3906465fbaa9d71de3404b8c3667e451d07f9984",
                 "shasum": ""
             },
             "require": {
@@ -920,7 +918,7 @@
             "keywords": [
                 "User management"
             ],
-            "time": "2015-08-03 00:52:58"
+            "time": "2015-08-10 10:51:54"
         },
         {
             "name": "incenteev/composer-parameter-handler",
@@ -1217,16 +1215,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "1.15.0",
+            "version": "1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0"
+                "reference": "c0c0b4bee3aabce7182876b0d912ef2595563db7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/dc5150cc608f2334c72c3b6a553ec9668a4156b0",
-                "reference": "dc5150cc608f2334c72c3b6a553ec9668a4156b0",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/c0c0b4bee3aabce7182876b0d912ef2595563db7",
+                "reference": "c0c0b4bee3aabce7182876b0d912ef2595563db7",
                 "shasum": ""
             },
             "require": {
@@ -1263,7 +1261,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.15.x-dev"
+                    "dev-master": "1.16.x-dev"
                 }
             },
             "autoload": {
@@ -1289,7 +1287,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2015-07-12 13:54:09"
+            "time": "2015-08-09 17:44:44"
         },
         {
             "name": "pimple/pimple",
@@ -1540,16 +1538,16 @@
         },
         {
             "name": "sensiolabs/security-checker",
-            "version": "v3.0.0",
+            "version": "v3.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/security-checker.git",
-                "reference": "8d32035cfe692efb3dddd0d828f8261280ec9006"
+                "reference": "7735fd97ff7303d9df776b8dbc970f949399abc9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/8d32035cfe692efb3dddd0d828f8261280ec9006",
-                "reference": "8d32035cfe692efb3dddd0d828f8261280ec9006",
+                "url": "https://api.github.com/repos/sensiolabs/security-checker/zipball/7735fd97ff7303d9df776b8dbc970f949399abc9",
+                "reference": "7735fd97ff7303d9df776b8dbc970f949399abc9",
                 "shasum": ""
             },
             "require": {
@@ -1580,7 +1578,7 @@
                 }
             ],
             "description": "A security checker for your composer.lock",
-            "time": "2015-08-03 10:03:32"
+            "time": "2015-08-11 12:11:25"
         },
         {
             "name": "swiftmailer/swiftmailer",

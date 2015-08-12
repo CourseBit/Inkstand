@@ -84,6 +84,12 @@ class Plugin
      */
     private $version;
 
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_installed", type="datetime")
+     */
+    private $dateInstalled;
 
     /**
      * Get pluginId
@@ -300,5 +306,28 @@ class Plugin
     public function getBundleTitle()
     {
         return $this->bundleTitle;
+    }
+
+    /**
+     * Set dateInstalled
+     *
+     * @param \DateTime $dateInstalled
+     * @return Plugin
+     */
+    public function setDateInstalled($dateInstalled)
+    {
+        $this->dateInstalled = $dateInstalled;
+
+        return $this;
+    }
+
+    /**
+     * Get dateInstalled
+     *
+     * @return \DateTime 
+     */
+    public function getDateInstalled()
+    {
+        return $this->dateInstalled;
     }
 }

@@ -2,21 +2,27 @@
 
 {% block title %}InkstandCoreBundle:Plugin:list{% endblock %}
 
-{% block page_header %}{% endblock %}
+{% block page_header %}Plugins{% endblock %}
 
 {% block main_content %}
     {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
         {% block grid_head %}
             <th>Name</th>
-            <th>Enabled</th>
-            <th>Version</th>
+            <th>Info</th>
+            <th></th>
         {% endblock %}
         {% block grid_body %}
             {% for plugin in plugins %}
                 <tr>
                     <td>{{ plugin.bundleTitle }}</td>
-                    <td>{{ plugin.enabled }}</td>
-                    <td>{{ plugin.version }}</td>
+                    <td>
+                        <p>{{ plugin.description }}</p>
+                        Version: {{ plugin.version }} | Links: <a target="_blank" href="{{ plugin.homepage }}">Homepage</a>
+                    </td>
+                    <td>
+                        <a href="#" class="text-danger"><i class="fa fa-times fa-lg"></i></a>
+                        <a href="#" class="text-info"><i class="fa fa-download fa-lg"></i></a>
+                    </td>
                 </tr>
             {% endfor %}
         {% endblock %}
