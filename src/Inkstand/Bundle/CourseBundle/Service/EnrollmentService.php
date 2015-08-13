@@ -2,9 +2,11 @@
 
 namespace Inkstand\Bundle\CourseBundle\Service;
 
+use Inkstand\Bundle\CourseBundle\Entity\Course;
 use Inkstand\Bundle\CourseBundle\Entity\Enrollment;
 use Inkstand\Bundle\CourseBundle\Event\EnrollmentEvent;
 use Inkstand\Bundle\CourseBundle\Event\EnrollmentEvents;
+use Inkstand\Bundle\UserBundle\Entity\User;
 
 class EnrollmentService
 {
@@ -22,16 +24,19 @@ class EnrollmentService
     /**
      * Enroll a single user user to a single course
      *
-     * @param $user
-     * @param $course
+     * @author Joseph Conradt (joseph.conradt@coursebit.net)
+     * @param User $user User to enroll
+     * @param Course $course Course to enroll to
+     * @param string $enrollmentType Name identifier of enrollmentType
      */
-    public function enrollUser($user, $course)
+    public function enrollUser(User $user, Course $course, $enrollmentType)
     {
         $enrollment = new Enrollment();
         $enrollment->setUser($user);
         $enrollment->setUserId($user->getId());
         $enrollment->setCourse($course);
         $enrollment->setCourseId($course->getCourseId());
+        $enrollment->setEnrollmentType($enrollmentType);
 
         $event = new EnrollmentEvent($enrollment);
         $this->eventDispatcher->dispatch(EnrollmentEvents::ENROLL_PRE, $event);
@@ -46,10 +51,12 @@ class EnrollmentService
     /**
      * Enroll multiple users to a single course
      *
-     * @param array $users
-     * @param $course
+     * @author Joseph Conradt (joseph.conradt@coursebit.net)
+     * @param array $users Users to enroll
+     * @param Course $course Course to enroll to
+     * @param string $enrollmentType Name identifier of enrollmentType
      */
-    public function enrollUsers(array $users, $course)
+    public function enrollUsers(array $users, Course $course, $enrollmentType)
     {
         // Insert enrollments in batches
         $batchSize = 20;

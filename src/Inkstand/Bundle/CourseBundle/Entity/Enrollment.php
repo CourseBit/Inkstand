@@ -36,6 +36,13 @@ class Enrollment
     private $userId;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="enrollment_type", type="string")
+     */
+    private $enrollmentType;
+
+    /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="enrollments")
      * @ORM\JoinColumn(name="course_id", referencedColumnName="course_id")
      */
@@ -101,6 +108,29 @@ class Enrollment
     public function getUserId()
     {
         return $this->userId;
+    }
+
+    /**
+     * Set enrollmentType
+     *
+     * @param string $enrollmentType
+     * @return Enrollment
+     */
+    public function setEnrollmentType($enrollmentType)
+    {
+        $this->enrollmentType = $enrollmentType;
+
+        return $this;
+    }
+
+    /**
+     * Get enrollmentType
+     *
+     * @return string
+     */
+    public function getEnrollmentType()
+    {
+        return $this->enrollmentType;
     }
 
     /**
