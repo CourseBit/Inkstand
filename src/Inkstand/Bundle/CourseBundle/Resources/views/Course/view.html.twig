@@ -2,12 +2,17 @@
 
 {% block title %}InkstandCourseBundle:Course:view{% endblock %}
 
+{% block page_header %}{{ course.name }}{% endblock %}
+
 {% block main_content %}
     {{ parent() }}
 	{% for module in course.modules %}
 		{{ include('InkstandThemeBundle::module.html.twig', {'module':module}) }}
         <hr class="line-bold">
 	{% endfor %}
+	{% if course.modules is empty %}
+		<p class="alert alert-warning">This course is currently empty.</p>
+	{% endif %}
 	<a class="btn btn-default btn-primary" href="{{ path('inkstand_course_module_add', {'courseId': course.courseId}) }}">{% trans %}Add new module{% endtrans %}</a>
 	<div id="modal-activity-list" class="modal fade">
 		<div class="modal-dialog">

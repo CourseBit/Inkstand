@@ -17,6 +17,7 @@ course.deleted:                   Course "%name%" deleted
 course.notfound:                  Course could not be found
 courseware:                       Courseware
 course.update.settings:           Update course settings
+course.state:                     State
 
 # Course Form
 course.form.name.placeholder:     My New Course

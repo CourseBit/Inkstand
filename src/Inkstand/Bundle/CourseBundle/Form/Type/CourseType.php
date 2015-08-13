@@ -2,6 +2,7 @@
 
 namespace Inkstand\Bundle\CourseBundle\Form\Type;
 
+use Inkstand\Bundle\CourseBundle\Entity\Course;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -36,6 +37,14 @@ class CourseType extends AbstractType
                 'attr' => array(
                     'placeholder' => 'course.form.slug.placeholder',
                 )
+            ))
+            ->add('state', 'choice', array(
+                'choices' => array(
+                    Course::STATE_HIDDEN => 'Hidden',
+                    Course::STATE_PUBLISHED => 'Published'
+                ),
+                'label' => 'course.state',
+                'data' => 1
             ))
             ->add('categoryId', 'choice', array(
                 'choices' => $this->courseCategoryService->getFormattedList(),

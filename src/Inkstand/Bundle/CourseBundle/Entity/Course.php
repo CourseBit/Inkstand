@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Course
 {
+    const STATE_HIDDEN = 0;
+    const STATE_PUBLISHED = 1;
+
     /**
      * @var integer
      *
@@ -26,7 +29,7 @@ class Course
      *
      * @ORM\Column(name="name", type="string", length=255)
      */
-    protected $name;
+    private $name;
 
     /**
      * @ORM\Column(type="string", length=50, nullable=true)
@@ -67,6 +70,13 @@ class Course
      * @ORM\Column(name="category_id", type="integer")
      */
     private $categoryId;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="state", type="integer")
+     */
+    private $state;
 
     /**
      * @ORM\ManyToOne(targetEntity="CourseCategory", inversedBy="courses")
@@ -256,6 +266,29 @@ class Course
     public function getCategoryId()
     {
         return $this->categoryId;
+    }
+
+    /**
+     * Set state
+     *
+     * @param integer $state
+     * @return Course
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return integer
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 
     /**

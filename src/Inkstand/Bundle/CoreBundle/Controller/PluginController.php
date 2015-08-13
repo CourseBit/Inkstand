@@ -40,6 +40,6 @@ class PluginController extends Controller
             throw new \Exception('Plugin not found.');
         }
 
-        
+
     }
 }
