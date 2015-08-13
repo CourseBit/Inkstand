@@ -11,7 +11,7 @@
         <hr class="line-bold">
 	{% endfor %}
 	{% if course.modules is empty %}
-		<p class="alert alert-warning">This course is currently empty.</p>
+		<p class="alert alert-warning">{% trans %}course.empty{% endtrans %}</p>
 	{% endif %}
 	<a class="btn btn-default btn-primary" href="{{ path('inkstand_course_module_add', {'courseId': course.courseId}) }}">{% trans %}Add new module{% endtrans %}</a>
 	<div id="modal-activity-list" class="modal fade">

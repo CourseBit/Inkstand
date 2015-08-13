@@ -18,6 +18,7 @@ course.notfound:                  Course could not be found
 courseware:                       Courseware
 course.update.settings:           Update course settings
 course.state:                     State
+course.empty:                     This course is currently empty.
 
 # Course Form
 course.form.name.placeholder:     My New Course
