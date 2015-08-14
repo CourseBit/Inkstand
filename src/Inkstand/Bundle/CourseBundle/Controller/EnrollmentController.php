@@ -26,7 +26,20 @@ class EnrollmentController extends Controller
     public function enrollmentAction($courseId)
     {
         $course = $this->get('course_service')->findOneByCourseId($courseId);
-        return array();
+
+        $enrollmentTypes = $this->get('enrollment_service')->getEnrollmentTypes();
+
+        //dump($enrollmentTypes);
+
+//        foreach($enrollmentTypes as $enrollmentType)
+//        {
+//            dump($this->get($enrollmentType)->getLabel());
+//        }
+
+        return array(
+            'enrollmentTypes' => $enrollmentTypes,
+            'course' => $course
+        );
     }
 
     /**

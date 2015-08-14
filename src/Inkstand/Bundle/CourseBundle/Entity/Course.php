@@ -87,7 +87,12 @@ class Course
     /**
      * @ORM\OneToMany(targetEntity="Module", mappedBy="course")
      */
-    protected $modules;
+    private $modules;
+
+    /**
+     * @ORM\OneToMany(targetEntity="CourseEnrollmentType", mappedBy="course")
+     */
+    private $courseEnrollmentType;
 
     /**
      * Constructor
@@ -345,5 +350,38 @@ class Course
     public function getModules()
     {
         return $this->modules;
+    }
+
+    /**
+     * Add courseEnrollmentType
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType
+     * @return Course
+     */
+    public function addCourseEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType)
+    {
+        $this->courseEnrollmentType[] = $courseEnrollmentType;
+
+        return $this;
+    }
+
+    /**
+     * Remove courseEnrollmentType
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType
+     */
+    public function removeCourseEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType)
+    {
+        $this->courseEnrollmentType->removeElement($courseEnrollmentType);
+    }
+
+    /**
+     * Get courseEnrollmentType
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCourseEnrollmentType()
+    {
+        return $this->courseEnrollmentType;
     }
 }

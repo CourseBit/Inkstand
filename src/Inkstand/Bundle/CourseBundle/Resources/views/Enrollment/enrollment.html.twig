@@ -5,4 +5,18 @@
 {% block main_content %}
     {{ parent() }}
 
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Enrollment Type</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollmentType in enrollmentTypes %}
+                <tr>
+                    <td>{{ enrollmentType.label|trans }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
 {% endblock %}

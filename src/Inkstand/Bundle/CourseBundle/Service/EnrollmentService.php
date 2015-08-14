@@ -6,6 +6,7 @@ use Inkstand\Bundle\CourseBundle\Entity\Course;
 use Inkstand\Bundle\CourseBundle\Entity\Enrollment;
 use Inkstand\Bundle\CourseBundle\Event\EnrollmentEvent;
 use Inkstand\Bundle\CourseBundle\Event\EnrollmentEvents;
+use Inkstand\Bundle\CourseBundle\Event\EnrollmentRegisterEvent;
 use Inkstand\Bundle\UserBundle\Entity\User;
 
 class EnrollmentService
@@ -13,12 +14,16 @@ class EnrollmentService
     protected $entityManager;
     protected $eventDispatcher;
     protected $repository;
+    protected $serviceContainer;
 
-    public function __construct($entityManager, $eventDispatcher)
+    private $enrollmentTypes;
+
+    public function __construct($entityManager, $eventDispatcher, $serviceContainer)
     {
         $this->entityManager = $entityManager;
         $this->eventDispatcher = $eventDispatcher;
         $this->repository = $this->entityManager->getRepository('InkstandCourseBundle:Enrollment');
+        $this->serviceContainer = $serviceContainer;
     }
 
     /**
@@ -87,6 +92,7 @@ class EnrollmentService
     /**
      * Unenroll a single user from a course
      *
+     * @author Joseph Conradt (joseph.conradt@coursebit.net)
      * @param $user
      * @param $course
      * @throws \Exception
@@ -111,6 +117,7 @@ class EnrollmentService
     /**
      * Unenroll multiple users from a course
      *
+     * @author Joseph Conradt (joseph.conradt@coursebit.net)
      * @param array $users
      * @param $course
      * @throws \Exception
@@ -148,6 +155,7 @@ class EnrollmentService
     /**
      * Check if a user is enrolled to a course
      *
+     * @author Joseph Conradt (joseph.conradt@coursebit.net)
      * @param $user
      * @param $course
      * @return boolean
@@ -155,5 +163,23 @@ class EnrollmentService
     public function isUserEnrolled($user, $course)
     {
         return $this->repository->findOneByUserAndCourse($user, $course) != null;
+    }
+
+    public function getEnrollmentTypes()
+    {
+        if($this->enrollmentTypes == null) {
+            $event = new EnrollmentRegisterEvent();
+            $this->eventDispatcher->dispatch(EnrollmentEvents::ENROLLMENT_REGISTER, $event);
+
+            $this->enrollmentTypes = $event->getEnrollmentTypes();
+        }
+
+        $enrollmentTypes = array();
+
+        foreach($this->enrollmentTypes as $enrollmentType) {
+            $enrollmentTypes[] = $this->serviceContainer->get($enrollmentType);
+        }
+
+        return $enrollmentTypes;
     }
 }

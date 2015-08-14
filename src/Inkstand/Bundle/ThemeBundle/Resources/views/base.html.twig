@@ -86,10 +86,11 @@
 						</div>
 					</div>
 				</div>
-
-                {% for widget in page_template_service.getWidgetsForTemplate(1) %}
-                    {{ include(widget.partial) }}
-                {% endfor %}
+				<!--
+                for widget in page_template_service.getWidgetsForTemplate(1)
+                    include(widget.partial)
+                endfor
+                -->
 
 			</div>
 

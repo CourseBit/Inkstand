@@ -25,7 +25,7 @@ services:
         arguments: [@doctrine.orm.entity_manager]
     enrollment_service:
         class:     "%enrollment_service.class%"
-        arguments: [@doctrine.orm.entity_manager, @event_dispatcher]
+        arguments: [@doctrine.orm.entity_manager, @event_dispatcher, @service_container]
 
     # Form types
     inkstand_course.form.type.task:
@@ -34,8 +34,15 @@ services:
         tags:
             - { name: form.type, alias: course }
 
+    inkstand_course.enrollment.manual_enrollment:
+        class: Inkstand\Bundle\CourseBundle\Enrollment\ManualEnrollment
 
     course_widget_listener:
         class: Inkstand\Bundle\CourseBundle\EventListener\WidgetListener
         tags:
             - { name: kernel.event_listener, event: inkstand.core.widget_register, method: onWidgetRegister }
+
+    enrollment_register_listener:
+        class: Inkstand\Bundle\CourseBundle\EventListener\EnrollmentRegisterListener
+        tags:
+            - { name: kernel.event_listener, event: inkstand.course.enrollment_register, method: onEnrollmentRegister }
