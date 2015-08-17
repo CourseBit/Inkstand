@@ -26,7 +26,7 @@ class PackageEvents
 
         $kernel = self::bootKernel();
         $container = $kernel->getContainer();
-        $container->get('plugin_service')->install($installedPackage);
+        $container->get('plugin_service')->install($installedPackage, $packageEvent);
     }
 
     public static function prePackageUpdate(PackageEvent $packageEvent)
