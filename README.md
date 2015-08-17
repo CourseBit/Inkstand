@@ -33,7 +33,7 @@ If you would like to help out with Inkstand (please do!), there are a few areas 
  - Contact me (Joe) via [my website] for what areas you can help code.
  - Submit pull requests with quality work (Don't be discouraged if your pull request is not merged right away. In the early stages I have a vision for Inkstand's structure and functionality.)
 
-#### Feature requests
+#### Feature requests:
 To request a new Inkstand feature or enhancement, [create a new issue] and detail what should be added or changed.
 
 #### Bug reporting:
