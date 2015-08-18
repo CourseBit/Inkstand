@@ -17,7 +17,7 @@ class PluginService
         $this->repository = $entityManager->getRepository('InkstandCoreBundle:Plugin');
     }
 
-    public function install(CompletePackage $package, PackageEvent $event)
+    public function install(CompletePackage $package, $installPath = null)
     {
         $plugin = new Plugin();
         $plugin->setName($package->getName());
@@ -26,18 +26,18 @@ class PluginService
         $plugin->setDescription($package->getDescription());
         $plugin->setHomepage($package->getHomepage());
         $plugin->setAuthors($package->getAuthors());
+        // getSupport() is always going to return empty an array. Maybe this will change in the future
         $plugin->setSupport($package->getSupport());
         $plugin->setDateInstalled(new \DateTime());
 
         // Get full package json file. The package json from composer update/install does not include support properties
         // https://github.com/CourseBit/Inkstand/issues/4
-        $installPath = $event->getComposer()->getInstallationManager()->getInstallPath($package);
-        $packageJson = json_decode(file_get_contents(sprintf('%s/composer.json', $installPath)));
+        if($installPath != null) {
+            $packageJson = json_decode(file_get_contents(sprintf('%s/composer.json', $installPath)));
 
-        if(!empty($packageJson) && isset($packageJson->support)) {
-            $plugin->setSupport($packageJson->support);
-        } else {
-            $plugin->setSupport(array());
+            if (!empty($packageJson) && isset($packageJson->support)) {
+                $plugin->setSupport($packageJson->support);
+            }
         }
 
         $plugin->setBundleClass($package->getExtra()['bundle_class']);

@@ -24,9 +24,11 @@ class PackageEvents
             return;
         }
 
+        $installPath = $packageEvent->getComposer()->getInstallationManager()->getInstallPath($installedPackage);
+
         $kernel = self::bootKernel();
         $container = $kernel->getContainer();
-        $container->get('plugin_service')->install($installedPackage, $packageEvent);
+        $container->get('plugin_service')->install($installedPackage, $installPath);
     }
 
     public static function prePackageUpdate(PackageEvent $packageEvent)
