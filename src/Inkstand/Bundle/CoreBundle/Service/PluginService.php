@@ -17,6 +17,43 @@ class PluginService
         $this->repository = $entityManager->getRepository('InkstandCoreBundle:Plugin');
     }
 
+    /**
+     * Return all plugins
+     *
+     * return array
+     */
+    public function findAll()
+    {
+        return $this->repository->findAll();
+    }
+
+    /**
+     * Returns plugin by pluginId
+     * @param integer $pluginId
+     * @return Plugin|null
+     */
+    public function findOneByPluginId($pluginId)
+    {
+        return $this->repository->findOneByPluginId($pluginId);
+    }
+
+    /**
+     * Return a plugin by it's composer name (vender/package-name)
+     *
+     * @param $name
+     * @return mixed
+     */
+    public function findOneByName($name)
+    {
+        return $this->repository->findOneByName($name);
+    }
+
+    /**
+     * Install a plugin to the database
+     *
+     * @param CompletePackage $package
+     * @param string $installPath
+     */
     public function install(CompletePackage $package, $installPath = null)
     {
         $plugin = new Plugin();
@@ -47,20 +84,17 @@ class PluginService
     }
 
     /**
-     * Return all plugins
+     * Uninstall a plugin from the database
      *
-     * return array
+     * @param CompletePackage $package
      */
-    public function findAll()
+    public function uninstall(CompletePackage $package)
     {
-        return $this->repository->findAll();
-    }
+        $plugin = $this->findOneByName($package->getName());
 
-    /**
-     * Returns plugin by pluginId
-     */
-    public function findOneByPluginId($pluginId)
-    {
-        return $this->repository->findOneByPluginId($pluginId);
+        if($plugin != null) {
+            $this->entityManager->remove($plugin);
+            $this->entityManager->flush();
+        }
     }
 }

@@ -26,8 +26,7 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "knplabs/knp-menu-bundle": "^2.0",
         "monolog/monolog": "^1.15",
-        "pimple/pimple": "^3.0",
-        "coursebit/inkstand-plugin-test": "dev-master"
+        "pimple/pimple": "^3.0"
     },
     "require-dev": {
     },
@@ -55,6 +54,9 @@
         ],
         "post-package-install": [
             "Inkstand\\Component\\Composer\\PackageEvents::postPackageInstall"
+        ],
+        "pre-package-uninstall": [
+            "Inkstand\\Component\\Composer\\PackageEvents::prePackageUninstall"
         ]
     },
     "config": {

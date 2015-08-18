@@ -14,6 +14,11 @@ class PackageEvents
 
     }
 
+    /**
+     * This method is called by a composer script
+     *
+     * @param PackageEvent $packageEvent
+     */
     public static function postPackageInstall(PackageEvent $packageEvent)
     {
         $installedPackage = $packageEvent->getOperation()->getPackage();
@@ -41,9 +46,21 @@ class PackageEvents
 
     }
 
-    public static function PrePackageUninstall(PackageEvent $packageEvent)
+    public static function prePackageUninstall(PackageEvent $packageEvent)
     {
+        $uninstalledPackage = $packageEvent->getOperation()->getPackage();
+        $extra = $uninstalledPackage->getExtra();
 
+        // Check if composer package is an Inkstand bundle
+        if(!array_key_exists('bundle_class', $extra)) {
+            return;
+        }
+
+        $installPath = $packageEvent->getComposer()->getInstallationManager()->getInstallPath($uninstalledPackage);
+
+        $kernel = self::bootKernel();
+        $container = $kernel->getContainer();
+        $container->get('plugin_service')->uninstall($uninstalledPackage, $installPath);
     }
 
     public static function postPackageUninstall(PackageEvent $packageEvent)
