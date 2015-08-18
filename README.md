@@ -1,4 +1,4 @@
-# Inkstand
+![Inkstand LMS](https://cloud.githubusercontent.com/assets/3340747/9319889/109a867a-4519-11e5-91a8-189ee57ec872.png)
 
 Open source Learning Management System (LMS) by [CourseBit].
 
