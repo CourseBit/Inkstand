@@ -26,6 +26,11 @@ class EnrollmentService
         $this->serviceContainer = $serviceContainer;
     }
 
+    public function findAll()
+    {
+        return $this->repository->findAll();
+    }
+
     /**
      * Enroll a single user user to a single course
      *
@@ -163,23 +168,5 @@ class EnrollmentService
     public function isUserEnrolled($user, $course)
     {
         return $this->repository->findOneByUserAndCourse($user, $course) != null;
-    }
-
-    public function getEnrollmentTypes()
-    {
-        if($this->enrollmentTypes == null) {
-            $event = new EnrollmentRegisterEvent();
-            $this->eventDispatcher->dispatch(EnrollmentEvents::ENROLLMENT_REGISTER, $event);
-
-            $this->enrollmentTypes = $event->getEnrollmentTypes();
-        }
-
-        $enrollmentTypes = array();
-
-        foreach($this->enrollmentTypes as $enrollmentType) {
-            $enrollmentTypes[] = $this->serviceContainer->get($enrollmentType);
-        }
-
-        return $enrollmentTypes;
     }
 }

@@ -5,6 +5,7 @@ parameters:
     activity_type_service.class:   Inkstand\Bundle\CourseBundle\Service\ActivityTypeService
     module_service.class:          Inkstand\Bundle\CourseBundle\Service\ModuleService
     enrollment_service.class:      Inkstand\Bundle\CourseBundle\Service\EnrollmentService
+    enrollment_type_service.class: Inkstand\Bundle\CourseBundle\Service\EnrollmentTypeService
 
 services:
     # Entity services
@@ -26,6 +27,9 @@ services:
     enrollment_service:
         class:     "%enrollment_service.class%"
         arguments: [@doctrine.orm.entity_manager, @event_dispatcher, @service_container]
+    enrollment_type_service:
+        class:     "%enrollment_type_service.class%"
+        arguments: [@doctrine.orm.entity_manager]
 
     # Form types
     inkstand_course.form.type.task:
@@ -41,8 +45,3 @@ services:
         class: Inkstand\Bundle\CourseBundle\EventListener\WidgetListener
         tags:
             - { name: kernel.event_listener, event: inkstand.core.widget_register, method: onWidgetRegister }
-
-    enrollment_register_listener:
-        class: Inkstand\Bundle\CourseBundle\EventListener\EnrollmentRegisterListener
-        tags:
-            - { name: kernel.event_listener, event: inkstand.course.enrollment_register, method: onEnrollmentRegister }

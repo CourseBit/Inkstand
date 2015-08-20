@@ -49,6 +49,12 @@ class CourseEnrollmentType
     private $course;
 
     /**
+     * @ORM\ManyToOne(targetEntity="EnrollmentType", inversedBy="courseEnrollmentTypes")
+     * @ORM\JoinColumn(name="enrollment_type_id", referencedColumnName="enrollment_type_id")
+     */
+    private $enrollmentType;
+
+    /**
      * Get courseEnrollmentTypeId
      *
      * @return integer 
@@ -125,5 +131,51 @@ class CourseEnrollmentType
     public function getEnabled()
     {
         return $this->enabled;
+    }
+
+    /**
+     * Set course
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Course $course
+     * @return CourseEnrollmentType
+     */
+    public function setCourse(\Inkstand\Bundle\CourseBundle\Entity\Course $course = null)
+    {
+        $this->course = $course;
+
+        return $this;
+    }
+
+    /**
+     * Get course
+     *
+     * @return \Inkstand\Bundle\CourseBundle\Entity\Course 
+     */
+    public function getCourse()
+    {
+        return $this->course;
+    }
+
+    /**
+     * Set enrollmentType
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\EnrollmentType $enrollmentType
+     * @return CourseEnrollmentType
+     */
+    public function setEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\EnrollmentType $enrollmentType = null)
+    {
+        $this->enrollmentType = $enrollmentType;
+
+        return $this;
+    }
+
+    /**
+     * Get enrollmentType
+     *
+     * @return \Inkstand\Bundle\CourseBundle\Entity\EnrollmentType 
+     */
+    public function getEnrollmentType()
+    {
+        return $this->enrollmentType;
     }
 }

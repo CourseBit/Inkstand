@@ -2,6 +2,8 @@
 
 {% block title %}InkstandCourseBundle:Course:edit{% endblock %}
 
+{% block page_header %}{% trans %}course.edit{% endtrans %}{% endblock %}
+
 {% block main_content %}
     {{ parent() }}
     {{ form_start(courseForm) }}

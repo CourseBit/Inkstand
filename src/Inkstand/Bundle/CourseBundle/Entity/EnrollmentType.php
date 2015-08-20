@@ -29,6 +29,11 @@ class EnrollmentType
     private $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="Module", mappedBy="enrollmentType")
+     */
+    private $courseEnrollmentTypes;
+
+    /**
      * Get enrollmentTypeId
      *
      * @return integer 
@@ -59,5 +64,46 @@ class EnrollmentType
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->courseEnrollmentTypes = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Add courseEnrollmentTypes
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Module $courseEnrollmentTypes
+     * @return EnrollmentType
+     */
+    public function addCourseEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\Module $courseEnrollmentTypes)
+    {
+        $this->courseEnrollmentTypes[] = $courseEnrollmentTypes;
+
+        return $this;
+    }
+
+    /**
+     * Remove courseEnrollmentTypes
+     *
+     * @param \Inkstand\Bundle\CourseBundle\Entity\Module $courseEnrollmentTypes
+     */
+    public function removeCourseEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\Module $courseEnrollmentTypes)
+    {
+        $this->courseEnrollmentTypes->removeElement($courseEnrollmentTypes);
+    }
+
+    /**
+     * Get courseEnrollmentTypes
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getCourseEnrollmentTypes()
+    {
+        return $this->courseEnrollmentTypes;
     }
 }

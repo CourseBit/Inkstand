@@ -90,9 +90,9 @@ class Course
     private $modules;
 
     /**
-     * @ORM\OneToMany(targetEntity="CourseEnrollmentType", mappedBy="course")
+     * @ORM\OneToMany(targetEntity="CourseEnrollmentType", mappedBy="course", cascade={"persist"})
      */
-    private $courseEnrollmentType;
+    private $courseEnrollmentTypes;
 
     /**
      * Constructor
@@ -353,35 +353,35 @@ class Course
     }
 
     /**
-     * Add courseEnrollmentType
+     * Add courseEnrollmentTypes
      *
-     * @param \Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType
+     * @param \Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentTypes
      * @return Course
      */
-    public function addCourseEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType)
+    public function addCourseEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentTypes)
     {
-        $this->courseEnrollmentType[] = $courseEnrollmentType;
+        $this->courseEnrollmentTypes[] = $courseEnrollmentTypes;
 
         return $this;
     }
 
     /**
-     * Remove courseEnrollmentType
+     * Remove courseEnrollmentTypes
      *
-     * @param \Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType
+     * @param \Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentTypes
      */
-    public function removeCourseEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType)
+    public function removeCourseEnrollmentType(\Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentTypes)
     {
-        $this->courseEnrollmentType->removeElement($courseEnrollmentType);
+        $this->courseEnrollmentTypes->removeElement($courseEnrollmentTypes);
     }
 
     /**
-     * Get courseEnrollmentType
+     * Get courseEnrollmentTypes
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getCourseEnrollmentType()
+    public function getCourseEnrollmentTypes()
     {
-        return $this->courseEnrollmentType;
+        return $this->courseEnrollmentTypes;
     }
 }

@@ -5,6 +5,7 @@ namespace Inkstand\Bundle\CourseBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Form\FormView;
 
 class CourseEnrollmentTypeType extends AbstractType
 {
@@ -14,10 +15,11 @@ class CourseEnrollmentTypeType extends AbstractType
             ->add('courseId', 'hidden')
             ->add('enrollmentTypeId', 'hidden')
             ->add('enabled', 'choice', array(
-                'choices' => array('0' => 'Disabled', '1' => 'Enabled'),
+                'choices' => array('1' => 'Enabled', '0' => 'Disabled'),
                 'expanded' => true,
                 'multiple' => false
-            ));
+            ))
+            ->add('enrollmentType', new EnrollmentTypeType());
     }
 
     public function getName()
