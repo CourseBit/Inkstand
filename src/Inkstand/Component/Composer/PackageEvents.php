@@ -43,7 +43,19 @@ class PackageEvents
 
     public static function postPackageUpdate(PackageEvent $packageEvent)
     {
+        $updatePackage = $packageEvent->getOperation()->getPackage();
+        $extra = $updatePackage->getExtra();
 
+        // Check if composer package is an Inkstand bundle
+        if(!array_key_exists('bundle_class', $extra)) {
+            return;
+        }
+
+        $installPath = $packageEvent->getComposer()->getInstallationManager()->getInstallPath($updatePackage);
+
+        $kernel = self::bootKernel();
+        $container = $kernel->getContainer();
+        $container->get('plugin_service')->update($updatePackage, $installPath);
     }
 
     public static function prePackageUninstall(PackageEvent $packageEvent)

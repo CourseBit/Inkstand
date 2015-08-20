@@ -92,6 +92,13 @@ class Plugin
     private $dateInstalled;
 
     /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_updated", type="datetime")
+     */
+    private $dateUpdated;
+
+    /**
      * Get pluginId
      *
      * @return integer 
@@ -324,10 +331,33 @@ class Plugin
     /**
      * Get dateInstalled
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getDateInstalled()
     {
         return $this->dateInstalled;
+    }
+
+    /**
+     * Set dateUpdated
+     *
+     * @param \DateTime $dateUpdated
+     * @return Plugin
+     */
+    public function setDateUpdated($dateUpdated)
+    {
+        $this->dateUpdated = $dateUpdated;
+
+        return $this;
+    }
+
+    /**
+     * Get dateUpdated
+     *
+     * @return \DateTime
+     */
+    public function getDateUpdated()
+    {
+        return $this->dateUpdated;
     }
 }

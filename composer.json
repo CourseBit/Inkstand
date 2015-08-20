@@ -57,6 +57,9 @@
         ],
         "pre-package-uninstall": [
             "Inkstand\\Component\\Composer\\PackageEvents::prePackageUninstall"
+        ],
+        "post-package-update": [
+            "Inkstand\\Component\\Composer\\PackageEvents::postPackageUpdate"
         ]
     },
     "config": {
