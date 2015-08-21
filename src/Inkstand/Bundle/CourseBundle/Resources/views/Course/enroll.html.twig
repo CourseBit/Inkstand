@@ -1,0 +1,11 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCourseBundle:Course:enroll{% endblock %}
+
+{% block page_header %}{{ "course.enroll"|trans }}{% endblock %}
+
+{% block main_content %}
+    {% for courseEnrollmentType in course.courseEnrollmentTypes if courseEnrollmentType.enabled %}
+
+    {% endfor %}
+{% endblock %}

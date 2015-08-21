@@ -45,6 +45,10 @@ class CourseController extends Controller
             throw new NotFoundHttpException($this->get('translator')->trans('course.notfound'));
         }
 
+		if(!$this->get('enrollment_service')->isUserEnrolled($this->getUser(), $course)) {
+			return $this->forward('InkstandCourseBundle:Course:enroll', array('courseId' => $course->getCourseId()));
+		}
+
         // TODO: Use an activity type service
 		$activityTypes = $this->getDoctrine()
 			->getRepository('InkstandCourseBundle:ActivityType')
@@ -215,12 +219,36 @@ class CourseController extends Controller
         );
     }
 
-    /**
+	/**
 	 * @Route("/course/manage", name="inkstand_course_manage")
 	 * @Template
 	 */
 	public function manageAction()
 	{
 		return array();
+	}
+
+	/**
+	 * Display options for enrolling into a course
+	 *
+	 * @Route("/course/enroll/{courseId}", name="inkstand_course_enroll")
+	 * @Template
+	 * @param Request $request
+	 * @param int $courseId ID of course to enroll
+	 * @return array
+	 */
+    public function enrollAction(Request $request, $courseId)
+	{
+		$course = $this->get('course_service')->findOneByCourseId($courseId);
+
+		if (is_null($course)) {
+			throw new NotFoundHttpException($this->get('translator')->trans('course.notfound'));
+		}
+
+
+
+		return array(
+			'course' => $course
+		);
 	}
 }

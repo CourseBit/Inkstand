@@ -20,6 +20,7 @@ course.update.settings:           Update course settings
 course.state:                     State
 course.empty:                     This course is currently empty.
 course.edit:                      Edit Course
+course.enroll:                    Enroll
 
 # Course Form
 course.form.name.placeholder:     My New Course
