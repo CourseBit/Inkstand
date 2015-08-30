@@ -1,0 +1,12 @@
+{% extends "InkstandCourseBundle::course.html.twig" %}
+
+{% block title %}InkstandCourseBundle:Enrollment:settings{% endblock %}
+
+{% block page_header %}{% trans %}enrollment.settings{% endtrans %}{% endblock %}
+
+{% block main_content %}
+    {{ parent() }}
+    {{ form_start(settingsForm) }}
+    {{ form_widget(settingsForm) }}
+    {{ form_end(settingsForm) }}
+{% endblock %}

@@ -13,60 +13,65 @@
     {{ form_start(form) }}
         {{ form_errors(form) }}
         {{ form_widget(form._token) }}
-
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Enabled Enrollment Types</th>
-                    <th>Description</th>
-                    <th>Enabled</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for courseEnrollmentType in form.courseEnrollmentTypes if courseEnrollmentType.vars.value.enabled %}
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td>
-                            <i class="fa fa-check text-success"></i>
-                            {{ ('enrollment.'~courseEnrollmentType.enrollmentType.vars.value.name)|trans }}
-                        </td>
-                        <td>{{ ('enrollment.'~courseEnrollmentType.enrollmentType.vars.value.name~'.description')|trans }}</td>
-                        <td>
-                            {{ form_widget(courseEnrollmentType.courseId) }}
-                            {{ form_widget(courseEnrollmentType.enrollmentTypeId) }}
-                            {{ form_errors(courseEnrollmentType) }}
-                            {{ form_widget(courseEnrollmentType.enabled) }}
-                        </td>
+                        <th>Enabled Enrollment Types</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                        <th>Enabled</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for courseEnrollmentType in form.courseEnrollmentTypes if courseEnrollmentType.vars.value.enabled %}
+                        <tr>
+                            <td>
+                                <i class="fa fa-check text-success"></i>
+                                {{ ('enrollment.'~courseEnrollmentType.enrollmentType.vars.value.name)|trans }}
+                            </td>
+                            <td>{{ ('enrollment.'~courseEnrollmentType.enrollmentType.vars.value.name~'.description')|trans }}</td>
+                            <td><a href="{{ path('inkstand_course_enrollment_settings', {'courseEnrollmentTypeId': courseEnrollmentType.vars.value.courseEnrollmentTypeId}) }}"><i class="fa fa-cog"></i> Settings</a></td>
+                            <td>
+                                {{ form_widget(courseEnrollmentType.courseId) }}
+                                {{ form_widget(courseEnrollmentType.enrollmentTypeId) }}
+                                {{ form_errors(courseEnrollmentType) }}
+                                {{ form_widget(courseEnrollmentType.enabled) }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
 
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>Disabled Enrollment Types</th>
-                    <th>Description</th>
-                    <th>Enabled</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for courseEnrollmentType in form.courseEnrollmentTypes if courseEnrollmentType.vars.value.enabled == 0 %}
+            <table class="table table-bordered">
+                <thead>
                     <tr>
-                        <td>
-                            <i class="fa fa-times-circle text-danger"></i>
-                            {{ courseEnrollmentType.enrollmentType.vars.value.name }}
-                        </td>
-                        <td>{{ ('enrollment.'~courseEnrollmentType.enrollmentType.vars.value.name~'.description')|trans }}</td>
-                        <td>
-                            {{ form_widget(courseEnrollmentType.courseId) }}
-                            {{ form_widget(courseEnrollmentType.enrollmentTypeId) }}
-                            {{ form_errors(courseEnrollmentType) }}
-                            {{ form_widget(courseEnrollmentType.enabled) }}
-                        </td>
+                        <th>Disabled Enrollment Types</th>
+                        <th>Description</th>
+                        <th>Actions</th>
+                        <th>Enabled</th>
                     </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    {% for courseEnrollmentType in form.courseEnrollmentTypes if courseEnrollmentType.vars.value.enabled == 0 %}
+                        <tr>
+                            <td>
+                                <i class="fa fa-times-circle text-danger"></i>
+                                {{ ('enrollment.'~courseEnrollmentType.enrollmentType.vars.value.name)|trans }}
+                            </td>
+                            <td>{{ ('enrollment.'~courseEnrollmentType.enrollmentType.vars.value.name~'.description')|trans }}</td>
+                            <td><a href="{{ path('inkstand_course_enrollment_settings', {'courseEnrollmentTypeId': courseEnrollmentType.vars.value.courseEnrollmentTypeId}) }}"><i class="fa fa-cog"></i> Settings</a></td>
+                            <td>
+                                {{ form_widget(courseEnrollmentType.courseId) }}
+                                {{ form_widget(courseEnrollmentType.enrollmentTypeId) }}
+                                {{ form_errors(courseEnrollmentType) }}
+                                {{ form_widget(courseEnrollmentType.enabled) }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
         {{ form_widget(form.save) }}
     </form><?php // Manually close form to avoid outputting extra form elements ?>
 

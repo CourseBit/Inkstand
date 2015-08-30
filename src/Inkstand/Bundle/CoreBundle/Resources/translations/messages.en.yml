@@ -2,6 +2,7 @@
 email:            Email
 yes:              Yes
 no:               No
+settings.save:    Save
 
 # Widget
 widget.name:      Name

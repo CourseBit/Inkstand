@@ -245,9 +245,8 @@ class CourseController extends Controller
 			throw new NotFoundHttpException($this->get('translator')->trans('course.notfound'));
 		}
 
-
-
 		return array(
+			'enrollmentTypeService' => $this->get('enrollment_type_service'),
 			'course' => $course
 		);
 	}

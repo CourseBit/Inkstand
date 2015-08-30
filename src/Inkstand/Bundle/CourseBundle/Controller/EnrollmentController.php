@@ -90,28 +90,62 @@ class EnrollmentController extends Controller
     }
 
     /**
-     * @Route("/course/enroll/{courseId}", name="inkstand_course_enroll")
+     * @Route("/course/enrollment/settings/{courseEnrollmentTypeId}", name="inkstand_course_enrollment_settings")
      * @Template
      */
-	public function enrollAction($courseId)
+    public function settingsAction(Request $request, $courseEnrollmentTypeId)
     {
-        $course = $this->get('course_service')->findOneByCourseId($courseId);
+        $courseEnrollmentType = $this->get('course_enrollment_type_service')->findOneByCourseEnrollmentTypeId($courseEnrollmentTypeId);
+        $course = $courseEnrollmentType->getCourse();
 
+        $enrollmentService = $this->get('enrollment_type_service')->getServiceForEnrollmentType($courseEnrollmentType->getEnrollmentType());
+        // TODO: Rename to getSettingsFormType since it's really not a form
+        $settingsFormType = $enrollmentService->getSettingsForm();
 
+        $settingsForm = $this->createForm($settingsFormType, $enrollmentService->getSettings($course->getCourseId()));
 
+        $settingsForm->handleRequest($request);
 
-        $event = new EnrollmentEvent(new Enrollment());
-        $eventDispatcher = $this->get('event_dispatcher');
+        if($settingsForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($course);
+            $em->flush();
 
-//        $eventDispatcher->addListener('inkstand.course.enroll_pre', function() {
-//           echo("here2");
-//        });
+            $session = $request->getSession();
+            $session->getFlashBag()->add('success', $this->get('translator')->trans('enrollment.settings.edited', array('%name%' => $course->getName())));
 
-        $eventDispatcher->dispatch('inkstand.course.enroll_pre', $event);
+            return $this->redirect($this->generateUrl('inkstand_course_enrollment', array('courseId' => $course->getCourseId())));
+        }
 
         return array(
-
+            'settingsForm' => $settingsForm->createView(),
             'course' => $course
         );
     }
+//
+//    /**
+//     * @Route("/course/enroll/{courseId}", name="inkstand_course_enroll")
+//     * @Template
+//     */
+//	public function enrollAction($courseId)
+//    {
+//        $course = $this->get('course_service')->findOneByCourseId($courseId);
+//
+//
+//
+//
+//        $event = new EnrollmentEvent(new Enrollment());
+//        $eventDispatcher = $this->get('event_dispatcher');
+//
+////        $eventDispatcher->addListener('inkstand.course.enroll_pre', function() {
+////           echo("here2");
+////        });
+//
+//        $eventDispatcher->dispatch('inkstand.course.enroll_pre', $event);
+//
+//        return array(
+//
+//            'course' => $course
+//        );
+//    }
 }

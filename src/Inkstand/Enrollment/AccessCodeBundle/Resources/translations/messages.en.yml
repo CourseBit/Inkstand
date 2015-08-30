@@ -1,0 +1,4 @@
+enrollment.access_code:                    Access Code
+enrollment.access_code.enroll:             Enroll by Access Code
+enrollment.access_code.enroll.description: If you received an access code please enter it below.
+enrollment.access_code.description:        Allow users to enroll via an access code that you define.

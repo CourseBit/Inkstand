@@ -1,0 +1,16 @@
+<h3>{{ "enrollment.access_code.enroll"|trans }}</h3>
+<p>{{ "enrollment.access_code.enroll.description"|trans }}</p>
+{{ form_start(accessCodeForm) }}
+    {{ form_widget(accessCodeForm.courseId) }}
+    <div class="form-group">
+        {{ form_label(accessCodeForm.accessCode) }}
+        <div class="col-sm-10">
+            <div class="input-group">
+                {{ form_widget(accessCodeForm.accessCode) }}
+                <span class="input-group-btn">
+                    {{ form_widget(accessCodeForm.submit) }}
+                </span>
+            </div><!-- /input-group -->
+        </div>
+    </div>
+</form><?php // Manually close form to avoid outputting extra form elements ?>

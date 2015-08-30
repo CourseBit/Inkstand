@@ -2,10 +2,13 @@
 
 {% block title %}InkstandCourseBundle:Course:enroll{% endblock %}
 
-{% block page_header %}{{ "course.enroll"|trans }}{% endblock %}
+{% block page_header %}{{ course.name }}{% endblock %}
 
 {% block main_content %}
     {% for courseEnrollmentType in course.courseEnrollmentTypes if courseEnrollmentType.enabled %}
-
+        {% set enrollmentTypeController = enrollmentTypeService.getServiceForEnrollmentType(courseEnrollmentType.enrollmentType).getController() %}
+        {% if enrollmentTypeController is not null %}
+            {{ render(controller(enrollmentTypeController ~ ':enrollPage', { 'course': course })) }}
+        {% endif %}
     {% endfor %}
 {% endblock %}

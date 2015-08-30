@@ -1,3 +1,7 @@
+inkstand_access_code:
+    resource: "@InkstandAccessCodeBundle/Resources/config/routing.yml"
+    prefix:   /
+
 inkstand_core:
     resource: "@InkstandCoreBundle/Resources/config/routing.yml"
     prefix:   /

@@ -1,11 +1,13 @@
 parameters:
-    course_category_service.class: Inkstand\Bundle\CourseBundle\Service\CourseCategoryService
-    course_service.class:          Inkstand\Bundle\CourseBundle\Service\CourseService
-    activity_service.class:        Inkstand\Bundle\CourseBundle\Service\ActivityService
-    activity_type_service.class:   Inkstand\Bundle\CourseBundle\Service\ActivityTypeService
-    module_service.class:          Inkstand\Bundle\CourseBundle\Service\ModuleService
-    enrollment_service.class:      Inkstand\Bundle\CourseBundle\Service\EnrollmentService
-    enrollment_type_service.class: Inkstand\Bundle\CourseBundle\Service\EnrollmentTypeService
+    course_category_service.class:        Inkstand\Bundle\CourseBundle\Service\CourseCategoryService
+    course_service.class:                 Inkstand\Bundle\CourseBundle\Service\CourseService
+    activity_service.class:               Inkstand\Bundle\CourseBundle\Service\ActivityService
+    activity_type_service.class:          Inkstand\Bundle\CourseBundle\Service\ActivityTypeService
+    module_service.class:                 Inkstand\Bundle\CourseBundle\Service\ModuleService
+    enrollment_service.class:             Inkstand\Bundle\CourseBundle\Service\EnrollmentService
+    enrollment_type_service.class:        Inkstand\Bundle\CourseBundle\Service\EnrollmentTypeService
+    enrollment.manual.service.class:      Inkstand\Bundle\CourseBundle\Service\ManualEnrollmentService
+    course_enrollment_type_service.class: Inkstand\Bundle\CourseBundle\Service\CourseEnrollmentTypeService
 
 services:
     # Entity services
@@ -29,7 +31,14 @@ services:
         arguments: [@doctrine.orm.entity_manager, @event_dispatcher, @service_container]
     enrollment_type_service:
         class:     "%enrollment_type_service.class%"
+        arguments: [@doctrine.orm.entity_manager, @service_container]
+    enrollment.manual.service:
+        class:     "%enrollment.manual.service.class%"
+        arguments: [@enrollment_service]
+    course_enrollment_type_service:
+        class:     "%course_enrollment_type_service.class%"
         arguments: [@doctrine.orm.entity_manager]
+
 
     # Form types
     inkstand_course.form.type.task:

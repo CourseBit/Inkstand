@@ -29,7 +29,7 @@ class EnrollmentType
     private $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="Module", mappedBy="enrollmentType")
+     * @ORM\OneToMany(targetEntity="Module", mappedBy="enrollmentType", cascade={"remove"})
      */
     private $courseEnrollmentTypes;
 

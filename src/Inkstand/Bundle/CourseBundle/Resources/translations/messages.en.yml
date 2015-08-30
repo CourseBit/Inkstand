@@ -50,6 +50,8 @@ calendar_widget.name:             Calendar Widget
 # Enrollment
 enrollment.manual_enrollment.label: Manual Enrollment
 enrollment.edited:                Enrollment settings updated for %name%
+enrollment.settings.edited:       Enrollment Type settings updated for %name%
 enrollment.settings:              Enrollment Settings
 enrollment.manual:                Manual
 enrollment.manual.description:    Allow teacher to enroll students via email or username.
+enrollment.enroll:                Enroll

@@ -1,0 +1,7 @@
+parameters:
+    enrollment.access_code.service.class: Inkstand\Enrollment\AccessCodeBundle\Service\AccessCodeEnrollmentService
+
+services:
+    enrollment.access_code.service:
+        class:     "%enrollment.access_code.service.class%"
+        arguments: [@enrollment_service, @doctrine.orm.entity_manager]
