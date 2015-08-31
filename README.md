@@ -6,11 +6,11 @@ Development is in early prototyping phases. Installation can be done for evaluat
 
 ## Release Date
 
-Inkstand is developed in my free time, however I plan on releasing a beta version of Inkstand in **November 2015**. 
+Inkstand is developed in my free time, however I plan on releasing an experimental version of Inkstand in **November 2015**. If this project gains traction and receives more help, versions will be more robust and frequent.
 
- - Version 0.5: November 2015 **Alpha**
- - Version 1.0: May 2016 **Beta**
- - Version 1.5: TBD
+ - Version 0.1: November 2015
+ - Version 0.2: May 2016
+ - Version 0.3: TBD
 
 ## Goals
 
