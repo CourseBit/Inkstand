@@ -1,0 +1,7 @@
+{% extends "InkstandThemeBundle::minimal.html.twig" %}
+
+{% form_theme passwordResetForm ':Form:bootstrap-form.html.twig' %}
+
+{% block main_content %}
+{% include "InkstandUserBundle:Resetting:request_content.html.twig" %}
+{% endblock main_content %}

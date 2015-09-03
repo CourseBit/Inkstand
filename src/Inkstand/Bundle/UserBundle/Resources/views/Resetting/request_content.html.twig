@@ -1,0 +1,14 @@
+{% trans_default_domain 'FOSUserBundle' %}
+
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{ 'resetting.request.submit'|trans }}</div>
+            <div class="panel-body">
+                {{ form_start(passwordResetForm) }}
+                {{ form_widget(passwordResetForm) }}
+                {{ form_end(passwordResetForm) }}
+            </div>
+        </div>
+    </div>
+</div>

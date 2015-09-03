@@ -1,0 +1,15 @@
+{% extends "InkstandThemeBundle::minimal.html.twig" %}
+
+{% block main_content %}
+<div class="row">
+    <div class="col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <h2>{{ 'user.resetting.check_email'|trans }}</h2>
+                <p>{{ 'resetting.check_email'|trans({'%email%': email}) }}</p>
+                <a href="{{ path('inkstand_home') }}" class="btn btn-default"><i class="fa fa-angle-double-left"></i> {{ 'user.resetting.home_page'|trans }}</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
