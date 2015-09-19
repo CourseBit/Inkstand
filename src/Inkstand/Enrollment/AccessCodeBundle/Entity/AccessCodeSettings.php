@@ -26,7 +26,7 @@ class AccessCodeSettings
      * @var integer
      *
      * @ORM\Column(name="course_id", type="integer")
-     * @Assert\NotNull()
+     * @Assert\NotBlank()
      */
     private $courseId;
 
@@ -42,12 +42,19 @@ class AccessCodeSettings
     private $accessCode;
 
     /**
-     * @var \DateTime
+     * @var boolean
      *
-     * @ORM\Column(name="expires", type="datetime")
-     * @Assert\Date()
+     * @ORM\Column(name="expires", type="boolean")
      */
     private $expires;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date_expires", type="datetime")
+     * @Assert\Date()
+     */
+    private $dateExpires;
 
     /**
      * @var integer
@@ -86,29 +93,6 @@ class AccessCodeSettings
     public function getAccessCode()
     {
         return $this->accessCode;
-    }
-
-    /**
-     * Set expires
-     *
-     * @param \DateTime $expires
-     * @return Settings
-     */
-    public function setExpires($expires)
-    {
-        $this->expires = $expires;
-
-        return $this;
-    }
-
-    /**
-     * Get expires
-     *
-     * @return \DateTime 
-     */
-    public function getExpires()
-    {
-        return $this->expires;
     }
 
     /**
@@ -155,5 +139,51 @@ class AccessCodeSettings
     public function getCourseId()
     {
         return $this->courseId;
+    }
+
+    /**
+     * Set expires
+     *
+     * @param boolean $expires
+     * @return AccessCodeSettings
+     */
+    public function setExpires($expires)
+    {
+        $this->expires = $expires;
+
+        return $this;
+    }
+
+    /**
+     * Get expires
+     *
+     * @return boolean 
+     */
+    public function getExpires()
+    {
+        return $this->expires;
+    }
+
+    /**
+     * Set dateExpires
+     *
+     * @param \DateTime $dateExpires
+     * @return AccessCodeSettings
+     */
+    public function setDateExpires($dateExpires)
+    {
+        $this->dateExpires = $dateExpires;
+
+        return $this;
+    }
+
+    /**
+     * Get dateExpires
+     *
+     * @return \DateTime 
+     */
+    public function getDateExpires()
+    {
+        return $this->dateExpires;
     }
 }

@@ -13,12 +13,18 @@ class AccessCodeSettingsType extends AbstractType
     {
         $builder
             ->add('accessCode', 'text', array(
-                'label' => 'access_code',
-                'help_text' => 'access_code.help'
+                'label' => 'enrollment.access_code',
+                'help_text' => 'enrollment.access_code.help'
             ))
-            ->add('expires', 'date', array(
-                'label' => 'access_code.expires',
-                'help_text' => 'access_code.expires.help'
+            ->add('expires', 'choice', array(
+                'choices' => array(1 => 'yes', 0 => 'no'),
+                'expanded' => true,
+                'label' => 'enrollment.access_code.expires',
+                'help_text' => 'enrollment.access_code.expires.help'
+            ))
+            ->add('dateExpires', 'date', array(
+                'label' => 'enrollment.access_code.date_expires',
+                'help_text' => 'enrollment.access_code.date_expires.help'
             ))
             ->add('actions', 'form_actions', array(
                 'buttons' => array(
