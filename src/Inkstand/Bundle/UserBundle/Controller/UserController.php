@@ -2,6 +2,7 @@
 
 namespace Inkstand\Bundle\UserBundle\Controller;
 
+use Symfony\Component\Validator\Exception\MappingException;
 use Inkstand\Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

@@ -250,4 +250,13 @@ class CourseController extends Controller
 			'course' => $course
 		);
 	}
+
+	/**
+	 * @Route("/course/scorm")
+	 * @Template
+	 */
+	public function scormAction()
+	{
+		return array();
+	}
 }

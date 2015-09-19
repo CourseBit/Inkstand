@@ -1,0 +1,12 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandUserBundle:User:upload-errors{% endblock %}
+
+{% block page_header %}{{ 'user.upload.errors'|trans }}{% endblock %}
+
+{% block main_content %}
+    {% for errors in userErrors %}
+        <p class="alert alert-danger">
+        {%  %}
+    {% endfor %}
+{% endblock %}

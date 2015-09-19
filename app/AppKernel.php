@@ -25,6 +25,7 @@ class AppKernel extends Kernel
             new Knp\Bundle\MenuBundle\KnpMenuBundle(),
             new Inkstand\Bundle\CoreBundle\InkstandCoreBundle(),
             new Inkstand\Enrollment\AccessCodeBundle\InkstandAccessCodeBundle(),
+            new Inkstand\Activity\ScormBundle\InkstandScormBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

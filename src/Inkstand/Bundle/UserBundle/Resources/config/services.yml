@@ -4,4 +4,4 @@ parameters:
 services:
     user_service:
         class: "%user_service.class%"
-        arguments: [@doctrine.orm.entity_manager]
+        arguments: [@doctrine.orm.entity_manager, @validator]

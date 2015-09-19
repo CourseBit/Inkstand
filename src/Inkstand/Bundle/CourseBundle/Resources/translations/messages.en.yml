@@ -8,6 +8,9 @@ slug:                             Slug
 identifier:                       Identifier
 description:                      Description
 manage:                           Manage
+yes:                              Yes
+no:                               No
+preview:                          Preview
 
 # Course general
 course:                           Course
