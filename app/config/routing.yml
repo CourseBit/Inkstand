@@ -1,3 +1,7 @@
+inkstand_lrs:
+    resource: "@InkstandLrsBundle/Resources/config/routing.yml"
+    prefix:   /
+
 inkstand_scorm:
     resource: "@InkstandScormBundle/Resources/config/routing.yml"
     prefix:   /
