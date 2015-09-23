@@ -6,11 +6,9 @@ Development is in early prototyping phases. Installation can be done for evaluat
 
 ## Release Date
 
-Inkstand is developed in my free time, however I plan on releasing an experimental version of Inkstand in **November 2015**. If this project gains traction and receives more help, versions will be more robust and frequent.
+Inkstand is developed in my free time, so the release date is TBD. If this project gains traction and receives more help, versions will be more robust and frequent.
 
- - Version 0.1: November 2015
- - Version 0.2: May 2016
- - Version 0.3: TBD
+I have pushed back my timeline due to my research of the Tin Can API (xAPI). 
 
 ## Goals
 
@@ -23,6 +21,9 @@ Inkstand aims to be the modern solution for online learning.
  - Flexible system that can be extended modularly.
  - Utilize [Composer] for plugin and dependency management.
  - Solid performance and quick page load times. 
+ - **Include a built-in Learning Record Store (LRS) and support the Tin Can API (xAPI).** 
+
+Inkstand's goals have slightly changed since the decision to incorporate the Tin Can API.
  
 ## Contributing
 
