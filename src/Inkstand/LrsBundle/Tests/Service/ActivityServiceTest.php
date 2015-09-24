@@ -66,6 +66,13 @@ class ActivityServiceTest extends KernelTestCase
                 ),
                 'type' => 'http://inkstand.org/xapi/test',
                 'moreInfo' => 'http://inkstand.org/xapi/test/info',
+                'interactionType' => 'test',
+                'correctResponsesPattern' => array('test', 'test'),
+                'choices' => array('test', 'test'),
+                'scale' => array('test', 'test'),
+                'source' => array('test', 'test'),
+                'target' => array('test', 'test'),
+                'steps' => array('test', 'test'),
                 'extensions' => array(
                     'http://inkstand.org/extensions/test_data' => 'this_is_arbitrary'
                 )
@@ -90,6 +97,13 @@ class ActivityServiceTest extends KernelTestCase
         $this->assertEquals($activity->getDefinitionDescription(), $activityData['definition']['description']);
         $this->assertEquals($activity->getDefinitionType(), $activityData['definition']['type']);
         $this->assertEquals($activity->getDefinitionMoreInfo(), $activityData['definition']['moreInfo']);
+        $this->assertEquals($activity->getDefinitionInteractionType(), $activityData['definition']['interactionType']);
+        $this->assertEquals($activity->getDefinitionCorrectResponsesPattern(), $activityData['definition']['correctResponsesPattern']);
+        $this->assertEquals($activity->getDefinitionChoices(), $activityData['definition']['choices']);
+        $this->assertEquals($activity->getDefinitionScale(), $activityData['definition']['scale']);
+        $this->assertEquals($activity->getDefinitionSource(), $activityData['definition']['source']);
+        $this->assertEquals($activity->getDefinitionTarget(), $activityData['definition']['target']);
+        $this->assertEquals($activity->getDefinitionSteps(), $activityData['definition']['steps']);
         $this->assertEquals($activity->getDefinitionExtensions(), $activityData['definition']['extensions']);
     }
 
@@ -102,6 +116,7 @@ class ActivityServiceTest extends KernelTestCase
         $activityJson = json_encode($activityData);
         $activity = $this->activityService->denormalize($activityJson);
 
+        $this->assertTrue(is_string($this->activityService->normalize($activity)));
         $this->assertTrue(is_array($this->activityService->normalize($activity, true)));
 
         $activityData2 = json_decode($this->activityService->normalize($activity), true);
@@ -112,6 +127,13 @@ class ActivityServiceTest extends KernelTestCase
         $this->assertEquals($activityData2['definition']['description'], $activityData['definition']['description']);
         $this->assertEquals($activityData2['definition']['type'], $activityData['definition']['type']);
         $this->assertEquals($activityData2['definition']['moreInfo'], $activityData['definition']['moreInfo']);
+        $this->assertEquals($activityData2['definition']['interactionType'], $activityData['definition']['interactionType']);
+        $this->assertEquals($activityData2['definition']['correctResponsesPattern'], $activityData['definition']['correctResponsesPattern']);
+        $this->assertEquals($activityData2['definition']['choices'], $activityData['definition']['choices']);
+        $this->assertEquals($activityData2['definition']['scale'], $activityData['definition']['scale']);
+        $this->assertEquals($activityData2['definition']['source'], $activityData['definition']['source']);
+        $this->assertEquals($activityData2['definition']['target'], $activityData['definition']['target']);
+        $this->assertEquals($activityData2['definition']['steps'], $activityData['definition']['steps']);
         $this->assertEquals($activityData2['definition']['extensions'], $activityData['definition']['extensions']);
     }
 
