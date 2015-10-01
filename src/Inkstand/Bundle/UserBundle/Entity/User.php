@@ -42,6 +42,80 @@ class User extends BaseUser
     protected $lastname;
 
     /**
+     * @ORM\OneToMany(targetEntity="Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment", mappedBy="user")
+     */
+    private $contextRoleAssignments;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->contextRoleAssignments = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
+    /**
+     * Serializes the user.
+     *
+     * The serialized data have to contain the fields used by the equals method and the username.
+     *
+     * @return string
+     */
+    public function serialize()
+    {
+        return serialize(array(
+            // BaseUser
+            $this->email,
+            $this->password,
+            $this->salt,
+            $this->usernameCanonical,
+            $this->username,
+            $this->expired,
+            $this->locked,
+            $this->credentialsExpired,
+            $this->enabled,
+            $this->id,
+            // User
+            $this->firstname,
+            $this->lastname
+        ));
+    }
+
+    /**
+     * Unserializes the user.
+     *
+     * @param string $serialized
+     */
+    public function unserialize($serialized)
+    {
+        $data = unserialize($serialized);
+        // add a few extra elements in the array to ensure that we have enough keys when unserializing
+        // older data which does not include all properties.
+        $data = array_merge($data, array_fill(0, 2, null));
+
+        list(
+            $this->email,
+            $this->password,
+            $this->salt,
+            $this->usernameCanonical,
+            $this->username,
+            $this->expired,
+            $this->locked,
+            $this->credentialsExpired,
+            $this->enabled,
+            $this->id,
+            $this->firstname,
+            $this->lastname
+            ) = $data;
+    }
+
+    public function getRoles()
+    {
+        dump("Getting roles");
+        return parent::getRoles();
+    }
+
+    /**
      * Get id
      *
      * @return integer 
@@ -98,57 +172,35 @@ class User extends BaseUser
     }
 
     /**
-     * Serializes the user.
+     * Add contextRoleAssignments
      *
-     * The serialized data have to contain the fields used by the equals method and the username.
-     *
-     * @return string
+     * @param \Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment $contextRoleAssignments
+     * @return User
      */
-    public function serialize()
+    public function addContextRoleAssignment(\Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment $contextRoleAssignments)
     {
-        return serialize(array(
-            // BaseUser
-            $this->email,
-            $this->password,
-            $this->salt,
-            $this->usernameCanonical,
-            $this->username,
-            $this->expired,
-            $this->locked,
-            $this->credentialsExpired,
-            $this->enabled,
-            $this->id,
-            // User
-            $this->firstname,
-            $this->lastname
-        ));
+        $this->contextRoleAssignments[] = $contextRoleAssignments;
+
+        return $this;
     }
 
     /**
-     * Unserializes the user.
+     * Remove contextRoleAssignments
      *
-     * @param string $serialized
+     * @param \Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment $contextRoleAssignments
      */
-    public function unserialize($serialized)
+    public function removeContextRoleAssignment(\Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment $contextRoleAssignments)
     {
-        $data = unserialize($serialized);
-        // add a few extra elements in the array to ensure that we have enough keys when unserializing
-        // older data which does not include all properties.
-        $data = array_merge($data, array_fill(0, 2, null));
+        $this->contextRoleAssignments->removeElement($contextRoleAssignments);
+    }
 
-        list(
-            $this->email,
-            $this->password,
-            $this->salt,
-            $this->usernameCanonical,
-            $this->username,
-            $this->expired,
-            $this->locked,
-            $this->credentialsExpired,
-            $this->enabled,
-            $this->id,
-            $this->firstname,
-            $this->lastname
-            ) = $data;
+    /**
+     * Get contextRoleAssignments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getContextRoleAssignments()
+    {
+        return $this->contextRoleAssignments;
     }
 }

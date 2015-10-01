@@ -2,7 +2,7 @@
 
 namespace Inkstand\Bundle\CourseBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Inkstand\Bundle\CoreBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -44,6 +44,8 @@ class CourseController extends Controller
 		if(is_null($course)) {
             throw new NotFoundHttpException($this->get('translator')->trans('course.notfound'));
         }
+
+		$this->setContext(CONTEXT_COURSE, $course, true);
 
 		if(!$this->get('enrollment_service')->isUserEnrolled($this->getUser(), $course)) {
 			return $this->forward('InkstandCourseBundle:Course:enroll', array('courseId' => $course->getCourseId()));

@@ -2,6 +2,7 @@ parameters:
     widget_service.class:        Inkstand\Bundle\CoreBundle\Service\WidgetService
     page_template_service.class: Inkstand\Bundle\CoreBundle\Service\PageTemplateService
     plugin_service.class:        Inkstand\Bundle\CoreBundle\Service\PluginService
+    inkstand_core.context.class: Inkstand\Bundle\CoreBundle\Service\ContextService
 
 services:
     widget_service:
@@ -14,6 +15,10 @@ services:
 
     plugin_service:
         class: "%plugin_service.class%"
+        arguments: [@doctrine.orm.entity_manager]
+
+    inkstand_core.context:
+        class: "%inkstand_core.context.class%"
         arguments: [@doctrine.orm.entity_manager]
 
     menu_builder:
