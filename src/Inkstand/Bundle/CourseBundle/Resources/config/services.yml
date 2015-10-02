@@ -8,6 +8,7 @@ parameters:
     enrollment_type_service.class:        Inkstand\Bundle\CourseBundle\Service\EnrollmentTypeService
     enrollment.manual.service.class:      Inkstand\Bundle\CourseBundle\Service\ManualEnrollmentService
     course_enrollment_type_service.class: Inkstand\Bundle\CourseBundle\Service\CourseEnrollmentTypeService
+    inkstand_course.voter.course_voter.class: Inkstand\Bundle\CourseBundle\Voter\CourseVoter
 
 services:
     # Entity services
@@ -54,3 +55,10 @@ services:
         class: Inkstand\Bundle\CourseBundle\EventListener\WidgetListener
         tags:
             - { name: kernel.event_listener, event: inkstand.core.widget_register, method: onWidgetRegister }
+
+    # Voters
+    inkstand_course.voter.course_voter:
+        class:      "%inkstand_course.voter.course_voter.class%"
+        public:     true
+        tags:
+            - { name: security.voter }

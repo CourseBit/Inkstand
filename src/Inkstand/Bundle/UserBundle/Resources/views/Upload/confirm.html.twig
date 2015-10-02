@@ -1,0 +1,32 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandUserBundle:User:upload-confirm{% endblock %}
+
+{% block page_header %}{{ 'user.upload'|trans }}{% endblock %}
+
+{% block main_content %}
+    {% if users is not null %}
+        <h2>{{ 'preview'|trans }}</h2>
+        <hr>
+        {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+            {% block grid_head %}
+                {% for column in userColumns %}
+                    <th>{{ column }}</th>
+                {% endfor %}
+            {% endblock %}
+            {% block grid_body %}
+                {% for user in users %}
+                <tr>
+                    {% for column in userColumns %}
+                        <th>{{ attribute(user, column) }}</th>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+        <h2>Form</h2>
+        {{ form_start(confirmForm) }}
+        {{ form_widget(confirmForm) }}
+        {{ form_end(confirmForm) }}
+    {% endif %}
+{% endblock %}

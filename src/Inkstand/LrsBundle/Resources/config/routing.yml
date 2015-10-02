@@ -1,0 +1,8 @@
+inkstand_lrs_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: InkstandLrsBundle:Default:index }
+
+inkstand_lrs_xapi_activty:
+    resource: "@InkstandLrsBundle/Controller/XapiActivityController.php"
+    type:     annotation
+    prefix:   /XAPI

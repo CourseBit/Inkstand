@@ -1,0 +1,10 @@
+parameters:
+     inkstand_lrs.activity.class: Inkstand\LrsBundle\Service\ActivityService
+
+services:
+#    inkstand_lrs.example:
+#        class: Inkstand\LrsBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
+     inkstand_lrs.activity:
+         class: "%inkstand_lrs.activity.class%"
+         arguments: [@doctrine.orm.entity_manager]

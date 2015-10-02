@@ -14,6 +14,11 @@ user.edited:           User "%name%" edited
 user.resetting.check_email: Check your email
 user.resetting.home_page:   Home page
 
+user.upload:             Upload Users
+user.upload.errors:      Upload Users Error
+user.upload.description: A spreadsheet of users can be uploaded, and users will be created automatically.
+user.upload.submit:      Upload
+user.no_users_uploaded:  No users were uploaded. Does your spreadsheet have correct formatting?
 
 # Group
 group:

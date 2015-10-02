@@ -1,4 +1,9 @@
 enrollment.access_code:                    Access Code
+enrollment.access_code.help:               What your users will enter to enroll. This can be a word, a phrase, or a randomized code.
+enrollment.access_code.expires:            Expires
+enrollment.access_code.expires.help:       If enabled, Access Code will expire at Date Expires below.
+enrollment.access_code.date_expires:       Date Expires
+enrollment.access_code.date_expires.help:  Date when users will no longer be able to enroll.
 enrollment.access_code.enroll:             Enroll by Access Code
 enrollment.access_code.enroll.description: If you received an access code please enter it below.
 enrollment.access_code.description:        Allow users to enroll via an access code that you define.

@@ -2,6 +2,9 @@ parameters:
     widget_service.class:        Inkstand\Bundle\CoreBundle\Service\WidgetService
     page_template_service.class: Inkstand\Bundle\CoreBundle\Service\PageTemplateService
     plugin_service.class:        Inkstand\Bundle\CoreBundle\Service\PluginService
+    inkstand_core.context.class: Inkstand\Bundle\CoreBundle\Service\ContextService
+    inkstand_core.context_role_assignment.class: Inkstand\Bundle\CoreBundle\Service\ContextRoleAssignmentService
+    inkstand_core.voter.class:   Inkstand\Bundle\CoreBundle\Service\VoterService
 
 services:
     widget_service:
@@ -15,6 +18,18 @@ services:
     plugin_service:
         class: "%plugin_service.class%"
         arguments: [@doctrine.orm.entity_manager]
+
+    inkstand_core.context:
+        class: "%inkstand_core.context.class%"
+        arguments: [@doctrine.orm.entity_manager, @inkstand_core.context_role_assignment, @security.token_storage]
+
+    inkstand_core.context_role_assignment:
+        class: "%inkstand_core.context_role_assignment.class%"
+        arguments: [@doctrine.orm.entity_manager]
+
+    inkstand_core.voter:
+        class: Inkstand\Bundle\CoreBundle\Service\VoterService
+        arguments: [@doctrine.orm.entity_manager, @service_container]
 
     menu_builder:
         class: Inkstand\Bundle\CoreBundle\Menu\MenuBuilder

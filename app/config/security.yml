@@ -1,6 +1,7 @@
 # you can read more about security in the related section of the documentation
 # http://symfony.com/doc/current/book/security.html
 security:
+    always_authenticate_before_granting: true
     # http://symfony.com/doc/current/book/security.html#encoding-the-user-s-password
     encoders:
         FOS\UserBundle\Model\UserInterface: sha512
@@ -42,6 +43,7 @@ security:
             #anonymous: ~
             #http_basic:
             #    realm: "Secured Demo Area"
+
         main:
             pattern: ^/
             form_login:
@@ -49,6 +51,7 @@ security:
                 csrf_provider: form.csrf_provider
             logout:       true
             anonymous:    true
+            provider: fos_userbundle
 
     # with these settings you can restrict or allow access for different parts
     # of your application based on roles, ip, host or methods
