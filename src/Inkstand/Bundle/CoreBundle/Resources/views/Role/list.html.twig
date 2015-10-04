@@ -1,0 +1,24 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCoreBundle:Role:list{% endblock %}
+
+{% block page_header %}{{ 'role.list'|trans }}{% endblock %}
+
+{% block main_content %}
+    <table class="table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for role in roles %}
+            <tr>
+                <td>{{ role['name']|trans }}</td>
+                <td><a href=""><i class="fa fa-cog"></i> {{ 'settings'|trans }}</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

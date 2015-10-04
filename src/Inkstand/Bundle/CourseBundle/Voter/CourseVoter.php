@@ -20,7 +20,7 @@ class CourseVoter extends AbstractVoter
     public function getDefaultRoles()
     {
         return array(
-            self::ADD => 'ROLE_ADMIN',
+            self::ADD => array('ROLE_ADMIN'),
             self::VIEW => 'ROLE_STUDENT',
             self::EDIT => 'ROLE_ADMIN',
             self::DELETE => 'ROLE_ADMIN'

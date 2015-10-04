@@ -1,10 +1,11 @@
 parameters:
-    widget_service.class:        Inkstand\Bundle\CoreBundle\Service\WidgetService
-    page_template_service.class: Inkstand\Bundle\CoreBundle\Service\PageTemplateService
-    plugin_service.class:        Inkstand\Bundle\CoreBundle\Service\PluginService
-    inkstand_core.context.class: Inkstand\Bundle\CoreBundle\Service\ContextService
+    widget_service.class:                        Inkstand\Bundle\CoreBundle\Service\WidgetService
+    page_template_service.class:                 Inkstand\Bundle\CoreBundle\Service\PageTemplateService
+    plugin_service.class:                        Inkstand\Bundle\CoreBundle\Service\PluginService
+    inkstand_core.context.class:                 Inkstand\Bundle\CoreBundle\Service\ContextService
     inkstand_core.context_role_assignment.class: Inkstand\Bundle\CoreBundle\Service\ContextRoleAssignmentService
-    inkstand_core.voter.class:   Inkstand\Bundle\CoreBundle\Service\VoterService
+    inkstand_core.voter.class:                   Inkstand\Bundle\CoreBundle\Service\VoterService
+    inkstand_core.scripts.role.class:            Inkstand\Bundle\CoreBundle\Scripts\RoleScripts
 
 services:
     widget_service:
@@ -30,6 +31,11 @@ services:
     inkstand_core.voter:
         class: Inkstand\Bundle\CoreBundle\Service\VoterService
         arguments: [@doctrine.orm.entity_manager, @service_container]
+
+    # Scripts
+    inkstand_core.scripts.role:
+        class: "%inkstand_core.scripts.role.class%"
+        arguments: [@service_container]
 
     menu_builder:
         class: Inkstand\Bundle\CoreBundle\Menu\MenuBuilder

@@ -30,10 +30,15 @@ class VoterService
         return $this->repository->findOneByService($service);
     }
 
-    public function updateVoters()
+    public function updateVoters($verbose = false)
     {
         $existingVoters = $this->findAll();
         $voterServiceIds = $this->voterServiceIds;
+
+        $newVotersCount = 0;
+        $updatedVotersCount = 0;
+        $newVoterActionsCount = 0;
+        $updatedVoterActionsCount = 0;
 
         foreach($existingVoters as $existingVoter) {
             if(in_array($existingVoter->getService(), $voterServiceIds)) {
@@ -46,6 +51,7 @@ class VoterService
                 $voter = new Voter();
                 $voter->setService($voterServiceId);
                 $this->entityManager->persist($voter);
+                $newVotersCount++;
             }
         }
 
@@ -68,10 +74,23 @@ class VoterService
                         $voterAction->setVoter($voter);
                         $voter->addVoterAction($voterAction);
                         $this->entityManager->persist($voterAction);
+                        $newVoterActionsCount++;
                     }
                 }
                 $this->entityManager->flush();
             }
+        }
+
+        if($verbose) {
+            echo PHP_EOL;
+            echo sprintf('    %s new Voter(s)', $newVotersCount);
+            echo PHP_EOL;
+            echo sprintf('    %s updated Voter(s)', $updatedVotersCount);
+            echo PHP_EOL;
+            echo sprintf('    %s new Voter Action(s),', $newVotersCount);
+            echo PHP_EOL;
+            echo sprintf('    %s updated Voter Action(s)', $updatedVoterActionsCount);
+            echo PHP_EOL . PHP_EOL;
         }
     }
 

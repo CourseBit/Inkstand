@@ -7,3 +7,6 @@ settings.save:    Save
 # Widget
 widget.name:      Name
 widget.nowidgets: No widgets installed.
+
+# Role
+role.list:        User Roles

@@ -1,11 +1,15 @@
-inkstand_home:
+inkstand_core_home:
     resource: "@InkstandCoreBundle/Controller/HomeController.php"
     type:     annotation
 
-inkstand_widget:
+inkstand_core_widget:
     resource: "@InkstandCoreBundle/Controller/WidgetController.php"
     type:     annotation
 
-inkstand_plugin:
+inkstand_core_plugin:
     resource: "@InkstandCoreBundle/Controller/PluginController.php"
+    type:     annotation
+
+inkstand_core_role:
+    resource: "@InkstandCoreBundle/Controller/RoleController.php"
     type:     annotation
