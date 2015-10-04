@@ -29,11 +29,11 @@ class ContextRoleAssignment
     private $contextId;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="role", type="string", length=255)
+     * @ORM\Column(name="role_id", type="integer")
      */
-    private $role;
+    private $roleId;
 
     /**
      * @var integer
@@ -53,6 +53,12 @@ class ContextRoleAssignment
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Role", inversedBy="contextRoleAssignments")
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="role_id")
+     */
+    private $role;
 
     /**
      * Get contextRoleAssignmentId
@@ -88,26 +94,26 @@ class ContextRoleAssignment
     }
 
     /**
-     * Set role
+     * Set roleId
      *
-     * @param string $role
+     * @param integer $roleId
      * @return ContextRoleAssignment
      */
-    public function setRole($role)
+    public function setRole($roleId)
     {
-        $this->role = $role;
+        $this->roleId = $roleId;
 
         return $this;
     }
 
     /**
-     * Get role
+     * Get roleId
      *
-     * @return string 
+     * @return integer
      */
-    public function getRole()
+    public function getRoleId()
     {
-        return $this->role;
+        return $this->roleId;
     }
 
     /**
@@ -177,5 +183,28 @@ class ContextRoleAssignment
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Set roleId
+     *
+     * @param integer $roleId
+     * @return ContextRoleAssignment
+     */
+    public function setRoleId($roleId)
+    {
+        $this->roleId = $roleId;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return \Inkstand\Bundle\CoreBundle\Entity\Role 
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

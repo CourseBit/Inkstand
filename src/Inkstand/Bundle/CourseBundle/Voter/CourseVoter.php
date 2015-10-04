@@ -2,7 +2,7 @@
 
 namespace Inkstand\Bundle\CourseBundle\Voter;
 
-use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
+use Inkstand\Bundle\CoreBundle\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class CourseVoter extends AbstractVoter
@@ -17,13 +17,13 @@ class CourseVoter extends AbstractVoter
         return array(self::ADD, self::VIEW, self::EDIT, self::DELETE);
     }
 
-    public function getDefaultRoles()
+    public function getDefaultRoleAssignments()
     {
         return array(
-            self::ADD => array('ROLE_ADMIN'),
+            self::ADD => 'ROLE_CONTENT_MANAGER',
             self::VIEW => 'ROLE_STUDENT',
-            self::EDIT => 'ROLE_ADMIN',
-            self::DELETE => 'ROLE_ADMIN'
+            self::EDIT => 'ROLE_CONTENT_MANAGER',
+            self::DELETE => 'ROLE_CONTENT_MANAGER'
         );
     }
 

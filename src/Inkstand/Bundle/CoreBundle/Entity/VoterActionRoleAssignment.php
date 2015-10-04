@@ -7,19 +7,19 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * VoterActionRole
  *
- * @ORM\Table("voter_action_role")
+ * @ORM\Table("voter_action_role_assignment")
  * @ORM\Entity
  */
-class VoterActionRole
+class VoterActionRoleAssignment
 {
     /**
      * @var integer
      *
-     * @ORM\Column(name="voter_action_role_id", type="integer")
+     * @ORM\Column(name="voter_action_role_assignment_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $voterActionRoleId;
+    private $voterActionRoleAssignmentId;
 
     /**
      * @var integer
@@ -29,11 +29,11 @@ class VoterActionRole
     private $voterActionId;
 
     /**
-     * @var string
+     * @var integer
      *
-     * @ORM\Column(name="role_name", type="string", length=255)
+     * @ORM\Column(name="role_id", type="integer")
      */
-    private $roleName;
+    private $roleId;
 
     /**
      * @var boolean
@@ -43,19 +43,25 @@ class VoterActionRole
     private $allow;
 
     /**
-     * @ORM\ManyToOne(targetEntity="VoterAction", inversedBy="voterActionRoles")
+     * @ORM\ManyToOne(targetEntity="VoterAction", inversedBy="voterActionRoleAssignments")
      * @ORM\JoinColumn(name="voter_action_id", referencedColumnName="voter_action_id")
      */
     private $voterAction;
 
     /**
-     * Get voterActionRoleId
+     * @ORM\ManyToOne(targetEntity="Role", inversedBy="voterActionRoleAssignments")
+     * @ORM\JoinColumn(name="role_id", referencedColumnName="role_id")
+     */
+    private $role;
+
+    /**
+     * Get voterActionRoleAssignmentId
      *
      * @return integer 
      */
-    public function getVoterActionRoleId()
+    public function getVoterActionRoleAssignmentId()
     {
-        return $this->voterActionRoleId;
+        return $this->voterActionRoleAssignmentId;
     }
 
     /**
@@ -82,26 +88,26 @@ class VoterActionRole
     }
 
     /**
-     * Set roleName
+     * Set roleId
      *
-     * @param string $roleName
+     * @param integer $roleId
      * @return VoterActionRole
      */
-    public function setRoleName($roleName)
+    public function setRoleId($roleId)
     {
-        $this->roleName = $roleName;
+        $this->roleId = $roleId;
 
         return $this;
     }
 
     /**
-     * Get roleName
+     * Get roleId
      *
      * @return string 
      */
-    public function getRoleName()
+    public function getRoleId()
     {
-        return $this->roleName;
+        return $this->roleId;
     }
 
     /**
@@ -148,5 +154,28 @@ class VoterActionRole
     public function getVoterAction()
     {
         return $this->voterAction;
+    }
+
+    /**
+     * Set role
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\Role $role
+     * @return VoterActionRoleAssignment
+     */
+    public function setRole(\Inkstand\Bundle\CoreBundle\Entity\Role $role = null)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Get role
+     *
+     * @return \Inkstand\Bundle\CoreBundle\Entity\Role 
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

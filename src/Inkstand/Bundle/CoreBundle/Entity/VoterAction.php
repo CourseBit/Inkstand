@@ -42,16 +42,16 @@ class VoterAction
     private $voter;
 
     /**
-     * @ORM\OneToMany(targetEntity="VoterActionRole", mappedBy="voterAction")
+     * @ORM\OneToMany(targetEntity="VoterActionRoleAssignment", mappedBy="voterAction")
      */
-    private $voterActionRoles;
+    private $voterActionRoleAssignments;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->voterActionRoles = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->voterActionRoleAssignments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -134,35 +134,35 @@ class VoterAction
     }
 
     /**
-     * Add voterActionRoles
+     * Add voterActionRoleAssignments
      *
-     * @param \Inkstand\Bundle\CoreBundle\Entity\VoterActionRole $voterActionRoles
+     * @param \Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment $voterActionRoleAssignments
      * @return VoterAction
      */
-    public function addVoterActionRole(\Inkstand\Bundle\CoreBundle\Entity\VoterActionRole $voterActionRoles)
+    public function addVoterActionRoleAssignment(\Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment $voterActionRoleAssignments)
     {
-        $this->voterActionRoles[] = $voterActionRoles;
+        $this->voterActionRoleAssignments[] = $voterActionRoleAssignments;
 
         return $this;
     }
 
     /**
-     * Remove voterActionRoles
+     * Remove voterActionRoleAssignments
      *
-     * @param \Inkstand\Bundle\CoreBundle\Entity\VoterActionRole $voterActionRoles
+     * @param \Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment $voterActionRoleAssignments
      */
-    public function removeVoterActionRole(\Inkstand\Bundle\CoreBundle\Entity\VoterActionRole $voterActionRoles)
+    public function removeVoterActionRoleAssignment(\Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment $voterActionRoleAssignments)
     {
-        $this->voterActionRoles->removeElement($voterActionRoles);
+        $this->voterActionRoleAssignments->removeElement($voterActionRoleAssignments);
     }
 
     /**
-     * Get voterActionRoles
+     * Get voterActionRoleAssignments
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getVoterActionRoles()
+    public function getVoterActionRoleAssignments()
     {
-        return $this->voterActionRoles;
+        return $this->voterActionRoleAssignments;
     }
 }

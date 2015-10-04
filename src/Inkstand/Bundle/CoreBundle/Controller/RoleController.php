@@ -16,11 +16,7 @@ class RoleController extends Controller
     {
         $this->setContext(CONTEXT_SYSTEM, null, true);
 
-        $roles = array(
-            array('name' => 'ROLE_ADMIN'),
-            array('name' => 'ROLE_STUDENT'),
-            array('name' => 'ROLE_MENTOR'),
-        );
+        $roles = $this->get('inkstand_core.role')->findAll();
 
         return array(
             'roles' => $roles

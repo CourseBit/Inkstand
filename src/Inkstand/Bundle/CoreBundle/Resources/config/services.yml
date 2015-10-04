@@ -5,6 +5,10 @@ parameters:
     inkstand_core.context.class:                 Inkstand\Bundle\CoreBundle\Service\ContextService
     inkstand_core.context_role_assignment.class: Inkstand\Bundle\CoreBundle\Service\ContextRoleAssignmentService
     inkstand_core.voter.class:                   Inkstand\Bundle\CoreBundle\Service\VoterService
+    inkstand_core.voter_action_role_assignment.class: Inkstand\Bundle\CoreBundle\Service\VoterActionRoleAssignmentService
+    inkstand_core.role.class:                    Inkstand\Bundle\CoreBundle\Service\RoleService
+
+    # Scripts parameters
     inkstand_core.scripts.role.class:            Inkstand\Bundle\CoreBundle\Scripts\RoleScripts
 
 services:
@@ -28,9 +32,17 @@ services:
         class: "%inkstand_core.context_role_assignment.class%"
         arguments: [@doctrine.orm.entity_manager]
 
+    inkstand_core.role:
+        class: "%inkstand_core.role.class%"
+        arguments: [@doctrine.orm.entity_manager]
+
     inkstand_core.voter:
-        class: Inkstand\Bundle\CoreBundle\Service\VoterService
-        arguments: [@doctrine.orm.entity_manager, @service_container]
+        class: "%inkstand_core.voter.class%"
+        arguments: [@doctrine.orm.entity_manager, @inkstand_core.role, @inkstand_core.voter_action_role_assignment,, @service_container]
+
+    inkstand_core.voter_action_role_assignment:
+        class: "%inkstand_core.voter_action_role_assignment.class%"
+        arguments: [@doctrine.orm.entity_manager]
 
     # Scripts
     inkstand_core.scripts.role:

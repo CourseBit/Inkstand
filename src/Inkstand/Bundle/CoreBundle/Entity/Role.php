@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Role
  *
  * @ORM\Table("role")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Inkstand\Bundle\CoreBundle\Entity\RoleRepository")
  */
 class Role
 {
@@ -54,11 +54,17 @@ class Role
     protected $parent;
 
     /**
+     * @ORM\OneToMany(targetEntity="VoterActionRoleAssignment", mappedBy="role")
+     */
+    protected $voterActionRoleAssignments;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->voterActionRoleAssignments = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -194,5 +200,38 @@ class Role
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Add voterActionRoleAssignments
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment $voterActionRoleAssignments
+     * @return Role
+     */
+    public function addVoterActionRoleAssignment(\Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment $voterActionRoleAssignments)
+    {
+        $this->voterActionRoleAssignments[] = $voterActionRoleAssignments;
+
+        return $this;
+    }
+
+    /**
+     * Remove voterActionRoleAssignments
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment $voterActionRoleAssignments
+     */
+    public function removeVoterActionRoleAssignment(\Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment $voterActionRoleAssignments)
+    {
+        $this->voterActionRoleAssignments->removeElement($voterActionRoleAssignments);
+    }
+
+    /**
+     * Get voterActionRoleAssignments
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getVoterActionRoleAssignments()
+    {
+        return $this->voterActionRoleAssignments;
     }
 }
