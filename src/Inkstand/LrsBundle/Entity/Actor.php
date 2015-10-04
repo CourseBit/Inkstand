@@ -8,10 +8,10 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Agent
  *
- * @ORM\Table("lrs_agent")
+ * @ORM\Table("lrs_actor")
  * @ORM\Entity
  */
-class Agent
+class Actor
 {
     /**
      * @var integer
@@ -70,6 +70,30 @@ class Agent
      * @ORM\Column(name="account_name", type="string", length=2083)
      */
     private $accountName;
+
+    /**
+     * @ORM\Column(name="parent_id", type="integer", nullable=true)
+     */
+    private $parentId = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Actor", mappedBy="parent")
+     */
+    private $members;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Actor", inversedBy="children")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", nullable=true)
+     */
+    private $parent;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->children = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get id
@@ -240,5 +264,84 @@ class Agent
     public function getAccountName()
     {
         return $this->accountName;
+    }
+
+    /**
+     * Set parentId
+     *
+     * @param integer $parentId
+     * @return Actor
+     */
+    public function setParentId($parentId)
+    {
+        $this->parentId = $parentId;
+
+        return $this;
+    }
+
+    /**
+     * Get parentId
+     *
+     * @return integer 
+     */
+    public function getParentId()
+    {
+        return $this->parentId;
+    }
+
+    /**
+     * Add members
+     *
+     * @param \Inkstand\LrsBundle\Entity\Actor $members
+     * @return Actor
+     */
+    public function addMember(\Inkstand\LrsBundle\Entity\Actor $members)
+    {
+        $this->members[] = $members;
+
+        return $this;
+    }
+
+    /**
+     * Remove members
+     *
+     * @param \Inkstand\LrsBundle\Entity\Actor $members
+     */
+    public function removeMember(\Inkstand\LrsBundle\Entity\Actor $members)
+    {
+        $this->members->removeElement($members);
+    }
+
+    /**
+     * Get members
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getMembers()
+    {
+        return $this->members;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \Inkstand\LrsBundle\Entity\Actor $parent
+     * @return Actor
+     */
+    public function setParent(\Inkstand\LrsBundle\Entity\Actor $parent = null)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return \Inkstand\LrsBundle\Entity\Actor 
+     */
+    public function getParent()
+    {
+        return $this->parent;
     }
 }

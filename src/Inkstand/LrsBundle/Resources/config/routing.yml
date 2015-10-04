@@ -5,4 +5,9 @@ inkstand_lrs_homepage:
 inkstand_lrs_xapi_activty:
     resource: "@InkstandLrsBundle/Controller/XapiActivityController.php"
     type:     annotation
-    prefix:   /XAPI
+    prefix:   /xAPI
+
+inkstand_lrs_xapi_statement:
+    resource: "@InkstandLrsBundle/Controller/XapiStatementController.php"
+    type:     annotation
+    prefix:   /xAPI

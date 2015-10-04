@@ -1,0 +1,2 @@
+statements.error.both_ids_present:        Request cannot contain both statementId and voidedStatementId
+statements.error.ids_with_invalid_params: Request with statementId or voidedStatementId cannot provide other parameters except attachments and format
