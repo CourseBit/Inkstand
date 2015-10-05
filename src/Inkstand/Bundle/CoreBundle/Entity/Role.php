@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Role
  *
- * @ORM\Table("role")
+ * @ORM\Table("lms_role")
  * @ORM\Entity(repositoryClass="Inkstand\Bundle\CoreBundle\Entity\RoleRepository")
  */
 class Role

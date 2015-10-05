@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Settings
  *
- * @ORM\Table("access_code_settings")
+ * @ORM\Table("lms_access_code_settings")
  * @ORM\Entity
  */
 class AccessCodeSettings

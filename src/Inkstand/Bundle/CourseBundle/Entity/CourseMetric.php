@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * CourseMetric
  *
- * @ORM\Table(name="course_metric")
+ * @ORM\Table(name="lms_course_metric")
  * @ORM\Entity
  */
 class CourseMetric

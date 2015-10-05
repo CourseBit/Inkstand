@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Module
  *
- * @ORM\Table()
+ * @ORM\Table("lms_module")
  * @ORM\Entity(repositoryClass="Inkstand\Bundle\CourseBundle\Entity\ModuleRepository")
  */
 class Module

@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="course_category")
+ * @ORM\Table(name="lms_course_category")
  */
 class CourseCategory
 {

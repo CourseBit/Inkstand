@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Voter
  *
- * @ORM\Table("voter")
+ * @ORM\Table("lms_voter")
  * @ORM\Entity
  */
 class Voter

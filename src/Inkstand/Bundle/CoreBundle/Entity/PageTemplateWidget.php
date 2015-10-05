@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * PageTemplateWidget
  *
- * @ORM\Table("page_template_widget")
+ * @ORM\Table("lms_page_template_widget")
  * @ORM\Entity(repositoryClass="Inkstand\Bundle\CoreBundle\Entity\PageTemplateWidgetRepository")
  */
 class PageTemplateWidget

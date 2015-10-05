@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Context
  *
- * @ORM\Table("context")
+ * @ORM\Table("lms_context")
  * @ORM\Entity(repositoryClass="Inkstand\Bundle\CoreBundle\Entity\ContextRepository")
  */
 class Context

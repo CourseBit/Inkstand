@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ActivityType
  *
- * @ORM\Table(name="activity_type")
+ * @ORM\Table(name="lms_activity_type")
  * @ORM\Entity(repositoryClass="Inkstand\Bundle\CourseBundle\Entity\ActivityTypeRepository")
  */
 class ActivityType

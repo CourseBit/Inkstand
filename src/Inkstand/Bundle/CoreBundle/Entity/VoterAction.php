@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * VoterAction
  *
- * @ORM\Table("voter_action")
+ * @ORM\Table("lms_voter_action")
  * @ORM\Entity(repositoryClass="Inkstand\Bundle\CoreBundle\Entity\VoterActionRepository")
  */
 class VoterAction

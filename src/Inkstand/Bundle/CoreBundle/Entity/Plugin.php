@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Plugin
  *
- * @ORM\Table()
+ * @ORM\Table("lms_plugin")
  * @ORM\Entity(repositoryClass="Inkstand\Bundle\CoreBundle\Entity\PluginRepository")
  */
 class Plugin

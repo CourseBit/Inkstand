@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ContextRoleAssignment
  *
- * @ORM\Table("context_role_assignment")
+ * @ORM\Table("lms_context_role_assignment")
  * @ORM\Entity
  */
 class ContextRoleAssignment
