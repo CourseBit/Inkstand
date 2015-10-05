@@ -5,6 +5,7 @@ namespace Inkstand\Bundle\CourseBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Table("lms_activity")
  * @ORM\Entity
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="activity_type_discriminator", type="string")

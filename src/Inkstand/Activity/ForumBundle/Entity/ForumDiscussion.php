@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ForumDiscussion
  *
- * @ORM\Table(name="forum_discussion")
+ * @ORM\Table(name="lms_forum_discussion")
  * @ORM\Entity
  */
 class ForumDiscussion

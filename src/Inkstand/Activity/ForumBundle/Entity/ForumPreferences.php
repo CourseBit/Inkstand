@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * ForumPreferences
  *
- * @ORM\Table(name="forum_preferences")
+ * @ORM\Table(name="lms_forum_preferences")
  * @ORM\Entity
  */
 class ForumPreferences
