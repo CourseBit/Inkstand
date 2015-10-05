@@ -10,6 +10,11 @@ class VoterActionService
     public function __construct($entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->repository = $this->entityManager->getRepository('InkstandCourseBundle:VoterAction');
+        $this->repository = $this->entityManager->getRepository('InkstandCoreBundle:VoterAction');
+    }
+
+    public function findAll()
+    {
+        return $this->repository->findAll();
     }
 }

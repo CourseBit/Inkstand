@@ -1,0 +1,43 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCoreBundle:Role:edit{% endblock %}
+
+{% block page_header %}{{ 'role.edit'|trans }}{% endblock %}
+
+{% block main_content %}
+    {{ form_start(roleForm) }}
+    {{ form_errors(roleForm) }}
+    {{ form_widget(roleForm._token) }}
+
+    {{ form_row(roleForm.name) }}
+    {{ form_row(roleForm.label) }}
+    {{ form_row(roleForm.description) }}
+
+    <div class="table-responsive">
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>Action</th>
+                <th>Allow</th>
+            </tr>
+            </thead>
+            <tbody>
+                {% for voterActionRoleAssignment in roleForm.voterActionRoleAssignments %}
+                    <tr>
+                        <td>{{ voterActionRoleAssignment.vars.value.voterAction.name }}</td>
+                        <td>
+                            {% dump(voterActionRoleAssignment.allow.vars) %}
+                            {% for choice in voterActionRoleAssignment.allow.vars.choices %}
+                                <label><input type="radio" id="{{ voterActionRoleAssignment.allow.vars.id }}" name="{{ voterActionRoleAssignment.allow.vars.full_name }}" value="{{ choice.value }}"> {{ choice.label|raw }}</label>&nbsp;
+                            {% endfor %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {{ form_widget(roleForm.submit) }}
+    </form>
+
+
+{% endblock %}

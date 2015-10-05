@@ -5,6 +5,7 @@ parameters:
     inkstand_core.context.class:                 Inkstand\Bundle\CoreBundle\Service\ContextService
     inkstand_core.context_role_assignment.class: Inkstand\Bundle\CoreBundle\Service\ContextRoleAssignmentService
     inkstand_core.voter.class:                   Inkstand\Bundle\CoreBundle\Service\VoterService
+    inkstand_core.voter_action.class:            Inkstand\Bundle\CoreBundle\Service\VoterActionService
     inkstand_core.voter_action_role_assignment.class: Inkstand\Bundle\CoreBundle\Service\VoterActionRoleAssignmentService
     inkstand_core.role.class:                    Inkstand\Bundle\CoreBundle\Service\RoleService
 
@@ -39,6 +40,10 @@ services:
     inkstand_core.voter:
         class: "%inkstand_core.voter.class%"
         arguments: [@doctrine.orm.entity_manager, @inkstand_core.role, @inkstand_core.voter_action_role_assignment,, @service_container]
+
+    inkstand_core.voter_action:
+        class: "%inkstand_core.voter_action.class%"
+        arguments: [@doctrine.orm.entity_manager]
 
     inkstand_core.voter_action_role_assignment:
         class: "%inkstand_core.voter_action_role_assignment.class%"

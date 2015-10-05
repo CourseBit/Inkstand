@@ -16,7 +16,7 @@
             {% for role in roles %}
             <tr>
                 <td>{{ role.name|trans }}</td>
-                <td><a href=""><i class="fa fa-cog"></i> {{ 'settings'|trans }}</a></td>
+                <td><a href="{{ path("inkstand_core_role_edit", {"roleId":role.roleId}) }}"><i class="fa fa-cog"></i> {{ 'settings'|trans }}</a></td>
             </tr>
             {% endfor %}
         </tbody>

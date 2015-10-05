@@ -10,3 +10,6 @@ widget.nowidgets: No widgets installed.
 
 # Role
 role.list:        User Roles
+role.notfound:    Role could not be found
+role.edit:        Edit Role
+role.edit.submit: Save Role

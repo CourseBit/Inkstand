@@ -17,4 +17,9 @@ class RoleService
     {
         return $this->repository->findAll($toArray);
     }
+
+    public function findOneByRoleId($roleId)
+    {
+        return $this->repository->findOneByRoleId($roleId);
+    }
 }

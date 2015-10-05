@@ -31,6 +31,13 @@ class Role
     /**
      * @var string
      *
+     * @ORM\Column(name="label", type="string", length=255)
+     */
+    private $label;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="description", type="text")
      */
     private $description;
@@ -96,6 +103,29 @@ class Role
      * @return string 
      */
     public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Set label
+     *
+     * @param string $label
+     * @return Role
+     */
+    public function setLabel($label)
+    {
+        $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * Get name
+     *
+     * @return string
+     */
+    public function getLabel()
     {
         return $this->name;
     }
