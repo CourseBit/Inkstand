@@ -7,6 +7,7 @@ use FOS\UserBundle\FOSUserEvents;
 use FOS\UserBundle\Event\FormEvent;
 use FOS\UserBundle\Event\GetResponseUserEvent;
 use FOS\UserBundle\Event\FilterUserResponseEvent;
+use Inkstand\Bundle\UserBundle\Form\Type\RegistrationFormType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 
@@ -31,8 +32,8 @@ class RegistrationController extends BaseController
             return $event->getResponse();
         }
 
-        $userForm = $formFactory->createForm();
-        $userForm->setData($user);
+        $userForm = $this->createForm(new RegistrationFormType(get_class($user)), $user);
+        //$userForm->setData($user);
         $userForm->add('Register', 'submit', array('attr' => array('class' => 'btn btn-primary')));
 
         $userForm->handleRequest($request);

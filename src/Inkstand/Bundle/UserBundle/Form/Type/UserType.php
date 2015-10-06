@@ -20,6 +20,12 @@ class UserType extends AbstractType
         $submitLabel = empty($userId) ? 'user.form.add' : 'user.edit';
 
         $builder
+            ->add('firstname', 'text', array(
+                'label' => 'user.firstname'
+            ))
+            ->add('lastname', 'text', array(
+                'label' => 'user.lastname'
+            ))
             ->add('username', 'text', array(
                 'label' => 'user.username',
             ))

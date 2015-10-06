@@ -52,6 +52,7 @@ class User extends BaseUser
     public function __construct()
     {
         $this->contextRoleAssignments = new \Doctrine\Common\Collections\ArrayCollection();
+        parent::__construct();
     }
 
     /**
