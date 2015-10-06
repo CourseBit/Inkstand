@@ -127,7 +127,7 @@ class Role
      */
     public function getLabel()
     {
-        return $this->name;
+        return $this->label;
     }
 
     /**

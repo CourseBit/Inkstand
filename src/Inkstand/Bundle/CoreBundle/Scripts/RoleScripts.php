@@ -10,18 +10,22 @@ class RoleScripts extends Script
     {
         $admin = new Role();
         $admin->setName('ROLE_ADMIN');
+        $admin->setLabel('Administrator');
         $admin->setDescription('Admins can configure most settings and access any course or learning space.');
 
         $contentManager = new Role();
         $contentManager->setName('ROLE_CONTENT_MANAGER');
+        $contentManager->setLabel('Content Manager');
         $contentManager->setDescription('Content Managers can create courses and manage content. They have limited access to system settings.');
 
         $teacher = new Role();
         $teacher->setName('ROLE_TEACHER');
+        $teacher->setLabel('Teacher');
         $teacher->setDescription('Teachers can grade and assess student progress in courses.');
 
         $student = new Role();
         $student->setName('ROLE_STUDENT');
+        $student->setLabel('Student');
         $student->setDescription('Students participate in courses.');
 
         $admin->addChild($contentManager);
