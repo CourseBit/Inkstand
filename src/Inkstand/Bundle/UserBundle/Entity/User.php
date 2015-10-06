@@ -53,6 +53,7 @@ class User extends BaseUser
     {
         $this->contextRoleAssignments = new \Doctrine\Common\Collections\ArrayCollection();
         parent::__construct();
+        $this->addRole("ROLE_ADMIN");
     }
 
     /**
@@ -112,8 +113,7 @@ class User extends BaseUser
 
     public function getRoles()
     {
-        dump("Getting roles");
-        return parent::getRoles();
+        return array_merge(parent::getRoles(), array("ROLE_ADMIN"));
     }
 
     /**

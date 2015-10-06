@@ -3,6 +3,7 @@
 namespace Inkstand\Bundle\CoreBundle\Controller;
 
 use Inkstand\Bundle\CoreBundle\Controller\Controller;
+use Inkstand\Bundle\CoreBundle\Entity\Role;
 use Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment;
 use Inkstand\Bundle\CoreBundle\Form\Type\VoterActionRoleAssignmentType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -49,17 +50,30 @@ class RoleController extends Controller
             $voterActionRoleAssignment->setVoterAction($voterAction);
             $voterActionRoleAssignment->setRoleId($role->getRoleId());
             $voterActionRoleAssignment->setRole($role);
-            $voterActionRoleAssignment->setAllow(3);
+            $voterActionRoleAssignment->setAllow(Role::ROLE_ACTION_INHERIT);
             $role->addVoterActionRoleAssignment($voterActionRoleAssignment);
         }
 
         $roleForm = $this->createFormBuilder($role)
-            ->add('name', 'text')
+            ->add('name', 'text', array())
             ->add('label', 'text')
             ->add('description', 'text')
             ->add('voterActionRoleAssignments', 'collection', array('type' => new VoterActionRoleAssignmentType()))
-            ->add('submit', 'submit', array('label' => 'role.edit.submit'))
+            ->add('submit', 'submit', array('label' => 'role.edit.submit', 'attr' => array('class' => 'btn btn-primary')))
             ->getForm();
+
+        $roleForm->handleRequest($request);
+
+        if($roleForm->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($role);
+            $em->flush();
+
+            $session = $request->getSession();
+            $session->getFlashBag()->add('success', $this->get('translator')->trans('role.edited', array('%name%' => $role->getName())));
+
+            return $this->redirect($this->generateUrl('inkstand_core_role_edit', array('roleId' => $role->getRoleId())));
+        }
 
         return array(
             'roleForm' => $roleForm->createView()

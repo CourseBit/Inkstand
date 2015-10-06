@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Inkstand\Bundle\UserBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;

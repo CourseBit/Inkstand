@@ -1,7 +1,15 @@
 parameters:
-    user_service.class: Inkstand\Bundle\UserBundle\Service\UserService
+    user_service.class:                   Inkstand\Bundle\UserBundle\Service\UserService
+    inkstand_user.voter.user_voter.class: Inkstand\Bundle\UserBundle\Voter\UserVoter
 
 services:
     user_service:
         class: "%user_service.class%"
         arguments: [@doctrine.orm.entity_manager, @validator]
+
+    # Voters
+    inkstand_user.voter.user_voter:
+        class:      "%inkstand_user.voter.user_voter.class%"
+        public:     true
+        tags:
+            - { name: security.voter }

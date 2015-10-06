@@ -73,6 +73,9 @@ class VoterService
             if($this->serviceContainer->has($voter->getService())) {
                 $voterService = $this->serviceContainer->get($voter->getService());
 
+                $voter->setClassName(get_class($voterService));
+                $this->entityManager->persist($voter);
+
                 if(!$voterService instanceof AbstractVoter) {
                     throw new \Exception('Voter must inherit from Inkstand\Bundle\CoreBundle\Voter\AbstractVoter. Did you forget to extend?');
                 }

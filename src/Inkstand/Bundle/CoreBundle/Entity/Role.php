@@ -12,6 +12,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Role
 {
+    const ROLE_ACTION_FORBID = 0;
+    const ROLE_ACTION_ALLOW = 1;
+    const ROLE_ACTION_INHERIT = 2;
+
     /**
      * @var integer
      *
@@ -61,7 +65,7 @@ class Role
     protected $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity="VoterActionRoleAssignment", mappedBy="role")
+     * @ORM\OneToMany(targetEntity="VoterActionRoleAssignment", mappedBy="role", cascade={"persist"})
      */
     protected $voterActionRoleAssignments;
 

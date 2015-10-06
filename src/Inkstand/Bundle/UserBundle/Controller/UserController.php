@@ -53,6 +53,8 @@ class UserController extends Controller
     {
         $user = $this->get('user_service')->findOneByUserId($userId);
 
+        $this->denyAccessUnlessGranted('edit', $user, 'Unauthorized access!');
+
         if($user === null) {
             throw new NotFoundHttpException($this->get('translator')->trans('user.notfound'));
         }

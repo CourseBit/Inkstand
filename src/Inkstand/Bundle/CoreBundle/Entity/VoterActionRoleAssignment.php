@@ -38,7 +38,7 @@ class VoterActionRoleAssignment
     /**
      * @var boolean
      *
-     * @ORM\Column(name="allow", type="boolean")
+     * @ORM\Column(name="allow", type="integer")
      */
     private $allow;
 

@@ -29,6 +29,12 @@ class Voter
     private $service;
 
     /**
+     * @var string
+     * @ORM\Column(name="class_name", type="string", length=255)
+     */
+    private $className;
+
+    /**
      * @ORM\OneToMany(targetEntity="VoterAction", mappedBy="voter")
      */
     private $voterActions;
@@ -72,6 +78,29 @@ class Voter
     public function getService()
     {
         return $this->service;
+    }
+
+    /**
+     * Set className
+     *
+     * @param string $className
+     * @return Voter
+     */
+    public function setClassName($className)
+    {
+        $this->className = $className;
+
+        return $this;
+    }
+
+    /**
+     * Get className
+     *
+     * @return string
+     */
+    public function getClassName()
+    {
+        return $this->className;
     }
 
     /**

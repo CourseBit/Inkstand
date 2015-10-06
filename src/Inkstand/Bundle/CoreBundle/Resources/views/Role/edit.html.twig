@@ -24,11 +24,23 @@
             <tbody>
                 {% for voterActionRoleAssignment in roleForm.voterActionRoleAssignments %}
                     <tr>
-                        <td>{{ voterActionRoleAssignment.vars.value.voterAction.name }}</td>
+                        <td>{{ voterActionRoleAssignment.vars.value.voterAction.voter.service }} <b>{{ voterActionRoleAssignment.vars.value.voterAction.name }}</b></td>
                         <td>
-                            {% dump(voterActionRoleAssignment.allow.vars) %}
+                            {{ form_widget(voterActionRoleAssignment.voterActionId) }}
+                            {{ form_widget(voterActionRoleAssignment.roleId) }}
                             {% for choice in voterActionRoleAssignment.allow.vars.choices %}
-                                <label><input type="radio" id="{{ voterActionRoleAssignment.allow.vars.id }}" name="{{ voterActionRoleAssignment.allow.vars.full_name }}" value="{{ choice.value }}"> {{ choice.label|raw }}</label>&nbsp;
+                                <label>
+                                    <input
+                                        type="radio"
+                                        id="{{ voterActionRoleAssignment.allow.vars.id }}"
+                                        name="{{ voterActionRoleAssignment.allow.vars.full_name }}"
+                                        value="{{ choice.value }}"
+                                        {% if voterActionRoleAssignment.allow.vars.data == choice.data %}
+                                            checked="true"
+                                        {% endif %}
+                                    >
+                                    {{ choice.label|raw }}
+                                </label>&nbsp;
                             {% endfor %}
                         </td>
                     </tr>
