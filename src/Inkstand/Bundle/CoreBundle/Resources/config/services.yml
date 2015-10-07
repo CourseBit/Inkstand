@@ -39,7 +39,7 @@ services:
 
     inkstand_core.voter:
         class: "%inkstand_core.voter.class%"
-        arguments: [@doctrine.orm.entity_manager, @inkstand_core.role, @inkstand_core.voter_action_role_assignment,, @service_container]
+        arguments: [@doctrine.orm.entity_manager, @inkstand_core.role, @inkstand_core.voter_action, @inkstand_core.voter_action_role_assignment,, @service_container]
 
     inkstand_core.voter_action:
         class: "%inkstand_core.voter_action.class%"

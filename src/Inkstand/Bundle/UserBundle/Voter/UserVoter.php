@@ -36,6 +36,18 @@ class UserVoter extends AbstractVoter
     {
         $user->getRoles();
 
+        $isRollAllowed = false;
+
+        foreach($user->getRoles() as $roleName) {
+            if($this->isRoleGranted($roleName, $attribute)) {
+                $isRollAllowed = true;
+            }
+        }
+
+        if(!$isRollAllowed) {
+            return false;
+        }
+
         switch($attribute) {
             case self::ADD:
 
@@ -45,7 +57,7 @@ class UserVoter extends AbstractVoter
                 break;
 
             case self::EDIT:
-
+                return true;
                 break;
 
             case self::DELETE:
@@ -56,8 +68,8 @@ class UserVoter extends AbstractVoter
         return false;
     }
 
-    protected function isRoleGranted($role, $action)
+    protected function isRoleGranted($roleName, $actionName)
     {
-
+        return $this->voterService->isRoleGranted($roleName, get_class($this), $actionName);
     }
 }

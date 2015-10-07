@@ -17,4 +17,9 @@ class VoterActionService
     {
         return $this->repository->findAll();
     }
+
+    public function findOneBy(array $params)
+    {
+        return $this->repository->findOneBy($params);
+    }
 }

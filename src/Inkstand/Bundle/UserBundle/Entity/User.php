@@ -113,7 +113,8 @@ class User extends BaseUser
 
     public function getRoles()
     {
-        return array_merge(parent::getRoles(), array("ROLE_ADMIN"));
+        //return parent::getRoles();
+        return array("ROLE_ADMIN");
     }
 
     /**

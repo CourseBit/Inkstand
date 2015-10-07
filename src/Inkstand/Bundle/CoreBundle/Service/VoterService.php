@@ -13,16 +13,18 @@ class VoterService
     protected $entityManager;
     protected $repository;
     protected $serviceContainer;
+    protected $voterActionService;
     protected $voterActionRoleAssignmentService;
     protected $roleService;
 
     private $voterServiceIds = array();
 
-    public function __construct($entityManager, $roleService, $voterActionRoleAssignmentService, $serviceContainer)
+    public function __construct($entityManager, $roleService, $voterActionService, $voterActionRoleAssignmentService, $serviceContainer)
     {
         $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository('InkstandCoreBundle:Voter');
         $this->roleService = $roleService;
+        $this->voterActionService = $voterActionService;
         $this->voterActionRoleAssignmentService = $voterActionRoleAssignmentService;
         $this->serviceContainer = $serviceContainer;
     }
@@ -34,6 +36,11 @@ class VoterService
 
     public function findOneByService($service) {
         return $this->repository->findOneByService($service);
+    }
+
+    public function findOneByClassName($className)
+    {
+        return $this->repository->findOneByClassName($className);
     }
 
     public function updateVoters($verbose = false)
@@ -147,5 +154,26 @@ class VoterService
         }
 
         return null;
+    }
+
+    public function isRoleGranted($roleName, $voterClassName, $actionName)
+    {
+        $voter = $this->findOneByClassName($voterClassName);
+        $voterAction = $this->voterActionService->findOneBy(array('voterId' => $voter->getVoterId(), 'name' => $actionName));
+        $role = $this->roleService->findOneByName($roleName);
+
+        $assignment = $this->voterActionRoleAssignmentService->getAssignmentWith($role->getRoleId(), $voterAction->getVoterActionId());
+
+        dump($assignment);
+
+        if($assignment->getAllow() == 0) {
+            return false;
+        } else if($assignment->getAllow() == 1) {
+            return true;
+        } else {
+            // TODO: Check child roles for permission
+            dump("Inherit role, default to forbid");
+            return false;
+        }
     }
 }

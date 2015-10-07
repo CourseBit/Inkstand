@@ -10,6 +10,7 @@ services:
     # Voters
     inkstand_user.voter.user_voter:
         class:      "%inkstand_user.voter.user_voter.class%"
+        arguments: [@inkstand_core.voter]
         public:     true
         tags:
             - { name: security.voter }

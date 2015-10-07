@@ -22,4 +22,9 @@ class RoleService
     {
         return $this->repository->findOneByRoleId($roleId);
     }
+
+    public function findOneByName($name)
+    {
+        return $this->repository->findOneByName($name);
+    }
 }

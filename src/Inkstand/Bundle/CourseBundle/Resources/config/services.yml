@@ -59,6 +59,7 @@ services:
     # Voters
     inkstand_course.voter.course_voter:
         class:      "%inkstand_course.voter.course_voter.class%"
+        arguments:  [@inkstand_core.voter]
         public:     true
         tags:
             - { name: security.voter }
