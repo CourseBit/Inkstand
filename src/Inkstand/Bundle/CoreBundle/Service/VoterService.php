@@ -64,8 +64,10 @@ class VoterService
 
         foreach($voterServiceIds as $voterServiceId) {
             if($this->findOneByService($voterServiceId) == null) {
+                $voterService = $this->serviceContainer->get($voterServiceId);
                 $voter = new Voter();
                 $voter->setService($voterServiceId);
+                $voter->setClassName(get_class($voterService));
                 $this->entityManager->persist($voter);
                 $stats['newVotersCount']++;
             }
@@ -73,6 +75,7 @@ class VoterService
 
         $this->entityManager->flush();
 
+        // TODO: Do we really need to find them all again? ($existingVoters)
         $voters = $this->findAll();
         $roles = $this->roleService->findAll();
 
@@ -152,7 +155,6 @@ class VoterService
                 return $voterAction;
             }
         }
-
         return null;
     }
 
