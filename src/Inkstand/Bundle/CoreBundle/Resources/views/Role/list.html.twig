@@ -5,20 +5,26 @@
 {% block page_header %}{{ 'role.list'|trans }}{% endblock %}
 
 {% block main_content %}
-    <table class="table-striped">
-        <thead>
-            <tr>
-                <th>Name</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
+    {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+        {% block grid_head %}
+            <td>ID</td>
+            <th>Name</th>
+            <th>Parent Role</th>
+            <th>Actions</th>
+        {% endblock %}
+        {% block grid_body %}
             {% for role in roles %}
-            <tr>
-                <td>{{ role.name|trans }}</td>
-                <td><a href="{{ path("inkstand_core_role_edit", {"roleId":role.roleId}) }}"><i class="fa fa-cog"></i> {{ 'settings'|trans }}</a></td>
-            </tr>
+                <tr>
+                    <td>{{ role.roleId }}</td>
+                    <td>{{ role.label }}</td>
+                    {% if role.parent is not null %}
+                        <td>{{ role.parent.label }}</td>
+                    {% else %}
+                        <td></td>
+                    {% endif %}
+                    <td><a href="{{ path("inkstand_core_role_edit", {"roleId":role.roleId}) }}"><i class="fa fa-cog"></i> {{ 'settings'|trans }}</a></td>
+                </tr>
             {% endfor %}
-        </tbody>
-    </table>
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

@@ -9,6 +9,9 @@ parameters:
     inkstand_core.voter_action_role_assignment.class: Inkstand\Bundle\CoreBundle\Service\VoterActionRoleAssignmentService
     inkstand_core.role.class:                    Inkstand\Bundle\CoreBundle\Service\RoleService
 
+    # Voter parameters
+    inkstand_core.voter.role_voter.class:        Inkstand\Bundle\CoreBundle\Voter\RoleVoter
+
     # Scripts parameters
     inkstand_core.scripts.role.class:            Inkstand\Bundle\CoreBundle\Scripts\RoleScripts
 
@@ -70,3 +73,11 @@ services:
             class: Inkstand\Bundle\CoreBundle\EventListener\WidgetListener
             tags:
                 - { name: kernel.event_listener, event: inkstand.core.widget_register, method: onWidgetRegister }
+
+    # Voters
+    inkstand_core.voter.role_voter:
+        class:      "%inkstand_core.voter.role_voter.class%"
+        arguments: [@inkstand_core.voter]
+        public:     true
+        tags:
+            - { name: security.voter }
