@@ -2,6 +2,8 @@
 
 namespace Inkstand\Bundle\CourseBundle\Service;
 
+use Inkstand\Bundle\CourseBundle\Entity\Course;
+
 class CourseService
 {
     protected $entityManager;
@@ -37,5 +39,25 @@ class CourseService
     public function findOneByCourseId($courseId)
     {
         return $this->repository->findOneByCourseId($courseId);
+    }
+
+    /**
+     * Determine if a Course as any enabled CourseEnrollmentType
+     *
+     * @param Course $course
+     * @return bool
+     */
+    public function hasEnabledEnrollmentTypes(Course $course)
+    {
+        if(!empty($courseEnrollmentTypes = $course->getCourseEnrollmentTypes())) {
+            foreach($courseEnrollmentTypes as $courseEnrollmentType) {
+                /** @var \Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType */
+                if($courseEnrollmentType->getEnabled()) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }
