@@ -17,6 +17,11 @@ class VoterService
     protected $voterActionRoleAssignmentService;
     protected $roleService;
 
+    /**
+     * This is populated by a CompilerPass and contains all the Voter service IDs
+     *
+     * @var array
+     */
     private $voterServiceIds = array();
 
     public function __construct($entityManager, $roleService, $voterActionService, $voterActionRoleAssignmentService, $serviceContainer)
@@ -143,6 +148,11 @@ class VoterService
         }
     }
 
+    /**
+     * This method is called by a CompilerPass. Do not call this method directly.
+     *
+     * @param $serviceId
+     */
     public function addVoter($serviceId)
     {
         $this->voterServiceIds[] = $serviceId;
