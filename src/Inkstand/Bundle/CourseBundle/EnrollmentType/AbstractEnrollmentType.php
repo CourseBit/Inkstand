@@ -1,9 +1,9 @@
 <?php
 
-namespace Inkstand\Bundle\CourseBundle\Service;
+namespace Inkstand\Bundle\CourseBundle\EnrollmentType;
 
 
-abstract class AbstractEnrollmentService
+abstract class AbstractEnrollmentType
 {
     protected $enrollmentService;
 
@@ -16,4 +16,6 @@ abstract class AbstractEnrollmentService
     {
         return null;
     }
+
+    public abstract function getName();
 }

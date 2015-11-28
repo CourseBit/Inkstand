@@ -3,6 +3,7 @@ email:            Email
 yes:              Yes
 no:               No
 settings.save:    Save
+dashboard:        Dashboard
 
 # Widget
 widget.name:      Name

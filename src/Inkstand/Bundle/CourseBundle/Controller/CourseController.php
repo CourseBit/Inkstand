@@ -250,7 +250,7 @@ class CourseController extends Controller
 		}
 
 		return array(
-			'enrollmentTypeService' => $this->get('enrollment_type_service'),
+			'enrollmentTypeService' => $this->get('inkstand_course.enrollment_type'),
 			'course' => $course
 		);
 	}

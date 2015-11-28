@@ -34,6 +34,16 @@ class VoterService
         $this->serviceContainer = $serviceContainer;
     }
 
+    /**
+     * This method is called by a CompilerPass. Do not call this method directly.
+     *
+     * @param string $serviceId
+     */
+    public function addVoter($serviceId)
+    {
+        $this->voterServiceIds[] = $serviceId;
+    }
+
     public function findAll()
     {
         return $this->repository->findAll();
@@ -146,16 +156,6 @@ class VoterService
             echo sprintf('    %s new Voter Action Role Assignment(s)', $stats['newVoterActionRoleAssignments']);
             echo PHP_EOL . PHP_EOL;
         }
-    }
-
-    /**
-     * This method is called by a CompilerPass. Do not call this method directly.
-     *
-     * @param $serviceId
-     */
-    public function addVoter($serviceId)
-    {
-        $this->voterServiceIds[] = $serviceId;
     }
 
     private function getActionFromVoter(Voter $voter, $actionName)

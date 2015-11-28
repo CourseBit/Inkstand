@@ -34,8 +34,10 @@ class EnrollmentController extends Controller
     {
         $course = $this->get('course_service')->findOneByCourseId($courseId);
 
+        $accessCodeEnrollmentType = $this->get('inkstand_course.enrollment_type.access_code');
+
         // TODO: Optimize this and make it look pretty
-        $enrollmentTypes = $this->get('enrollment_type_service')->findAll();
+        $enrollmentTypes = $this->get('inkstand_course.enrollment_type')->findAll();
         $currentEnrollments = $course->getCourseEnrollmentTypes();
         foreach($currentEnrollments as $currentEnrollment) {
             foreach($enrollmentTypes as $key => $enrollmentType) {
@@ -98,7 +100,7 @@ class EnrollmentController extends Controller
         $courseEnrollmentType = $this->get('course_enrollment_type_service')->findOneByCourseEnrollmentTypeId($courseEnrollmentTypeId);
         $course = $courseEnrollmentType->getCourse();
 
-        $enrollmentService = $this->get('enrollment_type_service')->getServiceForEnrollmentType($courseEnrollmentType->getEnrollmentType());
+        $enrollmentService = $this->get('inkstand_course.enrollment_type')->getServiceForEnrollmentType($courseEnrollmentType->getEnrollmentType());
         // TODO: Rename to getSettingsFormType since it's really not a form
         $settingsFormType = $enrollmentService->getSettingsForm();
 

@@ -2,7 +2,7 @@
 
 {% block title %}InkstandCourseBundle:Course:enroll{% endblock %}
 
-{% block page_header %}{{ course.name }}{% endblock %}
+{% block page_header %}{{ course.name }} Enrollment{% endblock %}
 
 {% block main_content %}
     {% for courseEnrollmentType in course.courseEnrollmentTypes if courseEnrollmentType.enabled %}

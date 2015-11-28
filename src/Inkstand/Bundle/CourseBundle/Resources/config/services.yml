@@ -5,7 +5,7 @@ parameters:
     activity_type_service.class:          Inkstand\Bundle\CourseBundle\Service\ActivityTypeService
     module_service.class:                 Inkstand\Bundle\CourseBundle\Service\ModuleService
     enrollment_service.class:             Inkstand\Bundle\CourseBundle\Service\EnrollmentService
-    enrollment_type_service.class:        Inkstand\Bundle\CourseBundle\Service\EnrollmentTypeService
+    inkstand_course.enrollment_type.class: Inkstand\Bundle\CourseBundle\Service\EnrollmentTypeService
     enrollment.manual.service.class:      Inkstand\Bundle\CourseBundle\Service\ManualEnrollmentService
     course_enrollment_type_service.class: Inkstand\Bundle\CourseBundle\Service\CourseEnrollmentTypeService
     inkstand_course.voter.course_voter.class: Inkstand\Bundle\CourseBundle\Voter\CourseVoter
@@ -30,9 +30,19 @@ services:
     enrollment_service:
         class:     "%enrollment_service.class%"
         arguments: [@doctrine.orm.entity_manager, @event_dispatcher, @service_container]
-    enrollment_type_service:
-        class:     "%enrollment_type_service.class%"
+
+    inkstand_course.enrollment_type:
+        class:     "%inkstand_course.enrollment_type.class%"
         arguments: [@doctrine.orm.entity_manager, @service_container]
+
+    inkstand_course.enrollment_type.access_code:
+        class:     Inkstand\Bundle\CourseBundle\EnrollmentType\AccessCodeEnrollmentType
+        arguments: [@enrollment_service]
+        public:    true
+        tags:
+            - { name: inkstand.enrollment_type }
+
+
     enrollment.manual.service:
         class:     "%enrollment.manual.service.class%"
         arguments: [@enrollment_service]

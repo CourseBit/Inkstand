@@ -14,5 +14,6 @@ class InkstandCoreBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new ServiceCompilerPass('security.voter', 'inkstand_core.voter', 'addVoter'));
+        $container->addCompilerPass(new ServiceCompilerPass('inkstand.enrollment_type', 'inkstand_course.enrollment_type', 'addEnrollmentType'));
     }
 }

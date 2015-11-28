@@ -29,6 +29,13 @@ class EnrollmentType
     private $name;
 
     /**
+     * @var
+     *
+     * @ORM\Column(name="service", type="string", length=255)
+     */
+    private $service;
+
+    /**
      * @ORM\OneToMany(targetEntity="Module", mappedBy="enrollmentType", cascade={"remove"})
      */
     private $courseEnrollmentTypes;
@@ -64,6 +71,29 @@ class EnrollmentType
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set service
+     *
+     * @param string $service
+     * @return EnrollmentType
+     */
+    public function setService($service)
+    {
+        $this->service = $service;
+
+        return $this;
+    }
+
+    /**
+     * Get service
+     *
+     * @return string
+     */
+    public function getService()
+    {
+        return $this->service;
     }
 
     /**
