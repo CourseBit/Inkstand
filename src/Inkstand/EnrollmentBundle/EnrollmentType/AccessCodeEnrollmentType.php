@@ -2,6 +2,9 @@
 
 namespace Inkstand\EnrollmentBundle\EnrollmentType;
 
+use Inkstand\EnrollmentBundle\Entity\AccessCodeSettings;
+use Inkstand\EnrollmentBundle\Form\Type\AccessCodeSettingsType;
+
 class AccessCodeEnrollmentType extends AbstractEnrollmentType
 {
     protected $entityManager;

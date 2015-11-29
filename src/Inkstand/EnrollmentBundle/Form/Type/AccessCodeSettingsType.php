@@ -58,7 +58,7 @@ class AccessCodeSettingsType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Inkstand\Enrollment\AccessCodeBundle\Entity\AccessCodeSettings',
+            'data_class' => 'Inkstand\EnrollmentBundle\Entity\AccessCodeSettings',
         ));
     }
 }
