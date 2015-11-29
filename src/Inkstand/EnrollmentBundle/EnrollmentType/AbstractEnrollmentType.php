@@ -1,6 +1,6 @@
 <?php
 
-namespace Inkstand\Bundle\CourseBundle\EnrollmentType;
+namespace Inkstand\EnrollmentBundle\EnrollmentType;
 
 
 abstract class AbstractEnrollmentType

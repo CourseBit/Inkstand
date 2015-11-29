@@ -1,4 +1,0 @@
-inkstand_access_code:
-    resource: "@InkstandAccessCodeBundle/Controller/AccessCodeEnrollmentController.php"
-    prefix:   /course/enroll/access-code/
-    type:     annotation

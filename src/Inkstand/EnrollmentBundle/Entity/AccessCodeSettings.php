@@ -1,6 +1,6 @@
 <?php
 
-namespace Inkstand\Enrollment\AccessCodeBundle\Entity;
+namespace Inkstand\EnrollmentBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;

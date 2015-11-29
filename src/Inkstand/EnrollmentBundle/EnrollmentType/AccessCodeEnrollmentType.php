@@ -1,12 +1,8 @@
 <?php
 
-namespace Inkstand\Enrollment\AccessCodeBundle\Service;
+namespace Inkstand\EnrollmentBundle\EnrollmentType;
 
-use Inkstand\Bundle\CourseBundle\Service\AbstractEnrollmentService;
-use Inkstand\Enrollment\AccessCodeBundle\Entity\AccessCodeSettings;
-use Inkstand\Enrollment\AccessCodeBundle\Form\Type\AccessCodeSettingsType;
-
-class AccessCodeEnrollmentService extends AbstractEnrollmentService
+class AccessCodeEnrollmentType extends AbstractEnrollmentType
 {
     protected $entityManager;
     protected $accessCodeSettingsRepository;
@@ -14,13 +10,13 @@ class AccessCodeEnrollmentService extends AbstractEnrollmentService
     public function __construct($enrollmentService, $entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->accessCodeSettingsRepository = $this->entityManager->getRepository('InkstandAccessCodeBundle:AccessCodeSettings');
+        $this->accessCodeSettingsRepository = $this->entityManager->getRepository('InkstandEnrollmentBundle:AccessCodeSettings');
         parent::__construct($enrollmentService);
     }
 
     public function getController()
     {
-        return 'InkstandAccessCodeBundle:AccessCodeEnrollment';
+        return 'InkstandEnrollmentBundle:AccessCodeEnrollment';
     }
 
     public function getSettingsForm()
@@ -35,5 +31,10 @@ class AccessCodeEnrollmentService extends AbstractEnrollmentService
             return new AccessCodeSettings();
         }
         return $accessCodeSettings;
+    }
+
+    public function getName()
+    {
+        return 'access_code';
     }
 }

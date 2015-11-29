@@ -35,14 +35,6 @@ services:
         class:     "%inkstand_course.enrollment_type.class%"
         arguments: [@doctrine.orm.entity_manager, @service_container]
 
-    inkstand_course.enrollment_type.access_code:
-        class:     Inkstand\Bundle\CourseBundle\EnrollmentType\AccessCodeEnrollmentType
-        arguments: [@enrollment_service]
-        public:    true
-        tags:
-            - { name: inkstand.enrollment_type }
-
-
     enrollment.manual.service:
         class:     "%enrollment.manual.service.class%"
         arguments: [@enrollment_service]

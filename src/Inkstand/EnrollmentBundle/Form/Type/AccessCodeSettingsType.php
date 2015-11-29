@@ -1,6 +1,6 @@
 <?php
 
-namespace Inkstand\Enrollment\AccessCodeBundle\Form\Type;
+namespace Inkstand\EnrollmentBundle\Form\Type;
 
 use Inkstand\Bundle\CourseBundle\Entity\Course;
 use Symfony\Component\Form\AbstractType;

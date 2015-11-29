@@ -1,6 +1,6 @@
 <?php
 
-namespace Inkstand\Enrollment\AccessCodeBundle\Controller;
+namespace Inkstand\EnrollmentBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -14,7 +14,7 @@ class AccessCodeEnrollmentController extends Controller
     {
         $accessCodeForm = $this->getAccessCodeForm($course->getCourseId());
 
-        return $this->render('InkstandAccessCodeBundle:AccessCodeEnrollment:enroll_page.html.twig', array(
+        return $this->render('InkstandEnrollmentBundle:AccessCodeEnrollment:enroll_page.html.twig', array(
             'accessCodeForm' => $accessCodeForm->createView()
         ));
     }
