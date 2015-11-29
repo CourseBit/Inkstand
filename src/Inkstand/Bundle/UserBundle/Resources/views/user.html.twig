@@ -1,0 +1,17 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block main_content %}
+    <ul class="nav nav-pills" style="margin-bottom:15px">
+        <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_user_list' %}active{% endif %}">
+            <a href="{{ path("inkstand_user_list") }}">{{ 'list'|trans }}</a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_user_add' %}active{% endif %}">
+            <a href="{{ path("inkstand_user_add") }}">{{ 'add'|trans }}</a>
+        </li>
+        <li role="presentation" class="{% if app.request.get('_route') == 'inkstand_user_upload' %}active{% endif %}">
+            <a href="{{ path("inkstand_user_upload") }}">{{ 'upload'|trans }}</a>
+        </li>
+    </ul>
+    <hr>
+{% endblock %}
+

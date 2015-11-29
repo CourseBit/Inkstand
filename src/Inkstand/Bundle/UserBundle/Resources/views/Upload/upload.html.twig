@@ -1,10 +1,11 @@
-{% extends "InkstandThemeBundle::base.html.twig" %}
+{% extends "InkstandUserBundle::user.html.twig" %}
 
 {% block title %}InkstandUserBundle:User:upload{% endblock %}
 
 {% block page_header %}{{ 'user.upload'|trans }}{% endblock %}
 
 {% block main_content %}
+    {{ parent() }}
     <p>{{ 'user.upload.description'|trans }}</p>
     {{ form_start(uploadForm) }}
     {{ form_widget(uploadForm) }}

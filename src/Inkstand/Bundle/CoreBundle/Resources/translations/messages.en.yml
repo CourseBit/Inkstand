@@ -4,6 +4,7 @@ yes:              Yes
 no:               No
 settings.save:    Save
 dashboard:        Dashboard
+list:             List
 
 # Widget
 widget.name:      Name

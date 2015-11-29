@@ -1,8 +1,17 @@
-{% extends "InkstandThemeBundle::base.html.twig" %}
+{% extends "InkstandUserBundle::user.html.twig" %}
 
 {% block title %}InkstandUserBundle:User:list{% endblock %}
 
+{% block page_header %}
+    {% if userCount == 1 %}
+        {{ userCount }} {{ 'user'|trans }}
+    {% else %}
+        {{ userCount }} {{ 'users'|trans }}
+    {% endif %}
+{% endblock %}
+
 {% block main_content %}
+    {{ parent() }}
     {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
         {% block grid_head %}
             <th>Username</th>

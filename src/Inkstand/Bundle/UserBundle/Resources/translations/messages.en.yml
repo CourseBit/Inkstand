@@ -1,4 +1,6 @@
 # User strings
+user:                  User
+users:                 Users
 user.firstname:        Firstname
 user.lastname:         Lastname
 user.username:         Username

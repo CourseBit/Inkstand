@@ -17,8 +17,12 @@ class UserController extends Controller
     public function listAction()
     {
         $users = $this->get('user_service')->findAll();
+        $userCount = count($users);
 
-        return $this->render('InkstandUserBundle:User:list.html.twig', array('users' => $users));
+        return $this->render('InkstandUserBundle:User:list.html.twig', array(
+            'users' => $users,
+            'userCount' => $userCount
+        ));
     }
 
     /**
