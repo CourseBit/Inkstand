@@ -34,8 +34,6 @@ class EnrollmentController extends Controller
     {
         $course = $this->get('course_service')->findOneByCourseId($courseId);
 
-        $accessCodeEnrollmentType = $this->get('inkstand_course.enrollment_type.access_code');
-
         // TODO: Optimize this and make it look pretty
         $enrollmentTypes = $this->get('inkstand_course.enrollment_type')->findAll();
         $currentEnrollments = $course->getCourseEnrollmentTypes();

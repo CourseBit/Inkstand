@@ -44,6 +44,21 @@ class EnrollmentTypeService
     {
         $existingEnrollmentTypes = $this->findAll();
 
+        // Delete any missing
+        foreach($existingEnrollmentTypes as $key => $existingEnrollmentType) {
+            $serviceExists = false;
+            foreach($this->enrollmentTypeServiceIds as $enrollmentTypeServiceId) {
+                if($existingEnrollmentType->getService() == $enrollmentTypeServiceId) {
+                    $serviceExists = true;
+                }
+            }
+            if(!$serviceExists) {
+                $this->entityManager->remove($existingEnrollmentType);
+                $this->entityManager->flush();
+                unset($existingEnrollmentTypes[$key]);
+            }
+        }
+
         foreach($this->enrollmentTypeServiceIds as $enrollmentTypeServiceId) {
             if(!$this->serviceContainer->has($enrollmentTypeServiceId)) {
                 throw new \Exception(sprintf('EnrollmentType service %s not found.', $enrollmentTypeServiceId));

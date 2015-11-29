@@ -36,7 +36,7 @@ class EnrollmentType
     private $service;
 
     /**
-     * @ORM\OneToMany(targetEntity="Module", mappedBy="enrollmentType", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="CourseEnrollmentType", mappedBy="enrollmentType", cascade={"remove"})
      */
     private $courseEnrollmentTypes;
 
