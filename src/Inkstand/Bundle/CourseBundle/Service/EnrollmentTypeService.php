@@ -97,10 +97,10 @@ class EnrollmentTypeService
      */
     public function getServiceForEnrollmentType(EnrollmentType $enrollmentType)
     {
-        $enrollmentService = $this->serviceContainer->get(sprintf('enrollment.%s.service', $enrollmentType->getName()));
-        if(!is_a($enrollmentService, 'Inkstand\Bundle\CourseBundle\Service\AbstractEnrollmentService')) {
-            throw new \Exception(sprintf('Invalid enrollment service. %s must extend Inkstand\Bundle\CourseBundle\Service\AbstractEnrollmentService', get_class($enrollmentService)));
+        $enrollmentService = $this->serviceContainer->get($enrollmentType->getService());
+        if(!is_a($enrollmentService, 'Inkstand\EnrollmentBundle\EnrollmentType\AbstractEnrollmentType')) {
+            throw new \Exception(sprintf('Invalid enrollment service. %s must extend Inkstand\EnrollmentBundle\EnrollmentType\AbstractEnrollmentType', get_class($enrollmentService)));
         }
-        return $this->serviceContainer->get(sprintf('enrollment.%s.service', $enrollmentType->getName()));
+        return $enrollmentService;
     }
 }
