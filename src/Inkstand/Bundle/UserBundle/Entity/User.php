@@ -42,6 +42,41 @@ class User extends BaseUser
     protected $lastname;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="image", type="string")
+     */
+    protected $image;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="bio", type="string")
+     */
+    protected $bio;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="country", type="string")
+     */
+    protected $country;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="city", type="string")
+     */
+    protected $city;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="twitter", type="string")
+     */
+    protected $twitter;
+
+    /**
      * @ORM\OneToMany(targetEntity="Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment", mappedBy="user")
      */
     private $contextRoleAssignments;
@@ -79,7 +114,10 @@ class User extends BaseUser
             $this->id,
             // User
             $this->firstname,
-            $this->lastname
+            $this->lastname,
+            $this->image,
+            $this->bio,
+            $this->twitter
         ));
     }
 
@@ -107,7 +145,10 @@ class User extends BaseUser
             $this->enabled,
             $this->id,
             $this->firstname,
-            $this->lastname
+            $this->lastname,
+            $this->image,
+            $this->bio,
+            $this->twitter
             ) = $data;
     }
 
@@ -171,6 +212,121 @@ class User extends BaseUser
     public function getLastname()
     {
         return $this->lastname;
+    }
+
+    /**
+     * Set image
+     *
+     * @param string $image
+     * @return User
+     */
+    public function setImage($image)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return string
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Set bio
+     *
+     * @param string $bio
+     * @return User
+     */
+    public function setBio($bio)
+    {
+        $this->bio = $bio;
+
+        return $this;
+    }
+
+    /**
+     * Get bio
+     *
+     * @return string
+     */
+    public function getBio()
+    {
+        return $this->bio;
+    }
+
+    /**
+     * Set country
+     *
+     * @param string $country
+     * @return User
+     */
+    public function setCountry($country)
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * Get country
+     *
+     * @return string
+     */
+    public function getCountry()
+    {
+        return $this->country;
+    }
+
+    /**
+     * Set city
+     *
+     * @param string $city
+     * @return User
+     */
+    public function setCity($city)
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    /**
+     * Get city
+     *
+     * @return string
+     */
+    public function getCity()
+    {
+        return $this->city;
+    }
+
+    /**
+     * Set twitter
+     *
+     * @param string $twitter
+     * @return User
+     */
+    public function setTwitter($twitter)
+    {
+        $this->twitter = $twitter;
+
+        return $this;
+    }
+
+    /**
+     * Get twitter
+     *
+     * @return string
+     */
+    public function getTwitter()
+    {
+        return $this->twitter;
     }
 
     /**

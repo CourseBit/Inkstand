@@ -59,8 +59,23 @@
 				<nav style="display:block !important" class="navbar navbar-default navbar-static-top">
 					<div class="container-fluid">
 						<div class="navbar-header navbar-header-full">
-							<ul class="nav navbar-nav navbar-right">
-								
+							<ul class="nav navbar-nav navbar-right navbar-user">
+								{% if app.user %}
+									<li>
+										<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.firstname }} {{ app.user.lastname }} <img width="32" class="img-responsive img-circle img-user inline" src="{{ app.user.image }}"></a>
+										<ul class="dropdown-menu">
+											<li><a href="{{ path("inkstand_user_profile", {"userId":app.user.id}) }}"><i class="fa fa-fw fa-user"></i> My Profile</a></li>
+											<li><a href="#"><i class="fa fa-fw fa-user"></i> Messages <span class="label label-danger">42</span></a></li>
+											<li><a href="#"><i class="fa fa-fw fa-calendar"></i> Calendar</a></li>
+											<li role="separator" class="divider"></li>
+											<li><a href="{{ path("inkstand_help") }}"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
+											<li role="separator" class="divider"></li>
+											<li><a href="{{ path("fos_user_security_logout") }}"><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
+										</ul>
+									</li>
+								{% else %}
+									<li><a href="{{ path("fos_user_security_login") }}">Login</a></li>
+								{% endif %}
 							</ul>
 						</div>
 					</div>

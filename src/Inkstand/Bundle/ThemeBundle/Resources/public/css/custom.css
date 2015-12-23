@@ -12,6 +12,12 @@ body.layout-minimal {
 	background:transparent;
 }
 
+/* Helper class
+----------------------------- */
+.inline {
+	display:inline;
+}
+
 /* Main page header
 ----------------------------- */
 .page-header.page-header-sm {
@@ -20,6 +26,13 @@ body.layout-minimal {
 .page-header.page-header-sm h1 {
 	margin-top:0;
 	font-size:28px;
+}
+
+/* User menu
+----------------------------- */
+.navbar-user .img-user {
+	margin-top:-8px;
+	margin-bottom:-6px;
 }
 
 /* Make the navmenu narrower */
@@ -40,7 +53,8 @@ ul.activities li.activity:last-child {
     border:none
 }
 
-/* Breadcrumbs */
+/* Breadcrumbs
+----------------------------- */
 .breadcrumb.breadcrumb-inline {
 	display:inline-block;
 }

@@ -58,7 +58,7 @@ class UserController extends Controller
     {
         $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
 
-        $this->denyAccessUnlessGranted('edit', $user, 'Unauthorized access!');
+        //$this->denyAccessUnlessGranted('edit', $user, 'Unauthorized access!');
 
         if($user === null) {
             throw new NotFoundHttpException($this->get('translator')->trans('user.notfound'));
@@ -138,6 +138,28 @@ class UserController extends Controller
         return array(
             'course' => $user,
             'deleteForm' => $deleteForm->createView()
+        );
+    }
+
+    /**
+     * User profile page that shows their information and updates
+     *
+     * @Route("/user/profile/{userId}", name="inkstand_user_profile")
+     * @Template
+     * @param Request $request
+     * @param int $userId
+     * @return array
+     */
+    public function profileAction(Request $request, $userId)
+    {
+        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
+
+        if (empty($user)) {
+            throw new NotFoundHttpException($this->get('translator')->trans('user.notfound'));
+        }
+
+        return array(
+            'user' => $user
         );
     }
 }

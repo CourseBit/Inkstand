@@ -1,0 +1,49 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandUserBundle:User:profile{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block main_content %}
+    <div class="row">
+        <div class="col-md-12">
+            <div class="pull-left">
+                <div class="clearfix">
+                    {% if user.image %}
+                        <img width="150" class="img-responsive img-thumbnail pull-left" src="{{ user.image }}">
+                    {% endif %}
+                </div>
+
+                <ul class="nav nav-pills nav-stacked">
+                    {% if app.user.id == user.id %}
+                        <li role="presentation"><a href="{{ path("inkstand_user_edit", {"userId":user.id}) }}">Edit Profile</a></li>
+                    {% endif %}
+                    <li role="presentation"><a href="#">Messages</a></li>
+                </ul>
+            </div>
+            <div style="margin-left:165px">
+                <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+                {% if user.country or user.city %}
+                    <span>
+                        <i class="fa fa-map-marker"></i>
+                        {% if user.city %}
+                            {{ user.city }}, {{ user.country }}
+                        {% else %}
+                            {{ user.country }}
+                        {% endif %}
+                    </span>
+                {% endif %}
+                {% if user.twitter %}
+                    <p><a href="http://twitter.com/" target="_blank">@{{ user.twitter }}</a></p>
+                {% endif %}
+                {% if user.bio %}
+                    <h4>Bio:</h4>
+                    <p>{{ user.bio }}</p>
+                {% endif %}
+                <h4>Recent Activity:</h4>
+                <p class="text-muted">This user hasn't done anything yet.</p>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

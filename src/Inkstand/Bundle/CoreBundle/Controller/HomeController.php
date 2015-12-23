@@ -39,4 +39,13 @@ class HomeController extends Controller
 
 		return array();
 	}
+
+	/**
+	 * @Route("/help", name="inkstand_help")
+	 * @Template
+	 */
+	public function helpAction()
+	{
+		return array();
+	}
 }

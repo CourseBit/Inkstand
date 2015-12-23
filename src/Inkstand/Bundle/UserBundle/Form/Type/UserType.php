@@ -32,6 +32,21 @@ class UserType extends AbstractType
             ->add('email', 'text', array(
                 'label' => 'email'
             ))
+            ->add('image', 'text', array(
+                'label' => 'Image'
+            ))
+            ->add('bio', 'textarea', array(
+                'label' => 'Bio'
+            ))
+            ->add('country', 'text', array(
+                'label' => 'Country'
+            ))
+            ->add('city', 'text', array(
+                'label' => 'City'
+            ))
+            ->add('twitter', 'text', array(
+                'label' => 'Twitter'
+            ))
             ->add('plainPassword', 'password', array(
                 'label' => $this->edit === true ? 'user.newpassword' : 'user.password',
                 'help_text' => 'user.newpassword.desc',
