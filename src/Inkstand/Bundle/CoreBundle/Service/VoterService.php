@@ -122,7 +122,9 @@ class VoterService
                         $stats['newVoterActionsCount']++;
                     }
 
-                    if(!empty($roleName = $defaultRoleAssignments[$voterAction->getName()])) {
+                    $roleName = $defaultRoleAssignments[$voterAction->getName()];
+
+                    if(!empty($roleName)) {
                         $role = $roles[$roleName];
                         // Check for existing role assignment (we don't want to overwrite any preexisting configuration)
                         if(!$this->voterActionRoleAssignmentService->hasRoleWithAction($role->getRoleId(), $voterAction->getVoterActionId())) {
