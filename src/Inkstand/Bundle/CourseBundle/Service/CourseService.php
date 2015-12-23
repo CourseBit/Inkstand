@@ -49,7 +49,9 @@ class CourseService
      */
     public function hasEnabledEnrollmentTypes(Course $course)
     {
-        if(!empty($courseEnrollmentTypes = $course->getCourseEnrollmentTypes())) {
+        $courseEnrollmentTypes = $course->getCourseEnrollmentTypes();
+
+        if(!empty($courseEnrollmentTypes)) {
             foreach($courseEnrollmentTypes as $courseEnrollmentType) {
                 /** @var \Inkstand\Bundle\CourseBundle\Entity\CourseEnrollmentType $courseEnrollmentType */
                 if($courseEnrollmentType->getEnabled()) {
