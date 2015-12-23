@@ -44,35 +44,35 @@ class User extends BaseUser
     /**
      * @var string
      *
-     * @ORM\Column(name="image", type="string")
+     * @ORM\Column(name="image", type="string", nullable=true)
      */
     protected $image;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="bio", type="string")
+     * @ORM\Column(name="bio", type="string", nullable=true)
      */
     protected $bio;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="country", type="string")
+     * @ORM\Column(name="country", type="string", nullable=true)
      */
     protected $country;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="city", type="string")
+     * @ORM\Column(name="city", type="string", nullable=true)
      */
     protected $city;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="twitter", type="string")
+     * @ORM\Column(name="twitter", type="string", nullable=true)
      */
     protected $twitter;
 
@@ -161,7 +161,7 @@ class User extends BaseUser
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -184,7 +184,7 @@ class User extends BaseUser
     /**
      * Get firstname
      *
-     * @return string 
+     * @return string
      */
     public function getFirstname()
     {
@@ -207,7 +207,7 @@ class User extends BaseUser
     /**
      * Get lastname
      *
-     * @return string 
+     * @return string
      */
     public function getLastname()
     {
@@ -355,7 +355,7 @@ class User extends BaseUser
     /**
      * Get contextRoleAssignments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getContextRoleAssignments()
     {
