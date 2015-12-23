@@ -1,0 +1,12 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCourseBundle:CourseCategory:add{% endblock %}
+
+{% block page_header %}{% trans %}course.category.add{% endtrans %}{% endblock %}
+
+{% block main_content %}
+    {{ parent() }}
+    {{ form_start(courseCategoryForm) }}
+    {{ form_widget(courseCategoryForm) }}
+    {{ form_end(courseCategoryForm) }}
+{% endblock %}

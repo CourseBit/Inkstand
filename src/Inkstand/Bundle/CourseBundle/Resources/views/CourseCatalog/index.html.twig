@@ -1,7 +1,10 @@
-{% extends "InkstandThemeBundle::base.html.twig" %}
+{% extends "InkstandCourseBundle::catelog.html.twig" %}
 
 {% block title %}InkstandCourseBundle:CourseCatalog:index{% endblock %}
 
+{% block page_header %}Course Catelog{% endblock %}
+
 {% block main_content %}
+	{{ parent() }}
 	{{ include('InkstandThemeBundle::course-catalog.html.twig') }}
 {% endblock %}

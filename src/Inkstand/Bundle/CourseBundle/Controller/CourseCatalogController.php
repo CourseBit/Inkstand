@@ -40,7 +40,11 @@ class CourseCatalogController extends Controller
 
 		return array(
 			'categories' => $categories,
-			'category' => $category
+			'category' => $category,
+			'breadcrumbs' => array(
+				array('route' => 'inkstand_home', 'title' => 'Dashboard', 'parameters' => array()),
+				array('title' => 'Course Catalog'),
+			)
 		);
 	}
 }

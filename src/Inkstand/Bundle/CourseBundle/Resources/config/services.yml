@@ -50,6 +50,12 @@ services:
         tags:
             - { name: form.type, alias: course }
 
+    inkstand_course.form.type.course_category:
+            class: Inkstand\Bundle\CourseBundle\Form\Type\CourseCategoryType
+            arguments: [@course_category_service]
+            tags:
+                - { name: form.type, alias: courseCategory }
+
     inkstand_course.enrollment.manual_enrollment:
         class: Inkstand\Bundle\CourseBundle\Enrollment\ManualEnrollment
 

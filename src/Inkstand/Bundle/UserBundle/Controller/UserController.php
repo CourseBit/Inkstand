@@ -2,6 +2,7 @@
 
 namespace Inkstand\Bundle\UserBundle\Controller;
 
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Exception\MappingException;
 use Inkstand\Bundle\UserBundle\Form\Type\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -16,7 +17,7 @@ class UserController extends Controller
      */
     public function listAction()
     {
-        $users = $this->get('user_service')->findAll();
+        $users = $this->get('inkstand_user.user')->findAll();
         $userCount = count($users);
 
         return $this->render('InkstandUserBundle:User:list.html.twig', array(
@@ -55,7 +56,7 @@ class UserController extends Controller
     */
     public function editAction(Request $request, $userId)
     {
-        $user = $this->get('user_service')->findOneByUserId($userId);
+        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
 
         $this->denyAccessUnlessGranted('edit', $user, 'Unauthorized access!');
 
@@ -87,5 +88,56 @@ class UserController extends Controller
             'user' => $user,
             'userForm' => $userForm->createView(),
         ));
+    }
+
+    /**
+     * Delete a single user
+     *
+     * @Route("/user/delete/{userId}", name="inkstand_user_delete")
+     * @Template
+     * @param Request $request
+     * @param integer $userId
+     * @throws NotFoundHttpException
+     * @return array
+     */
+    public function deleteAction(Request $request, $userId)
+    {
+        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
+
+        if (empty($user)) {
+            throw new NotFoundHttpException($this->get('translator')->trans('user.notfound'));
+        }
+
+        $deleteForm = $this->createFormBuilder()
+            ->add('delete', 'submit', array(
+                'label' => $this->get('translator')->trans('user.delete'),
+                'attr' => array('class' => 'btn btn-danger')
+            ))
+            ->add('cancel', 'submit', array(
+                'label' => $this->get('translator')->trans('button.cancel'),
+                'attr' => array('class' => 'btn btn-default')
+            ))
+            ->getForm();
+
+        if ($request->isMethod('POST')) {
+
+            $deleteForm->handleRequest($request);
+
+            if ($deleteForm->get('delete')->isClicked()) {
+                $em = $this->getDoctrine()->getManager();
+                $em->remove($user);
+                $em->flush();
+
+                $session = $this->getSession();
+                $session->getFlashBag()->add('success', $this->get('translator')->trans('user.deleted', array('%name%' => $user->getUsername())));
+
+                return $this->redirect($this->generateUrl('inkstand_user_list'));
+            }
+        }
+
+        return array(
+            'course' => $user,
+            'deleteForm' => $deleteForm->createView()
+        );
     }
 }

@@ -30,6 +30,7 @@ course.form.name.placeholder:     My New Course
 course.form.slug.placeholder:     my-new-course
 course.form.slug.help:            Used for a human friendly course URL.
 course.form.category.placeholder: Choose Category...
+course.form.category.placeholder.none: No Category available
 course.form.identifier.help:      Unique identifier for course (e.g. CS101)
 course.form.add:                  Add Course
 course.form.update:               Update Course
@@ -37,6 +38,9 @@ course.form.delete:               Delete Course
 
 # Category general
 course.category:                  Category
+course.category.notfound:         Category could not be found
+course.category.edited:           Category "%name%" edited
+course.category.add:              Add Category
 
 # Activity general
 activity.notfound:                Activity could not be found

@@ -49,6 +49,17 @@ class UserService
     }
 
     /**
+     * Delete a single User
+     *
+     * @param User $user
+     */
+    public function deleteUser(User $user)
+    {
+        $this->entityManager->remove($user);
+        $this->entityManager->flush();
+    }
+
+    /**
      * Converts UploadedFile of users into array of User objects
      *
      * @param UploadedFile $file

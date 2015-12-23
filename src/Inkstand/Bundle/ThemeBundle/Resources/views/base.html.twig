@@ -29,6 +29,12 @@
 						<li><a href="{{ path('inkstand_course_catalog_index') }}">View catalog</a></li>
 					</ul>
 				</li>
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-circle-o"></i> Categories <b class="caret"></b></a>
+					<ul class="dropdown-menu navmenu-nav" role="menu">
+						<li><a href="{{ path('inkstand_course_category_add') }}">Add category</a></li>
+					</ul>
+				</li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-user"></i> Users <b class="caret"></b></a>
                     <ul class="dropdown-menu navmenu-nav" role="menu">
@@ -62,17 +68,22 @@
 			</div>
 		</div>
 		<div class="container-fluid">
-				<div class="page-header page-header-sm">
-					<h1>{% block page_header %}{% endblock %}</h1>
-				</div>
+			<div class="page-header page-header-sm">
+				<h1>{% block page_header %}{% endblock %}</h1>
 
+			</div>
 			{% if breadcrumbs is defined %}
-				<ol class="breadcrumb bg-transparent">
+				<ol class="breadcrumb breadcrumb-inline">
 					{% for breadcrumb in breadcrumbs %}
-						<li><a href="{{ path(breadcrumb.route, breadcrumb.parameters) }}">{{ breadcrumb.title }}</a></li>
+						{% if breadcrumb.route is defined %}
+							<li><a href="{{ path(breadcrumb.route, breadcrumb.parameters) }}">{{ breadcrumb.title }}</a></li>
+						{% else %}
+							<li>{{ breadcrumb.title }}</li>
+						{% endif %}
 					{% endfor %}
 				</ol>
 			{% endif %}
+
 
 			{{ include('InkstandThemeBundle::flash-messages.html.twig') }}
 

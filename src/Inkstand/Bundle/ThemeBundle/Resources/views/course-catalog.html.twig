@@ -12,11 +12,27 @@
 		</ul>
 	{% endif %}
 {% elseif categories is defined and categories is not null %}
-	<ul>
+	<div class="row">
 		{% for category in categories %}
-			<li>
-				<a href="{{ path('inkstand_course_catalog_index', {"categoryId":category.categoryId}) }}">{{ category.name }}</a>
-			</li>
+			<div class="col-md-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<div class="pull-right">
+							<a href="{{ path("inkstand_course_category_edit", {"categoryId":category.categoryId}) }}"><i class="fa fa-cog"></i></a>
+						</div>
+						<h3 class="panel-title"><a href="{{ path('inkstand_course_catalog_index', {"categoryId":category.categoryId}) }}">{{ category.name }}</a></h3>
+					</div>
+					<div class="panel-body">
+						{% if category.featuredImage is defined %}
+							<img class="img-responsive img-thumbnail" src="{{ category.featuredImage }}">
+						{% endif %}
+						<p>{{ category.description }}</p>
+						<div>
+							<a href="{{ path("inkstand_course_category_edit", {"categoryId":category.categoryId}) }}" class="btn btn-primary">View courses</a>
+						</div>
+					</div>
+				</div>
+			</div>
 		{% endfor %}
-	</ul>
+	</div>
 {% endif %}

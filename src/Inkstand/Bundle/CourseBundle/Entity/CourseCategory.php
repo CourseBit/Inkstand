@@ -37,6 +37,11 @@ class CourseCategory
 	 */
 	protected $description;
 
+    /**
+     * @ORM\Column(name="featured_image", type="string", nullable=true)
+     */
+    protected $featuredImage;
+
 	/**
 	 * @ORM\Column(name="parent_id", type="integer", nullable=true)
 	 */
@@ -167,6 +172,29 @@ class CourseCategory
     public function getDescription()
     {
         return $this->description;
+    }
+
+    /**
+     * Set featuredImage
+     *
+     * @param string $featuredImage
+     * @return CourseCategory
+     */
+    public function setFeaturedImage($featuredImage)
+    {
+        $this->featuredImage = $featuredImage;
+
+        return $this;
+    }
+
+    /**
+     * Get featuredImage
+     *
+     * @return string
+     */
+    public function getFeaturedImage()
+    {
+        return $this->featuredImage;
     }
 
     /**

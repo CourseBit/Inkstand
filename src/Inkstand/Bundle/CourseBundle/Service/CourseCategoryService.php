@@ -33,9 +33,10 @@ class CourseCategoryService
 	 * displaying the full path to each category in addition to its name. e.g. Toplevel / Sublevel / MyCategory  
 	 *
 	 * @param string $delimiter String to glue category names together
+	 * @param array $excludeList List of Categories to exclude from list
 	 * @return array Formatted list of categories
 	 */
-	public function getFormattedList($delimiter = ' / ')
+	public function getFormattedList($delimiter = ' / ', $excludeList = array())
 	{
 		$list = array();
 		foreach($this->repository->findAll() as $category) {
@@ -43,6 +44,19 @@ class CourseCategoryService
 			$fullCategoryPath = array();
 
 			if($category) {
+
+				if(count($excludeList) > 0) {
+					$excludeCategory = false;
+					foreach($excludeList as $excludeCategory) {
+						if($excludeCategory->getCategoryId() == $category->getCategoryId()) {
+							$excludeCategory = true;
+						}
+					}
+
+					if($excludeCategory) {
+						break;
+					}
+				}
 
 				$currentCategory = $category;
 

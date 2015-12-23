@@ -4,9 +4,9 @@
 
 {% block page_header %}
     {% if userCount == 1 %}
-        {{ userCount }} {{ 'user'|trans }}
+        {{ 'list'|trans }} {{ userCount }} {{ 'user'|trans }}
     {% else %}
-        {{ userCount }} {{ 'users'|trans }}
+        {{ 'list'|trans }} {{ userCount }} {{ 'users'|trans }}
     {% endif %}
 {% endblock %}
 
@@ -16,12 +16,15 @@
         {% block grid_head %}
             <th>Username</th>
             <th>Email</th>
+            <td>Actions</td>
         {% endblock %}
         {% block grid_body %}
             {% for user in users %}
                 <tr>
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>
+                    <td><a href="{{ path("inkstand_user_edit", {'userId':user.id}) }}">{{ 'user.edit'|trans }}</a></td>
+                    <td><a href="{{ path("inkstand_user_delete", {'userId':user.id}) }}">{{ 'user.delete'|trans }}</a></td>
                 </tr>
             {% endfor %}
         {% endblock %}

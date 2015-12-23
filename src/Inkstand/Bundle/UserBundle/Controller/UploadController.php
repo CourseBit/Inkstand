@@ -32,7 +32,7 @@ class UploadController extends Controller
             $spreadsheet = $uploadForm['attachment']->getData();
 
             try {
-                $userData = $this->get('user_service')->parseUserFile($spreadsheet);
+                $userData = $this->get('inkstand_user.user')->parseUserFile($spreadsheet);
             } catch(MappingException $e) {
                 $request->getSession()->getFlashBag()->add('error', $e->getMessage());
             }
@@ -41,7 +41,7 @@ class UploadController extends Controller
                 $request->getSession()->getFlashBag()->add('error', $this->get('translator')->trans('user.no_users_uploaded'));
             }
 
-            $userErrors = $this->get('user_service')->getUsersValidationErrors($userData['users']);
+            $userErrors = $this->get('inkstand_user.user')->getUsersValidationErrors($userData['users']);
 
             if(!empty($userErrors)) {
                 return $this->render('InkstandUserBundle:Upload:upload-errors.html.twig', array('userErrors' => $userErrors));

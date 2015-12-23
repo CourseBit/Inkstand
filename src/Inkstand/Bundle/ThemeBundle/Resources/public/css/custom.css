@@ -39,3 +39,8 @@ ul.activities li.activity {
 ul.activities li.activity:last-child {
     border:none
 }
+
+/* Breadcrumbs */
+.breadcrumb.breadcrumb-inline {
+	display:inline-block;
+}

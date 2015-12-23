@@ -1,10 +1,10 @@
 parameters:
-    user_service.class:                   Inkstand\Bundle\UserBundle\Service\UserService
+    inkstand_user.user.class:                   Inkstand\Bundle\UserBundle\Service\UserService
     inkstand_user.voter.user_voter.class: Inkstand\Bundle\UserBundle\Voter\UserVoter
 
 services:
-    user_service:
-        class: "%user_service.class%"
+    inkstand_user.user:
+        class: "%inkstand_user.user.class%"
         arguments: [@doctrine.orm.entity_manager, @validator]
 
     # Voters

@@ -1,0 +1,12 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandUserBundle:User:delete{% endblock %}
+
+{% block page_header %}{% trans %}user.delete{% endtrans %}{% endblock %}
+
+{% block main_content %}
+    <p class="alert alert-warning"><b>Warning!</b> Deleting this user will also delete their enrollments and course progress.</p>
+    {{ form_start(deleteForm) }}
+    {{ form_widget(deleteForm) }}
+    {{ form_end(deleteForm) }}
+{% endblock %}

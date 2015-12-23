@@ -13,6 +13,7 @@ user.form.add.another: Add User and Add Another
 user.added:            User %name% created.
 user.add:              Add User
 user.edit:             Edit User
+user.delete:           Delete User
 user.notfound:         User could not be found
 user.edited:           User "%name%" edited
 user.resetting.check_email: Check your email

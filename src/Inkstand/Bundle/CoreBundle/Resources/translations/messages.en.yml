@@ -5,6 +5,8 @@ no:               No
 settings.save:    Save
 dashboard:        Dashboard
 list:             List
+add:              Add
+upload:           Upload
 
 # Widget
 widget.name:      Name
