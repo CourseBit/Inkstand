@@ -5,10 +5,16 @@
 {% block page_header %}{{ course.name }} Enrollment{% endblock %}
 
 {% block main_content %}
-    {% for courseEnrollmentType in course.courseEnrollmentTypes if courseEnrollmentType.enabled %}
-        {% set enrollmentTypeController = enrollmentTypeService.getServiceForEnrollmentType(courseEnrollmentType.enrollmentType).getController() %}
-        {% if enrollmentTypeController is not null %}
-            {{ render(controller(enrollmentTypeController ~ ':enrollPage', { 'course': course })) }}
-        {% endif %}
-    {% endfor %}
+    <h3>{{ course.name }}</h3>
+    <p>{{ course.description }}</p>
+    {% if courseEnrollmentTypes|length > 0 %}
+        {% for courseEnrollmentType in courseEnrollmentTypes %}
+            {% set enrollmentTypeController = enrollmentTypeService.getServiceForEnrollmentType(courseEnrollmentType.enrollmentType).getController() %}
+            {% if enrollmentTypeController is not null %}
+                {{ render(controller(enrollmentTypeController ~ ':enrollPage', { 'course': course })) }}
+            {% endif %}
+        {% endfor %}
+    {% else %}
+        <p class="alert alert-info">You cannot enroll into this course.</p>
+    {% endif %}
 {% endblock %}

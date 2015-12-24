@@ -50,7 +50,7 @@ class CourseController extends Controller
 		$this->get('inkstand_core.voter');
 
 		if(!$this->get('enrollment_service')->isUserEnrolled($this->getUser(), $course)) {
-			return $this->forward('InkstandCourseBundle:Course:enroll', array('courseId' => $course->getCourseId()));
+			return $this->redirectToRoute('inkstand_course_enroll', array('courseId' => $course->getCourseId()));
 		}
 
         // TODO: Use an activity type service
@@ -245,12 +245,15 @@ class CourseController extends Controller
 	{
 		$course = $this->get('course_service')->findOneByCourseId($courseId);
 
+		$courseEnrollmentTypes = $this->get('course_enrollment_type_service')->getEnabled($course);
+
 		if (is_null($course)) {
 			throw new NotFoundHttpException($this->get('translator')->trans('course.notfound'));
 		}
 
 		return array(
 			'enrollmentTypeService' => $this->get('inkstand_course.enrollment_type'),
+			'courseEnrollmentTypes' => $courseEnrollmentTypes,
 			'course' => $course
 		);
 	}
@@ -260,6 +263,15 @@ class CourseController extends Controller
 	 * @Template
 	 */
 	public function scormAction()
+	{
+		return array();
+	}
+
+	/**
+	 * @Route("/course/browser-information", name="inkstand_course_browser_information")
+	 * @Template
+	 */
+	public function browserInformationAction()
 	{
 		return array();
 	}

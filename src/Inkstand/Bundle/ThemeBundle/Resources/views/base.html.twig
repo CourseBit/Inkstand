@@ -4,14 +4,14 @@
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>{% block title %}Welcome!{% endblock %}</title>
-	{% stylesheets 
+	{% stylesheets
 		'@InkstandThemeBundle/Resources/public/bower_components/font-awesome/css/font-awesome.css'
 		'@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.min.css'
 		'@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css'
 		'@InkstandThemeBundle/Resources/public/css/font-awesome-fonts.css'
 		'@InkstandThemeBundle/Resources/public/css/navmenu.css'
 		'@InkstandThemeBundle/Resources/public/css/custom.css'
-	filter='cssrewrite' 
+	filter='cssrewrite'
 	%}
 	<link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
 	<link rel="stylesheet" href="{{ asset_url }}" />
@@ -23,6 +23,8 @@
 		<div class="navmenu navmenu-inverse navmenu-fixed-left offcanvas-sm">
 			<a class="navmenu-brand visible-md visible-lg" href="#">Inkstand LMS</a>
 			<ul class="nav navmenu-nav">
+				<li><a href="{{ path("inkstand_dashboard") }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+				<li><a href="{{ path("inkstand_course_catalog_index") }}"><i class="fa fa-fw fa-list"></i> Course Catalog</a></li>
 				<li class="dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-graduation-cap"></i> Course <b class="caret"></b></a>
 					<ul class="dropdown-menu navmenu-nav" role="menu">
@@ -62,7 +64,11 @@
 							<ul class="nav navbar-nav navbar-right navbar-user">
 								{% if app.user %}
 									<li>
-										<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.firstname }} {{ app.user.lastname }} <img width="32" class="img-responsive img-circle img-user inline" src="{{ app.user.image }}"></a>
+										<a href="" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.firstname }} {{ app.user.lastname }}
+											{% if app.user.image %}
+												&nbsp;<img width="32" class="img-responsive img-circle img-user inline" src="{{ app.user.image }}">
+											{% endif %}
+										</a>
 										<ul class="dropdown-menu">
 											<li><a href="{{ path("inkstand_user_profile", {"userId":app.user.id}) }}"><i class="fa fa-fw fa-user"></i> My Profile</a></li>
 											<li><a href="#"><i class="fa fa-fw fa-user"></i> Messages <span class="label label-danger">42</span></a></li>
@@ -121,7 +127,7 @@
 			</div>
 
 		</div><!-- /.container -->
-		{% javascripts 
+		{% javascripts
 			'@InkstandThemeBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
 			'@InkstandThemeBundle/Resources/public/bower_components/datatables/media/js/jquery.dataTables.min.js'
 			'@InkstandThemeBundle/Resources/public/js/dataTables.bootstrap.js'

@@ -17,7 +17,7 @@ class CourseCategoryType extends AbstractType
      */
     protected $courseCategoryService;
 
-    public function __construct($courseCategoryService) 
+    public function __construct($courseCategoryService)
     {
         $this->courseCategoryService = $courseCategoryService;
     }
@@ -27,7 +27,12 @@ class CourseCategoryType extends AbstractType
         $courseCategoryId = $options['data']->getCategoryId();
         $submitLabel = empty($courseCategoryId) ? 'course.form.add' : 'course.form.update';
 
-        $categoryOptions = $this->courseCategoryService->getFormattedList(' / ', array($options['data']));
+        if(!empty($courseCategoryId)) {
+            dump($options['data']);
+            $categoryOptions = $this->courseCategoryService->getFormattedList(' / ', array($options['data']));
+        } else {
+            $categoryOptions = $this->courseCategoryService->getFormattedList();
+        }
 
         $builder
             ->add('name', 'text', array(
@@ -40,7 +45,8 @@ class CourseCategoryType extends AbstractType
                 'choices' => $categoryOptions,
                 'label' => 'course.category',
                 'placeholder' => (count($categoryOptions) > 0) ? 'course.form.category.placeholder' : 'course.form.category.placeholder.none',
-                'disabled' => (count($categoryOptions) > 0) ? false : true
+                'disabled' => (count($categoryOptions) > 0) ? false : true,
+                'required' => false
             ))
             ->add('description', 'textarea', array(
                 'attr' => array('class' => 'wysiwyg'),
@@ -55,7 +61,7 @@ class CourseCategoryType extends AbstractType
             ->add('actions', 'form_actions', array(
                 'buttons' => array(
                     'save' => array(
-                        'type' => 'submit', 
+                        'type' => 'submit',
                         'options' => array(
                             'label' => $submitLabel,
                             'attr' => array(
@@ -64,7 +70,7 @@ class CourseCategoryType extends AbstractType
                         )
                     ),
                     'cancel' => array(
-                        'type' => 'submit', 
+                        'type' => 'submit',
                         'options' => array(
                             'label' => 'button.cancel',
                             'attr' => array(

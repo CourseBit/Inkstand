@@ -18,6 +18,10 @@ body.layout-minimal {
 	display:inline;
 }
 
+.dropdown-backdrop {
+	display:none;
+}
+
 /* Main page header
 ----------------------------- */
 .page-header.page-header-sm {

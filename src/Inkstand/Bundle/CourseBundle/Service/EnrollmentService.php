@@ -169,4 +169,9 @@ class EnrollmentService
     {
         return $this->repository->findOneByUserAndCourse($user, $course) != null;
     }
+
+    public function getEnrolledCourses($user)
+    {
+        return $this->repository->findByUserId($user->getId());
+    }
 }

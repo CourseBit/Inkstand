@@ -26,11 +26,16 @@ class CourseCategoryService
     	return $this->repository->findAll();
     }
 
+	public function findByParentId($parentId)
+	{
+		return $this->repository->findByParentId($parentId);
+	}
+
 	/**
 	 * Get a formatted list of categories
 	 *
 	 * Ideal use is for creating a dropdown of categories, because it formats them into an array recursively,
-	 * displaying the full path to each category in addition to its name. e.g. Toplevel / Sublevel / MyCategory  
+	 * displaying the full path to each category in addition to its name. e.g. Toplevel / Sublevel / MyCategory
 	 *
 	 * @param string $delimiter String to glue category names together
 	 * @param array $excludeList List of Categories to exclude from list
@@ -53,8 +58,8 @@ class CourseCategoryService
 						}
 					}
 
-					if($excludeCategory) {
-						break;
+					if(true === $excludeCategory) {
+						continue;
 					}
 				}
 
@@ -68,7 +73,7 @@ class CourseCategoryService
 
 					array_unshift($fullCategoryPath, $currentCategory->getName());
 					$currentCategory = $currentCategory->getParent();
-			
+
 				}
 
 			}
@@ -78,5 +83,10 @@ class CourseCategoryService
 		}
 
 		return $list;
+	}
+
+	public function getTopCategories()
+	{
+		return $this->findByParentId(null);
 	}
 }

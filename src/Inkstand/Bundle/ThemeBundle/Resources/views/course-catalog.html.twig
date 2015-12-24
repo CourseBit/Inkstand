@@ -1,16 +1,70 @@
 {% if category is defined and category is not null %}
-	<h3>{{ category.name }}</h3>
-	{% if category.courses|length == 0 %}
-		<p class="alert alert-info clearfix">There are no courses in this category. <a class="btn btn-default pull-right" href="{{ path('inkstand_course_add') }}">Add Course</a></p>
-	{% else %}
-		<ul>
-			{% for course in category.courses %}
-				<li>
-					<a href="{{ path('inkstand_course_view', {"slug":course.slug}) }}">{{ course.name }}</a>
-				</li>
-			{% endfor %}
-		</ul>
+	<h2 class="text-center">{{ category.name }}</h2>
+	{% if category.featuredImage is defined %}
+		<img class="img-responsive img-thumbnail center-block" src="{{ category.featuredImage }}">
 	{% endif %}
+	<p class="text-center">{{ category.description }}</p>
+	<hr>
+
+	{% if category.children|length > 0 %}
+		<h3>Subcategories</h3>
+		<div class="row">
+			{% for childCategory in category.children %}
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="pull-right">
+								<a href="{{ path("inkstand_course_category_edit", {"categoryId":childCategory.categoryId}) }}"><i class="fa fa-cog"></i></a>
+							</div>
+							<h3 class="panel-title"><a href="{{ path('inkstand_course_catalog_index', {"categoryId":childCategory.categoryId}) }}">{{ childCategory.name }}</a></h3>
+						</div>
+						<div class="panel-body">
+							{% if childCategory.featuredImage is defined %}
+								<img class="img-responsive img-thumbnail" src="{{ childCategory.featuredImage }}">
+							{% endif %}
+							<p>{{ childCategory.description }}</p>
+							<div>
+								<a href="{{ path("inkstand_course_catalog_index", {"categoryId":childCategory.categoryId}) }}" class="btn btn-primary">View courses</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<hr>
+	{% endif %}
+
+	{% if category.courses|length > 0 %}
+		<h3>Courses</h3>
+		<div class="row">
+			{% for course in category.courses %}
+				<div class="col-md-4">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<div class="pull-right">
+								<a href="{{ path('inkstand_course_edit', {"courseId":course.courseId}) }}"><i class="fa fa-cog"></i></a>
+							</div>
+							<h3 class="panel-title"><a href="{{ path('inkstand_course_view', {"slug":course.slug}) }}">{{ course.name }}</a></h3>
+						</div>
+						<div class="panel-body">
+							{% if course.featuredImage is defined %}
+								<img class="img-responsive img-thumbnail" src="">
+							{% endif %}
+							<p>{{ course.description }}</p>
+							<div>
+								<a href="{{ path('inkstand_course_view', {"slug":course.slug}) }}" class="btn btn-primary">Access Course</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	{% else %}
+		<div class="col-sm-12">
+			<p class="alert alert-info clearfix">There are no courses in this category. <a class="btn btn-default pull-right" href="{{ path('inkstand_course_add') }}">Add Course</a></p>
+		</div>
+	{% endif %}
+
 {% elseif categories is defined and categories is not null %}
 	<div class="row">
 		{% for category in categories %}
@@ -28,7 +82,7 @@
 						{% endif %}
 						<p>{{ category.description }}</p>
 						<div>
-							<a href="{{ path("inkstand_course_category_edit", {"categoryId":category.categoryId}) }}" class="btn btn-primary">View courses</a>
+							<a href="{{ path("inkstand_course_catalog_index", {"categoryId":category.categoryId}) }}" class="btn btn-primary">View courses</a>
 						</div>
 					</div>
 				</div>

@@ -21,4 +21,9 @@ class CourseEnrollmentTypeService
     {
         return $this->repository->findOneByCourseEnrollmentTypeId($courseEnrollmentTypeId);
     }
+
+    public function getEnabled($course)
+    {
+        return $this->repository->findBy(array('courseId' => $course->getCourseId(), 'enabled' => 1));
+    }
 }

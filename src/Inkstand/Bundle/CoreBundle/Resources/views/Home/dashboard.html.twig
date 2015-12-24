@@ -5,5 +5,11 @@
 {% block page_header %}{{ 'dashboard'|trans }}{% endblock %}
 
 {% block main_content %}
-    <p>You are at the dashboard</p>
+    {% if enrollments %}
+        {% for enrollment in enrollments %}
+            <p>{{ enrollment.course.name }}</p>
+        {% endfor %}
+    {% else %}
+        <p class="alert alert-info">You are not enrolled in any courses. <a href="{{ path("inkstand_course_catalog_index") }}">View catalog.</a></p>
+    {% endif %}
 {% endblock %}

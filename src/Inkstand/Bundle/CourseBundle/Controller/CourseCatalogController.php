@@ -25,11 +25,7 @@ class CourseCatalogController extends Controller
 		$category = null;
 
 		if(empty($categoryId)) {
-			$categories = $this->get('course_category_service')->findAll();
-
-			// return array(
-			// 	'categories' => $categories
-			// );
+			$categories = $this->get('course_category_service')->getTopCategories();
 		} else {
 			$category = $this->get('course_category_service')->findOneByCategoryId($categoryId);
 

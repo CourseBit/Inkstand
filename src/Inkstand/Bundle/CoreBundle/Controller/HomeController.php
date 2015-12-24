@@ -14,7 +14,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
  * inkstand_home      /
  * inkstand_dashboard /dashboard
  */
-class HomeController extends Controller 
+class HomeController extends Controller
 {
 	/**
 	 * Homepage of Inkstand. This action will forward to controllers based on criteria.
@@ -25,6 +25,12 @@ class HomeController extends Controller
 	{
 		$forwardController = 'InkstandCoreBundle:Home:dashboard';
 
+		$user = $this->getUser();
+
+		if(empty($user)) {
+			$forwardController = 'FOSUserBundle:Security:login';
+		}
+
 		return $this->forward($forwardController);
 	}
 
@@ -34,10 +40,14 @@ class HomeController extends Controller
 	 */
 	public function dashboardAction()
 	{
+		$user = $this->getUser();
+		$enrollments = $this->get('enrollment_service')->getEnrolledCourses($user);
         $widgetService = $this->get('widget_service');
         $widgets = $widgetService->getWidgets();
 
-		return array();
+		return array(
+			'enrollments' => $enrollments
+		);
 	}
 
 	/**

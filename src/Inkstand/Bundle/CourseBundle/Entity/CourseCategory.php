@@ -23,7 +23,7 @@ class CourseCategory
 	protected $name;
 
 	/**
-	 * @ORM\Column(type="string", length=50)
+	 * @ORM\Column(type="string", length=50, nullable=true)
 	 */
 	protected $abbreviation;
 
@@ -51,7 +51,7 @@ class CourseCategory
 	 * @ORM\OneToMany(targetEntity="CourseCategory", mappedBy="parent")
 	 */
 	protected $children;
-	
+
 	/**
 	 * @ORM\ManyToOne(targetEntity="CourseCategory", inversedBy="children")
 	 * @ORM\JoinColumn(name="parent_id", referencedColumnName="category_id", nullable=true)
@@ -75,7 +75,7 @@ class CourseCategory
     /**
      * Get categoryId
      *
-     * @return integer 
+     * @return integer
      */
     public function getCategoryId()
     {
@@ -98,7 +98,7 @@ class CourseCategory
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -121,7 +121,7 @@ class CourseCategory
     /**
      * Get abbreviation
      *
-     * @return string 
+     * @return string
      */
     public function getAbbreviation()
     {
@@ -144,7 +144,7 @@ class CourseCategory
     /**
      * Get identifier
      *
-     * @return string 
+     * @return string
      */
     public function getIdentifier()
     {
@@ -167,7 +167,7 @@ class CourseCategory
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -213,7 +213,7 @@ class CourseCategory
     /**
      * Get parentId
      *
-     * @return integer 
+     * @return integer
      */
     public function getParentId()
     {
@@ -246,7 +246,7 @@ class CourseCategory
     /**
      * Get children
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getChildren()
     {
@@ -269,7 +269,7 @@ class CourseCategory
     /**
      * Get parent
      *
-     * @return \Inkstand\Bundle\CourseBundle\Entity\CourseCategory 
+     * @return \Inkstand\Bundle\CourseBundle\Entity\CourseCategory
      */
     public function getParent()
     {
@@ -302,7 +302,7 @@ class CourseCategory
     /**
      * Get courses
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCourses()
     {
