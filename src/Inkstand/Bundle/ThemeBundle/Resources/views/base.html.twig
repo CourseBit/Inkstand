@@ -3,6 +3,9 @@
 <head>
 	<meta charset="UTF-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
+	{% if setting("inkstand_core_search_index") == "0" %}
+		<meta name="robots" content="noindex">
+	{% endif %}
 	<title>{% block title %}Welcome!{% endblock %}</title>
 	{% stylesheets
 		'@InkstandThemeBundle/Resources/public/bower_components/font-awesome/css/font-awesome.css'
@@ -21,7 +24,7 @@
 	</head>
 	<body class="layout-base">
 		<div class="navmenu navmenu-inverse navmenu-fixed-left offcanvas-sm">
-			<a class="navmenu-brand visible-md visible-lg" href="#">Inkstand LMS</a>
+			<a class="navmenu-brand visible-md visible-lg" href="#">{{ setting("inkstand_core_setting_sitename") }}</a>
 			<ul class="nav navmenu-nav">
 				<li><a href="{{ path("inkstand_dashboard") }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
 				<li><a href="{{ path("inkstand_course_catalog_index") }}"><i class="fa fa-fw fa-list"></i> Course Catalog</a></li>
