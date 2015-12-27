@@ -82,3 +82,13 @@ fos_user:
     db_driver: orm # other valid values are 'mongodb', 'couchdb' and 'propel'
     firewall_name: main
     user_class: Inkstand\Bundle\UserBundle\Entity\User
+
+oneup_flysystem:
+    adapters:
+        my_adapter:
+            local:
+                directory: %kernel.root_dir%/cache
+
+    filesystems:
+        inkstand:
+            adapter: my_adapter

@@ -13,3 +13,7 @@ inkstand_core_plugin:
 inkstand_core_role:
     resource: "@InkstandCoreBundle/Controller/RoleController.php"
     type:     annotation
+
+inkstand_core_file:
+    resource: "@InkstandCoreBundle/Controller/FileController.php"
+    type:     annotation
