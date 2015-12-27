@@ -15,8 +15,7 @@ class FileController extends Controller2
     public function getFileSystemAction()
     {
         $filesystem = $this->get('oneup_flysystem.inkstand_filesystem');
-        $contents = $filesystem->listContents();
-
+        $contents = $filesystem->listContents("/", true);
         return new JsonResponse($contents);
     }
 }
