@@ -13,6 +13,7 @@
 		'@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css'
 		'@InkstandThemeBundle/Resources/public/css/font-awesome-fonts.css'
 		'@InkstandThemeBundle/Resources/public/css/navmenu.css'
+		'@InkstandCoreBundle/Resources/public/css/file-explorer.css'
 		'@InkstandThemeBundle/Resources/public/css/custom.css'
 	filter='cssrewrite'
 	%}
@@ -130,12 +131,67 @@
 			</div>
 
 		</div><!-- /.container -->
+
+		<div id="file-explorer-modal" class="modal fade" tabindex="-1" role="dialog">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title" id="gridSystemModalLabel"><i class="fa fa-search"></i> File Explorer</h4>
+					</div>
+					<div class="modal-body clearfix">
+						<div class="file-breadcrumbs">
+
+						</div>
+						<div class="file-list">
+
+						</div>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		{# Handlebars syntax #}
+		{% raw %}
+		<script id="template-file-explorer-file" type="text/x-handlebars-template">
+			<div class="file pull-left text-center" data-file="{{ json }}">
+				<div>
+					<i class="fa fa-fw fa-{{ icon }}" style="font-size:30px"></i>
+				</div>
+				{{#if filename }}
+					<small>{{ filename }}</small>
+				{{else}}
+					<small>{{ basename }}</small>
+				{{/if}}
+			</div>
+		</script>
+
+		<script id="template-file-explorer-breadcrumbs" type="text/x-handlebars-template">
+			<ol class="breadcrumb">
+				{{#if folderPathLinks}}
+					{{#each folderPathLinks }}
+						{{#if @last }}
+							<li class="active">{{ dirName }}</li>
+						{{else}}
+							<li><a href="#" onclick="changeDir('{{ dir }}')">{{ dirName }}</a></li>
+						{{/if }}
+
+					{{/each}}
+				{{/if }}
+			</ol>
+		</script>
+		{% endraw %}
+
 		{% javascripts
 			'@InkstandThemeBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
 			'@InkstandThemeBundle/Resources/public/bower_components/datatables/media/js/jquery.dataTables.min.js'
 			'@InkstandThemeBundle/Resources/public/js/dataTables.bootstrap.js'
 			'@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.min.js'
 			'@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js'
+			'@InkstandThemeBundle/Resources/public/bower_components/handlebars/handlebars.min.js'
 			'@InkstandCoreBundle/Resources/public/js/file-explorer.js'
 			'@InkstandThemeBundle/Resources/public/js/custom.js'
 		%}
