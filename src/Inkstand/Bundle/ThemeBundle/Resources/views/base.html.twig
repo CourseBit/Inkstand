@@ -140,15 +140,61 @@
 						<h4 class="modal-title" id="gridSystemModalLabel"><i class="fa fa-search"></i> File Explorer</h4>
 					</div>
 					<div class="modal-body clearfix">
-						<div class="file-breadcrumbs">
+						<div data-page="files" class="modal-page">
+							<div class="file-toolbar btn-group btn-group-sm pull-right">
+								<button class="file-action-refresh btn btn-default"><i class="fa fa-refresh"></i></button>
+								<button class="file-action-upload btn btn-default"><i class="fa fa-upload"></i></button>
+								<button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-ellipsis-v"></i></button>
+								<ul class="dropdown-menu">
+									<li><a href="#" data-toggle="modal" data-target=".bs-example-modal-sm">New folder</a></li>
+								</ul>
+							</div>
+							<div class="file-breadcrumbs">
 
+							</div>
+							<div class="file-list">
+
+							</div>
+							<div class="file-loader hidden text-center" style="margin:10px 0">
+								<i class="fa fa-refresh fa-spin"></i>
+							</div>
 						</div>
-						<div class="file-list">
-
+						<div data-page="upload" class="modal-page hidden">
+							<p><span class="text-muted">Uploading to</span> <span class="current-dir"></span></p>
+							<form class="file-upload-form">
+								<div class="form-group">
+									<label for="exampleInputFile">File input</label>
+									<input type="file" name="file" id="exampleInputFile">
+									<p class="help-block">File will be uploaded to your filesystem.</p>
+								</div>
+								<button type="submit" class="btn btn-primary">Upload</button>
+								<button class="file-upload-cancel btn btn-default">Cancel</button>
+							</form>
 						</div>
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="modal fade bs-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+			<div class="modal-dialog modal-sm">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+						<h4 class="modal-title">New folder</h4>
+					</div>
+					<div class="modal-body">
+						<form>
+							<div class="input-group">
+								<input type="text" class="form-control" placeholder="">
+								<span class="input-group-btn">
+									<button class="btn btn-default" type="button">Add</button>
+								</span>
+							</div><!-- /input-group -->
+						</form>
 					</div>
 				</div>
 			</div>

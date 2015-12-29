@@ -8,11 +8,51 @@ var breadcrumbsTemplate = Handlebars.compile($("#template-file-explorer-breadcru
 
 $(document).ready(function() {
     $("#file-explorer-modal").on("show.bs.modal", function() {
+        var self = this;
         if(filesystem == null) {
+            $(self).find(".file-loader").removeClass("hidden");
             getFilesystem(function() {
                 changeDir("");
+                $(self).find(".file-loader").addClass("hidden");
             });
         }
+    });
+
+    $("#file-explorer-modal .file-upload-form").on("submit", function(e) {
+        e.preventDefault();
+
+        //var formData = $(this).serialize();
+        $.ajax({
+            type: "post",
+            url: "/inkstand/web/app_dev.php/file/upload",
+            data: new FormData( this ),
+            processData: false,
+            contentType: false,
+            success: function(data) {
+                changePage("files");
+                $("#file-explorer-modal .file-upload-form")[0].reset();
+                refreshFilesystem();
+            }
+        });
+    });
+
+    $("#file-explorer-modal .file-toolbar .file-action-refresh").on("click", function() {
+        refreshFilesystem();
+    });
+
+    $("#file-explorer-modal .file-toolbar .file-action-upload").on("click", function() {
+        if(currentDir == "") {
+            $("#file-explorer-modal .current-dir").html("Home");
+        } else {
+            $("#file-explorer-modal .current-dir").html(currentDir);
+        }
+
+        changePage("upload");
+    });
+
+    $("#file-explorer-modal .file-upload-cancel").on("click", function() {
+        changePage("files");
+        $("#file-explorer-modal .file-upload-form")[0].reset();
     });
 
     $(document).on("click", "#file-explorer-modal .file-list", function(e) {
@@ -92,9 +132,21 @@ function getFolderPathLinks(dir) {
         }
     }
 
-    console.log(paths);
-
-    console.log(folderPathLinks);
-
     return folderPathLinks;
+}
+
+function changePage(page) {
+    $("#file-explorer-modal .modal-page").addClass("hidden");
+
+    $("#file-explorer-modal .modal-page[data-page=" + page + "]").removeClass("hidden");
+}
+
+function refreshFilesystem() {
+    $("#file-explorer-modal .file-list").empty();
+
+    $("#file-explorer-modal").find(".file-loader").removeClass("hidden");
+    getFilesystem(function() {
+        changeDir(currentDir);
+        $("#file-explorer-modal").find(".file-loader").addClass("hidden");
+    });
 }
