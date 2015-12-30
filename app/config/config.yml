@@ -32,6 +32,8 @@ twig:
     strict_variables: "%kernel.debug%"
     form:
         resources: [':Form:bootstrap-form-horizontal.html.twig']
+    form_themes:
+        - 'InkstandCoreBundle:Form:file_picker.html.twig'
     globals:
         # Used for rendering widgets in base layouts
         page_template_service: "@page_template_service"
@@ -87,7 +89,7 @@ oneup_flysystem:
     adapters:
         my_adapter:
             local:
-                directory: %kernel.root_dir%/cache
+                directory: %kernel.root_dir%/cache/testfilesystem
 
     filesystems:
         inkstand:

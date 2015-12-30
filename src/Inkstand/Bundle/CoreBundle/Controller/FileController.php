@@ -30,6 +30,8 @@ class FileController extends Controller2
         /* @var $file \Symfony\Component\HttpFoundation\File\UploadedFile */
         $file = $request->files->get('file');
 
+        $path = $request->get('currentDir');
+
         $filesystem = $this->get('oneup_flysystem.inkstand_filesystem');
 
         if ($file->isValid()) {
@@ -42,7 +44,14 @@ class FileController extends Controller2
 //                }
 //            }
 
-            $filesystem->writeStream($file->getClientOriginalName(), $stream);
+
+            if(!empty($path)) {
+                $filePath = $path . "/" . $file->getClientOriginalName();
+            } else {
+                $filePath = $file->getClientOriginalName();
+            }
+
+            $filesystem->writeStream($filePath, $stream);
             fclose($stream);
         }
 
@@ -63,6 +72,6 @@ class FileController extends Controller2
             $filesystem->createDir($dir);
         }
 
-        return new JsonResponse(array('allgood'));
+        return new JsonResponse(array('allgood' => $dir));
     }
 }
