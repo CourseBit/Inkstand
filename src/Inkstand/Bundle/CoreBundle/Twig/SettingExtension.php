@@ -26,6 +26,9 @@ class SettingExtension extends \Twig_Extension
     public function setting($name)
     {
         $setting = $this->settingService->get($name);
+        if(empty($setting)) {
+            return null;
+        }
         return $setting->getValue();
     }
     
