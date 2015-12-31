@@ -1,0 +1,11 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandCoreBundle:Home:help{% endblock %}
+
+{% block page_header %}{% endblock %}
+
+{% block main_content %}
+    {{ form_start(settingsForm) }}
+    {{ form_widget(settingsForm) }}
+    {{ form_end(settingsForm) }}
+{% endblock %}

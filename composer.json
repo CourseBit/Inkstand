@@ -26,7 +26,8 @@
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "knplabs/knp-menu-bundle": "^2.0",
         "monolog/monolog": "^1.15",
-        "pimple/pimple": "^3.0"
+        "pimple/pimple": "^3.0",
+        "oneup/flysystem-bundle": "1.2.0"
     },
     "require-dev": {
     },
