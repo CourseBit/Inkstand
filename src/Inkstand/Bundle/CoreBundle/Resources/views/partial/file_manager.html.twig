@@ -21,7 +21,7 @@
 
                         </div>
                         <div data-page="files" class="modal-page">
-                            <div class="file-list">
+                            <div class="file-tabs">
 
                             </div>
                             <div class="file-loader hidden text-center" style="margin:10px 0">
@@ -76,30 +76,25 @@
         </div>
     </script>
 
-    <script id="template-file-explorer-file" type="text/x-handlebars-template">
-        <div class="file pull-left text-center" data-file="{{ json }}">
-            <div>
-                <i class="fa fa-fw fa-{{ icon }}" style="font-size:30px"></i>
+    <script id="template-file-tabs" type="text/x-handlebars-template">
+        <div>
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                {{#each filesystems }}
+                    <li role="presentation"><a href="" data-target="#tab-filesystem-{{ name }}" aria-controls="home" role="tab" data-toggle="tab" data-filesystem="{{ name }}">{{ name }}</a></li>
+                {{/each }}
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                {{#each filesystems }}
+                    <div role="tabpanel" class="tab-pane active" id="tab-filesystem-{{ name }}"></div>
+                {{/each }}
             </div>
-            {{#if filename }}
-            <small>{{ filename }}</small>
-            {{else}}
-            <small>{{ basename }}</small>
-            {{/if}}
         </div>
     </script>
 
-    <script id="template-file-explorer-file-single" type="text/x-handlebars-template">
-        <h4><i class="fa fa-fw fa-{{ icon }}" style="font-size:30px"></i> File: {{ basename }}</h4>
-        <ul>
-            <li>Size: {{ size }}</li>
-            <li>Last modifed: {{ timestamp }}</li>
-        </ul>
-        <button class="file-choose btn btn-primary" data-file="{{ json }}">Choose File</button>
-
-    </script>
-
-    <script id="template-file-explorer-breadcrumbs" type="text/x-handlebars-template">
+    <script id="template-file-explorer-file-list" type="text/x-handlebars-template">
         <ol class="breadcrumb">
             {{#if folderPathLinks}}
                 {{#each folderPathLinks }}
@@ -111,5 +106,41 @@
                 {{/each}}
             {{/if }}
         </ol>
+        {{#if fileList }}
+            {{#each fileList }}
+                <div class="file pull-left text-center" data-file="{{ json }}">
+                    <div>
+                        <i class="fa fa-fw fa-{{ icon }}" style="font-size:30px"></i>
+                    </div>
+                    {{#if filename }}
+                        <small>{{ filename }}</small>
+                    {{else}}
+                        <small>{{ basename }}</small>
+                    {{/if}}
+                </div>
+            {{/each }}
+        {{ else }}
+        {{/if }}
+    </script>
+
+    <script id="template-file-explorer-file-single" type="text/x-handlebars-template">
+        <ol class="breadcrumb">
+            {{#if folderPathLinks}}
+                {{#each folderPathLinks }}
+                    {{#if @last }}
+                        <li class="active"><a href="#" data-dir="{{ dir }}">{{ dirName }}</a></li>
+                    {{else}}
+                        <li><a href="#" data-dir="{{ dir }}">{{ dirName }}</a></li>
+                    {{/if }}
+                {{/each}}
+            {{/if }}
+        </ol>
+        <h4><i class="fa fa-fw fa-{{ file.icon }}" style="font-size:30px"></i> File: {{ file.basename }}</h4>
+        <ul>
+            <li>Size: {{ file.size }}</li>
+            <li>Last modifed: {{ file.timestamp }}</li>
+        </ul>
+        <button class="file-choose btn btn-primary" data-file="{{ file.json }}">Choose File</button>
+
     </script>
 {% endraw %}

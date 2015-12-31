@@ -87,10 +87,15 @@ fos_user:
 
 oneup_flysystem:
     adapters:
-        my_adapter:
+        testfilesystem_adapter:
             local:
                 directory: %kernel.root_dir%/cache/testfilesystem
+        testfilesystem_adapter2:
+            local:
+                directory: %kernel.root_dir%/cache/testfilesystem2
 
     filesystems:
         inkstand:
-            adapter: my_adapter
+            adapter: testfilesystem_adapter
+        inkstand2:
+            adapter: testfilesystem_adapter2

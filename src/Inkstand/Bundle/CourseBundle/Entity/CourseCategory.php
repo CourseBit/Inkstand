@@ -38,7 +38,13 @@ class CourseCategory
 	protected $description;
 
     /**
-     * @ORM\Column(name="featured_image", type="string", nullable=true)
+     * @ORM\Column(name="featured_image_file_id", type="integer", nullable=true)
+     */
+    protected $featuredImageFileId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Inkstand\Bundle\CoreBundle\Entity\FileReference", cascade={"persist"})
+     * @ORM\JoinColumn(name="featured_image_file_id", referencedColumnName="file_reference_id", nullable=true)
      */
     protected $featuredImage;
 
@@ -131,7 +137,7 @@ class CourseCategory
     /**
      * Set indentifier
      *
-     * @param string $indentifier
+     * @param string $identifier
      * @return CourseCategory
      */
     public function setIdentifier($identifier)
@@ -175,26 +181,26 @@ class CourseCategory
     }
 
     /**
-     * Set featuredImage
+     * Set featuredImageFileId
      *
-     * @param string $featuredImage
+     * @param string $featuredImageFileId
      * @return CourseCategory
      */
-    public function setFeaturedImage($featuredImage)
+    public function setFeaturedImageFileId($featuredImageFileId)
     {
-        $this->featuredImage = $featuredImage;
+        $this->featuredImageFileId = $featuredImageFileId;
 
         return $this;
     }
 
     /**
-     * Get featuredImage
+     * Get featuredImageFileId
      *
      * @return string
      */
-    public function getFeaturedImage()
+    public function getFeaturedImageFileId()
     {
-        return $this->featuredImage;
+        return $this->featuredImageFileId;
     }
 
     /**
@@ -307,5 +313,28 @@ class CourseCategory
     public function getCourses()
     {
         return $this->courses;
+    }
+
+    /**
+     * Set featuredImage
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\FileReference $featuredImage
+     * @return CourseCategory
+     */
+    public function setFeaturedImage(\Inkstand\Bundle\CoreBundle\Entity\FileReference $featuredImage = null)
+    {
+        $this->featuredImage = $featuredImage;
+
+        return $this;
+    }
+
+    /**
+     * Get featuredImage
+     *
+     * @return \Inkstand\Bundle\CoreBundle\Entity\FileReference 
+     */
+    public function getFeaturedImage()
+    {
+        return $this->featuredImage;
     }
 }

@@ -9,6 +9,7 @@ parameters:
     inkstand_core.voter_action_role_assignment.class: Inkstand\Bundle\CoreBundle\Service\VoterActionRoleAssignmentService
     inkstand_core.role.class:                    Inkstand\Bundle\CoreBundle\Service\RoleService
     inkstand_core.setting.class:                 Inkstand\Bundle\CoreBundle\Service\SettingService
+    inkstand_core.filesystem.class:              Inkstand\Bundle\CoreBundle\Service\FilesystemService
     inkstand_core.setting.site.class:            Inkstand\Bundle\CoreBundle\Setting\SiteSettings
 
     # Voter parameters
@@ -56,6 +57,10 @@ services:
 
     inkstand_core.setting:
         class: "%inkstand_core.setting.class%"
+        arguments: [@doctrine.orm.entity_manager]
+
+    inkstand_core.filesystem:
+        class: "%inkstand_core.filesystem.class%"
         arguments: [@doctrine.orm.entity_manager]
 
     # Scripts

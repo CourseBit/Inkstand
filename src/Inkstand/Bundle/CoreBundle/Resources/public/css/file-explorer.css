@@ -1,15 +1,15 @@
-.file-list .file {
+.file-tabs .file {
     width: 75px;
     padding:5px 3px;
 }
-.file-list .file small {
+.file-tabs .file small {
     font-size:11px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
     display:block;
 }
-.file-list .file:hover {
+.file-tabs .file:hover {
     background-color: #d9edf7;
     cursor: pointer;
 }

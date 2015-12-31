@@ -3,6 +3,7 @@
 namespace Inkstand\Bundle\CourseBundle\Form\Type;
 
 use Inkstand\Bundle\CoreBundle\Form\Type\FilePickerType;
+use Inkstand\Bundle\CoreBundle\Form\Type\FileReferenceType;
 use Inkstand\Bundle\CourseBundle\Entity\Course;
 use Inkstand\Bundle\CourseBundle\Service\CourseCategoryService;
 use Symfony\Component\Form\AbstractType;
@@ -56,7 +57,7 @@ class CourseCategoryType extends AbstractType
                 'label' => 'identifier',
                 'help_text' => 'course.form.identifier.help'
             ))
-            ->add('featuredImage', new FilePickerType(), array(
+            ->add('featuredImage', new FileReferenceType(), array(
                 'label' => 'Featured Image',
             ))
             ->add('actions', 'form_actions', array(

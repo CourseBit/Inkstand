@@ -2,22 +2,39 @@
 
 namespace Inkstand\Bundle\CoreBundle\Controller;
 
+use Inkstand\Bundle\CoreBundle\Entity\Filesystem;
+use Inkstand\Bundle\CoreBundle\Service\FilesystemService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller as Controller2;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class FileController extends Controller2
 {
     /**
-     * @Route("/file/get-file-system", name="inkstand_core_file_get_file_system")
+     * @Route("/file/get-filesystems", name="inkstand_core_file_get_file_system")
      */
-    public function getFileSystemAction()
+    public function getFilesystemsAction()
     {
-        $filesystem = $this->get('oneup_flysystem.inkstand_filesystem');
-        $contents = $filesystem->listContents("/", true);
-        return new JsonResponse($contents);
+        /* @var $filesystemService FilesystemService */
+        $filesystemService = $this->get('inkstand_core.filesystem');
+        $filesystems = $filesystemService->findAll();
+
+        $filesystemsArray = array();
+
+        /* @var $filesystem Filesystem */
+        foreach($filesystems as $filesystem) {
+            $filesystemsArray[] = array(
+                'filesystemId' => $filesystem->getFilesystemId(),
+                'contents' => $this->get(sprintf('oneup_flysystem.%s_filesystem', $filesystem->getName()))->listContents("/", true),
+                'name' => $filesystem->getName(),
+                'currentDir' => ''
+            );
+        }
+
+        return new JsonResponse($filesystemsArray);
     }
 
     /**
@@ -31,8 +48,9 @@ class FileController extends Controller2
         $file = $request->files->get('file');
 
         $path = $request->get('currentDir');
+        $filesystemName = $request->get('filesystemName');
 
-        $filesystem = $this->get('oneup_flysystem.inkstand_filesystem');
+        $filesystem = $this->get(sprintf('oneup_flysystem.%s_filesystem', $filesystemName));
 
         if ($file->isValid()) {
             $stream = fopen($file->getRealPath(), 'r+');
@@ -65,13 +83,28 @@ class FileController extends Controller2
      */
     public function newFolderAction(Request $request)
     {
-        $dir = $request->get("dir");
-        $filesystem = $this->get('oneup_flysystem.inkstand_filesystem');
+        $dir = $request->get('dir');
+        $filesystemName = $request->get('filesystemName');
+        $filesystem = $this->get(sprintf('oneup_flysystem.%s_filesystem', $filesystemName));
 
         if(!$filesystem->has($dir)) {
             $filesystem->createDir($dir);
         }
 
         return new JsonResponse(array('allgood' => $dir));
+    }
+
+    /**
+     * @Route("/file/download", name="inkstand_core_file_download")
+     * @param Request $request
+     * @return Response
+     */
+    public function downloadAction(Request $request)
+    {
+        $filesystem = $this->get('oneup_flysystem.inkstand_filesystem');
+
+        $fileContents = $filesystem->read('airplanevsvolcano.png');
+
+        return new Response($fileContents, 200, array('Content-Type' => 'image/png'));
     }
 }
