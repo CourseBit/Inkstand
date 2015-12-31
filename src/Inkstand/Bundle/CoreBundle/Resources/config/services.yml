@@ -10,6 +10,7 @@ parameters:
     inkstand_core.role.class:                    Inkstand\Bundle\CoreBundle\Service\RoleService
     inkstand_core.setting.class:                 Inkstand\Bundle\CoreBundle\Service\SettingService
     inkstand_core.filesystem.class:              Inkstand\Bundle\CoreBundle\Service\FilesystemService
+    inkstand_core.file_reference.class:          Inkstand\Bundle\CoreBundle\Service\FileReferenceService
     inkstand_core.setting.site.class:            Inkstand\Bundle\CoreBundle\Setting\SiteSettings
 
     # Voter parameters
@@ -63,6 +64,10 @@ services:
         class: "%inkstand_core.filesystem.class%"
         arguments: [@doctrine.orm.entity_manager]
 
+    inkstand_core.file_reference:
+        class: "%inkstand_core.file_reference.class%"
+        arguments: [@doctrine.orm.entity_manager]
+
     # Scripts
     inkstand_core.scripts.role:
         class: "%inkstand_core.scripts.role.class%"
@@ -90,6 +95,13 @@ services:
         class: Inkstand\Bundle\CoreBundle\Twig\SettingExtension
         public: false
         arguments: [@inkstand_core.setting]
+        tags:
+            - { name: twig.extension }
+
+    inkstand_core.twig.image:
+        class: Inkstand\Bundle\CoreBundle\Twig\ImageExtension
+        public: false
+        arguments: [@router]
         tags:
             - { name: twig.extension }
 

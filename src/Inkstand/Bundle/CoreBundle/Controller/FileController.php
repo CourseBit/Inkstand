@@ -10,6 +10,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Inkstand\Bundle\CoreBundle\Service\FileReferenceService;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class FileController extends Controller2
 {
@@ -106,5 +108,41 @@ class FileController extends Controller2
         $fileContents = $filesystem->read('airplanevsvolcano.png');
 
         return new Response($fileContents, 200, array('Content-Type' => 'image/png'));
+    }
+
+    /**
+     * @Route("/file/image/{fileReferenceId}", name="inkstand_core_file_image")
+     * @param Request $request
+     * @param integer $fileReferenceId
+     * @return Response
+     */
+    public function imageAction(Request $request, $fileReferenceId)
+    {
+        /* @var $fileReferenceService FileReferenceService */
+        $fileReferenceService = $this->get('inkstand_core.file_reference');
+        /* @var $filesystemService FilesystemService */
+        $filesystemService = $this->get('inkstand_core.filesystem');
+
+        /* @var $fileReference \Inkstand\Bundle\CoreBundle\Entity\FileReference */
+        $fileReference = $fileReferenceService->findOneByFileReferenceId($fileReferenceId);
+
+        if(empty($fileReference)) {
+            throw new NotFoundHttpException("FileReference not found. Make sure file exists.");
+        }
+
+        /* @var $filesystem Filesystem */
+        $filesystem = $filesystemService->findOneByFilesystemId($fileReference->getFilesystemId());
+
+        $filesystemName = sprintf('oneup_flysystem.%s_filesystem', $filesystem->getName());
+
+        if(!$this->has($filesystemName)) {
+            throw new NotFoundHttpException("Filesystem not found.");
+        }
+
+        $filesystemApi = $this->get($filesystemName);
+
+        $fileContents = $filesystemApi->read($fileReference->getPath());
+
+        return new Response($fileContents, 200, array('Content-Type' => 'image/png', 'Cache-Control' => 'public'));
     }
 }

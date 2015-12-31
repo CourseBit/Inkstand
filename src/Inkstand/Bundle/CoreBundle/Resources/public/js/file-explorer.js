@@ -32,17 +32,19 @@ var FileManager = (function(_name) {
     properties.$newFolderModal = $("#" + properties.name + "-new-folder-modal");
 
     properties.$modal.on("show.bs.modal", function() {
-        showLoader();
+        if(!isFilesystemLoaded()) {
+            showLoader();
 
-        getFilesystems(function(data) {
-            properties.filesystems = data;
-            console.log(data);
-            renderTabs();
-            hideLoader();
-            if(properties.filesystems) {
-                properties.$modal.find("a[data-toggle=tab]").first().tab("show");
-            }
-        });
+            getFilesystems(function(data) {
+                properties.filesystems = data;
+                console.log(data);
+                renderTabs();
+                hideLoader();
+                if(properties.filesystems) {
+                    properties.$modal.find("a[data-toggle=tab]").first().tab("show");
+                }
+            });
+        }
     });
 
     properties.$modal.on("show.bs.tab", "a[data-toggle=tab]", function (e) {
@@ -92,6 +94,8 @@ var FileManager = (function(_name) {
     properties.$modal.find(".file-upload-form").on("submit", function(e) {
         e.preventDefault();
 
+        var form = this;
+
         $(this).find(".progress").removeClass("hidden");
 
         var $progressBar = $(this).find(".progress .progress-bar");
@@ -109,6 +113,9 @@ var FileManager = (function(_name) {
             success: function(data) {
                 changePage("files");
                 properties.$modal.find(".file-upload-form")[0].reset();
+                $(form).find(".progress .progress-bar").css("width", "2em");
+                $(form).find(".progress .progress-bar").html("0%");
+                $(form).find(".progress").addClass("hidden");
                 refreshFilesystems();
             },
             xhr: function(){
@@ -213,7 +220,7 @@ var FileManager = (function(_name) {
     }
 
     var isFilesystemLoaded = function() {
-        if(filesystems == null) {
+        if(properties.filesystems == null) {
             return false;
         }
         return true;
@@ -292,12 +299,18 @@ var FileManager = (function(_name) {
             var file = $(e.target).data("file");
             console.log(supportedFormats);
             console.log(file.extension);
-            if(supportedFormats.indexOf(file.extension) > 0) {
+            console.log(supportedFormats.indexOf(file.extension));
+            if(supportedFormats.indexOf(file.extension) >= 0) {
                 properties.$modal.modal("hide");
                 callback(file, getCurrentFilesystem());
             } else {
                 alert("You must choose a file of the follow: " + supportedFormats.join(", "));
             }
+        });
+
+        properties.$modal.on("hide.bs.modal", function() {
+            properties.$modal.off("click", ".file-choose");
+            properties.$modal.off("hide.bs.modal");
         });
     };
 

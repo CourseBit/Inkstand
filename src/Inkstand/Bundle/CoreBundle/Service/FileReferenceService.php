@@ -2,7 +2,7 @@
 
 namespace Inkstand\Bundle\CoreBundle\Service;
 
-class FilesystemService
+class FileReferenceService
 {
     protected $entityManager;
     protected $repository;
@@ -10,7 +10,7 @@ class FilesystemService
     public function __construct($entityManager)
     {
         $this->entityManager = $entityManager;
-        $this->repository = $this->entityManager->getRepository('InkstandCoreBundle:Filesystem');
+        $this->repository = $this->entityManager->getRepository('InkstandCoreBundle:FileReference');
     }
 
     public function findAll()
@@ -18,8 +18,8 @@ class FilesystemService
         return $this->repository->findAll();
     }
 
-    public function findOneByFilesystemId($filesystemId)
+    public function findOneByFileReferenceId($fileReferenceId)
     {
-        return $this->repository->findOneByFilesystemId($filesystemId);
+        return $this->repository->findOneByFileReferenceId($fileReferenceId);
     }
 }
