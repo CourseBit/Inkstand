@@ -1,0 +1,3 @@
+inkstand_scorm_scorm:
+    resource: "@InkstandScormBundle/Controller/ScormController.php"
+    type:     annotation

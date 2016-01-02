@@ -1,4 +1,7 @@
+parameters:
+    inkstand_scorm.scorm.class: Inkstand\Activity\ScormBundle\Service\ScormService
+
 services:
-#    inkstand_scorm.example:
-#        class: Inkstand\Activity\ScormBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    inkstand_scorm.scorm:
+        class: "%inkstand_scorm.scorm.class%"
+        arguments: [@inkstand_core.filesystem, "%kernel.cache_dir%"]

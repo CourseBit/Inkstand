@@ -63,6 +63,8 @@ services:
     inkstand_core.filesystem:
         class: "%inkstand_core.filesystem.class%"
         arguments: [@doctrine.orm.entity_manager]
+        calls:
+            - [setContainer, [@service_container]]
 
     inkstand_core.file_reference:
         class: "%inkstand_core.file_reference.class%"

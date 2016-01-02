@@ -1,0 +1,9 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandScormBundle:Scorm:view{% endblock %}
+
+{% block page_header %}SCORM View Test{% endblock %}
+
+{% block main_content %}
+    <iframe src="{{ path("inkstand_scorm_file", {"relativePath":"index_lms.html"}) }}"></iframe>
+{% endblock %}

@@ -28,6 +28,11 @@ class Filesystem
      */
     private $name;
 
+    /**
+     * @var
+     */
+    private $api;
+
 
     /**
      * Get filesystemId
@@ -60,5 +65,28 @@ class Filesystem
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set api
+     *
+     * @param string $api
+     * @return Filesystem
+     */
+    public function setApi($api)
+    {
+        $this->api = $api;
+
+        return $this;
+    }
+
+    /**
+     * Get api
+     *
+     * @return string
+     */
+    public function getApi()
+    {
+        return $this->api;
     }
 }

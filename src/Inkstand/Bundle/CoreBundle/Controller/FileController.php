@@ -145,4 +145,13 @@ class FileController extends Controller2
 
         return new Response($fileContents, 200, array('Content-Type' => 'image/png', 'Cache-Control' => 'public'));
     }
+
+    /**
+     * @Route("/file/scorm", name="inkstand_core_file_scorm")
+     */
+    public function scormAction(Request $request)
+    {
+        $fileReference = $this->get('inkstand_core.file_reference')->findOneByFileReferenceId(2);
+        $this->get('inkstand_scorm.scorm')->cacheScormPackage($fileReference);
+    }
 }
