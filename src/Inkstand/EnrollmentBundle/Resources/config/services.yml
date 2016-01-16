@@ -1,9 +1,17 @@
 parameters:
     inkstand_enrollment.enrollment_type.access_code.class: Inkstand\EnrollmentBundle\EnrollmentType\AccessCodeEnrollmentType
+    inkstand_enrollment.enrollment_type.self.class:        Inkstand\EnrollmentBundle\EnrollmentType\SelfEnrollmentType
 
 services:
     inkstand_enrollment.enrollment_type.access_code:
         class:     "%inkstand_enrollment.enrollment_type.access_code.class%"
+        arguments: [@enrollment_service, @doctrine.orm.entity_manager]
+        public:    true
+        tags:
+            - { name: inkstand.enrollment_type }
+
+    inkstand_enrollment.enrollment_type.self:
+        class:     "%inkstand_enrollment.enrollment_type.self.class%"
         arguments: [@enrollment_service, @doctrine.orm.entity_manager]
         public:    true
         tags:

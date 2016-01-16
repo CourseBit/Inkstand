@@ -32,6 +32,7 @@ class FileController extends Controller2
                 'filesystemId' => $filesystem->getFilesystemId(),
                 'contents' => $this->get(sprintf('oneup_flysystem.%s_filesystem', $filesystem->getName()))->listContents("/", true),
                 'name' => $filesystem->getName(),
+                'type' => $filesystem->getType(),
                 'currentDir' => ''
             );
         }
@@ -147,11 +148,11 @@ class FileController extends Controller2
     }
 
     /**
-     * @Route("/file/scorm", name="inkstand_core_file_scorm")
+     * @Route("/file/scorm/{fileReferenceId}", name="inkstand_core_file_scorm")
      */
-    public function scormAction(Request $request)
+    public function scormAction(Request $request, $fileReferenceId)
     {
-        $fileReference = $this->get('inkstand_core.file_reference')->findOneByFileReferenceId(2);
+        $fileReference = $this->get('inkstand_core.file_reference')->findOneByFileReferenceId($fileReferenceId);
         $this->get('inkstand_scorm.scorm')->cacheScormPackage($fileReference);
     }
 }

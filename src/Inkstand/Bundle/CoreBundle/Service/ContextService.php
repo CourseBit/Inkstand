@@ -64,12 +64,11 @@ class ContextService
 
 
         $userContextRoleAssignments = $this->contextRoleAssignmentService->getUserRoleAssignments($user->getId(), $this->context->getContextId());
-        dump($userContextRoleAssignments);
+
         foreach($userContextRoleAssignments as $contextRoleAssignment) {
             $user->addRole($contextRoleAssignment->getRole());
         }
 
-        dump($user);
     }
 
     public function getContext()

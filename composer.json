@@ -27,7 +27,8 @@
         "knplabs/knp-menu-bundle": "^2.0",
         "monolog/monolog": "^1.15",
         "pimple/pimple": "^3.0",
-        "oneup/flysystem-bundle": "1.2.0"
+        "oneup/flysystem-bundle": "1.2.0",
+        "league/flysystem-dropbox": "^1.0"
     },
     "require-dev": {
     },

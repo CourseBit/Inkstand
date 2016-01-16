@@ -5,10 +5,31 @@
 {% block page_header %}{{ 'dashboard'|trans }}{% endblock %}
 
 {% block main_content %}
+    <h4>My Courses</h4>
+    <hr>
     {% if enrollments %}
-        {% for enrollment in enrollments %}
-            <p>{{ enrollment.course.name }}</p>
-        {% endfor %}
+        <div class="row">
+            {% for enrollment in enrollments %}
+                <div class="col-sm-6">
+                    <div class="media">
+                        <div class="media-left">
+                            <a href="#">
+                                {% if enrollment.course.featuredImage is not empty %}
+                                    <a href="{{ path("inkstand_course_view", {"slug": enrollment.course.slug}) }}">
+                                        <img width="100px" class="media-object" src="{{ image(enrollment.course.featuredImage) }}" alt="...">
+                                    </a>
+                                {% endif %}
+                            </a>
+                        </div>
+                        <div class="media-body">
+                            <h4 class="media-heading"><a href="{{ path("inkstand_course_view", {"slug": enrollment.course.slug}) }}">{{ enrollment.course.name }}</a></h4>
+                            {{ enrollment.course.description }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
     {% else %}
         <p class="alert alert-info">You are not enrolled in any courses. <a href="{{ path("inkstand_course_catalog_index") }}">View catalog.</a></p>
     {% endif %}

@@ -81,7 +81,14 @@
             <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 {{#each filesystems }}
-                    <li role="presentation"><a href="" data-target="#tab-filesystem-{{ name }}" aria-controls="home" role="tab" data-toggle="tab" data-filesystem="{{ name }}">{{ name }}</a></li>
+                    <li role="presentation">
+                        <a href="" data-target="#tab-filesystem-{{ name }}" aria-controls="home" role="tab" data-toggle="tab" data-filesystem="{{ name }}">
+                            {{#if icon }}
+                                <i class="fa fa-{{ icon }}"></i>
+                            {{/if }}
+                            {{ name }}
+                        </a>
+                    </li>
                 {{/each }}
             </ul>
 

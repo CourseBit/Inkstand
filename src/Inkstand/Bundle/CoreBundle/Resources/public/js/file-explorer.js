@@ -194,6 +194,11 @@ var FileManager = (function(_name) {
         $.ajax({
             url: "/inkstand/web/app_dev.php/file/get-filesystems",
             success: function(data) {
+                for(var i in data) {
+                    if(data[i].type == "dropbox") {
+                        data[i].icon = "dropbox";
+                    }
+                }
                 callback(data);
             }
         })
@@ -297,14 +302,17 @@ var FileManager = (function(_name) {
 
         properties.$modal.on("click", ".file-choose", function(e) {
             var file = $(e.target).data("file");
-            console.log(supportedFormats);
-            console.log(file.extension);
-            console.log(supportedFormats.indexOf(file.extension));
-            if(supportedFormats.indexOf(file.extension) >= 0) {
+
+            if(supportedFormats != null) {
+                if(supportedFormats.indexOf(file.extension) >= 0) {
+                    properties.$modal.modal("hide");
+                    callback(file, getCurrentFilesystem());
+                } else {
+                    alert("You must choose a file of the follow: " + supportedFormats.join(", "));
+                }
+            } else {
                 properties.$modal.modal("hide");
                 callback(file, getCurrentFilesystem());
-            } else {
-                alert("You must choose a file of the follow: " + supportedFormats.join(", "));
             }
         });
 
@@ -323,7 +331,7 @@ var FileManager = (function(_name) {
 var defaultFileManager = new FileManager("default");
 
 $(document).on("click", ".file-picker button", function(e) {
-    defaultFileManager.chooseFile(["png", "jpg", "gif"], function(file, filesystem) {
+    defaultFileManager.chooseFile(null, function(file, filesystem) {
         var $formGroup = $(e.target).closest(".form-group").parent().closest(".form-group");
         $formGroup.find("input[data-file=filesystemId]").val(filesystem.filesystemId);
         $formGroup.find("input[data-file=path]").val(file.path);

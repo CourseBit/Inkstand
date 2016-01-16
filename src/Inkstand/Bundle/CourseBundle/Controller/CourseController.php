@@ -61,7 +61,10 @@ class CourseController extends Controller
 		return array(
 			'course' => $course,
 			'activityTypes' => $activityTypes,
-			'pageHeading' => $course->getName()
+			'breadcrumbs' => array(
+				array('route' => 'inkstand_home', 'title' => 'Dashboard', 'parameters' => array()),
+				array('title' => $course->getName()),
+			)
 		);
 	}
 

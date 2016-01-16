@@ -5,3 +5,5 @@ services:
     inkstand_scorm.scorm:
         class: "%inkstand_scorm.scorm.class%"
         arguments: [@inkstand_core.filesystem, "%kernel.cache_dir%"]
+        tags:
+            - { name: inkstand.activity_type }

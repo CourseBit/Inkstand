@@ -2,6 +2,7 @@
 
 namespace Inkstand\Bundle\CourseBundle\Form\Type;
 
+use Inkstand\Bundle\CoreBundle\Form\Type\FileReferenceType;
 use Inkstand\Bundle\CourseBundle\Entity\Course;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -40,7 +41,7 @@ class CourseType extends AbstractType
             ))
             ->add('state', 'choice', array(
                 'choices' => array(
-                    Course::STATE_HIDDEN => 'Hidden',
+                    Course::STATE_HIDDEN => 'Draft',
                     Course::STATE_PUBLISHED => 'Published'
                 ),
                 'label' => 'course.state',
@@ -58,7 +59,9 @@ class CourseType extends AbstractType
                 'label' => 'identifier',
                 'help_text' => 'course.form.identifier.help'
             ))
-
+            ->add('featuredImage', new FileReferenceType(), array(
+                'label' => 'Featured Image'
+            ))
             ->add('actions', 'form_actions', array(
                 'buttons' => array(
                     'save' => array(

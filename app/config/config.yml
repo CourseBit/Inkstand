@@ -93,9 +93,18 @@ oneup_flysystem:
         testfilesystem_adapter2:
             local:
                 directory: %kernel.root_dir%/cache/testfilesystem2
+        dropboxfilesystem_adapter:
+            dropbox:
+                client: inkstand_core.dropbox_client
+                prefix: ~
 
     filesystems:
-        inkstand:
+        server:
             adapter: testfilesystem_adapter
-        inkstand2:
-            adapter: testfilesystem_adapter2
+        dropbox:
+            adapter: dropboxfilesystem_adapter
+
+services:
+    inkstand_core.dropbox_client:
+        class: Dropbox\Client
+        arguments: [ "Q3PIY6Q30lAAAAAAAAAADDIPPoyvDZJNIHg5NmjP7cXfqdIlNnS3pW-l9A12AAzk", "r40b63wi5p8a39s" ]

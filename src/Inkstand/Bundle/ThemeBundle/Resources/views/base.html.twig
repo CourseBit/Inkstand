@@ -14,6 +14,7 @@
 		'@InkstandThemeBundle/Resources/public/css/font-awesome-fonts.css'
 		'@InkstandThemeBundle/Resources/public/css/navmenu.css'
 		'@InkstandCoreBundle/Resources/public/css/file-explorer.css'
+		'@InkstandCoreBundle/Resources/public/css/responsive-calendar.css'
 		'@InkstandThemeBundle/Resources/public/css/custom.css'
 	filter='cssrewrite'
 	%}
@@ -25,14 +26,14 @@
 	</head>
 	<body class="layout-base">
 		<div class="navmenu navmenu-inverse navmenu-fixed-left offcanvas-sm">
-			<a class="navmenu-brand visible-md visible-lg" href="#">{{ setting("inkstand_core_setting_sitename") }}</a>
+			<a class="navmenu-brand visible-md visible-lg" href="{{ path("inkstand_dashboard") }}">{{ setting("inkstand_core_setting_sitename") }}</a>
 			<ul class="nav navmenu-nav">
 				<li><a href="{{ path("inkstand_dashboard") }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
 				<li><a href="{{ path("inkstand_course_catalog_index") }}"><i class="fa fa-fw fa-list"></i> Course Catalog</a></li>
 				<li class="dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-graduation-cap"></i> Course <b class="caret"></b></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-graduation-cap"></i> Courses <b class="caret"></b></a>
 					<ul class="dropdown-menu navmenu-nav" role="menu">
-						<li><a href="{{ path('inkstand_course_catalog_index') }}">View catalog</a></li>
+						<li><a href="{{ path('inkstand_course_add') }}">Add course</a></li>
 					</ul>
 				</li>
 				<li class="dropdown">
@@ -58,13 +59,30 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="#">Inkstand LMS</a>
+			<a class="navbar-brand" href="{{ path("inkstand_dashboard") }}">Inkstand LMS</a>
 		</div>
 		<div class="container-fluid">
 			<div class="row">
 				<nav style="display:block !important" class="navbar navbar-default navbar-static-top">
 					<div class="container-fluid">
 						<div class="navbar-header navbar-header-full">
+							<ul class="nav navbar-nav collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+								<li><a href="#">Resources</a></li>
+								<li><a href="#">Library</a></li>
+								<li class="dropdown">
+									<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Staff Directory <span class="caret"></span></a>
+									<ul class="dropdown-menu">
+										<li><a href="#">Action</a></li>
+										<li><a href="#">Another action</a></li>
+										<li><a href="#">Something else here</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a href="#">Separated link</a></li>
+										<li role="separator" class="divider"></li>
+										<li><a href="#">One more separated link</a></li>
+									</ul>
+								</li>
+							</ul>
+
 							<ul class="nav navbar-nav navbar-right navbar-user">
 								{% if app.user %}
 									<li>
@@ -122,14 +140,55 @@
 						</div>
 					</div>
 				</div>
-				<!--
-                for widget in page_template_service.getWidgetsForTemplate(1)
-                    include(widget.partial)
-                endfor
-                -->
 
+				{#
+				{% for widget in page_template_service.getWidgetsForTemplate(1) %}
+                    {{ include(widget.partial) }}
+                {% endfor %}
+				#}
+
+				<div class="col-lg-4">
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h4>Welcome to Inkstand!</h4>
+							<hr>
+							<p>This is a demo of Inkstand LMS. Widgets will appear here in future versions.</p>
+							<img class="img-responsive center-block" src="https://cloud.githubusercontent.com/assets/3340747/9319889/109a867a-4519-11e5-91a8-189ee57ec872.png">
+						</div>
+					</div>
+
+					<div class="panel panel-default">
+						<div class="panel-body">
+							<h4>Calendar</h4>
+							<hr>
+							<!-- Responsive calendar - START -->
+							<div class="responsive-calendar">
+								<div class="controls">
+									<a class="pull-left" data-go="prev"><div class="btn btn-primary">Prev</div></a>
+									<h4><span data-head-year></span> <span data-head-month></span></h4>
+									<a class="pull-right" data-go="next"><div class="btn btn-primary">Next</div></a>
+								</div><hr/>
+								<div class="day-headers">
+									<div class="day header">Mon</div>
+									<div class="day header">Tue</div>
+									<div class="day header">Wed</div>
+									<div class="day header">Thu</div>
+									<div class="day header">Fri</div>
+									<div class="day header">Sat</div>
+									<div class="day header">Sun</div>
+								</div>
+								<div class="days" data-group="days">
+
+								</div>
+							</div>
+							<!-- Responsive calendar - END -->
+						</div>
+					</div>
+				</div>
 			</div>
-
+			<div class="footer container-fluid">
+				<p class="text-muted">Copyright Inkstand 2016</p>
+			</div>
 		</div><!-- /.container -->
 
 		{{ include('InkstandCoreBundle:partial:file_manager.html.twig') }}
@@ -141,12 +200,22 @@
 			'@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.min.js'
 			'@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js'
 			'@InkstandThemeBundle/Resources/public/bower_components/handlebars/handlebars.min.js'
-			'@InkstandScormBundle/Resources/public/js/scorm-1.2.js'
 			'@InkstandCoreBundle/Resources/public/js/file-explorer.js'
+			'@InkstandCoreBundle/Resources/public/js/responsive-calendar.min.js'
 			'@InkstandThemeBundle/Resources/public/js/custom.js'
 		%}
 			<script src="{{ asset_url }}"></script>
 		{% endjavascripts %}
 		{% block javascripts %}{% endblock %}
+		<script type="text/javascript">
+			$(document).ready(function () {
+				$(".responsive-calendar").responsiveCalendar({
+					time: '2016-01',
+					events: {
+						"2016-01-03": {}
+					}
+				});
+			});
+		</script>
 	</body>
 </html>

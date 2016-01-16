@@ -58,11 +58,15 @@ class Course
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="featured_image", type="string", length=255, nullable=true)
+     * @ORM\Column(name="featured_image_file_id", type="integer", nullable=true)
      */
-    private $featuredImage;
+    protected $featuredImageFileId;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Inkstand\Bundle\CoreBundle\Entity\FileReference", cascade={"persist"})
+     * @ORM\JoinColumn(name="featured_image_file_id", referencedColumnName="file_reference_id", nullable=true)
+     */
+    protected $featuredImage;
 
     /**
      * @var integer

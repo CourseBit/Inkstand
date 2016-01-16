@@ -12,11 +12,11 @@ use Inkstand\Activity\ForumBundle\Form\Type\ForumPreferencesType;
 
 class ActivityType extends AbstractType
 {
-    private $preferences;
+    private $preferencesFormType;
 
-    public function __construct($preferences) 
+    public function __construct($preferencesFormType)
     {
-        $this->preferences = $preferences;
+        $this->preferencesFormType = $preferencesFormType;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options) 
@@ -37,7 +37,7 @@ class ActivityType extends AbstractType
             'attr' => array('class' => 'wysiwyg form-control'),
             'label_attr' => array('class' => 'col-sm-2 control-label')
         ));
-        $builder->add('preferences', new \Inkstand\Activity\ForumBundle\Form\Type\ForumPreferencesType());
+        $builder->add('preferences', $this->preferencesFormType);
         $builder->add('actions', 'form_actions', array(
             'buttons' => array(
                 'save' => array(

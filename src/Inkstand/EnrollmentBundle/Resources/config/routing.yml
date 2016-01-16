@@ -2,3 +2,8 @@ inkstand_enrollment.access_code:
     resource: "@InkstandEnrollmentBundle/Controller/AccessCodeEnrollmentController.php"
     prefix:   /course/enroll/access-code/
     type:     annotation
+
+inkstand_enrollment.self:
+    resource: "@InkstandEnrollmentBundle/Controller/SelfEnrollmentController.php"
+    prefix:   /course/enroll/self/
+    type:     annotation

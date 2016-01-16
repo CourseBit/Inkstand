@@ -2,7 +2,7 @@ parameters:
     course_category_service.class:        Inkstand\Bundle\CourseBundle\Service\CourseCategoryService
     course_service.class:                 Inkstand\Bundle\CourseBundle\Service\CourseService
     activity_service.class:               Inkstand\Bundle\CourseBundle\Service\ActivityService
-    activity_type_service.class:          Inkstand\Bundle\CourseBundle\Service\ActivityTypeService
+    inkstand_course.activity_type.class:  Inkstand\Bundle\CourseBundle\Service\ActivityTypeService
     module_service.class:                 Inkstand\Bundle\CourseBundle\Service\ModuleService
     enrollment_service.class:             Inkstand\Bundle\CourseBundle\Service\EnrollmentService
     inkstand_course.enrollment_type.class: Inkstand\Bundle\CourseBundle\Service\EnrollmentTypeService
@@ -21,8 +21,8 @@ services:
     activity_service:
         class:     "%activity_service.class%"
         arguments: [@doctrine.orm.entity_manager]
-    activity_type_service:
-        class:     "%activity_type_service.class%"
+    inkstand_course.activity_type:
+        class:     "%inkstand_course.activity_type.class%"
         arguments: [@doctrine.orm.entity_manager]
     module_service:
         class:     "%module_service.class%"

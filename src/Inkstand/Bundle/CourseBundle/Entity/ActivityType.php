@@ -36,6 +36,13 @@ class ActivityType
     private $bundleName;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="service_id", type="string")
+     */
+    private $serviceId;
+
+    /**
      * @ORM\OneToMany(targetEntity="Activity", mappedBy="module", cascade={"remove"})
      */
     private $activities;
@@ -134,5 +141,28 @@ class ActivityType
     public function getBundleName()
     {
         return $this->bundleName;
+    }
+
+    /**
+     * Set serviceId
+     *
+     * @param string $serviceId
+     * @return ActivityType
+     */
+    public function setServiceId($serviceId)
+    {
+        $this->serviceId = $serviceId;
+
+        return $this;
+    }
+
+    /**
+     * Get serviceId
+     *
+     * @return string
+     */
+    public function getServiceId()
+    {
+        return $this->serviceId;
     }
 }

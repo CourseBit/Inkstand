@@ -2,6 +2,7 @@
 
 namespace Inkstand\Bundle\CourseBundle\Controller;
 
+use Inkstand\Bundle\CourseBundle\Entity\Activity;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
@@ -25,15 +26,18 @@ class ActivityController extends Controller
 	 */
 	public function viewAction($slug) 
 	{
+		/* @var $activity Activity */
 		$activity = $this->get('activity_service')->findOneBySlug($slug);
+
+		$activityType = $this->get('inkstand_course.activity_type')->findOneByActivityTypeId($activity->getActivityTypeId());
+
+		$activityService = $this->get($activityType->getServiceId());
 
 		if($activity === null) {
 			throw new NotFoundHttpException($this->get('translator')->trans('activity.notfound'));
 		}
 
-		$activityReflection = new \ReflectionClass($activity);
-
-		$controller = sprintf('%s:%s:view', $activity->getActivityType()->getBundleName(), $activityReflection->getShortName());
+		$controller = sprintf('%s:view', $activityService->getController());
 
 		// TODO Check if controller exists. The error that shows currently doesn't explain what happened
 		return $this->forward($controller, array(
@@ -50,7 +54,8 @@ class ActivityController extends Controller
 	 */
 	public function addAction(Request $request, $activityTypeId, $moduleId)
 	{
-		$activityType = $this->get('activity_type_service')->findOneByActivityTypeId($activityTypeId);
+		/* @var $activityType \Inkstand\Bundle\CourseBundle\Entity\ActivityType */
+		$activityType = $this->get('inkstand_course.activity_type')->findOneByActivityTypeId($activityTypeId);
         $module = $this->get('module_service')->findOneByModuleId($moduleId);
 
 		if($activityType === null) {
@@ -62,7 +67,7 @@ class ActivityController extends Controller
         }
 
         // Each activity bundle must have a service for its activity. That is how a new activity entity is retrieved
-        $activityService = $this->get(sprintf('%s_service', strtolower($activityType->getName())));
+        $activityService = $this->get($activityType->getServiceId());
 
         $activity = $activityService->getNewEntity();
 
@@ -78,7 +83,7 @@ class ActivityController extends Controller
         $preferences = $activityService->getNewPreferences();
         $activity->setPreferences($preferences);
 
-        $activityForm = $this->createForm(new ActivityType($preferences), $activity, array(
+        $activityForm = $this->createForm(new ActivityType($activityService->getPreferencesFormType()), $activity, array(
             'action' => $this->generateUrl('inkstand_course_activity_add', array('activityTypeId' => $activityTypeId, 'moduleId' => $moduleId)),
             'method' => 'POST'
         ));
@@ -90,10 +95,13 @@ class ActivityController extends Controller
             $em->persist($activity);
             $em->flush();
 
-            $preferences->setActivityId($activity->getActivityId());
+			if(!empty($preferences)) {
+				$preferences->setActivityId($activity->getActivityId());
 
-            $em->persist($preferences);
-            $em->flush();
+				$em->persist($preferences);
+				$em->flush();
+			}
+
 
             $session = $request->getSession();
             $session->getFlashBag()->add('success', $this->get('translator')->trans('activity.added', array('%name%' => $activity->getName())));
@@ -103,6 +111,7 @@ class ActivityController extends Controller
 
         return array(
             'activity' => $activity,
+			'activityType' => $activityType,
             'activityForm' => $activityForm->createView(),
             'pageHeading' => 'activity.edit'
         );
@@ -124,8 +133,6 @@ class ActivityController extends Controller
 		if(empty($activity)) {
 			throw new NotFoundHttpException($this->get('translator')->trans('Activity could not be found'));
 		}
-
-		$activityReflection = new \ReflectionClass($activity);
 
 		// Get activity preferences. If none exist, create new preferences entity
 		$preferences = $this->getDoctrine()

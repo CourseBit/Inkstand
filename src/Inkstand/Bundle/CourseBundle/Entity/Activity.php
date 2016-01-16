@@ -243,6 +243,7 @@ class Activity
      */
     public function getActivityType()
     {
+        dump($this->activityType);
         return $this->activityType;
     }
 

@@ -2,6 +2,9 @@
 
 namespace Inkstand\Activity\ScormBundle\Service;
 
+use Inkstand\Activity\ScormBundle\Form\Type\ScormPreferencesType;
+use Inkstand\Activity\ScormBundle\Entity\Scorm;
+use Inkstand\Activity\ScormBundle\Entity\ScormPreferences;
 use Inkstand\Bundle\CoreBundle\Entity\FileReference;
 use Inkstand\Bundle\CoreBundle\Service\FilesystemService;
 use Inkstand\Bundle\CoreBundle\Entity\Filesystem;
@@ -23,6 +26,26 @@ class ScormService
     {
         $this->filesystemService = $filesystemService;
         $this->cacheDir = $cacheDir;
+    }
+
+    public function getNewEntity()
+    {
+        return new Scorm();
+    }
+
+    public function getNewPreferences()
+    {
+        return new ScormPreferences();
+    }
+
+    public function getPreferencesFormType()
+    {
+        return new ScormPreferencesType();
+    }
+
+    public function getController()
+    {
+        return 'InkstandScormBundle:Scorm';
     }
 
     public function cacheScormPackage(FileReference $fileReference)

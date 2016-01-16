@@ -48,7 +48,7 @@
 						</div>
 						<div class="panel-body">
 							{% if course.featuredImage is not empty %}
-								<img class="img-responsive img-thumbnail" src="">
+								<img class="img-responsive img-thumbnail" src="{{ image(course.featuredImage) }}">
 							{% endif %}
 							<p>{{ course.description }}</p>
 							<div>

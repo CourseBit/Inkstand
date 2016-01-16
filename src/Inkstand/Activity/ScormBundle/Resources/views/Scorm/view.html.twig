@@ -1,9 +1,11 @@
-{% extends "InkstandThemeBundle::base.html.twig" %}
+{% extends "InkstandThemeBundle:layout:minimal.html.twig" %}
 
 {% block title %}InkstandScormBundle:Scorm:view{% endblock %}
 
 {% block page_header %}SCORM View Test{% endblock %}
 
 {% block main_content %}
-    <iframe src="{{ path("inkstand_scorm_file", {"relativePath":"index_lms.html"}) }}"></iframe>
+    <div class="scorm-container">
+        <iframe class="scorm-embed" border="0" frameBorder="0" seamless="seamless" src="{{ path("inkstand_scorm_file", {"activityId":activity.activityId, "relativePath":"index_lms.html"}) }}"></iframe>
+    </div>
 {% endblock %}

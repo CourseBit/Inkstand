@@ -29,6 +29,13 @@ class Filesystem
     private $name;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="type", type="string", length=255)
+     */
+    private $type;
+
+    /**
      * @var
      */
     private $api;
@@ -65,6 +72,29 @@ class Filesystem
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set type
+     *
+     * @param string $type
+     * @return Filesystem
+     */
+    public function setType($type)
+    {
+        $this->name = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get type
+     *
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
     }
 
     /**
