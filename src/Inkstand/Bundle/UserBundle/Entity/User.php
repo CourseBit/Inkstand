@@ -77,16 +77,10 @@ class User extends BaseUser
     protected $twitter;
 
     /**
-     * @ORM\OneToMany(targetEntity="Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment", mappedBy="user")
-     */
-    private $contextRoleAssignments;
-
-    /**
      * Constructor
      */
     public function __construct()
     {
-        $this->contextRoleAssignments = new \Doctrine\Common\Collections\ArrayCollection();
         parent::__construct();
         $this->addRole("ROLE_ADMIN");
     }
@@ -327,38 +321,5 @@ class User extends BaseUser
     public function getTwitter()
     {
         return $this->twitter;
-    }
-
-    /**
-     * Add contextRoleAssignments
-     *
-     * @param \Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment $contextRoleAssignments
-     * @return User
-     */
-    public function addContextRoleAssignment(\Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment $contextRoleAssignments)
-    {
-        $this->contextRoleAssignments[] = $contextRoleAssignments;
-
-        return $this;
-    }
-
-    /**
-     * Remove contextRoleAssignments
-     *
-     * @param \Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment $contextRoleAssignments
-     */
-    public function removeContextRoleAssignment(\Inkstand\Bundle\CoreBundle\Entity\ContextRoleAssignment $contextRoleAssignments)
-    {
-        $this->contextRoleAssignments->removeElement($contextRoleAssignments);
-    }
-
-    /**
-     * Get contextRoleAssignments
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getContextRoleAssignments()
-    {
-        return $this->contextRoleAssignments;
     }
 }

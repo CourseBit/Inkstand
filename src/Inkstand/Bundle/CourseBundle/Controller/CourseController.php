@@ -45,8 +45,6 @@ class CourseController extends Controller
             throw new NotFoundHttpException($this->get('translator')->trans('course.notfound'));
         }
 
-		$this->setContext(CONTEXT_COURSE, $course, true);
-
 		$this->get('inkstand_core.voter');
 
 		if(!$this->get('enrollment_service')->isUserEnrolled($this->getUser(), $course)) {

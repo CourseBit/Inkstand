@@ -19,8 +19,6 @@ class RoleController extends Controller
      */
     public function listAction()
     {
-        $this->setContext(CONTEXT_SYSTEM, null, true);
-
         $roles = $this->get('inkstand_core.role')->findAll();
 
         return array(
