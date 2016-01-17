@@ -26,11 +26,15 @@
                     <td>{{ user.email }}</td>
                     <td>
                         {% for role in user.userRoles %}
-                            {{ role.label }}
+                            <span>
+                                {{ role.label }}{% if not loop.last %},&nbsp;{% endif %}
+                            </span>
                         {% endfor %}
                     </td>
-                    <td><a href="{{ path("inkstand_user_edit", {'userId':user.id}) }}">{{ 'user.edit'|trans }}</a></td>
-                    <td><a href="{{ path("inkstand_user_delete", {'userId':user.id}) }}">{{ 'user.delete'|trans }}</a></td>
+                    <td>
+                        <a href="{{ path("inkstand_user_edit", {'userId':user.id}) }}"><i class="fa fa-cog fa-lg"></i></a>
+                        <a href="{{ path("inkstand_user_delete", {'userId':user.id}) }}"><i class="fa fa-times fa-lg"></i></a>
+                    </td>
                 </tr>
             {% endfor %}
         {% endblock %}
