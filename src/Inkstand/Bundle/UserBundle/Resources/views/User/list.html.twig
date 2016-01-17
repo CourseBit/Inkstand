@@ -16,6 +16,7 @@
         {% block grid_head %}
             <th>Username</th>
             <th>Email</th>
+            <th>Roles</th>
             <td>Actions</td>
         {% endblock %}
         {% block grid_body %}
@@ -23,6 +24,11 @@
                 <tr>
                     <td>{{ user.username }}</td>
                     <td>{{ user.email }}</td>
+                    <td>
+                        {% for role in user.userRoles %}
+                            {{ role.label }}
+                        {% endfor %}
+                    </td>
                     <td><a href="{{ path("inkstand_user_edit", {'userId':user.id}) }}">{{ 'user.edit'|trans }}</a></td>
                     <td><a href="{{ path("inkstand_user_delete", {'userId':user.id}) }}">{{ 'user.delete'|trans }}</a></td>
                 </tr>
