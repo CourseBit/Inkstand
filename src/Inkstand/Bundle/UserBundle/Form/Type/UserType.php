@@ -2,6 +2,7 @@
 
 namespace Inkstand\Bundle\UserBundle\Form\Type;
 
+use Inkstand\Bundle\CoreBundle\Service\RoleServiceInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -31,6 +32,12 @@ class UserType extends AbstractType
             ))
             ->add('email', 'text', array(
                 'label' => 'email'
+            ))
+            ->add('userRoles', 'entity', array(
+                'class' => 'Inkstand\Bundle\CoreBundle\Entity\Role',
+                'property' => 'label',
+                'expanded' => true,
+                'multiple' => true
             ))
             ->add('image', 'text', array(
                 'label' => 'Image'
