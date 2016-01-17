@@ -3,6 +3,7 @@
 namespace Inkstand\Bundle\CourseBundle\Controller;
 
 use Inkstand\Bundle\CoreBundle\Controller\Controller;
+use Inkstand\Bundle\CourseBundle\Voter\CourseVoter;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpFoundation\Request;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -45,7 +46,7 @@ class CourseController extends Controller
             throw new NotFoundHttpException($this->get('translator')->trans('course.notfound'));
         }
 
-		$this->get('inkstand_core.voter');
+		$this->denyAccessUnlessGranted('view', $course);
 
 		if(!$this->get('enrollment_service')->isUserEnrolled($this->getUser(), $course)) {
 			return $this->redirectToRoute('inkstand_course_enroll', array('courseId' => $course->getCourseId()));

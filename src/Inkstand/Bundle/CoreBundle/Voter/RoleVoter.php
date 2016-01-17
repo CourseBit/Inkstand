@@ -32,7 +32,7 @@ class RoleVoter extends AbstractVoter
         return array('Inkstand\Bundle\CoreBundle\Entity\Role');
     }
 
-    protected function isGranted($attribute, $role, $user = null)
+    protected function isUserGranted($attribute, $role, $user = null)
     {
         $user->getRoles();
 

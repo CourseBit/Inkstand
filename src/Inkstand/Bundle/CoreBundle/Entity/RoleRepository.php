@@ -19,4 +19,19 @@ class RoleRepository extends EntityRepository
         }
         return $queryBuilder->getQuery()->getResult();
     }
+
+    public function findAllCached()
+    {
+        return $this->_em->createQueryBuilder()
+            ->select('r, ra, va, v')
+            ->from('Inkstand\Bundle\CoreBundle\Entity\Role', 'r', 'r.roleId')
+            ->leftJoin('r.voterActionRoleAssignments', 'ra')
+            ->leftJoin('ra.voterAction', 'va')
+            ->leftJoin('va.voter', 'v')
+            ->getQuery()
+            ->useQueryCache(true)
+            ->setResultCacheId('role_data')
+            ->useResultCache(true)
+            ->getResult();
+    }
 }

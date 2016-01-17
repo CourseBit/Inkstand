@@ -169,25 +169,4 @@ class VoterService
         }
         return null;
     }
-
-    public function isRoleGranted($roleName, $voterClassName, $actionName)
-    {
-        $voter = $this->findOneByClassName($voterClassName);
-        $voterAction = $this->voterActionService->findOneBy(array('voterId' => $voter->getVoterId(), 'name' => $actionName));
-        $role = $this->roleService->findOneByName($roleName);
-
-        $assignment = $this->voterActionRoleAssignmentService->getAssignmentWith($role->getRoleId(), $voterAction->getVoterActionId());
-
-        dump($assignment);
-
-        if($assignment->getAllow() == 0) {
-            return false;
-        } else if($assignment->getAllow() == 1) {
-            return true;
-        } else {
-            // TODO: Check child roles for permission
-            dump("Inherit role, default to forbid");
-            return false;
-        }
-    }
 }

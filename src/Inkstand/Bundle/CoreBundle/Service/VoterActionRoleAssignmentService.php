@@ -18,9 +18,4 @@ class VoterActionRoleAssignmentService
         $voterActionRoleAssignment = $this->repository->findOneBy(array('roleId' => $roleId, 'voterActionId' => $voterActionId));
         return !empty($voterActionRoleAssignment);
     }
-
-    public function getAssignmentWith($roleId, $voterActionId)
-    {
-        return $this->repository->findOneBy(array('roleId' => $roleId, 'voterActionId' => $voterActionId));
-    }
 }

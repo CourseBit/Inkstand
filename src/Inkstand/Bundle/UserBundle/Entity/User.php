@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * User
  *
  * @ORM\Table("lms_user")
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="UserRepository")
  */
 class User extends BaseUser
 {
@@ -75,6 +75,22 @@ class User extends BaseUser
      * @ORM\Column(name="twitter", type="string", nullable=true)
      */
     protected $twitter;
+
+    /**
+     * @var \Doctrine\Common\Collections\ArrayCollection
+     *
+     * @ORM\ManyToMany(targetEntity="\Inkstand\Bundle\CoreBundle\Entity\Role")
+     * @ORM\JoinTable(
+     *  name="lms_user_role",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="role_id", referencedColumnName="role_id")
+     *  }
+     * )
+     */
+    protected $userRoles;
 
     /**
      * Constructor
@@ -321,5 +337,38 @@ class User extends BaseUser
     public function getTwitter()
     {
         return $this->twitter;
+    }
+
+    /**
+     * Add userRoles
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\Role $userRoles
+     * @return User
+     */
+    public function addUserRole(\Inkstand\Bundle\CoreBundle\Entity\Role $userRoles)
+    {
+        $this->userRoles[] = $userRoles;
+
+        return $this;
+    }
+
+    /**
+     * Remove userRoles
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\Role $userRoles
+     */
+    public function removeUserRole(\Inkstand\Bundle\CoreBundle\Entity\Role $userRoles)
+    {
+        $this->userRoles->removeElement($userRoles);
+    }
+
+    /**
+     * Get userRoles
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUserRoles()
+    {
+        return $this->userRoles;
     }
 }

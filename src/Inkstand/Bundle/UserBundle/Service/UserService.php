@@ -1,8 +1,13 @@
 <?php
 
 namespace Inkstand\Bundle\UserBundle\Service;
+
+use Inkstand\Bundle\CoreBundle\Entity\Role;
+use Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment;
 use Inkstand\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
+use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
+use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Validator\Exception\MappingException;
 
 /**
