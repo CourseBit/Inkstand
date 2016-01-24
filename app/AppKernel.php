@@ -27,7 +27,8 @@ class AppKernel extends Kernel
             new Inkstand\Activity\ScormBundle\InkstandScormBundle(),
             new Inkstand\LrsBundle\InkstandLrsBundle(),
             new Inkstand\EnrollmentBundle\InkstandEnrollmentBundle(),
-            new Oneup\FlysystemBundle\OneupFlysystemBundle()
+            new Oneup\FlysystemBundle\OneupFlysystemBundle(),
+            new Inkstand\ResourceLibraryBundle\InkstandResourceLibraryBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

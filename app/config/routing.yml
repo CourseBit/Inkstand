@@ -1,3 +1,7 @@
+inkstand_resource_library:
+    resource: "@InkstandResourceLibraryBundle/Resources/config/routing.yml"
+    prefix:   /
+
 inkstand_enrollment:
     resource: "@InkstandEnrollmentBundle/Resources/config/routing.yml"
     prefix:   /
