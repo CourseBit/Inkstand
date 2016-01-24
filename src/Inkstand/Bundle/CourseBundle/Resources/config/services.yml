@@ -9,6 +9,7 @@ parameters:
     enrollment.manual.service.class:      Inkstand\Bundle\CourseBundle\Service\ManualEnrollmentService
     course_enrollment_type_service.class: Inkstand\Bundle\CourseBundle\Service\CourseEnrollmentTypeService
     inkstand_course.voter.course_voter.class: Inkstand\Bundle\CourseBundle\Voter\CourseVoter
+    inkstand_course.voter.module_voter.class: Inkstand\Bundle\CourseBundle\Voter\ModuleVoter
 
 services:
     # Entity services
@@ -67,6 +68,13 @@ services:
     # Voters
     inkstand_course.voter.course_voter:
         class:      "%inkstand_course.voter.course_voter.class%"
+        arguments:  [@inkstand_core.role]
+        public:     true
+        tags:
+            - { name: security.voter }
+
+    inkstand_course.voter.module_voter:
+        class:      "%inkstand_course.voter.module_voter.class%"
         arguments:  [@inkstand_core.role]
         public:     true
         tags:

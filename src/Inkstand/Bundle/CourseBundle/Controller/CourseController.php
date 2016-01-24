@@ -94,6 +94,8 @@ class CourseController extends Controller
 	{
 		$course = new Course();
 
+		$this->denyAccessUnlessGranted('add', $course);
+
 		// If route has categoryId, set that category on the course so it defaults in the form
 		if(!empty($categoryId)) {
 			$courseCategory = $this->get('course_category_service')->findOneByCategoryId($categoryId);

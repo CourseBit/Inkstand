@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Module
 {
+    const STATE_DRAFT = 0;
+    const STATE_PUBLISHED = 1;
+
     /**
      * @var integer
      *
@@ -41,6 +44,13 @@ class Module
      * @ORM\Column(name="description", type="text")
      */
     private $description;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="state", type="integer")
+     */
+    private $state = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity="Course", inversedBy="modules")
@@ -193,5 +203,28 @@ class Module
     public function getActivities()
     {
         return $this->activities;
+    }
+
+    /**
+     * Set state
+     *
+     * @param integer $state
+     * @return Module
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * Get state
+     *
+     * @return integer 
+     */
+    public function getState()
+    {
+        return $this->state;
     }
 }

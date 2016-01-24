@@ -2,7 +2,8 @@
 
 namespace Inkstand\Bundle\CourseBundle\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Inkstand\Bundle\CoreBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
@@ -170,6 +171,22 @@ class ModuleController extends Controller
 			'course' => $course,
 			'deleteForm' => $deleteForm->createView()
 		));
+	}
+
+	/**
+	 * @Template
+	 */
+	public function displayAction(Module $module)
+	{
+		if(!$this->isGranted('view', $module)) {
+			return new Response();
+		}
+
+		if($module->getState() == Module::STATE_DRAFT && !$this->isGranted('edit', $module)) {
+			return new Response();
+		}
+
+		return array('module' => $module);
 	}
 
 	/**

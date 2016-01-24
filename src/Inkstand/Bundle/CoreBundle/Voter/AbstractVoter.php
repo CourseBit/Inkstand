@@ -44,6 +44,9 @@ abstract class AbstractVoter extends BaseVoter
      */
     protected function isGranted($attribute, $object, $user = null)
     {
+        if(!is_a($user, 'FOS\UserBundle\Model\UserInterface')) {
+            return false;
+        }
         // First check if user has permission
         if(!$this->getRoleService()->isUserGranted($user, $attribute, $this)) {
             return false;

@@ -6,7 +6,7 @@ use Inkstand\Bundle\CoreBundle\Entity\Role;
 use Inkstand\Bundle\CoreBundle\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-class CourseVoter extends AbstractVoter
+class ModuleVoter extends AbstractVoter
 {
     const ADD = 'add';
     const VIEW = 'view';
@@ -30,7 +30,7 @@ class CourseVoter extends AbstractVoter
 
     protected function getSupportedClasses()
     {
-        return array('Inkstand\Bundle\CourseBundle\Entity\Course');
+        return array('Inkstand\Bundle\CourseBundle\Entity\Module');
     }
 
     protected function isUserGranted($attribute, $course, $user = null)

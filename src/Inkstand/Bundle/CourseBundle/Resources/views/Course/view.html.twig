@@ -5,9 +5,9 @@
 {% block page_header %}{{ course.name }}{% endblock %}
 
 {% block main_content %}
-    {{ parent() }}
 	{% for module in course.modules %}
-		{{ include('InkstandThemeBundle::module.html.twig', {'module':module}) }}
+
+		{{ render(controller('InkstandCourseBundle:Module:display', {'module': module})) }}
         <hr class="line-bold">
 	{% endfor %}
 	{% if course.modules is empty %}
