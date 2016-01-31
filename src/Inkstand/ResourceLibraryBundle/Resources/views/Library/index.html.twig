@@ -1,0 +1,79 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandResourceLibraryBundle:Library:index{% endblock %}
+
+{% block page_header %}Resource Library{% endblock %}
+
+{% block main_content %}
+    {% if resources is not empty  %}
+        {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+            {% block grid_head %}
+                <th></th>
+                <th>Topic</th>
+                <th>Actions</th>
+            {% endblock %}
+            {% block grid_body %}
+                {% for resource in resources %}
+                    <tr>
+                        <td>{{ render(controller('InkstandResourceLibraryBundle:Resource:render', {'resource': resource})) }}</td>
+                        <td>{{ resource.topic.name }}</td>
+                        <td>
+                            {% if is_granted("edit", resource) %}
+                                <a href="{{ path("inkstand_resource_library_resource_download") }}"><i class="fa fa-download fa-lg"></i></a>
+                            {% endif %}
+                            {% if is_granted("edit", resource) %}
+                                <a href="{{ path("inkstand_resource_library_resource_edit", {"resourceId":resource.resourceId}) }}"><i class="fa fa-pencil fa-lg"></i></a>
+                            {% endif %}
+                            {% if is_granted("delete", resource) %}
+                                <a href="{{ path("inkstand_resource_library_resource_delete") }}"><i class="fa fa-times fa-lg"></i></a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            {% endblock %}
+        {% endembed %}
+    {% else %}
+        <p class="text-muted">No resources yet.</p>
+    {% endif %}
+
+    {% for resource in resources %}
+        <!-- Modal -->
+        <div class="modal fade" id="resource-{{ resource.resourceId }}-preview-modal" tabindex="-1" role="dialog" aria-labelledby="resource-preview-modal">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">{{ resource.name }}</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+                            <div class="col-sm-8">
+                                {{ resource.description }}
+                            </div>
+                            <div class="col-sm-4">
+                                <p>Topic: {{ resource.topic.name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary"><i class="fa fa-download"></i> Download</button>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
+
+{% block extra_widgets %}
+    {% if is_granted('add', newResource) or is_granted('add', newTopic) %}
+        <div class="list-group">
+            {% if is_granted('add', newResource) %}
+                <a href="{{ path("inkstand_resource_library_resource_add") }}" class="list-group-item">Add Resource</a>
+            {% endif %}
+            {% if is_granted('add', newTopic) %}
+                <a href="{{ path("inkstand_resource_library_topic_add") }}" class="list-group-item">Add Topic</a>
+            {% endif %}
+        </div>
+    {% endif %}
+{% endblock %}

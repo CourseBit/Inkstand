@@ -1,4 +1,25 @@
+parameters:
+    inkstand_resource_library.resource.class: Inkstand\ResourceLibraryBundle\Service\ResourceService
+    inkstand_resource_library.voter.resource_voter.class: Inkstand\ResourceLibraryBundle\Voter\ResourceVoter
+    inkstand_resource_library.voter.topic_voter.class: Inkstand\ResourceLibraryBundle\Voter\TopicVoter
+
 services:
-#    inkstand_resource_library.example:
-#        class: Inkstand\ResourceLibraryBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    inkstand_resource_library.resource:
+        class: "%inkstand_resource_library.resource.class%"
+        arguments: [@doctrine.orm.entity_manager]
+
+    # Voters
+
+    inkstand_resource_library.voter.resource_voter:
+        class:      "%inkstand_resource_library.voter.resource_voter.class%"
+        arguments:  [@inkstand_core.role]
+        public:     true
+        tags:
+            - { name: security.voter }
+
+    inkstand_resource_library.voter.topic_voter:
+        class:      "%inkstand_resource_library.voter.topic_voter.class%"
+        arguments:  [@inkstand_core.role]
+        public:     true
+        tags:
+            - { name: security.voter }

@@ -7,7 +7,7 @@ use Inkstand\Bundle\CoreBundle\Event\DashboardEvent;
 use Inkstand\Bundle\CoreBundle\Event\DashboardEvents;
 use Inkstand\Bundle\CoreBundle\Form\Type\SettingType;
 use Inkstand\Bundle\CoreBundle\Setting\SiteSettings;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Inkstand\Bundle\CoreBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Config\Definition\Exception\Exception;

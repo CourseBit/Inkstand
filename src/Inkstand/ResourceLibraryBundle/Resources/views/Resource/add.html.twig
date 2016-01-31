@@ -1,0 +1,11 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandResourceLibraryBundle:Resource:add{% endblock %}
+
+{% block page_header %}Add Resource{% endblock %}
+
+{% block main_content %}
+    {{ form_start(resourceForm) }}
+    {{ form_widget(resourceForm) }}
+    {{ form_end(resourceForm) }}
+{% endblock %}

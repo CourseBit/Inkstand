@@ -1,0 +1,11 @@
+inkstand_resource_library:
+    resource: "@InkstandResourceLibraryBundle/Controller/LibraryController.php"
+    type:     annotation
+
+inkstand_resource_library_resource:
+    resource: "@InkstandResourceLibraryBundle/Controller/ResourceController.php"
+    type:     annotation
+
+inkstand_resource_library_topic:
+    resource: "@InkstandResourceLibraryBundle/Controller/TopicController.php"
+    type:     annotation

@@ -3,11 +3,12 @@
 namespace Inkstand\ResourceLibraryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Resource
  *
- * @ORM\Table()
+ * @ORM\Table("lms_resource")
  * @ORM\Entity
  */
 class Resource
@@ -15,11 +16,11 @@ class Resource
     /**
      * @var integer
      *
-     * @ORM\Column(name="id", type="integer")
+     * @ORM\Column(name="resource_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $id;
+    private $resourceId;
 
     /**
      * @var string
@@ -31,7 +32,7 @@ class Resource
     /**
      * @var integer
      *
-     * @ORM\Column(name="resource_file_reference_id", type="integer")
+     * @ORM\Column(name="resource_file_reference_id", type="integer", nullable=true)
      */
     private $resourceFileReferenceId;
 
@@ -49,15 +50,26 @@ class Resource
      */
     private $topicId;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Inkstand\Bundle\CoreBundle\Entity\FileReference", cascade={"persist"})
+     * @ORM\JoinColumn(name="resource_file_reference_id", referencedColumnName="file_reference_id", nullable=true)
+     */
+    private $resourceFileReference = null;
 
     /**
-     * Get id
+     * @ORM\ManyToOne(targetEntity="Topic", inversedBy="resources")
+     * @ORM\JoinColumn(name="topic_id", referencedColumnName="topic_id")
+     */
+    private $topic;
+
+    /**
+     * Get resourceId
      *
      * @return integer 
      */
-    public function getId()
+    public function getResourceId()
     {
-        return $this->id;
+        return $this->resourceId;
     }
 
     /**
@@ -150,5 +162,51 @@ class Resource
     public function getTopicId()
     {
         return $this->topicId;
+    }
+
+    /**
+     * Set resourceFileReference
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\FileReference $resourceFileReference
+     * @return Resource
+     */
+    public function setResourceFileReference(\Inkstand\Bundle\CoreBundle\Entity\FileReference $resourceFileReference = null)
+    {
+        $this->resourceFileReference = $resourceFileReference;
+
+        return $this;
+    }
+
+    /**
+     * Get resourceFileReference
+     *
+     * @return \Inkstand\Bundle\CoreBundle\Entity\FileReference 
+     */
+    public function getResourceFileReference()
+    {
+        return $this->resourceFileReference;
+    }
+
+    /**
+     * Set topic
+     *
+     * @param \Inkstand\ResourceLibraryBundle\Entity\Topic $topic
+     * @return Resource
+     */
+    public function setTopic(\Inkstand\ResourceLibraryBundle\Entity\Topic $topic = null)
+    {
+        $this->topic = $topic;
+
+        return $this;
+    }
+
+    /**
+     * Get topic
+     *
+     * @return \Inkstand\ResourceLibraryBundle\Entity\Topic 
+     */
+    public function getTopic()
+    {
+        return $this->topic;
     }
 }

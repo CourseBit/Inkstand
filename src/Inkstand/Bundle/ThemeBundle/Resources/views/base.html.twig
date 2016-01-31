@@ -50,6 +50,7 @@
 						<li><a href="{{ path('inkstand_core_role_list') }}">Manage roles</a></li>
                     </ul>
                 </li>
+				<li><a href="{{ path("inkstand_resource_library_index") }}"><i class="fa fa-fw fa-book"></i> Library</a></li>
 			</ul>
 		</div>
 
@@ -148,42 +149,7 @@
 				#}
 
 				<div class="col-lg-4">
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<h4>Welcome to Inkstand!</h4>
-							<hr>
-							<p>This is a demo of Inkstand LMS. Widgets will appear here in future versions.</p>
-							<img class="img-responsive center-block" src="https://cloud.githubusercontent.com/assets/3340747/9319889/109a867a-4519-11e5-91a8-189ee57ec872.png">
-						</div>
-					</div>
-
-					<div class="panel panel-default">
-						<div class="panel-body">
-							<h4>Calendar</h4>
-							<hr>
-							<!-- Responsive calendar - START -->
-							<div class="responsive-calendar">
-								<div class="controls">
-									<a class="pull-left" data-go="prev"><div class="btn btn-primary">Prev</div></a>
-									<h4><span data-head-year></span> <span data-head-month></span></h4>
-									<a class="pull-right" data-go="next"><div class="btn btn-primary">Next</div></a>
-								</div><hr/>
-								<div class="day-headers">
-									<div class="day header">Mon</div>
-									<div class="day header">Tue</div>
-									<div class="day header">Wed</div>
-									<div class="day header">Thu</div>
-									<div class="day header">Fri</div>
-									<div class="day header">Sat</div>
-									<div class="day header">Sun</div>
-								</div>
-								<div class="days" data-group="days">
-
-								</div>
-							</div>
-							<!-- Responsive calendar - END -->
-						</div>
-					</div>
+					{% block extra_widgets %}{% endblock %}
 				</div>
 			</div>
 			<div class="footer container-fluid">
