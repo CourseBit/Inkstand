@@ -33,6 +33,10 @@ class UserType extends AbstractType
             ->add('email', 'text', array(
                 'label' => 'email'
             ))
+            ->add('organization', 'entity', array(
+                'class' => 'Inkstand\Bundle\UserBundle\Entity\Organization',
+                'property' => 'name'
+            ))
             ->add('userRoles', 'entity', array(
                 'class' => 'Inkstand\Bundle\CoreBundle\Entity\Role',
                 'property' => 'label',

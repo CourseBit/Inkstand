@@ -85,6 +85,12 @@ fos_user:
     firewall_name: main
     user_class: Inkstand\Bundle\UserBundle\Entity\User
 
+doctrine_migrations:
+    dir_name: "%kernel.root_dir%/DoctrineMigrations"
+    namespace: Application\Migrations
+    table_name: migration_versions
+    name: Application Migrations
+
 oneup_flysystem:
     adapters:
         testfilesystem_adapter:

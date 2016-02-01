@@ -10,8 +10,8 @@ class SecurityController extends BaseController
     {
         $defaultData = array('_csrf_token' => $data['csrf_token']);
 
-        $userLoginForm =  $this->get('form.factory')->createNamedBuilder('', 'form', $defaultData, array())
-            ->setAction($this->generateUrl('fos_user_security_check'))
+        $userLoginForm =  $this->container->get('form.factory')->createNamedBuilder('', 'form', $defaultData, array())
+            ->setAction($this->container->get('router')->generate('fos_user_security_check'))
             ->add('_csrf_token', 'hidden')
             ->add('_username', 'text')
             ->add('_password', 'password')
@@ -25,6 +25,6 @@ class SecurityController extends BaseController
 
         $data['userLoginForm'] = $userLoginForm->createView();
 
-        return $this->render('InkstandUserBundle:Security:login.html.twig', $data);
+        return $this->container->get('templating')->renderResponse('InkstandUserBundle:Security:login.html.twig', $data);
     }
 }

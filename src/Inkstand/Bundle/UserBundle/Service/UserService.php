@@ -146,8 +146,12 @@ class UserService
      * @param Organization $organization
      * @param boolean $recursive If true the check will include children Organizations
      */
-    public function belongsToOrganization(\FOS\UserBundle\Model\User $user, Organization $organization, $recursive = true)
+    public function belongsToOrganization(User $user, Organization $organization, $recursive = true)
     {
+        if(false === $recursive) {
+            return $user->getOrganization() == $organization->getOrganizationId();
+        }
 
+        
     }
 }

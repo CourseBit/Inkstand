@@ -3,6 +3,11 @@ parameters:
     inkstand_user.voter.user_voter.class: Inkstand\Bundle\UserBundle\Voter\UserVoter
 
 services:
+
+    # Needed for bug in FOSUserBundle https://github.com/FriendsOfSymfony/FOSUserBundle/issues/2048
+    fos_user.doctrine_registry:
+        alias: doctrine
+
     inkstand_user.user:
         class: "%inkstand_user.user.class%"
         arguments: [@doctrine.orm.entity_manager, @validator]

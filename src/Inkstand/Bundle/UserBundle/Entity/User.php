@@ -44,9 +44,9 @@ class User extends BaseUser
     /**
      * @var integer
      *
-     * @ORM\Column(name="organization_id", type="integer")
+     * @ORM\Column(name="organization_id", type="integer", nullable=true)
      */
-    protected $organizationId;
+    protected $organizationId = null;
 
     /**
      * @var string
