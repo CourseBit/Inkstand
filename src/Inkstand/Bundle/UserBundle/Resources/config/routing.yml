@@ -2,6 +2,10 @@ inkstand_user:
     resource: "@InkstandUserBundle/Controller/UserController.php"
     type:     annotation
 
-inkstand_upload:
+inkstand_user_upload:
     resource: "@InkstandUserBundle/Controller/UploadController.php"
+    type:     annotation
+
+inkstand_user_organization:
+    resource: "@InkstandUserBundle/Controller/OrganizationController.php"
     type:     annotation

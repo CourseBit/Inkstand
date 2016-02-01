@@ -16,6 +16,7 @@ services:
         public:     true
         tags:
             - { name: security.voter }
+            - { name: inkstand.voter }
 
     inkstand_resource_library.voter.topic_voter:
         class:      "%inkstand_resource_library.voter.topic_voter.class%"
@@ -23,3 +24,4 @@ services:
         public:     true
         tags:
             - { name: security.voter }
+            - { name: inkstand.voter }

@@ -104,6 +104,7 @@ services:
         public:     true
         tags:
             - { name: security.voter }
+            - { name: inkstand.voter }
 
     # Settings
     setting.site:

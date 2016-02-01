@@ -42,6 +42,13 @@ class User extends BaseUser
     protected $lastname;
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="organization_id", type="integer")
+     */
+    protected $organizationId;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="image", type="string", nullable=true)
@@ -93,12 +100,17 @@ class User extends BaseUser
     protected $userRoles;
 
     /**
+     * @ORM\ManyToOne(targetEntity="Organization", inversedBy="users")
+     * @ORM\JoinColumn(name="organization_id", referencedColumnName="organization_id")
+     */
+    protected $organization;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         parent::__construct();
-        $this->addRole("ROLE_ADMIN");
     }
 
     /**
@@ -164,8 +176,7 @@ class User extends BaseUser
 
     public function getRoles()
     {
-        //return parent::getRoles();
-        return array("ROLE_ADMIN");
+        return parent::getRoles();
     }
 
     /**
@@ -370,5 +381,51 @@ class User extends BaseUser
     public function getUserRoles()
     {
         return $this->userRoles;
+    }
+
+    /**
+     * Set organizationId
+     *
+     * @param integer $organizationId
+     * @return User
+     */
+    public function setOrganizationId($organizationId)
+    {
+        $this->organizationId = $organizationId;
+
+        return $this;
+    }
+
+    /**
+     * Get organizationId
+     *
+     * @return integer 
+     */
+    public function getOrganizationId()
+    {
+        return $this->organizationId;
+    }
+
+    /**
+     * Set organization
+     *
+     * @param \Inkstand\Bundle\UserBundle\Entity\Organization $organization
+     * @return User
+     */
+    public function setOrganization(\Inkstand\Bundle\UserBundle\Entity\Organization $organization = null)
+    {
+        $this->organization = $organization;
+
+        return $this;
+    }
+
+    /**
+     * Get organization
+     *
+     * @return \Inkstand\Bundle\UserBundle\Entity\Organization 
+     */
+    public function getOrganization()
+    {
+        return $this->organization;
     }
 }

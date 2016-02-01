@@ -4,6 +4,7 @@ namespace Inkstand\Bundle\UserBundle\Service;
 
 use Inkstand\Bundle\CoreBundle\Entity\Role;
 use Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment;
+use Inkstand\Bundle\UserBundle\Entity\Organization;
 use Inkstand\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
@@ -136,5 +137,17 @@ class UserService
         }
 
         return $userErrorArray;
+    }
+
+    /**
+     * Check if User belongs to an Organization
+     *
+     * @param \FOS\UserBundle\Model\User $user
+     * @param Organization $organization
+     * @param boolean $recursive If true the check will include children Organizations
+     */
+    public function belongsToOrganization(\FOS\UserBundle\Model\User $user, Organization $organization, $recursive = true)
+    {
+
     }
 }
