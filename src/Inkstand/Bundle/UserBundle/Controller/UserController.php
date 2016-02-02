@@ -17,7 +17,7 @@ class UserController extends Controller
      */
     public function listAction()
     {
-        $users = $this->get('inkstand_user.user')->findAll();
+        $users = $this->get('inkstand_user.user_managers')->findUsers();
         $userCount = count($users);
 
         return $this->render('InkstandUserBundle:User:list.html.twig', array(
@@ -56,7 +56,7 @@ class UserController extends Controller
     */
     public function editAction(Request $request, $userId)
     {
-        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
+        $user = $this->get('inkstand_user.user_manager')->findOneByUserId($userId);
 
         //$this->denyAccessUnlessGranted('edit', $user, 'Unauthorized access!');
 
@@ -102,7 +102,7 @@ class UserController extends Controller
      */
     public function deleteAction(Request $request, $userId)
     {
-        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
+        $user = $this->get('inkstand_user.user_manager')->findOneByUserId($userId);
 
         if (empty($user)) {
             throw new NotFoundHttpException($this->get('translator')->trans('user.notfound'));
@@ -152,7 +152,7 @@ class UserController extends Controller
      */
     public function profileAction(Request $request, $userId)
     {
-        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
+        $user = $this->get('inkstand_user.user_manager')->findOneByUserId($userId);
 
         if (empty($user)) {
             throw new NotFoundHttpException($this->get('translator')->trans('user.notfound'));

@@ -42,7 +42,7 @@ class VoterAction
     private $voter;
 
     /**
-     * @ORM\OneToMany(targetEntity="VoterActionRoleAssignment", mappedBy="voterAction")
+     * @ORM\OneToMany(targetEntity="VoterActionRoleAssignment", mappedBy="voterAction", cascade={"remove"})
      */
     private $voterActionRoleAssignments;
 

@@ -160,6 +160,23 @@ class VoterService
         }
     }
 
+    public function deleteVoters($verbose)
+    {
+        $allVoters = $this->findAll();
+
+        foreach($allVoters as $voter) {
+            $this->entityManager->remove($voter);
+        }
+
+        $this->entityManager->flush();
+
+        if($verbose) {
+            echo PHP_EOL;
+            echo sprintf('    %s Voter(s) deleted', count($allVoters));
+            echo PHP_EOL . PHP_EOL;
+        }
+    }
+
     private function getActionFromVoter(Voter $voter, $actionName)
     {
         foreach($voter->getVoterActions() as $voterAction) {

@@ -3,6 +3,7 @@
 namespace Inkstand\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Inkstand\Bundle\UserBundle\Model\OrganizationInterface;
 
 /**
  * Organization
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table("lms_organization")
  * @ORM\Entity
  */
-class Organization
+class Organization implements OrganizationInterface
 {
     /**
      * @var integer
@@ -108,26 +109,26 @@ class Organization
     }
 
     /**
-     * Add children
+     * Add child Organization
      *
-     * @param \Inkstand\Bundle\UserBundle\Entity\Organization $children
+     * @param OrganizationInterface $child
      * @return Organization
      */
-    public function addChild(\Inkstand\Bundle\UserBundle\Entity\Organization $children)
+    public function addChild(OrganizationInterface $child)
     {
-        $this->children[] = $children;
+        $this->children[] = $child;
 
         return $this;
     }
 
     /**
-     * Remove children
+     * Remove child Organization
      *
-     * @param \Inkstand\Bundle\UserBundle\Entity\Organization $children
+     * @param OrganizationInterface $children
      */
-    public function removeChild(\Inkstand\Bundle\UserBundle\Entity\Organization $children)
+    public function removeChild(OrganizationInterface $child)
     {
-        $this->children->removeElement($children);
+        $this->children->removeElement($child);
     }
 
     /**
@@ -141,12 +142,12 @@ class Organization
     }
 
     /**
-     * Set parent
+     * Set parent Organization
      *
-     * @param \Inkstand\Bundle\UserBundle\Entity\Organization $parent
+     * @param OrganizationInterface $parent
      * @return Organization
      */
-    public function setParent(\Inkstand\Bundle\UserBundle\Entity\Organization $parent = null)
+    public function setParent(OrganizationInterface $parent = null)
     {
         $this->parent = $parent;
 
@@ -154,9 +155,9 @@ class Organization
     }
 
     /**
-     * Get parent
+     * Get parent Organization
      *
-     * @return \Inkstand\Bundle\UserBundle\Entity\Organization 
+     * @return OrganizationInterface
      */
     public function getParent()
     {

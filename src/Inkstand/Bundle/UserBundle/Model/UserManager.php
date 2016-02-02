@@ -1,75 +1,40 @@
 <?php
 
-namespace Inkstand\Bundle\UserBundle\Service;
+namespace Inkstand\Bundle\UserBundle\Model;
 
-use Inkstand\Bundle\CoreBundle\Entity\Role;
-use Inkstand\Bundle\CoreBundle\Entity\VoterActionRoleAssignment;
-use Inkstand\Bundle\UserBundle\Entity\Organization;
+
+use FOS\UserBundle\Model\UserInterface;
 use Inkstand\Bundle\UserBundle\Entity\User;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
-use FOS\UserBundle\Model\UserInterface;
 use Symfony\Component\Validator\Exception\MappingException;
 
-/**
- * Service for user business logic
- *
- * Class UserService
- * @package Inkstand\Bundle\UserBundle\Service
- */
-class UserService
+abstract class UserManager implements UserManagerInterface
 {
-    protected $entityManager;
-    protected $userRepository;
     protected $validator;
 
-    /**
-     * @param $entityManager
-     * @param $validator
-     */
-    public function __construct($entityManager, $validator)
+    public function __construct($validator)
     {
-        $this->entityManager = $entityManager;
-        $this->userRepository = $entityManager->getRepository('InkstandUserBundle:User');
         $this->validator = $validator;
-    }
-
-    /**
-     * Return all users
-     *
-     * @return mixed
-     */
-    public function findAll()
-    {
-        return $this->userRepository->findAll();
     }
 
     /**
      * Return a single user by userId
      *
-     * @return
+     * @param integer $userId
+     * @return UserInterface
      */
     public function findOneByUserId($userId)
     {
-        return $this->userRepository->findOneById($userId);
-    }
-
-    /**
-     * Delete a single User
-     *
-     * @param User $user
-     */
-    public function deleteUser(User $user)
-    {
-        $this->entityManager->remove($user);
-        $this->entityManager->flush();
+        return $this->findOneUserBy(array('id' => $userId));
     }
 
     /**
      * Converts UploadedFile of users into array of User objects
      *
+     * TODO: Move this to its own class
+     *
      * @param UploadedFile $file
-     * @return array
+     * @return mixed
      */
     public function parseUserFile(UploadedFile $file)
     {
@@ -96,7 +61,6 @@ class UserService
                         }
                         $user->$functionName($userProperty);
                     }
-                    $this->isUserValid($user);
                     $data['users'][] = $user;
                 }
 
@@ -109,10 +73,10 @@ class UserService
     /**
      * Check if user is valid and return errors if present.
      *
-     * @param User $user
+     * @param UserInterface $user
      * @return bool
      */
-    public function getUserValidationErrors(User $user)
+    public function getUserValidationErrors(UserInterface $user)
     {
         $validator = $this->validator;
         $errors = $validator->validate($user);
@@ -140,18 +104,30 @@ class UserService
     }
 
     /**
-     * Check if User belongs to an Organization
+     * Checks if a User belongs to an Organization, optionally check children Organizations
      *
-     * @param \FOS\UserBundle\Model\User $user
-     * @param Organization $organization
-     * @param boolean $recursive If true the check will include children Organizations
+     * @param UserInterface $user
+     * @param OrganizationInterface $organization
+     * @param bool $recursive
+     * @return boolean
      */
-    public function belongsToOrganization(User $user, Organization $organization, $recursive = true)
+    public function belongsToOrganization(UserInterface $user, OrganizationInterface $organization, $recursive = true)
     {
         if(false === $recursive) {
             return $user->getOrganization() == $organization->getOrganizationId();
         }
 
-        
+        /** @var Organization $childOrganization */
+        foreach($organization->getChildren() as $childOrganization) {
+            if($childOrganization->getOrganizationId() == $user->getOrganizationId()) {
+                return true;
+            }
+            $hasChildren = $childOrganization->getChildren();
+            if(!empty($hasChildren)) {
+                return $this->belongsToOrganization($user, $childOrganization);
+            }
+        }
+
+        return false;
     }
 }

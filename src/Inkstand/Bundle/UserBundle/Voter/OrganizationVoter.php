@@ -1,6 +1,6 @@
 <?php
 
-namespace Inkstand\ResourceLibraryBundle\Voter;
+namespace Inkstand\Bundle\UserBundle\Voter;
 
 use Inkstand\Bundle\CoreBundle\Entity\Role;
 use Inkstand\Bundle\CoreBundle\Voter\AbstractVoter;
@@ -16,7 +16,7 @@ class OrganizationVoter extends AbstractVoter
 
     public function getSupportedAttributes()
     {
-        return array(self::ADD, self::VIEW, self::EDIT, self::DELETE);
+        return array(self::ADD, self::VIEW, self::EDIT, self::DELETE, self::ADD_USER);
     }
 
     public function getDefaultRoleAssignments()
