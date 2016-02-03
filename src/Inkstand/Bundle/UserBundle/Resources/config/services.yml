@@ -12,6 +12,10 @@ services:
         class:     Inkstand\Bundle\UserBundle\Doctrine\UserManager
         arguments: [@doctrine.orm.entity_manager, @validator, %fos_user.model.user.class% ]
 
+    inkstand_user.organization_manager:
+        class:     Inkstand\Bundle\UserBundle\Doctrine\OrganizationManager
+        arguments: [@doctrine.orm.entity_manager, "\Inkstand\Bundle\UserBundle\Entity\Organization" ]
+
     # Voters
     inkstand_user.voter.user_voter:
         class:      "%inkstand_user.voter.user_voter.class%"

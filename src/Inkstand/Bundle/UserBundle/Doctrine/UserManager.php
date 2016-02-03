@@ -3,6 +3,7 @@
 namespace Inkstand\Bundle\UserBundle\Doctrine;
 
 use Doctrine\ORM\EntityManager;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\Security\Core\Authorization\Voter\VoterInterface;
 use FOS\UserBundle\Model\UserInterface;
 use Inkstand\Bundle\UserBundle\Model\UserManager as BaseUserManager;
@@ -29,6 +30,9 @@ class UserManager extends BaseUserManager
     {
         $this->entityManager = $entityManager;
         $this->repository = $entityManager->getRepository($class);
+
+        $metadata = $entityManager->getClassMetadata($class);
+        $this->class = $metadata->getName();
 
         parent::__construct($validator);
     }
@@ -64,5 +68,12 @@ class UserManager extends BaseUserManager
     {
         $this->entityManager->remove($user);
         $this->entityManager->flush();
+    }
+
+    public function parseUserFile(UploadedFile $file)
+    {
+
+
+        return parent::parseUserFile($file);
     }
 }

@@ -48,7 +48,7 @@ class Organization implements OrganizationInterface
     /**
      * Get organizationId
      *
-     * @return integer 
+     * @return integer
      */
     public function getOrganizationId()
     {

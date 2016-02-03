@@ -34,7 +34,7 @@ abstract class UserManager implements UserManagerInterface
      * TODO: Move this to its own class
      *
      * @param UploadedFile $file
-     * @return mixed
+     * @return null|array
      */
     public function parseUserFile(UploadedFile $file)
     {
