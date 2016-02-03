@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% if setting("inkstand_core_search_index") == "0" %}
+        <meta name="robots" content="noindex">
+    {% endif %}
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% stylesheets
+    '@InkstandThemeBundle/Resources/public/bower_components/font-awesome/css/font-awesome.css'
+    '@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.min.css'
+    '@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css'
+    '@InkstandThemeBundle/Resources/public/css/font-awesome-fonts.css'
+    '@InkstandThemeBundle/Resources/public/css/navmenu.css'
+    '@InkstandCoreBundle/Resources/public/css/file-explorer.css'
+    '@InkstandCoreBundle/Resources/public/css/responsive-calendar.css'
+    '@InkstandThemeBundle/Resources/public/css/custom.css'
+    filter='cssrewrite'
+    %}
+    <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="{{ asset_url }}" />
+    {% endstylesheets %}
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+</head>
+<body class="layout-base">
+<div class="navmenu navmenu-inverse navmenu-fixed-left offcanvas-sm">
+    <a class="navmenu-brand visible-md visible-lg" href="{{ path("inkstand_dashboard") }}">{{ setting("inkstand_core_setting_sitename") }}</a>
+    <ul class="nav navmenu-nav">
+        <li><a href="{{ path("inkstand_dashboard") }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a></li>
+        <li><a href="{{ path("inkstand_course_catalog_index") }}"><i class="fa fa-fw fa-list"></i> Course Catalog</a></li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-graduation-cap"></i> Courses <b class="caret"></b></a>
+            <ul class="dropdown-menu navmenu-nav" role="menu">
+                <li><a href="{{ path('inkstand_course_add') }}">Add course</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-fw fa-circle-o"></i> Categories <b class="caret"></b></a>
+            <ul class="dropdown-menu navmenu-nav" role="menu">
+                <li><a href="{{ path('inkstand_course_category_add') }}">Add category</a></li>
+            </ul>
+        </li>
+        <li class="dropdown">
+            <a href="{{ path("inkstand_user_manage") }}"><i class="fa fa-fw fa-user"></i> Users</a>
+        </li>
+        <li><a href="{{ path("inkstand_resource_library_index") }}"><i class="fa fa-fw fa-book"></i> Library</a></li>
+    </ul>
+</div>
+
+<div class="navbar navbar-inverse navbar-fixed-top hidden-md hidden-lg">
+    <button type="button" class="navbar-toggle" data-toggle="offcanvas" data-target=".navmenu">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+    </button>
+    <a class="navbar-brand" href="{{ path("inkstand_dashboard") }}">Inkstand LMS</a>
+</div>
+<div class="container-fluid">
+    <div class="row">
+        <nav style="display:block !important" class="navbar navbar-default navbar-static-top">
+            <div class="container-fluid">
+                <div class="navbar-header navbar-header-full">
+                    <ul class="nav navbar-nav collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <li><a href="#">Resources</a></li>
+                        <li><a href="#">Library</a></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Staff Directory <span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li><a href="#">Something else here</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="#">One more separated link</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+
+                    <ul class="nav navbar-nav navbar-right navbar-user">
+                        {% if app.user %}
+                            <li>
+                                <a href="" class="dropdown-toggle" data-toggle="dropdown">{{ app.user.firstname }} {{ app.user.lastname }}
+                                    {% if app.user.image %}
+                                        &nbsp;<img width="32" class="img-responsive img-circle img-user inline" src="{{ app.user.image }}">
+                                    {% endif %}
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="{{ path("inkstand_user_profile", {"userId":app.user.id}) }}"><i class="fa fa-fw fa-user"></i> My Profile</a></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-user"></i> Messages <span class="label label-danger">42</span></a></li>
+                                    <li><a href="#"><i class="fa fa-fw fa-calendar"></i> Calendar</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ path("inkstand_help") }}"><i class="fa fa-fw fa-question-circle"></i> Help</a></li>
+                                    <li role="separator" class="divider"></li>
+                                    <li><a href="{{ path("fos_user_security_logout") }}"><i class="fa fa-fw fa-sign-out"></i> Logout</a></li>
+                                </ul>
+                            </li>
+                        {% else %}
+                            <li><a href="{{ path("fos_user_security_login") }}">Login</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+</div>
+<div class="container-fluid">
+    <div class="page-header page-header-sm">
+        <h1>{% block page_header %}{% endblock %}</h1>
+
+    </div>
+    {% if breadcrumbs is defined %}
+        <ol class="breadcrumb breadcrumb-inline">
+            {% for breadcrumb in breadcrumbs %}
+                {% if breadcrumb.route is defined %}
+                    <li><a href="{{ path(breadcrumb.route, breadcrumb.parameters) }}">{{ breadcrumb.title }}</a></li>
+                {% else %}
+                    <li>{{ breadcrumb.title }}</li>
+                {% endif %}
+            {% endfor %}
+        </ol>
+    {% endif %}
+
+
+    {{ include('InkstandThemeBundle::flash-messages.html.twig') }}
+
+    <div class="row">
+        <div class="col-lg-8">
+            {% block main_content %}{% endblock %}
+        </div>
+
+        {#
+        {% for widget in page_template_service.getWidgetsForTemplate(1) %}
+            {{ include(widget.partial) }}
+        {% endfor %}
+        #}
+
+        <div class="col-lg-4">
+            {% block extra_widgets %}{% endblock %}
+        </div>
+    </div>
+    <div class="footer container-fluid">
+        <p class="text-muted">Copyright Inkstand 2016</p>
+    </div>
+</div><!-- /.container -->
+
+{{ include('InkstandCoreBundle:partial:file_manager.html.twig') }}
+
+{% javascripts
+'@InkstandThemeBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
+'@InkstandThemeBundle/Resources/public/bower_components/datatables/media/js/jquery.dataTables.min.js'
+'@InkstandThemeBundle/Resources/public/js/dataTables.bootstrap.js'
+'@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.min.js'
+'@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js'
+'@InkstandThemeBundle/Resources/public/bower_components/handlebars/handlebars.min.js'
+'@InkstandCoreBundle/Resources/public/js/file-explorer.js'
+'@InkstandCoreBundle/Resources/public/js/responsive-calendar.min.js'
+'@InkstandThemeBundle/Resources/public/js/custom.js'
+%}
+<script src="{{ asset_url }}"></script>
+{% endjavascripts %}
+{% block javascripts %}{% endblock %}
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(".responsive-calendar").responsiveCalendar({
+            time: '2016-01',
+            events: {
+                "2016-01-03": {}
+            }
+        });
+    });
+</script>
+</body>
+</html>

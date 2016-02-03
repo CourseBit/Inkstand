@@ -35,7 +35,7 @@ class Voter
     private $className;
 
     /**
-     * @ORM\OneToMany(targetEntity="VoterAction", mappedBy="voter")
+     * @ORM\OneToMany(targetEntity="VoterAction", mappedBy="voter", cascade={"remove"})
      */
     private $voterActions;
 

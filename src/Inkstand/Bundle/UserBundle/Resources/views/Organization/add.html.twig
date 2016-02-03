@@ -1,0 +1,11 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandUserBundle:Organization:add{% endblock %}
+
+{% block page_header %}Add Organization{% endblock %}
+
+{% block main_content %}
+    {{ form_start(organizationForm) }}
+    {{ form_widget(organizationForm) }}
+    {{ form_end(organizationForm) }}
+{% endblock %}

@@ -1,11 +1,20 @@
 parameters:
-    inkstand_user.user.class:                   Inkstand\Bundle\UserBundle\Service\UserService
     inkstand_user.voter.user_voter.class: Inkstand\Bundle\UserBundle\Voter\UserVoter
+    inkstand_user.voter.organization_voter.class: Inkstand\Bundle\UserBundle\Voter\OrganizationVoter
 
 services:
-    inkstand_user.user:
-        class: "%inkstand_user.user.class%"
-        arguments: [@doctrine.orm.entity_manager, @validator]
+
+    # Needed for bug in FOSUserBundle https://github.com/FriendsOfSymfony/FOSUserBundle/issues/2048
+    fos_user.doctrine_registry:
+        alias: doctrine
+
+    inkstand_user.user_manager:
+        class:     Inkstand\Bundle\UserBundle\Doctrine\UserManager
+        arguments: [@doctrine.orm.entity_manager, @validator, %fos_user.model.user.class% ]
+
+    inkstand_user.organization_manager:
+        class:     Inkstand\Bundle\UserBundle\Doctrine\OrganizationManager
+        arguments: [@doctrine.orm.entity_manager, "\Inkstand\Bundle\UserBundle\Entity\Organization" ]
 
     # Voters
     inkstand_user.voter.user_voter:
@@ -14,3 +23,12 @@ services:
         public:     true
         tags:
             - { name: security.voter }
+            - { name: inkstand.voter }
+
+    inkstand_user.voter.organization_voter:
+        class:      "%inkstand_user.voter.organization_voter.class%"
+        arguments: [@inkstand_core.role]
+        public:     true
+        tags:
+            - { name: security.voter }
+            - { name: inkstand.voter }

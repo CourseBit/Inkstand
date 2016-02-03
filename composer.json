@@ -22,13 +22,14 @@
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
         "incenteev/composer-parameter-handler": "~2.0",
         "sensio/generator-bundle": "~2.5",
-        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "friendsofsymfony/user-bundle": "dev-master",
         "doctrine/doctrine-fixtures-bundle": "~2.2",
         "knplabs/knp-menu-bundle": "^2.0",
         "monolog/monolog": "^1.15",
         "pimple/pimple": "^3.0",
         "oneup/flysystem-bundle": "1.2.0",
-        "league/flysystem-dropbox": "^1.0"
+        "league/flysystem-dropbox": "^1.0",
+        "doctrine/doctrine-migrations-bundle": "^1.0"
     },
     "require-dev": {
     },

@@ -1,0 +1,75 @@
+{% extends "InkstandThemeBundle:layout:default.html.twig" %}
+
+{% block title %}InkstandUserBundle:User:manage{% endblock %}
+
+{% block page_header %}User Management{% endblock %}
+
+{% block main_content %}
+
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Overview"} %}
+        {% block panel_body %}
+
+            {% if app.user.organization %}
+                <p>You belong to the <b>{{ app.user.organization.name }}</b> organization.</p>
+            {% else %}
+                <p>You do not belong to any organizations.</p>
+            {% endif %}
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <table border="0">
+                        <tr>
+                            <td class="text-right"><a href="{{ path("inkstand_user_list") }}">{{ users|length }}</a>&nbsp;</td>
+                            <td><a href="{{ path("inkstand_user_list") }}">Users</a></td>
+                        </tr>
+                        <tr>
+                            <td class="text-right"><a href="{{ path("inkstand_user_list") }}">{{ roles|length }}</a>&nbsp;</td>
+                            <td><a href="{{ path("inkstand_user_list") }}">Roles</a></td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="col-sm-4">
+                    <table border="0">
+                        <tr>
+                            <td class="text-right"><a href="{{ path("inkstand_user_list") }}">{{ organizations|length }}</a>&nbsp;</td>
+                            <td><a href="{{ path("inkstand_user_list") }}">Organizations</a></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        {% endblock %}
+    {% endembed %}
+
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Users"} %}
+        {% block panel_body %}
+            {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+                {% block grid_head %}
+                    <th>Username</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Actions</th>
+                {% endblock %}
+                {% block grid_body %}
+                    {% for user in users %}
+                        <tr>
+                            <td>{{ user.username }}</td>
+                            <td>{{ user.email }}</td>
+                            <td>
+                                {% for role in user.userRoles %}
+                                    <span>
+                                {{ role.label }}{% if not loop.last %},&nbsp;{% endif %}
+                            </span>
+                                {% endfor %}
+                            </td>
+                            <td>
+                                <a href="{{ path("inkstand_user_edit", {'userId':user.id}) }}"><i class="fa fa-cog fa-lg"></i></a>
+                                <a href="{{ path("inkstand_user_delete", {'userId':user.id}) }}"><i class="fa fa-times fa-lg"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

@@ -2,6 +2,8 @@
 
 namespace Inkstand\Bundle\UserBundle\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Inkstand\Bundle\UserBundle\Doctrine\UserManager;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Exception\MappingException;
 use Inkstand\Bundle\UserBundle\Form\Type\UserType;
@@ -13,11 +15,28 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends Controller
 {
     /**
+     * @Route("/user/manage", name="inkstand_user_manage")
+     * @Template
+     */
+    public function manageAction()
+    {
+        $users = $this->get('inkstand_user.user_manager')->findUsers();
+        $organizations = $this->get('inkstand_user.organization_manager')->findOrganizations();
+        $roles = $this->get('inkstand_core.role');
+
+        return array(
+            'users' => $users,
+            'organizations' => $organizations,
+            'roles' => $roles
+        );
+    }
+
+    /**
      * @Route("/user/list", name="inkstand_user_list")
      */
     public function listAction()
     {
-        $users = $this->get('inkstand_user.user')->findAll();
+        $users = $this->get('inkstand_user.user_manager')->findUsers();
         $userCount = count($users);
 
         return $this->render('InkstandUserBundle:User:list.html.twig', array(
@@ -56,7 +75,7 @@ class UserController extends Controller
     */
     public function editAction(Request $request, $userId)
     {
-        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
+        $user = $this->get('inkstand_user.user_manager')->findOneByUserId($userId);
 
         //$this->denyAccessUnlessGranted('edit', $user, 'Unauthorized access!');
 
@@ -102,7 +121,7 @@ class UserController extends Controller
      */
     public function deleteAction(Request $request, $userId)
     {
-        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
+        $user = $this->get('inkstand_user.user_manager')->findOneByUserId($userId);
 
         if (empty($user)) {
             throw new NotFoundHttpException($this->get('translator')->trans('user.notfound'));
@@ -152,7 +171,7 @@ class UserController extends Controller
      */
     public function profileAction(Request $request, $userId)
     {
-        $user = $this->get('inkstand_user.user')->findOneByUserId($userId);
+        $user = $this->get('inkstand_user.user_manager')->findOneByUserId($userId);
 
         if (empty($user)) {
             throw new NotFoundHttpException($this->get('translator')->trans('user.notfound'));
