@@ -29,6 +29,7 @@ class AppKernel extends Kernel
             new Inkstand\EnrollmentBundle\InkstandEnrollmentBundle(),
             new Oneup\FlysystemBundle\OneupFlysystemBundle(),
             new Inkstand\ResourceLibraryBundle\InkstandResourceLibraryBundle(),
+            new Inkstand\Library\RatingBundle\InkstandRatingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
