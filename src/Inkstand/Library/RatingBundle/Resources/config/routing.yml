@@ -1,0 +1,3 @@
+inkstand_rating_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: InkstandRatingBundle:Default:index }

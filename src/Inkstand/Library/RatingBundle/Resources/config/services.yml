@@ -1,0 +1,4 @@
+services:
+#    inkstand_rating.example:
+#        class: Inkstand\Library\RatingBundle\Example
+#        arguments: [@service_id, "plain_value", %parameter%]
