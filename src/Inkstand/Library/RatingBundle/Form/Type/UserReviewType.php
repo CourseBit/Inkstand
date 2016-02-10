@@ -19,10 +19,14 @@ class UserReviewType extends AbstractType
                 '0.8' => '4/5 stars',
                 '1' => '5/5 stars',
             ),
-            'label' => 'Rating'
+            'label' => 'rating.rating'
         ));
-        $builder->add('title', 'text');
-        $builder->add('comment', 'textarea');
+        $builder->add('title', 'text', array(
+            'label' => 'rating.comment_title'
+        ));
+        $builder->add('comment', 'textarea', array(
+            'label' => 'rating.comment'
+        ));
     }
 
     public function getName()

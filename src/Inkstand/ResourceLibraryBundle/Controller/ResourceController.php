@@ -160,6 +160,7 @@ class ResourceController extends Controller
         }
 
         return array(
+            'resource' => $resource,
             'userReviewForm' => $userReviewForm->createView()
         );
     }

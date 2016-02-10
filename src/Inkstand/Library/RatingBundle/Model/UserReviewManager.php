@@ -48,27 +48,9 @@ abstract class UserReviewManager implements UserReviewManagerInterface
     {
         $userReviewType = $this->formFactory->create(new UserReviewType(), $userReview);
 
-        $userReviewType->add('actions', 'form_actions', array(
-            'buttons' => array(
-                'save' => array(
-                    'type' => 'submit',
-                    'options' => array(
-                        'label' => 'Review',
-                        'attr' => array(
-                            'class' => 'btn btn-primary'
-                        )
-                    )
-                ),
-                'cancel' => array(
-                    'type' => 'submit',
-                    'options' => array(
-                        'label' => 'button.cancel',
-                        'attr' => array(
-                            'class' => 'btn btn-default'
-                        )
-                    )
-                ),
-            )
+        $userReviewType->add('submit', 'submit', array(
+            'label' => 'rating.submit',
+            'attr' => array('class' => 'btn btn-primary')
         ));
 
         return $userReviewType;

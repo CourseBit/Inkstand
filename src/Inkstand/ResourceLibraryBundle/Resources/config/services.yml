@@ -25,3 +25,10 @@ services:
         tags:
             - { name: security.voter }
             - { name: inkstand.voter }
+
+    # Menus
+    inkstand_resource_library.menu_builder:
+        class: Inkstand\ResourceLibraryBundle\Menu\MenuBuilder
+        arguments: [@knp_menu.factory]
+        tags:
+            - { name: knp_menu.menu_builder, method: createResourceRateBreadcrumbs, alias: resource_rate_breadcrumbs }

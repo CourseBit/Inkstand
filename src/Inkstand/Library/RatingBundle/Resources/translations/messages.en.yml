@@ -1,0 +1,5 @@
+rating:
+    rating: Rating
+    comment_title: Comment Title
+    comment: Comment
+    submit: Submit Rating

@@ -1,0 +1,18 @@
+Inkstand\Library\RatingBundle\Entity\UserReview:
+    properties:
+        ratingId:
+            - NotBlank: ~
+        value:
+            - Range:
+                min: 0
+                max: 1
+        userId:
+            - NotBlank: ~
+        title:
+            - Length:
+                min: 0
+                max: 255
+        comment:
+            - Length:
+                min: 0
+                max: 255
