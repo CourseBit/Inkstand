@@ -110,3 +110,10 @@ services:
     setting.site:
         class:     "%inkstand_core.setting.site.class%"
         arguments: [@inkstand_core.setting]
+
+    # Menus
+    inkstand_core.breadcrumb_renderer:
+        class: Inkstand\Bundle\CoreBundle\Menu\BreadcrumbRenderer
+        arguments: [@twig, "InkstandCoreBundle:menu:breadcrumb.html.twig"]
+        tags:
+            - { name: knp_menu.renderer, alias: breadcrumb }

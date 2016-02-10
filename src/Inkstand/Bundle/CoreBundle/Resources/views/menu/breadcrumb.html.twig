@@ -1,0 +1,7 @@
+{% if item.children %}
+    <ol class="breadcrumb breadcrumb-inline">
+        {% for child in item.children %}
+            <li><a href="{{ child.uri }}">{{ child.name }}</a></li>
+        {% endfor %}
+    </ol>
+{% endif %}

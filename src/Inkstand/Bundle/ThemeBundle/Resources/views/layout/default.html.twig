@@ -111,18 +111,7 @@
         <h1>{% block page_header %}{% endblock %}</h1>
 
     </div>
-    {% if breadcrumbs is defined %}
-        <ol class="breadcrumb breadcrumb-inline">
-            {% for breadcrumb in breadcrumbs %}
-                {% if breadcrumb.route is defined %}
-                    <li><a href="{{ path(breadcrumb.route, breadcrumb.parameters) }}">{{ breadcrumb.title }}</a></li>
-                {% else %}
-                    <li>{{ breadcrumb.title }}</li>
-                {% endif %}
-            {% endfor %}
-        </ol>
-    {% endif %}
-
+    {% block breadcrumbs %}{% endblock %}
 
     {{ include('InkstandThemeBundle::flash-messages.html.twig') }}
 
