@@ -3,11 +3,11 @@
 namespace Inkstand\Library\RatingBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use FOS\UserBundle\Model\UserInterface;
 use Inkstand\Library\RatingBundle\Model\RatingInterface;
+use Inkstand\Library\RatingBundle\Model\UserReviewInterface;
 
 /**
- * Rating
+ * RatingReference
  *
  * @ORM\Table("lib_rating")
  * @ORM\Entity
@@ -24,66 +24,17 @@ class Rating implements RatingInterface
     private $ratingId;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="value", type="float")
+     * @ORM\OneToMany(targetEntity="UserReview", mappedBy="rating", cascade={"persist"})
      */
-    private $value;
+    private $userReviews;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="user_id", type="integer")
+     * Constructor
      */
-    private $userId;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="title", type="string", length=255)
-     */
-    private $title;
-
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="comment", type="text")
-     */
-    private $comment;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="helpful_count", type="integer")
-     */
-    private $helpfulCount;
-
-    /**
-     * @var integer
-     *
-     * @ORM\Column(name="unhelpful_count", type="integer")
-     */
-    private $unhelpfulCount;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="created", type="datetime")
-     */
-    private $created;
-
-    /**
-     * @var \DateTime
-     *
-     * @ORM\Column(name="modifed", type="datetime")
-     */
-    private $modifed;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="Inkstand/Bundle/UserBundle/Entity/User")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
-     */
-    private $user;
+    public function __construct()
+    {
+        $this->userReviews = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get ratingId
@@ -96,212 +47,35 @@ class Rating implements RatingInterface
     }
 
     /**
-     * Set value
+     * Add userReviews
      *
-     * @param float $value
+     * @param UserReviewInterface $userReview
      * @return Rating
      */
-    public function setValue($value)
+    public function addUserReview(UserReviewInterface $userReview)
     {
-        if($value < 0 || $value > 1) {
-            throw new \LogicException(sprintf('Rating value must be between 0 and 1 inclusively. %s given.', $value));
-        }
-        $this->value = $value;
+        $this->userReviews[] = $userReview;
 
         return $this;
     }
 
     /**
-     * Get value
+     * Remove userReviews
      *
-     * @return float 
+     * @param UserReviewInterface $userReview
      */
-    public function getValue()
+    public function removeUserReview(UserReviewInterface $userReview)
     {
-        return $this->value;
+        $this->userReviews->removeElement($userReview);
     }
 
     /**
-     * Set userId
+     * Get userReviews
      *
-     * @param integer $userId
-     * @return Rating
+     * @return \Doctrine\Common\Collections\Collection 
      */
-    public function setUserId($userId)
+    public function getUserReviews()
     {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Get userId
-     *
-     * @return integer 
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Set title
-     *
-     * @param string $title
-     * @return Rating
-     */
-    public function setTitle($title)
-    {
-        $this->title = $title;
-
-        return $this;
-    }
-
-    /**
-     * Get title
-     *
-     * @return string 
-     */
-    public function getTitle()
-    {
-        return $this->title;
-    }
-
-    /**
-     * Set comment
-     *
-     * @param string $comment
-     * @return Rating
-     */
-    public function setComment($comment)
-    {
-        $this->comment = $comment;
-
-        return $this;
-    }
-
-    /**
-     * Get comment
-     *
-     * @return string 
-     */
-    public function getComment()
-    {
-        return $this->comment;
-    }
-
-    /**
-     * Set helpfulCount
-     *
-     * @param integer $helpfulCount
-     * @return Rating
-     */
-    public function setHelpfulCount($helpfulCount)
-    {
-        $this->helpfulCount = $helpfulCount;
-
-        return $this;
-    }
-
-    /**
-     * Get helpfulCount
-     *
-     * @return integer 
-     */
-    public function getHelpfulCount()
-    {
-        return $this->helpfulCount;
-    }
-
-    /**
-     * Set unhelpfulCount
-     *
-     * @param integer $unhelpfulCount
-     * @return Rating
-     */
-    public function setUnhelpfulCount($unhelpfulCount)
-    {
-        $this->unhelpfulCount = $unhelpfulCount;
-
-        return $this;
-    }
-
-    /**
-     * Get unhelpfulCount
-     *
-     * @return integer 
-     */
-    public function getUnhelpfulCount()
-    {
-        return $this->unhelpfulCount;
-    }
-
-    /**
-     * Set created
-     *
-     * @param \DateTime $created
-     * @return Rating
-     */
-    public function setCreated(\DateTime $created)
-    {
-        $this->created = $created;
-
-        return $this;
-    }
-
-    /**
-     * Get created
-     *
-     * @return \DateTime 
-     */
-    public function getCreated()
-    {
-        return $this->created;
-    }
-
-    /**
-     * Set modifed
-     *
-     * @param \DateTime $modifed
-     * @return Rating
-     */
-    public function setModifed(\DateTime $modifed)
-    {
-        $this->modifed = $modifed;
-
-        return $this;
-    }
-
-    /**
-     * Get modifed
-     *
-     * @return \DateTime 
-     */
-    public function getModifed()
-    {
-        return $this->modifed;
-    }
-
-    /**
-     * Set user
-     *
-     * @param UserInterface $user
-     * @return Rating
-     */
-    public function setUser(UserInterface $user = null)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Get user
-     *
-     * @return UserInterface
-     */
-    public function getUser()
-    {
-        return $this->user;
+        return $this->userReviews;
     }
 }

@@ -1,0 +1,26 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandUserBundle:Organization:delete{% endblock %}
+
+{% block page_header %}Delete Organization{% endblock %}
+
+{% block main_content %}
+    {% if organization.children|length > 0 %}
+        <p class="alert alert-warning">Are you sure you want to delete the <b>{{ organization.name }}</b> organization? You can delete or reassign the <b>{{ organization.users|length }}</b> users that belong to {{ organization.name }}.</p>
+    {% else %}
+        <p class="alert alert-warning">Are you sure you want to delete the <b>{{ organization.name }}</b> organization?</p>
+    {% endif %}
+
+    {{ form_start(organizationDeleteForm) }}
+    {% if organization.children|length > 0 %}
+        {{ form_row(organizationDeleteForm.deleteUsers) }}
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-2">
+                <p><b><i>- or -</i></b></p>
+            </div>
+        </div>
+        {{ form_row(organizationDeleteForm.reassignId) }}
+    {% endif %}
+    {{ form_widget(organizationDeleteForm) }}
+    {{ form_end(organizationDeleteForm) }}
+{% endblock %}

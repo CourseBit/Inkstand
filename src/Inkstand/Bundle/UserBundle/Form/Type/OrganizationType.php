@@ -12,6 +12,11 @@ class OrganizationType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', 'text');
+        $builder->add('parent', 'entity', array(
+            'class' => 'Inkstand\Bundle\UserBundle\Entity\Organization',
+            'property' => 'name',
+            'placeholder' => 'No parent'
+        ));
         $builder->add('actions', 'form_actions', array(
             'buttons' => array(
                 'save' => array(

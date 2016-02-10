@@ -4,6 +4,7 @@ namespace Inkstand\Bundle\UserBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Inkstand\Bundle\UserBundle\Model\OrganizationInterface;
+use FOS\UserBundle\Model\UserInterface;
 
 /**
  * Organization
@@ -44,6 +45,11 @@ class Organization implements OrganizationInterface
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="organization_id", nullable=true)
      */
     private $parent;
+
+    /**
+     * @ORM\OneToMany(targetEntity="User", mappedBy="organization")
+     */
+    private $users;
 
     /**
      * Get organizationId
@@ -124,7 +130,7 @@ class Organization implements OrganizationInterface
     /**
      * Remove child Organization
      *
-     * @param OrganizationInterface $children
+     * @param OrganizationInterface $child
      */
     public function removeChild(OrganizationInterface $child)
     {
@@ -162,5 +168,38 @@ class Organization implements OrganizationInterface
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * Add user
+     *
+     * @param UserInterface $user
+     * @return Organization
+     */
+    public function addUser(UserInterface $user)
+    {
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user
+     *
+     * @param UserInterface $user
+     */
+    public function removeUser(UserInterface $user)
+    {
+        $this->users->removeElement($user);
+    }
+
+    /**
+     * Get users
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

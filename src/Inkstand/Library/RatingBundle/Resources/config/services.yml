@@ -1,4 +1,16 @@
+parameters:
+    inkstand_rating.rating_manager.class: Inkstand\Library\RatingBundle\Doctrine\RatingManager
+    inkstand_rating.user_review_manager.class: Inkstand\Library\RatingBundle\Doctrine\UserReviewManager
+
+    inkstand_rating.model.rating.class:      Inkstand\Library\RatingBundle\Entity\Rating
+    inkstand_rating.model.user_review.class: Inkstand\Library\RatingBundle\Entity\UserReview
+
 services:
-#    inkstand_rating.example:
-#        class: Inkstand\Library\RatingBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    inkstand_rating.rating_manager:
+        class:     "%inkstand_rating.rating_manager.class%"
+        arguments: [@inkstand_rating.user_review_manager, @form.factory, @doctrine.orm.entity_manager, "%inkstand_rating.model.rating.class%"]
+
+    inkstand_rating.user_review_manager:
+        class:     "%inkstand_rating.user_review_manager.class%"
+        arguments: [@form.factory, @doctrine.orm.entity_manager, "%inkstand_rating.model.user_review.class%"]
+

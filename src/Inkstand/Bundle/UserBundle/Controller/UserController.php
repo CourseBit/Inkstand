@@ -21,8 +21,8 @@ class UserController extends Controller
     public function manageAction()
     {
         $users = $this->get('inkstand_user.user_manager')->findUsers();
-        $organizations = $this->get('inkstand_user.organization_manager')->findOrganizations();
-        $roles = $this->get('inkstand_core.role');
+        $organizations = $this->get('inkstand_user.organization_manager')->findMyOrganizations($this->getUser());
+        $roles = $this->get('inkstand_core.role')->findAll();
 
         return array(
             'users' => $users,

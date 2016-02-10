@@ -109,7 +109,11 @@ class RoleService implements RoleServiceInterface
             }
 
             if ($roleAssignment->getAllow() == Role::ROLE_ACTION_INHERIT) {
-                return $this->isRoleGranted($cachedRole->getParent(), $attribute, $voter);
+                if(null !== $cachedRole->getParent()) {
+                    return $this->isRoleGranted($cachedRole->getParent(), $attribute, $voter);
+                } else {
+                    return false;
+                }
             } elseif ($roleAssignment->getAllow() == Role::ROLE_ACTION_ALLOW) {
                 return true;
             } elseif ($roleAssignment->getAllow() == Role::ROLE_ACTION_FORBID) {

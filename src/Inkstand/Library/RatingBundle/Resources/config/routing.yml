@@ -1,3 +1,3 @@
-inkstand_rating_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: InkstandRatingBundle:Default:index }
+inkstand_rating:
+    resource: "@InkstandRatingBundle/Controller/RatingController.php"
+    type:     annotation

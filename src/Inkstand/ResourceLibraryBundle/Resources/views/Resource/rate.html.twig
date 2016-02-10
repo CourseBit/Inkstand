@@ -1,0 +1,11 @@
+{% extends "InkstandThemeBundle::base.html.twig" %}
+
+{% block title %}InkstandResourceLibraryBundle:Resource:rate{% endblock %}
+
+{% block page_header %}Rate Resource{% endblock %}
+
+{% block main_content %}
+    {{ form_start(userReviewForm) }}
+    {{ form_widget(userReviewForm) }}
+    {{ form_end(userReviewForm) }}
+{% endblock %}

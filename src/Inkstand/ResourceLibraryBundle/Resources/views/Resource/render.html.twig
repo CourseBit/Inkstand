@@ -7,5 +7,8 @@
     <div class="media-body">
         <a href="#" data-toggle="modal" data-target="#resource-{{ resource.resourceId }}-preview-modal"><h4 class="media-heading">{{ resource.name }}</h4></a>
         {{ resource.description }}
+        <div>
+            {{ render(controller("InkstandRatingBundle:Rating:renderRateable", {"rateable": resource})) }}
+        </div>
     </div>
 </div>

@@ -17,7 +17,12 @@ namespace Inkstand\Library\RatingBundle\Model;
 interface RateableInterface
 {
     /**
-     * @return array Array of RatingInterface
+     * @param RatingInterface $rating
      */
-    public function getRatings();
+    public function setRating(RatingInterface $rating);
+
+    /**
+     * @return RatingInterface
+     */
+    public function getRating();
 }

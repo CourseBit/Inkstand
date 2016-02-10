@@ -1,0 +1,12 @@
+{% set rating = value*5 %}
+<span class="rating">
+    {% for i in 1..5 %}
+        {% if rating >= i %}
+            <i class="fa fa-star"></i>
+        {% elseif rating < i and rating + 1 > i %}
+            <i class="fa fa-star-half-o"></i>
+        {% else %}
+            <i class="fa fa-star-o"></i>
+        {% endif %}
+    {% endfor %}
+</span>

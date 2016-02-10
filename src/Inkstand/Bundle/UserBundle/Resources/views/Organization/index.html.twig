@@ -1,0 +1,45 @@
+{% extends "InkstandThemeBundle:layout:default.html.twig" %}
+
+{% block title %}InkstandUserBundle:Organization:index{% endblock %}
+
+{% block page_header %}Organizations{% endblock %}
+
+{% block main_content %}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": organizations|length ~ " Organizations" } %}
+        {% block panel_body %}
+            {% if is_granted('add', newOrganization) %}
+                <a class="btn btn-default" href="{{ path("inkstand_user_organization_add") }}"><i class="fa fa-plus"></i> Add Organization</a>
+                <hr>
+            {% endif %}
+            {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+                {% block grid_head %}
+                    <th>Name</th>
+                    <th>Parent</th>
+                    <th>Actions</th>
+                {% endblock %}
+                {% block grid_body %}
+                    {% for organization in organizations %}
+                        <tr>
+                            <td>{{ organization.name }}</td>
+                            <td>
+                                {% if organization.parent %}
+                                    {{ organization.parent.name }}
+                                {% else %}
+                                    <span class="text-muted">None</span>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if is_granted('edit', organization) %}
+                                    <a href="{{ path("inkstand_user_organization_edit", {'organizationId':organization.organizationId}) }}"><i class="fa fa-cog fa-lg"></i></a>
+                                {% endif %}
+                                {% if is_granted('delete', organization) %}
+                                    <a href="{{ path("inkstand_user_organization_delete", {'organizationId':organization.organizationId}) }}"><i class="fa fa-times fa-lg"></i></a>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

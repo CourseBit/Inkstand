@@ -22,6 +22,22 @@ class OrganizationManager extends BaseOrganizationManager
         $this->class = $metadata->getName();
     }
 
+    /**
+     * {@inheritdoc}
+     */
+    public function findBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneBy(array $criteria)
+    {
+        return $this->repository->findOneBy($criteria);
+    }
+
     public function findOrganizations()
     {
         return $this->repository->findAll();

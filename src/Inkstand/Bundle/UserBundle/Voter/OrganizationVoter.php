@@ -32,7 +32,7 @@ class OrganizationVoter extends AbstractVoter
 
     protected function getSupportedClasses()
     {
-        return array('Inkstand\ResourceLibraryBundle\Entity\Organization');
+        return array('Inkstand\Bundle\UserBundle\Entity\Organization');
     }
 
     protected function isUserGranted($attribute, $course, $user = null)
