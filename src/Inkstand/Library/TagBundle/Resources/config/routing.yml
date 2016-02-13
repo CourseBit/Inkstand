@@ -1,0 +1,3 @@
+inkstand_tag_homepage:
+    path:     /hello/{name}
+    defaults: { _controller: InkstandTagBundle:Default:index }

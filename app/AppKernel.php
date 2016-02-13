@@ -30,6 +30,7 @@ class AppKernel extends Kernel
             new Oneup\FlysystemBundle\OneupFlysystemBundle(),
             new Inkstand\ResourceLibraryBundle\InkstandResourceLibraryBundle(),
             new Inkstand\Library\RatingBundle\InkstandRatingBundle(),
+            new Inkstand\Library\TagBundle\InkstandTagBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

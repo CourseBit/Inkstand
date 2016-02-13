@@ -1,3 +1,7 @@
+inkstand_tag:
+    resource: "@InkstandTagBundle/Resources/config/routing.yml"
+    prefix:   /
+
 inkstand_rating:
     resource: "@InkstandRatingBundle/Resources/config/routing.yml"
     prefix:   /

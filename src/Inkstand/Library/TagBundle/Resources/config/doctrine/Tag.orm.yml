@@ -1,0 +1,31 @@
+Inkstand\Library\TagBundle\Entity\Tag:
+    type: entity
+    table: null
+    id:
+        tagId:
+            type: integer
+            column: tag_id
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        name:
+            type: string
+            length: 255
+        type:
+            type: string
+            length: 255
+        defaultValue:
+            type: text
+            column: default_value
+        choices:
+            type: simple_array
+        uniqueName:
+            type: string
+            length: 255
+            column: unique_name
+        category:
+            type: text
+        required:
+            type: boolean
+    lifecycleCallbacks: {  }
