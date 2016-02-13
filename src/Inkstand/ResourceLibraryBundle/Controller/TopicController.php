@@ -44,4 +44,15 @@ class TopicController extends Controller
             'topicForm' => $topicForm->createView()
         );
     }
+
+    /**
+     * @Route("/library/topic/view/{topicId}", name="inkstand_resource_library_topic_view")
+     * @Template
+     * @param Request $request
+     * @param $topicId
+     */
+    public function viewAction(Request $request, $topicId)
+    {
+
+    }
 }

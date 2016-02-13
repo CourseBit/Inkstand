@@ -1,7 +1,11 @@
 {% if item.children %}
     <ol class="breadcrumb breadcrumb-inline">
         {% for child in item.children %}
-            <li><a href="{{ child.uri }}">{{ child.name }}</a></li>
+            {% if loop.last %}
+                <li class="active">{{ child.name|trans }}</li>
+            {% else %}
+                <li><a href="{{ child.uri }}">{{ child.name|trans }}</a></li>
+            {% endif %}
         {% endfor %}
     </ol>
 {% endif %}

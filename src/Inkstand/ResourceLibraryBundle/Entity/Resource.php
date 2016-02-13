@@ -5,6 +5,7 @@ namespace Inkstand\ResourceLibraryBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Inkstand\Library\RatingBundle\Model\RateableInterface;
 use Inkstand\Library\RatingBundle\Model\RatingInterface;
+use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table("lms_resource")
  * @ORM\Entity
  */
-class Resource implements RateableInterface
+class Resource implements ResourceInterface, RateableInterface
 {
     /**
      * @var integer

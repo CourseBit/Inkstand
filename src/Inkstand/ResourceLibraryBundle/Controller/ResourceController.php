@@ -49,6 +49,18 @@ class ResourceController extends Controller
     }
 
     /**
+     * @Route("/library/resource/view/{resourceId}", name="inkstand_resource_library_resource_view")
+     * @Template
+     * @param Request $request
+     * @param $resourceId
+     * @return array
+     */
+    public function viewAction(Request $request, $resourceId)
+    {
+        return array();
+    }
+
+    /**
      * @Route("/library/resource/edit/{resourceId}", name="inkstand_resource_library_resource_edit")
      * @Template
      */

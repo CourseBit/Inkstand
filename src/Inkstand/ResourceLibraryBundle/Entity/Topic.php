@@ -3,6 +3,7 @@
 namespace Inkstand\ResourceLibraryBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Inkstand\ResourceLibraryBundle\Model\TopicInterface;
 
 /**
  * Topic
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table("lms_resource_topic")
  * @ORM\Entity
  */
-class Topic
+class Topic implements TopicInterface
 {
     /**
      * @var integer

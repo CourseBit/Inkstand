@@ -1,8 +1,11 @@
-{% extends "InkstandThemeBundle::base.html.twig" %}
+{% extends "InkstandThemeBundle:layout:default.html.twig" %}
 
 {% block title %}InkstandResourceLibraryBundle:Resource:add{% endblock %}
 
 {% block page_header %}Add Resource{% endblock %}
+
+{% set breadcrumbs = knp_menu_get('InkstandResourceLibraryBundle:Builder:resourceAddBreadcrumb') %}
+{% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
 
 {% block main_content %}
     {{ form_start(resourceForm) }}

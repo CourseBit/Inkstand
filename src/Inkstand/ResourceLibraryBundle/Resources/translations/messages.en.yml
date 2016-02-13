@@ -1,2 +1,7 @@
 resource_library:
+    resource: Resource
+    resource.add: Add Resource
+    resource.edit: Edit Resource
+    library: Library
+    topic: Topic
     rate: Rate %name%

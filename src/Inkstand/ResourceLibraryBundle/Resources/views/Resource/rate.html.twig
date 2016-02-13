@@ -4,11 +4,10 @@
 
 {% block page_header %}{{ 'resource_library.rate'|trans({"%name%":resource.name}) }}{% endblock %}
 
-{% block breadcrumbs %}{{ knp_menu_render('resource_rate_breadcrumbs', {}, "breadcrumb") }}{% endblock %}
+{% set breadcrumbs = knp_menu_get('InkstandResourceLibraryBundle:Builder:resourceRateBreadcrumb' , [], {'resource': resource}) %}
+{% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
 
 {% block main_content %}
-
-
     {{ form_start(userReviewForm) }}
     {{ form_widget(userReviewForm) }}
     {{ form_end(userReviewForm) }}
