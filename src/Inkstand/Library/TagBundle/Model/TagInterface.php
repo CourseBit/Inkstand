@@ -91,21 +91,6 @@ interface TagInterface
     public function getUniqueName();
 
     /**
-     * Set category
-     *
-     * @param string $category
-     * @return TagInterface
-     */
-    public function setCategory($category);
-
-    /**
-     * Get category
-     *
-     * @return string
-     */
-    public function getCategory();
-
-    /**
      * Set required
      *
      * @param boolean $required

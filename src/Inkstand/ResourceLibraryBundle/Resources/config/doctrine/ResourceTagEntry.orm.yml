@@ -1,0 +1,30 @@
+Inkstand\ResourceLibraryBundle\Entity\ResourceTagEntry:
+    type: entity
+    table: lms_resource_tag_entry
+    id:
+        tagEntryId:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        tagId:
+            type: integer
+            column: tag_id
+        value:
+            type: text
+    manyToOne:
+        tag:
+            targetEntity: ResourceTag
+            inversedBy: tagEntries
+            joinColumn:
+                name: tag_id
+                referencedColumnName: tag_id
+    manyToOne:
+        object:
+            targetEntity: Resource
+            inversedBy: tagEntries
+            joinColumn:
+                name: object_id
+                referencedColumnName: resource_id
+    lifecycleCallbacks: {  }

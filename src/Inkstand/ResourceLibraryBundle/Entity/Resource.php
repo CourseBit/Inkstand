@@ -5,6 +5,7 @@ namespace Inkstand\ResourceLibraryBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Inkstand\Library\RatingBundle\Model\RateableInterface;
 use Inkstand\Library\RatingBundle\Model\RatingInterface;
+use Inkstand\Library\TagBundle\Model\TagEntryInterface;
 use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -79,6 +80,21 @@ class Resource implements ResourceInterface, RateableInterface
      * @ORM\JoinColumn(name="rating_id", referencedColumnName="rating_id", nullable=true)
      */
     private $rating = null;
+
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="ResourceTagEntry", mappedBy="object", cascade={"persist"})
+     */
+    private $tagEntries = null;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tagEntries = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * Get resourceId
@@ -272,5 +288,38 @@ class Resource implements ResourceInterface, RateableInterface
     public function getRating()
     {
         return $this->rating;
+    }
+
+    /**
+     * Add tagEntry
+     *
+     * @param TagEntryInterface $tagEntry
+     * @return Resource
+     */
+    public function addTagEntry(TagEntryInterface $tagEntry)
+    {
+        $this->tagEntries[] = $tagEntry;
+
+        return $this;
+    }
+
+    /**
+     * Remove tagEntry
+     *
+     * @param TagEntryInterface $tagEntry
+     */
+    public function removeTagEntry(TagEntryInterface $tagEntry)
+    {
+        $this->tagEntries->removeElement($tagEntry);
+    }
+
+    /**
+     * Get tagEntries
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTagEntries()
+    {
+        return $this->tagEntries;
     }
 }

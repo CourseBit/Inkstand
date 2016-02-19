@@ -1,54 +1,55 @@
 <?php
 
-namespace Inkstand\Library\TagBundle\Entity;
+namespace Inkstand\Library\TagBundle\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Inkstand\Library\TagBundle\Model\TagInterface;
 
 /**
  * Tag
  */
-class Tag implements TagInterface
+abstract class Tag implements TagInterface
 {
     /**
      * @var integer
      */
-    private $tagId;
+    protected $tagId;
 
     /**
      * @var string
      */
-    private $name;
+    protected $name;
 
     /**
      * @var string
      */
-    private $type;
+    protected $type;
 
     /**
      * @var string
      */
-    private $defaultValue;
+    protected $defaultValue;
 
     /**
      * @var array
      */
-    private $choices;
+    protected $choices;
 
     /**
      * @var string
      */
-    private $uniqueName;
-
-    /**
-     * @var string
-     */
-    private $category;
+    protected $uniqueName;
 
     /**
      * @var boolean
      */
-    private $required = 0;
+    protected $required = 0;
+
+    /**
+     * @var array
+     */
+    protected $tagEntries;
 
     /**
      * Get tagId
@@ -64,7 +65,7 @@ class Tag implements TagInterface
      * Set name
      *
      * @param string $name
-     * @return TagInterface
+     * @return Tag
      */
     public function setName($name)
     {
@@ -87,7 +88,7 @@ class Tag implements TagInterface
      * Set type
      *
      * @param string $type
-     * @return TagInterface
+     * @return Tag
      */
     public function setType($type)
     {
@@ -110,7 +111,7 @@ class Tag implements TagInterface
      * Set defaultValue
      *
      * @param string $defaultValue
-     * @return TagInterface
+     * @return Tag
      */
     public function setDefaultValue($defaultValue)
     {
@@ -132,8 +133,8 @@ class Tag implements TagInterface
     /**
      * Set choices
      *
-     * @param array $choices
-     * @return TagInterface
+     * @param string $choices
+     * @return Tag
      */
     public function setChoices($choices)
     {
@@ -145,7 +146,7 @@ class Tag implements TagInterface
     /**
      * Get choices
      *
-     * @return array 
+     * @return string 
      */
     public function getChoices()
     {
@@ -156,7 +157,7 @@ class Tag implements TagInterface
      * Set uniqueName
      *
      * @param string $uniqueName
-     * @return TagInterface
+     * @return Tag
      */
     public function setUniqueName($uniqueName)
     {
@@ -176,33 +177,10 @@ class Tag implements TagInterface
     }
 
     /**
-     * Set category
-     *
-     * @param string $category
-     * @return TagInterface
-     */
-    public function setCategory($category)
-    {
-        $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get category
-     *
-     * @return string
-     */
-    public function getCategory()
-    {
-        return $this->category;
-    }
-
-    /**
      * Set required
      *
      * @param boolean $required
-     * @return TagInterface
+     * @return Tag
      */
     public function setRequired($required)
     {
@@ -214,10 +192,43 @@ class Tag implements TagInterface
     /**
      * Get required
      *
-     * @return string
+     * @return boolean 
      */
     public function getRequired()
     {
         return $this->required;
+    }
+
+    /**
+     * Add tagEntries
+     *
+     * @param TagEntryInterface $tagEntries
+     * @return Tag
+     */
+    public function addTagEntry(TagEntryInterface $tagEntries)
+    {
+        $this->tagEntries[] = $tagEntries;
+
+        return $this;
+    }
+
+    /**
+     * Remove tagEntries
+     *
+     * @param TagEntryInterface $tagEntries
+     */
+    public function removeTagEntry(TagEntryInterface $tagEntries)
+    {
+        $this->tagEntries->removeElement($tagEntries);
+    }
+
+    /**
+     * Get tagEntries
+     *
+     * @return array
+     */
+    public function getTagEntries()
+    {
+        return $this->tagEntries;
     }
 }

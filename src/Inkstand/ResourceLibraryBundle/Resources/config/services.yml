@@ -3,10 +3,17 @@ parameters:
     inkstand_resource_library.voter.resource_voter.class: Inkstand\ResourceLibraryBundle\Voter\ResourceVoter
     inkstand_resource_library.voter.topic_voter.class: Inkstand\ResourceLibraryBundle\Voter\TopicVoter
 
+    inkstand_resource_library.resource_tag_manager: Inkstand\ResourceLibraryBundle\Doctrine\ResourceTagManager
+    inkstand_resource_library.model.tag.class: Inkstand\ResourceLibraryBundle\Entity\ResourceTag
+
 services:
     inkstand_resource_library.resource:
         class: "%inkstand_resource_library.resource.class%"
         arguments: [@doctrine.orm.entity_manager]
+
+    inkstand_resource_library.resource_tag_manager:
+        class: "%inkstand_resource_library.resource_tag_manager%"
+        arguments: [@form.factory, @doctrine.orm.entity_manager, "%inkstand_resource_library.model.tag.class%"]
 
     # Voters
 

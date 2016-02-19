@@ -1,6 +1,6 @@
-Inkstand\Library\TagBundle\Entity\Tag:
+Inkstand\ResourceLibraryBundle\Entity\ResourceTag:
     type: entity
-    table: null
+    table: lms_resource_tag
     id:
         tagId:
             type: integer
@@ -18,14 +18,18 @@ Inkstand\Library\TagBundle\Entity\Tag:
         defaultValue:
             type: text
             column: default_value
+            nullable: true
         choices:
-            type: simple_array
+            type: text
+            nullable: true
         uniqueName:
             type: string
             length: 255
             column: unique_name
-        category:
-            type: text
         required:
             type: boolean
+    oneToMany:
+        tagEntries:
+            targetEntity: ResourceTagEntry
+            mappedBy: tag
     lifecycleCallbacks: {  }

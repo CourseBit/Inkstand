@@ -1,6 +1,6 @@
 <?php
 
-namespace Inkstand\Library\TagBundle\Doctrine;
+namespace Inkstand\ResourceLibraryBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
@@ -8,7 +8,7 @@ use Inkstand\Library\TagBundle\Model\TagInterface;
 use Inkstand\Library\TagBundle\Model\TagManager as BaseTagManager;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class TagManager extends BaseTagManager
+class ResourceTagManager extends BaseTagManager
 {
     /**
      * @var EntityManagerInterface

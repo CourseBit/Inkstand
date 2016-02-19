@@ -16,7 +16,13 @@
                 {% for resource in resources %}
                     <tr>
                         <td>{{ render(controller('InkstandResourceLibraryBundle:Resource:render', {'resource': resource})) }}</td>
-                        <td>{{ resource.topic.name }}</td>
+                        <td>
+                            {% if resource.topic %}
+                                {{ resource.topic.name }}
+                            {% else %}
+                                <span class="text-muted">N/A</span>
+                            {% endif %}
+                        </td>
                         <td>
                             {% if is_granted("edit", resource) %}
                                 <a href="{{ path("inkstand_resource_library_resource_download") }}"><i class="fa fa-download fa-lg"></i></a>
@@ -51,7 +57,13 @@
                                 {{ resource.description }}
                             </div>
                             <div class="col-sm-4">
-                                <p>Topic: {{ resource.topic.name }}</p>
+                                <p>
+                                    Topic: {% if resource.topic %}
+                                        {{ resource.topic.name }}
+                                    {% else %}
+                                        <span class="text-muted">N/A</span>
+                                    {% endif %}
+                                </p>
                             </div>
                         </div>
                     </div>
@@ -72,6 +84,7 @@
             {% if is_granted('add', newResource) %}
                 <a href="{{ path("inkstand_resource_library_resource_add") }}" class="list-group-item">Add Resource</a>
             {% endif %}
+            <a href="{{ path("inkstand_tag_add", {"tagManager": "inkstand_resource_library.resource_tag_manager"}) }}" class="list-group-item">Add Resource Tags</a>
             {% if is_granted('add', newTopic) %}
                 <a href="{{ path("inkstand_resource_library_topic_add") }}" class="list-group-item">Add Topic</a>
             {% endif %}

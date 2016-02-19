@@ -1,0 +1,39 @@
+{% extends "InkstandThemeBundle:layout:default.html.twig" %}
+
+{% block title %}InkstandTagBundle:Tag:add{% endblock %}
+
+{% block page_header %}{{ "tag.add"|trans }}{% endblock %}
+
+{% set breadcrumbs = knp_menu_get("InkstandTagBundle:Builder:tagListBreadcrumb") %}
+{% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
+
+{% block main_content %}
+    {% embed "InkstandThemeBundle:partial:panel.html.twig" with {"panel_title":"tag.category." ~ category} %}
+        {% block panel_body %}
+            <a class="btn btn-default" href="{{ path("inkstand_tag_add", {"category":category}) }}"><i class="fa fa-plus"></i> {{ "tag.add"|trans }}</a>
+            <hr>
+            {% if tags is not empty  %}
+                {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+                    {% block grid_head %}
+                        <th>Name</th>
+                        <th>Type</th>
+                        <th>Actions</th>
+                    {% endblock %}
+                    {% block grid_body %}
+                        {% for tag in tags %}
+                            <tr>
+                                <td>{{ tag.name }}</td>
+                                <td>{{ "tag." ~ tag.type }}</td>
+                                <td>
+                                    <a href="{{ path("inkstand_tag_edit", {"tagId": tag.tagId}) }}"><i class="fa fa-pencil fa-lg"></i></a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    {% endblock %}
+                {% endembed %}
+            {% else %}
+                <p class="text-muted">{{ "tag.nonefound"|trans }}</p>
+            {% endif %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

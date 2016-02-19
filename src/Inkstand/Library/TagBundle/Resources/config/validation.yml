@@ -1,0 +1,12 @@
+Inkstand\Library\TagBundle\Entity\Tag:
+    constraints:
+        - Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity: uniqueName
+    properties:
+        name:
+            - NotBlank: ~
+        uniqueName:
+            - NotBlank: ~
+        type:
+            - NotBlank: ~
+        category:
+            - NotBlank: ~

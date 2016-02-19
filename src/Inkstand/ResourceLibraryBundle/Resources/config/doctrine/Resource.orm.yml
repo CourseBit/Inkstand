@@ -1,0 +1,96 @@
+Inkstand\ResourceLibraryBundle\Entity\Resource:
+    type: entity
+    table: lms_resource
+    id:
+        resourceId:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+            id: true
+            column: resource_id
+            generator:
+                strategy: IDENTITY
+    fields:
+        name:
+            type: string
+            scale: 0
+            length: 255
+            unique: false
+            nullable: false
+            precision: 0
+        resourceFileReferenceId:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+            column: resource_file_reference_id
+        description:
+            type: text
+            scale: 0
+            length: null
+            unique: false
+            nullable: false
+            precision: 0
+        topicId:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+            column: topic_id
+        ratingId:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+            column: rating_id
+    manyToOne:
+        resourceFileReference:
+            targetEntity: Inkstand\Bundle\CoreBundle\Entity\FileReference
+            cascade:
+                - persist
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                resource_file_reference_id:
+                    referencedColumnName: file_reference_id
+            orphanRemoval: false
+        topic:
+            targetEntity: Inkstand\ResourceLibraryBundle\Entity\Topic
+            cascade: {  }
+            mappedBy: null
+            inversedBy: resources
+            joinColumns:
+                topic_id:
+                    referencedColumnName: topic_id
+            orphanRemoval: false
+    oneToOne:
+        rating:
+            targetEntity: Inkstand\Library\RatingBundle\Entity\Rating
+            cascade:
+                - remove
+                - persist
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                rating_id:
+                    referencedColumnName: rating_id
+            orphanRemoval: false
+    oneToMany:
+        tagEntries:
+            targetEntity: Inkstand\ResourceLibraryBundle\Entity\ResourceTagEntry
+            cascade:
+                - persist
+            mappedBy: object
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
+    lifecycleCallbacks: {  }

@@ -9,17 +9,34 @@ use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class TagType extends AbstractType
 {
+    private $class;
+
+    public function __construct($class)
+    {
+        $this->class = $class;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name', 'text', array(
-            'label' => 'tag.name'
+            'label' => 'tag.name',
+            'required' => true
         ));
         $builder->add('uniqueName', 'text', array(
             'label' => 'tag.unique_name'
         ));
+        $builder->add('type', 'choice', array(
+            'label' => 'tag.type',
+            'choices' => array(
+                TagInterface::TYPE_TEXT => 'tag.text',
+                TagInterface::TYPE_DROPDOWN => 'tag.dropdown',
+                TagInterface::TYPE_CHECKBOX => 'tag.checkbox'
+            )
+        ));
         $builder->add('required', 'choice', array(
             'label' => 'tag.required',
-            'choices' => array('1' => 'Yes', '0' => 'No')
+            'choices' => array('1' => 'Yes', '0' => 'No'),
+            'expanded' => true
         ));
         $builder->add('defaultValue', 'text', array(
             'label' => 'tag.default_value'
@@ -37,7 +54,8 @@ class TagType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Inkstand\Library\TagBundle\Entity\Tag',
+            'data_class' => $this->class,
+            'required' => false
         ));
     }
 }

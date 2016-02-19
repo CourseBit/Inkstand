@@ -3,8 +3,10 @@
         {% for child in item.children %}
             {% if loop.last %}
                 <li class="active">{{ child.name|trans }}</li>
-            {% else %}
+            {% elseif child.uri %}
                 <li><a href="{{ child.uri }}">{{ child.name|trans }}</a></li>
+            {% else %}
+                <li>{{ child.name|trans }}</li>
             {% endif %}
         {% endfor %}
     </ol>

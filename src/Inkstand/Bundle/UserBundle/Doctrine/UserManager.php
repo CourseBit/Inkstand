@@ -64,6 +64,15 @@ class UserManager extends BaseUserManager
     /**
      * {@inheritDoc}
      */
+    public function update(UserInterface $user)
+    {
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public function deleteUser(UserInterface $user)
     {
         $this->entityManager->remove($user);

@@ -33,10 +33,9 @@ interface TagManagerInterface
     /**
      * Return new tag instance
      *
-     * @param string $category
      * @return TagInterface
      */
-    public function create($category);
+    public function create();
 
     /**
      * Persist tag

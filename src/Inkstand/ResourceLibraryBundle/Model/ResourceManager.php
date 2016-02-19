@@ -1,12 +1,14 @@
 <?php
 
-namespace Inkstand\Library\TagBundle\Model;
+namespace Inkstand\ResourceLibraryBundle\Model;
 
-use Inkstand\Library\TagBundle\Form\Type\TagType;
+use Inkstand\ResourceLibraryBundle\Form\Type\ResourceType;
+use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
+use Inkstand\ResourceLibraryBundle\Model\ResourceManagerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
-abstract class TagManager implements TagManagerInterface
+abstract class ResourceManager implements ResourceManagerInterface
 {
     /**
      * @var FormFactoryInterface
@@ -22,30 +24,32 @@ abstract class TagManager implements TagManagerInterface
     }
 
     /**
-     * Return new tag instance
+     * Return new resource instance
      *
-     * @return TagInterface
+     * @return ResourceInterface
      */
     public function create()
     {
         $class = $this->getClass();
-        /** @var TagInterface $tag */
-        $tag = new $class;
+        /** @var ResourceInterface $resource */
+        $resource = new $class;
 
-        return $tag;
+        return $resource;
     }
 
     /**
-     * Build form for tag
+     * Build form for resource
      *
-     * @param TagInterface $tag
+     * @param ResourceInterface $resource
      * @return FormTypeInterface
      */
-    public function getForm(TagInterface $tag)
+    public function getForm(ResourceInterface $resource)
     {
-        $tagType = $this->formFactory->create(new TagType($this->getClass()), $tag);
+        $resourceType = $this->formFactory->create(new ResourceType(), $resource);
 
-        if(empty($tag->getTagId())) {
+
+
+        if(empty($resource->getResourceId())) {
             $label = 'tag.add';
         } else {
             $label = 'tag.edit';

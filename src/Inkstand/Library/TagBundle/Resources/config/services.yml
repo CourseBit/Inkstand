@@ -1,4 +1,9 @@
+parameters:
+    inkstand_tag.tag_manager.class: Inkstand\Library\TagBundle\Doctrine\TagManager
+    inkstand_tag.model.tag.class: Inkstand\Library\TagBundle\Entity\Tag
+
 services:
-#    inkstand_tag.example:
-#        class: Inkstand\Library\TagBundle\Example
-#        arguments: [@service_id, "plain_value", %parameter%]
+    inkstand_tag.tag_manager:
+        class: "%inkstand_tag.tag_manager.class%"
+        arguments: [@form.factory, @doctrine.orm.entity_manager, "%inkstand_tag.model.tag.class%"]
+

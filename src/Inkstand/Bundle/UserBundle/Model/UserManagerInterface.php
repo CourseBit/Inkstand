@@ -39,6 +39,13 @@ interface UserManagerInterface
     public function findOneByUserId($userId);
 
     /**
+     * Persist tag
+     *
+     * @param UserInterface $user
+     */
+    public function update(UserInterface $user);
+
+    /**
      * Delete a user
      *
      * @param UserInterface $user

@@ -29,28 +29,7 @@ class ResourceType extends AbstractType
             'expanded' => false,
             'multiple' => false
         ));
-        $builder->add('actions', 'form_actions', array(
-                'buttons' => array(
-                    'save' => array(
-                        'type' => 'submit', 
-                        'options' => array(
-                            'label' => $submitLabel,
-                            'attr' => array(
-                                'class' => 'btn btn-primary'
-                            )
-                        )
-                    ),
-                    'cancel' => array(
-                        'type' => 'submit', 
-                        'options' => array(
-                            'label' => 'button.cancel',
-                            'attr' => array(
-                                'class' => 'btn btn-default'
-                            )
-                        )
-                    ),
-                )
-            ));
+
     }
 
     public function getName()

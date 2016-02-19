@@ -1,0 +1,14 @@
+{% extends "InkstandThemeBundle:layout:default.html.twig" %}
+
+{% block title %}InkstandTagBundle:Tag:add{% endblock %}
+
+{% block page_header %}{{ "tag.add"|trans }}{% endblock %}
+
+{% set breadcrumbs = knp_menu_get("InkstandTagBundle:Builder:tagAddBreadcrumb") %}
+{% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
+
+{% block main_content %}
+    {{ form_start(tagForm) }}
+    {{ form_widget(tagForm) }}
+    {{ form_end(tagForm) }}
+{% endblock %}
