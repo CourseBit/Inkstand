@@ -40,6 +40,8 @@ class Resource implements ResourceInterface, RateableInterface
      */
     private $resourceFileReferenceId;
 
+    private $thumbnailFileReferenceId;
+
     /**
      * @var string
      *
@@ -66,6 +68,8 @@ class Resource implements ResourceInterface, RateableInterface
      * @ORM\JoinColumn(name="resource_file_reference_id", referencedColumnName="file_reference_id", nullable=true)
      */
     private $resourceFileReference = null;
+
+    private $thumbnailFileReference = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Topic", inversedBy="resources")
@@ -321,5 +325,51 @@ class Resource implements ResourceInterface, RateableInterface
     public function getTagEntries()
     {
         return $this->tagEntries;
+    }
+
+    /**
+     * Set thumbnailFileReferenceId
+     *
+     * @param integer $thumbnailFileReferenceId
+     * @return Resource
+     */
+    public function setThumbnailFileReferenceId($thumbnailFileReferenceId)
+    {
+        $this->thumbnailFileReferenceId = $thumbnailFileReferenceId;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnailFileReferenceId
+     *
+     * @return integer 
+     */
+    public function getThumbnailFileReferenceId()
+    {
+        return $this->thumbnailFileReferenceId;
+    }
+
+    /**
+     * Set thumbnailFileReference
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\FileReference $thumbnailFileReference
+     * @return Resource
+     */
+    public function setThumbnailFileReference(\Inkstand\Bundle\CoreBundle\Entity\FileReference $thumbnailFileReference = null)
+    {
+        $this->thumbnailFileReference = $thumbnailFileReference;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnailFileReference
+     *
+     * @return \Inkstand\Bundle\CoreBundle\Entity\FileReference 
+     */
+    public function getThumbnailFileReference()
+    {
+        return $this->thumbnailFileReference;
     }
 }

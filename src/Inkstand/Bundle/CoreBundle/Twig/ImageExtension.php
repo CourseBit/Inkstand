@@ -24,8 +24,11 @@ class ImageExtension extends \Twig_Extension
         );
     }
 
-    public function image(FileReference $fileReference)
+    public function image(FileReference $fileReference = null)
     {
+        if(null === $fileReference) {
+            return "";
+        }
         return $this->router->generate('inkstand_core_file_image', array('fileReferenceId' => $fileReference->getFileReferenceId()));
     }
 

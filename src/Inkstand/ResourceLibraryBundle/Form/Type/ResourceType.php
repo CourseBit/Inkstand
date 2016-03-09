@@ -22,14 +22,41 @@ class ResourceType extends AbstractType
             'label' => 'File',
             'required' => false
         ));
-        $builder->add('description', 'textarea');
+        $builder->add('thumbnailFileReference', new FileReferenceType(), array(
+            'label' => 'Thumbnail',
+            'required' => false
+        ));
+        $builder->add('description', 'textarea',array(
+            'attr' => array('class' => 'wysiwyg-editor')
+        ));
         $builder->add('topic', 'entity', array(
             'class' => 'InkstandResourceLibraryBundle:Topic',
             'property' => 'name',
             'expanded' => false,
             'multiple' => false
         ));
-
+        $builder->add('actions', 'form_actions', array(
+            'buttons' => array(
+                'save' => array(
+                    'type' => 'submit',
+                    'options' => array(
+                        'label' => $submitLabel,
+                        'attr' => array(
+                            'class' => 'btn btn-primary'
+                        )
+                    )
+                ),
+                'cancel' => array(
+                    'type' => 'submit',
+                    'options' => array(
+                        'label' => 'button.cancel',
+                        'attr' => array(
+                            'class' => 'btn btn-default'
+                        )
+                    )
+                ),
+            )
+        ));
     }
 
     public function getName()

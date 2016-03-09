@@ -4,6 +4,9 @@ namespace Inkstand\ResourceLibraryBundle\Model;
 
 interface TopicInterface
 {
+    const STATE_DRAFT = 1;
+    const STATE_PUBLISHED = 2;
+
     /**
      * Get topicId
      *

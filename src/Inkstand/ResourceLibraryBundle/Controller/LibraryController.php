@@ -19,11 +19,13 @@ class LibraryController extends Controller
         /** @var  $resourceService */
         $resourceService = $this->get('inkstand_resource_library.resource');
         $resources = $resourceService->findAll();
+        $topics = $this->get('inkstand_resource_library.topic')->findAllShownInLibrary();
 
         return array(
             'resources' => $resources,
             'newResource' => new Resource(),
-            'newTopic' => new Topic()
+            'newTopic' => new Topic(),
+            'topics' => $topics
         );
     }
 }

@@ -23,6 +23,11 @@ class ResourceService
         return $this->resourceRepository->findAll();
     }
 
+    public function findBy($criteria)
+    {
+        return $this->resourceRepository->findBy($criteria);
+    }
+
     public function findOneByResourceId($resourceId)
     {
         return $this->resourceRepository->findOneByResourceId($resourceId, array('name' => 'DESC'));

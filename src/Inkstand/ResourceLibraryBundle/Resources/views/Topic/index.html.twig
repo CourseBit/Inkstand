@@ -1,0 +1,44 @@
+{% extends "InkstandThemeBundle:layout:default.html.twig" %}
+
+{% block title %}InkstandResourceLibraryBundle:Topic:index{% endblock %}
+
+{% block page_header %}Topics{% endblock %}
+
+{% set breadcrumbs = knp_menu_get('InkstandResourceLibraryBundle:Builder:topicIndexBreadcrumb') %}
+{% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
+
+{% block main_content %}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Topics"} %}
+        {% block panel_body %}
+            <a href="{{ path("inkstand_resource_library_topic_add") }}" class="btn btn-default"><i class="fa fa-plus"></i> Add Topic</a>
+            <hr>
+            {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+                {% block grid_head %}
+                    <th>Name</th>
+                    <th>Excerpt</th>
+                    <th>State</th>
+                    <td>Actions</td>
+                {% endblock %}
+                {% block grid_body %}
+                    {% for topic in topics %}
+                        <tr>
+                            <td>{{ topic.name }}</td>
+                            <td>{{ topic.excerpt }}</td>
+                            <td>
+                                {% if topic.state == 2 %}
+                                    <i class="fa fa-check fa-fw text-success"></i> Published
+                                {% else %}
+                                    <i class="fa fa-pencil fa-fw text-success"></i> Draft
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{{ path("inkstand_resource_library_topic_edit", {"topicId":topic.topicId}) }}"><i class="fa fa-cog fa-lg"></i></a>
+                                <a href=""><i class="fa fa-times fa-lg"></i></a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                {% endblock %}
+            {% endembed %}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

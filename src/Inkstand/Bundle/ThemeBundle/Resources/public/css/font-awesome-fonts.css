@@ -5,3 +5,14 @@
   font-weight: normal;
   font-style: normal;
 }
+
+/* Summernote styles */
+@font-face {
+  font-family: 'summernote';
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/font/summernote.eot');
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/font/summernote.ttf');
+  src: url('https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.1/font/summernote.woff');
+}
+.note-editor {
+  margin-bottom: 0;
+}

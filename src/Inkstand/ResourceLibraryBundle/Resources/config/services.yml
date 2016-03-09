@@ -15,6 +15,10 @@ services:
         class: "%inkstand_resource_library.resource_tag_manager%"
         arguments: [@form.factory, @doctrine.orm.entity_manager, "%inkstand_resource_library.model.tag.class%"]
 
+    inkstand_resource_library.topic:
+        class: Inkstand\ResourceLibraryBundle\Service\TopicService
+        arguments: [@doctrine.orm.entity_manager]
+
     # Voters
 
     inkstand_resource_library.voter.resource_voter:
