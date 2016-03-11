@@ -4,10 +4,10 @@ Inkstand\ResourceLibraryBundle\Entity\ResourceTag:
     id:
         tagId:
             type: integer
-            column: tag_id
             id: true
             generator:
                 strategy: AUTO
+            column: tag_id
     fields:
         name:
             type: string
@@ -16,12 +16,11 @@ Inkstand\ResourceLibraryBundle\Entity\ResourceTag:
             type: string
             length: 255
         defaultValue:
-            type: text
+            type: string
+            length: 255
             column: default_value
-            nullable: true
         choices:
             type: text
-            nullable: true
         uniqueName:
             type: string
             length: 255
@@ -32,4 +31,5 @@ Inkstand\ResourceLibraryBundle\Entity\ResourceTag:
         tagEntries:
             targetEntity: ResourceTagEntry
             mappedBy: tag
+            cascade: ["persist", "remove"]
     lifecycleCallbacks: {  }

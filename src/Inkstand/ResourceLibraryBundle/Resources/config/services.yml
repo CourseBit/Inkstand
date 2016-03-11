@@ -1,19 +1,25 @@
 parameters:
-    inkstand_resource_library.resource.class: Inkstand\ResourceLibraryBundle\Service\ResourceService
+    inkstand_resource_library.resource_manager.class: Inkstand\ResourceLibraryBundle\Doctrine\ResourceManager
+    inkstand_resource_library.resource_tag_manager.class: Inkstand\ResourceLibraryBundle\Doctrine\ResourceTagManager
+    inkstand_resource_library.resource_tag_entry_manager.class: Inkstand\ResourceLibraryBundle\Doctrine\ResourceTagEntryManager
     inkstand_resource_library.voter.resource_voter.class: Inkstand\ResourceLibraryBundle\Voter\ResourceVoter
     inkstand_resource_library.voter.topic_voter.class: Inkstand\ResourceLibraryBundle\Voter\TopicVoter
-
-    inkstand_resource_library.resource_tag_manager: Inkstand\ResourceLibraryBundle\Doctrine\ResourceTagManager
     inkstand_resource_library.model.tag.class: Inkstand\ResourceLibraryBundle\Entity\ResourceTag
+    inkstand_resource_library.model.resource.class: Inkstand\ResourceLibraryBundle\Entity\Resource
+    inkstand_resource_library.model.resource_tag_entry.class: Inkstand\ResourceLibraryBundle\Entity\ResourceTagEntry
 
 services:
-    inkstand_resource_library.resource:
-        class: "%inkstand_resource_library.resource.class%"
-        arguments: [@doctrine.orm.entity_manager]
+    inkstand_resource_library.resource_manager:
+        class: "%inkstand_resource_library.resource_manager.class%"
+        arguments: [@form.factory, @inkstand_resource_library.resource_tag_manager, @inkstand_resource_library.resource_tag_entry_manager, @doctrine.orm.entity_manager, "%inkstand_resource_library.model.resource.class%"]
 
     inkstand_resource_library.resource_tag_manager:
-        class: "%inkstand_resource_library.resource_tag_manager%"
+        class: "%inkstand_resource_library.resource_tag_manager.class%"
         arguments: [@form.factory, @doctrine.orm.entity_manager, "%inkstand_resource_library.model.tag.class%"]
+
+    inkstand_resource_library.resource_tag_entry_manager:
+        class: "%inkstand_resource_library.resource_tag_entry_manager.class%"
+        arguments: [@doctrine.orm.entity_manager, "%inkstand_resource_library.model.resource_tag_entry.class%"]
 
     # Voters
 

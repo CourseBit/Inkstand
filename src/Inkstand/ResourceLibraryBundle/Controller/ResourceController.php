@@ -7,6 +7,8 @@ use Inkstand\Library\RatingBundle\Entity\Rating;
 use Inkstand\Library\RatingBundle\Model\UserReviewInterface;
 use Inkstand\ResourceLibraryBundle\Entity\Resource;
 use Inkstand\ResourceLibraryBundle\Form\Type\ResourceType;
+use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
+use Inkstand\ResourceLibraryBundle\Model\ResourceManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,28 +22,26 @@ class ResourceController extends Controller
      */
     public function addAction(Request $request)
     {
-        $resource = new Resource();
+        /** @var ResourceManagerInterface $resourceManager */
+        $resourceManager = $this->get('inkstand_resource_library.resource_manager');
+        /** @var ResourceInterface $resource */
+        $resource = $resourceManager->create();
 
         $this->denyAccessUnlessGranted('add', $resource);
 
-        $resourceForm = $this->createForm(new ResourceType(), $resource, array(
-            'action' => $this->generateUrl('inkstand_resource_library_resource_add'),
-            'method' => 'POST'
-        ));
+        $resourceForm = $resourceManager->getForm($resource);
 
         $resourceForm->handleRequest($request);
 
         if($resourceForm->isValid()) {
+            $resourceManager->update($resource);
 
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($resource);
-            $em->flush();
-
-            $session = $request->getSession();
-            $session->getFlashBag()->add('success', $this->get('translator')->trans('course.added', array('%name%' => $resource->getName())));
+            $this->addSuccessMessage('resource.added');
 
             return $this->redirect($this->generateUrl('inkstand_resource_library_index'));
         }
+
+        dump($resourceForm->createView());
 
         return array(
             'resourceForm' => $resourceForm->createView()
@@ -66,7 +66,7 @@ class ResourceController extends Controller
      */
     public function editAction(Request $request, $resourceId)
     {
-        $resource = $this->get('inkstand_resource_library.resource')->findOneByResourceId($resourceId);
+        $resource = $this->get('inkstand_resource_library.resource_manager')->findOneByResourceId($resourceId);
 
         if($resource === null) {
             throw new NotFoundHttpException('Resource not found.');
@@ -126,7 +126,7 @@ class ResourceController extends Controller
     public function rateAction(Request $request, $resourceId)
     {
         /** @var Resource $resource */
-        $resource = $this->get('inkstand_resource_library.resource')->findOneByResourceId($resourceId);
+        $resource = $this->get('inkstand_resource_library.resource_manager')->findOneByResourceId($resourceId);
 
         if($resource === null) {
             throw new NotFoundHttpException('Resource not found.');
@@ -139,7 +139,7 @@ class ResourceController extends Controller
             $resource->setRating($rating);
             $this->get('doctrine.orm.entity_manager')->persist($resource);
             $this->get('doctrine.orm.entity_manager')->flush();
-            $resource = $this->get('inkstand_resource_library.resource')->findOneByResourceId($resourceId);
+            $resource = $this->get('inkstand_resource_library.resource_manager')->findOneByResourceId($resourceId);
         }
 
         $userReview = $this->get('inkstand_rating.user_review_manager')->findOneBy(array(

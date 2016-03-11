@@ -4,11 +4,14 @@ namespace Inkstand\ResourceLibraryBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
+use Inkstand\Library\TagBundle\Model\TagEntryManagerInterface;
 use Inkstand\Library\TagBundle\Model\TagInterface;
-use Inkstand\Library\TagBundle\Model\TagManager as BaseTagManager;
+use Inkstand\Library\TagBundle\Model\TagManagerInterface;
+use Inkstand\ResourceLibraryBundle\Model\ResourceManager as BaseResourceManager;
+use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class ResourceTagManager extends BaseTagManager
+class ResourceManager extends BaseResourceManager
 {
     /**
      * @var EntityManagerInterface
@@ -30,13 +33,14 @@ class ResourceTagManager extends BaseTagManager
      * @param ObjectManager $objectManager
      * @param $class
      */
-    public function __construct(FormFactoryInterface $formFactory, ObjectManager $objectManager, $class)
+    public function __construct(FormFactoryInterface $formFactory,  $resourceTagManager,
+                                 $resourceTagEntryManager, ObjectManager $objectManager, $class)
     {
         $this->objectManager = $objectManager;
         $this->class = $class;
         $this->repository = $objectManager->getRepository($class);
 
-        parent::__construct($formFactory);
+        parent::__construct($formFactory, $resourceTagManager, $resourceTagEntryManager);
     }
 
     /**
@@ -66,18 +70,18 @@ class ResourceTagManager extends BaseTagManager
     /**
      * {@inheritdoc}
      */
-    public function update($tag)
+    public function update(ResourceInterface $resource)
     {
-        $this->objectManager->persist($tag);
+        $this->objectManager->persist($resource);
         $this->objectManager->flush();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function delete(TagInterface $userReview)
+    public function delete(ResourceInterface $resource)
     {
-        $this->objectManager->remove($userReview);
+        $this->objectManager->remove($resource);
         $this->objectManager->flush();
     }
 

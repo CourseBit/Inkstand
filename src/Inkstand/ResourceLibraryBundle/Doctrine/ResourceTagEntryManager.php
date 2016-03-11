@@ -4,11 +4,11 @@ namespace Inkstand\ResourceLibraryBundle\Doctrine;
 
 use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
-use Inkstand\Library\TagBundle\Model\TagInterface;
-use Inkstand\Library\TagBundle\Model\TagManager as BaseTagManager;
+use Inkstand\Library\TagBundle\Model\TagEntryInterface;
+use Inkstand\Library\TagBundle\Model\TagEntryManager;
 use Symfony\Component\Form\FormFactoryInterface;
 
-class ResourceTagManager extends BaseTagManager
+class ResourceTagEntryManager extends TagEntryManager
 {
     /**
      * @var EntityManagerInterface
@@ -30,43 +30,17 @@ class ResourceTagManager extends BaseTagManager
      * @param ObjectManager $objectManager
      * @param $class
      */
-    public function __construct(FormFactoryInterface $formFactory, ObjectManager $objectManager, $class)
+    public function __construct(ObjectManager $objectManager, $class)
     {
         $this->objectManager = $objectManager;
         $this->class = $class;
         $this->repository = $objectManager->getRepository($class);
-
-        parent::__construct($formFactory);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function findAll()
-    {
-        return $this->repository->findAll();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findOneBy(array $criteria)
-    {
-        return $this->repository->findOneBy($criteria);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function findBy(array $criteria)
-    {
-        return $this->repository->findBy($criteria);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function update($tag)
+    public function update(TagEntryInterface $tag)
     {
         $this->objectManager->persist($tag);
         $this->objectManager->flush();
@@ -75,7 +49,7 @@ class ResourceTagManager extends BaseTagManager
     /**
      * {@inheritdoc}
      */
-    public function delete(TagInterface $userReview)
+    public function delete(TagEntryInterface $userReview)
     {
         $this->objectManager->remove($userReview);
         $this->objectManager->flush();

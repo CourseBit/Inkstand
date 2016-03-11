@@ -4,8 +4,13 @@ namespace Inkstand\ResourceLibraryBundle\Form\Type;
 
 use Inkstand\Bundle\CoreBundle\Form\Type\FileReferenceType;
 use Inkstand\Bundle\CourseBundle\Entity\Course;
+use Inkstand\Library\TagBundle\Model\TagEntryInterface;
+use Inkstand\Library\TagBundle\Model\TagInterface;
+use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 use Inkstand\Bundle\CourseBundle\Form\Type\MetricType;
@@ -29,7 +34,32 @@ class ResourceType extends AbstractType
             'expanded' => false,
             'multiple' => false
         ));
-
+        $builder->add('Tag' , 'entity' , array(
+            'class'    => 'InkstandResourceLibraryBundle:ResourceTag' ,
+            'property' => 'name' ,
+            'expanded' => true ,
+            'multiple' => true ,
+        ));;
+//        $builder->add('tagEntries', 'collection', array(
+//            'type' => new ResourceTagEntryType(),
+//        ));
+//
+//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+//            /** @var ResourceInterface $resource */
+//            $resource = $event->getData();
+//            $form = $event->getForm();
+//
+//            dump($resource->getTagEntries());
+//
+//            /** @var TagEntryInterface $tagEntry */
+//            foreach($resource->getTagEntries() as $tagEntry) {
+//                /** @var TagInterface $tag */
+//                $tag = $tagEntry->getTag();
+//                $form->add($tag->getUniqueName(), $tag->getType(), array(
+//                    'label' => $tag->getName()
+//                ));
+//            }
+//        });
     }
 
     public function getName()

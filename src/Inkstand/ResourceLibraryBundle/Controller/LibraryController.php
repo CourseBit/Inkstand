@@ -5,6 +5,7 @@ namespace Inkstand\ResourceLibraryBundle\Controller;
 use Inkstand\Bundle\CoreBundle\Controller\Controller;
 use Inkstand\ResourceLibraryBundle\Entity\Resource;
 use Inkstand\ResourceLibraryBundle\Entity\Topic;
+use Inkstand\ResourceLibraryBundle\Model\ResourceManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 
@@ -16,9 +17,9 @@ class LibraryController extends Controller
      */
     public function indexAction()
     {
-        /** @var  $resourceService */
-        $resourceService = $this->get('inkstand_resource_library.resource');
-        $resources = $resourceService->findAll();
+        /** @var ResourceManagerInterface $resourceService */
+        $resourceManager = $this->get('inkstand_resource_library.resource_manager');
+        $resources = $resourceManager->findAll();
 
         return array(
             'resources' => $resources,

@@ -2,91 +2,100 @@
 
 namespace Inkstand\ResourceLibraryBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Inkstand\Library\RatingBundle\Model\RateableInterface;
 use Inkstand\Library\RatingBundle\Model\RatingInterface;
 use Inkstand\Library\TagBundle\Model\TagEntryInterface;
+use Inkstand\Library\TagBundle\Model\TaggableInterface;
 use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Resource
- *
- * @ORM\Table("lms_resource")
- * @ORM\Entity
  */
-class Resource implements ResourceInterface, RateableInterface
+class Resource implements ResourceInterface, RateableInterface//, TaggableInterface
 {
     /**
      * @var integer
-     *
-     * @ORM\Column(name="resource_id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $resourceId;
 
     /**
      * @var string
-     *
-     * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="resource_file_reference_id", type="integer", nullable=true)
      */
     private $resourceFileReferenceId;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
      */
     private $description;
 
     /**
      * @var integer
      *
-     * @ORM\Column(name="topic_id", type="integer")
      */
     private $topicId;
 
     /**
      * @var integer
-     *
-     * @ORM\Column(name="rating_id", type="integer", nullable=true)
      */
     private $ratingId;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Inkstand\Bundle\CoreBundle\Entity\FileReference", cascade={"persist"})
-     * @ORM\JoinColumn(name="resource_file_reference_id", referencedColumnName="file_reference_id", nullable=true)
      */
     private $resourceFileReference = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Topic", inversedBy="resources")
-     * @ORM\JoinColumn(name="topic_id", referencedColumnName="topic_id")
      */
     private $topic;
 
     /**
      * @var
-     *
-     * @ORM\OneToOne(targetEntity="Inkstand\Library\RatingBundle\Entity\Rating", cascade={"remove", "persist"})
-     * @ORM\JoinColumn(name="rating_id", referencedColumnName="rating_id", nullable=true)
      */
     private $rating = null;
 
     /**
      * @var array
-     *
-     * @ORM\OneToMany(targetEntity="ResourceTagEntry", mappedBy="object", cascade={"persist"})
      */
-    private $tagEntries = null;
+    private $tagEntries;
+
+    private $tags;
+
+    // Important
+    public function getTag()
+    {
+        $tags = new ArrayCollection();
+
+        foreach($this->tagEntries as $tagEntry)
+        {
+            $tags[] = $tagEntry->getTag();
+        }
+
+        return $tags;
+    }
+    // Important
+    public function setTag($tags)
+    {
+        foreach($tags as $tag)
+        {
+            $tagEntry = new ResourceTagEntry();
+
+            $tagEntry->setResource($this);
+            $tagEntry->setResourceId($this->getResourceId());
+            $tagEntry->setTag($tag);
+            $tagEntry->setTagId($tag->getTagId());
+
+            $this->addTagEntry($tagEntry);
+        }
+
+    }
 
     /**
      * Constructor
@@ -104,6 +113,16 @@ class Resource implements ResourceInterface, RateableInterface
     public function getResourceId()
     {
         return $this->resourceId;
+    }
+
+    /**
+     * For taggable
+     *
+     * @return integer
+     */
+    public function getObjectId()
+    {
+        return $this->getResourceId();
     }
 
     /**
@@ -296,7 +315,7 @@ class Resource implements ResourceInterface, RateableInterface
      * @param TagEntryInterface $tagEntry
      * @return Resource
      */
-    public function addTagEntry(TagEntryInterface $tagEntry)
+    public function addTagEntry($tagEntry)
     {
         $this->tagEntries[] = $tagEntry;
 
@@ -308,7 +327,7 @@ class Resource implements ResourceInterface, RateableInterface
      *
      * @param TagEntryInterface $tagEntry
      */
-    public function removeTagEntry(TagEntryInterface $tagEntry)
+    public function removeTagEntry($tagEntry)
     {
         $this->tagEntries->removeElement($tagEntry);
     }

@@ -100,7 +100,7 @@ class TagController extends Controller
             $tagManager = $this->get($tagManagerServiceId);
 
             if(!is_a($tagManager, 'Inkstand\Library\TagBundle\Model\TagManagerInterface')) {
-                throw new \Exception('Requested service is not a tag manager.');
+                //throw new \Exception('Requested service is not a tag manager.');
             }
 
             return $tagManager;

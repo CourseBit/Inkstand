@@ -86,11 +86,7 @@ Inkstand\ResourceLibraryBundle\Entity\Resource:
             orphanRemoval: false
     oneToMany:
         tagEntries:
-            targetEntity: Inkstand\ResourceLibraryBundle\Entity\ResourceTagEntry
-            cascade:
-                - persist
-            mappedBy: object
-            inversedBy: null
-            orphanRemoval: false
-            orderBy: null
+            targetEntity: ResourceTagEntry
+            mappedBy: resource
+            cascade: ["persist", "remove"]
     lifecycleCallbacks: {  }

@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Inkstand\Library\TagBundle\Model\TagInterface;
 
-abstract class TagEntry implements TagEntryInterface
+abstract class TagEntry// implements TagEntryInterface
 {
     /**
      * @var integer
@@ -21,12 +21,12 @@ abstract class TagEntry implements TagEntryInterface
     /**
      * @var integer
      */
-    protected $objectId;
+    protected $resourceId;
 
     /**
      * @var mixed
      */
-    protected $object;
+    protected $resource;
 
     /**
      * @var integer
@@ -100,9 +100,9 @@ abstract class TagEntry implements TagEntryInterface
      * @param integer $objectId
      * @return TagEntry
      */
-    public function setObjectId($objectId)
+    public function setResourceId($objectId)
     {
-        $this->objectId = $objectId;
+        $this->resourceId = $objectId;
 
         return $this;
     }
@@ -112,9 +112,9 @@ abstract class TagEntry implements TagEntryInterface
      *
      * @return integer
      */
-    public function getObjectId()
+    public function getResourceId()
     {
-        return $this->objectId;
+        return $this->resourceId;
     }
 
     /**
@@ -123,9 +123,9 @@ abstract class TagEntry implements TagEntryInterface
      * @param mixed $object
      * @return TagEntry
      */
-    public function setObject($object = null)
+    public function setResource($object)
     {
-        $this->object = $object;
+        $this->resource = $object;
 
         return $this;
     }
@@ -135,9 +135,9 @@ abstract class TagEntry implements TagEntryInterface
      *
      * @return mixed
      */
-    public function getObject()
+    public function getResource()
     {
-        return $this->object;
+        return $this->resource;
     }
 
     /**
