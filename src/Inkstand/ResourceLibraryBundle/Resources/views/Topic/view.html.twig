@@ -1,13 +1,18 @@
 {% extends "InkstandThemeBundle:layout:default.html.twig" %}
 
-{% block title %}InkstandResourceLibraryBundle:Library:index{% endblock %}
+{% block title %}InkstandResourceLibraryBundle:Topic:view{% endblock %}
 
-{% block page_header %}Resource Library{% endblock %}
+{% block page_header %}{{ topic.name }}{% endblock %}
 
-{% set breadcrumbs = knp_menu_get('InkstandResourceLibraryBundle:Builder:libraryIndexBreadcrumb') %}
+{% set breadcrumbs = knp_menu_get('InkstandResourceLibraryBundle:Builder:topicViewBreadcrumb', [], {'topic':topic}) %}
 {% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
 
 {% block main_content %}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' %}
+        {% block panel_body %}
+            {{ topic.description|raw }}
+        {% endblock %}
+    {% endembed %}
     {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Resources"} %}
         {% block panel_body %}
             {% if resources is not empty  %}
@@ -83,41 +88,4 @@
             {% endfor %}
         {% endblock %}
     {% endembed %}
-{% endblock %}
-
-{% block extra_widgets %}
-    {% if is_granted('add', newResource) or is_granted('add', newTopic) %}
-        {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Actions"} %}
-            {% block panel_extra %}
-                <div class="list-group">
-                    {% if is_granted('add', newResource) %}
-                        <a href="{{ path("inkstand_resource_library_resource_add") }}" class="list-group-item">Add Resource</a>
-                    {% endif %}
-                    <a href="{{ path("inkstand_tag_add", {"tagManager": "inkstand_resource_library.resource_tag_manager"}) }}" class="list-group-item">Add Resource Tags</a>
-                    {% if is_granted('add', newTopic) %}
-                        <a href="{{ path("inkstand_resource_library_topic_add") }}" class="list-group-item">Add Topic</a>
-                    {% endif %}
-                </div>
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
-    {% if topics is not empty %}
-        {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Topics"} %}
-            {% block panel_body %}
-                {% for topic in topics %}
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img width="75" class="media-object" src="{{ image(topic.thumbnailFileReference) }}" alt="">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <strong><a href="{{ path('inkstand_resource_library_topic_view', {'topicId':topic.topicId}) }}">{{ topic.name }}</a></strong>
-                            <p>{{ topic.excerpt }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
 {% endblock %}

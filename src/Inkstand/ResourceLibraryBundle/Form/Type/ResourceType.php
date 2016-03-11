@@ -27,13 +27,20 @@ class ResourceType extends AbstractType
             'label' => 'File',
             'required' => false
         ));
-        $builder->add('description', 'textarea');
+        $builder->add('thumbnailFileReference', new FileReferenceType(), array(
+            'label' => 'Thumbnail',
+            'required' => false
+        ));
+        $builder->add('description', 'textarea',array(
+            'attr' => array('class' => 'wysiwyg-editor')
+        ));
         $builder->add('topic', 'entity', array(
             'class' => 'InkstandResourceLibraryBundle:Topic',
             'property' => 'name',
             'expanded' => false,
             'multiple' => false
         ));
+
         $builder->add('Tag' , 'entity' , array(
             'class'    => 'InkstandResourceLibraryBundle:ResourceTag' ,
             'property' => 'name' ,

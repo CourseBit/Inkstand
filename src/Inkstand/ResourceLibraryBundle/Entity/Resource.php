@@ -31,6 +31,8 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
      */
     private $resourceFileReferenceId;
 
+    private $thumbnailFileReferenceId;
+
     /**
      * @var string
      *
@@ -51,6 +53,8 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
     /**
      */
     private $resourceFileReference = null;
+
+    private $thumbnailFileReference = null;
 
     /**
      */
@@ -340,5 +344,51 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
     public function getTagEntries()
     {
         return $this->tagEntries;
+    }
+
+    /**
+     * Set thumbnailFileReferenceId
+     *
+     * @param integer $thumbnailFileReferenceId
+     * @return Resource
+     */
+    public function setThumbnailFileReferenceId($thumbnailFileReferenceId)
+    {
+        $this->thumbnailFileReferenceId = $thumbnailFileReferenceId;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnailFileReferenceId
+     *
+     * @return integer 
+     */
+    public function getThumbnailFileReferenceId()
+    {
+        return $this->thumbnailFileReferenceId;
+    }
+
+    /**
+     * Set thumbnailFileReference
+     *
+     * @param \Inkstand\Bundle\CoreBundle\Entity\FileReference $thumbnailFileReference
+     * @return Resource
+     */
+    public function setThumbnailFileReference(\Inkstand\Bundle\CoreBundle\Entity\FileReference $thumbnailFileReference = null)
+    {
+        $this->thumbnailFileReference = $thumbnailFileReference;
+
+        return $this;
+    }
+
+    /**
+     * Get thumbnailFileReference
+     *
+     * @return \Inkstand\Bundle\CoreBundle\Entity\FileReference 
+     */
+    public function getThumbnailFileReference()
+    {
+        return $this->thumbnailFileReference;
     }
 }

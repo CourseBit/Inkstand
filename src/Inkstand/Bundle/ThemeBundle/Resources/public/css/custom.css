@@ -1,5 +1,6 @@
 body {
 	overflow-x:hidden;
+	background-color:#F1F1F1;
 }
 
 body.layout-minimal {
@@ -61,4 +62,36 @@ ul.activities li.activity:last-child {
 ----------------------------- */
 .breadcrumb.breadcrumb-inline {
 	display:inline-block;
+	background-color: transparent;
+}
+
+/* Panels
+----------------------------- */
+.panel-dark > .panel-heading {
+	color: #fff;
+	background-color: #4C4F53;
+	border-color: #4C4F53;
+}
+
+.panel {
+	border-radius: 0;
+}
+
+.panel > .panel-heading {
+	border-radius: 0;
+}
+
+/* DataTables
+----------------------------- */
+.dataTables_wrapper .sorting_asc:after {
+	content: "\f0d8" !important;
+	font-family: "FontAwesome" !important;
+}
+.dataTables_wrapper .sorting_desc:after {
+	content: "\f0d7" !important;
+	font-family: "FontAwesome" !important;
+}
+.dataTables_wrapper .sorting:after {
+	content: "\f0dc" !important;
+	font-family: "FontAwesome" !important;
 }

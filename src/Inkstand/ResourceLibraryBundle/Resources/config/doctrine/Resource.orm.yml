@@ -29,6 +29,14 @@ Inkstand\ResourceLibraryBundle\Entity\Resource:
             nullable: true
             precision: 0
             column: resource_file_reference_id
+        thumbnailFileReferenceId:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+            column: thumbnail_file_reference_id
         description:
             type: text
             scale: 0
@@ -54,6 +62,16 @@ Inkstand\ResourceLibraryBundle\Entity\Resource:
             column: rating_id
     manyToOne:
         resourceFileReference:
+            targetEntity: Inkstand\Bundle\CoreBundle\Entity\FileReference
+            cascade:
+                - persist
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                resource_file_reference_id:
+                    referencedColumnName: file_reference_id
+            orphanRemoval: false
+        thumbnailFileReference:
             targetEntity: Inkstand\Bundle\CoreBundle\Entity\FileReference
             cascade:
                 - persist

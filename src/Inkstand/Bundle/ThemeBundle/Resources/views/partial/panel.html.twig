@@ -1,4 +1,4 @@
-<div class="panel panel-primary">
+<div class="panel panel-dark">
     {% if panel_title is defined %}
         <div class="panel-heading">
             <h3 class="panel-title">{{ panel_title }}</h3>
@@ -7,4 +7,5 @@
     <div class="panel-body">
         {% block panel_body %}{% endblock %}
     </div>
+    {% block panel_extra %}{% endblock %}
 </div>

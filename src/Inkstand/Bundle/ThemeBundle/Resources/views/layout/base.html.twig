@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        {% if setting("inkstand_core_search_index") == "0" %}
+            <meta name="robots" content="noindex">
+        {% endif %}
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        {% stylesheets
+        '@InkstandThemeBundle/Resources/public/bower_components/font-awesome/css/font-awesome.css'
+        '@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/css/bootstrap.min.css'
+        '@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/css/jasny-bootstrap.min.css'
+        '@InkstandThemeBundle/Resources/public/bower_components/summernote/dist/summernote.css'
+        '@InkstandThemeBundle/Resources/public/css/font-awesome-fonts.css'
+        '@InkstandThemeBundle/Resources/public/css/navmenu.css'
+        '@InkstandCoreBundle/Resources/public/css/file-explorer.css'
+        '@InkstandCoreBundle/Resources/public/css/responsive-calendar.css'
+        '@InkstandThemeBundle/Resources/public/css/custom.css'
+        filter='cssrewrite'
+        %}
+        <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css">
+        <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}
+        {% block stylesheets %}{% endblock %}
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    </head>
+    <body class="layout-base">
+        {% block body %}{% endblock %}
+
+        {% javascripts
+        '@InkstandThemeBundle/Resources/public/bower_components/jquery/dist/jquery.min.js'
+        '@InkstandThemeBundle/Resources/public/bower_components/datatables/media/js/jquery.dataTables.min.js'
+        '@InkstandThemeBundle/Resources/public/js/dataTables.bootstrap.js'
+        '@InkstandThemeBundle/Resources/public/bower_components/bootstrap/dist/js/bootstrap.min.js'
+        '@InkstandThemeBundle/Resources/public/bower_components/jasny-bootstrap/dist/js/jasny-bootstrap.min.js'
+        '@InkstandThemeBundle/Resources/public/bower_components/handlebars/handlebars.min.js'
+        '@InkstandThemeBundle/Resources/public/bower_components/summernote/dist/summernote.min.js'
+        '@InkstandCoreBundle/Resources/public/js/file-explorer.js'
+        '@InkstandCoreBundle/Resources/public/js/responsive-calendar.min.js'
+        '@InkstandThemeBundle/Resources/public/js/custom.js'
+        %}
+        <script src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% block javascripts %}{% endblock %}
+        <script type="text/javascript">
+            $(document).ready(function () {
+                $(".responsive-calendar").responsiveCalendar({
+                    time: '2016-01',
+                    events: {
+                        "2016-01-03": {}
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

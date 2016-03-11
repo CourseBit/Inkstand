@@ -28,4 +28,43 @@ Inkstand\ResourceLibraryBundle\Entity\Topic:
             unique: false
             nullable: false
             precision: 0
+        excerpt:
+            type: text
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+        state:
+            type: integer
+            nullable: false
+        showInLibrary:
+            type: boolean
+            nullable: false
+        thumbnailFileReferenceId:
+            type: integer
+            scale: 0
+            length: null
+            unique: false
+            nullable: true
+            precision: 0
+            column: thumbnail_file_reference_id
+    manyToOne:
+        thumbnailFileReference:
+            targetEntity: Inkstand\Bundle\CoreBundle\Entity\FileReference
+            cascade:
+                - persist
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                resource_file_reference_id:
+                    referencedColumnName: file_reference_id
+            orphanRemoval: false
+    oneToMany:
+        resources:
+            targetEntity: Inkstand\ResourceLibraryBundle\Entity\Resource
+            mappedBy: object
+            inversedBy: null
+            orphanRemoval: false
+            orderBy: null
     lifecycleCallbacks: {  }

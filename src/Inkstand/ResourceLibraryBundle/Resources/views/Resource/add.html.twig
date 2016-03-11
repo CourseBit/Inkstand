@@ -8,8 +8,11 @@
 {% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
 
 {% block main_content %}
-    {{ form_start(resourceForm) }}
-    {{ form_widget(resourceForm) }}
-    {{ form_widget(resourceForm.tag) }}
-    {{ form_end(resourceForm) }}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Resource"} %}
+        {% block panel_body %}
+            {{ form_start(resourceForm) }}
+            {{ form_widget(resourceForm) }}
+            {{ form_end(resourceForm) }}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}
