@@ -17,16 +17,11 @@ class LibraryController extends Controller
      */
     public function indexAction()
     {
-<<<<<<< HEAD
         /** @var ResourceManagerInterface $resourceService */
         $resourceManager = $this->get('inkstand_resource_library.resource_manager');
         $resources = $resourceManager->findAll();
-=======
-        /** @var  $resourceService */
-        $resourceService = $this->get('inkstand_resource_library.resource');
-        $resources = $resourceService->findAll();
+
         $topics = $this->get('inkstand_resource_library.topic')->findAllShownInLibrary();
->>>>>>> 050c7dc901aec6feed27894f3d0f03adfdd840d8
 
         return array(
             'resources' => $resources,
