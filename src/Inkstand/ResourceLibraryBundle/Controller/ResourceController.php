@@ -11,6 +11,7 @@ use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
 use Inkstand\ResourceLibraryBundle\Model\ResourceManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
+use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -29,19 +30,19 @@ class ResourceController extends Controller
 
         $this->denyAccessUnlessGranted('add', $resource);
 
+        /** @var FormInterface $resourceForm */
         $resourceForm = $resourceManager->getForm($resource);
 
         $resourceForm->handleRequest($request);
 
         if($resourceForm->isValid()) {
-            $resourceManager->update($resource);
+            // Also update tags that were manually added to form
+            $resourceManager->updateWithForm($resource, $resourceForm);
 
             $this->addSuccessMessage('resource.added');
 
             return $this->redirect($this->generateUrl('inkstand_resource_library_index'));
         }
-
-        dump($resourceForm->createView());
 
         return array(
             'resourceForm' => $resourceForm->createView()
@@ -66,28 +67,26 @@ class ResourceController extends Controller
      */
     public function editAction(Request $request, $resourceId)
     {
-        $resource = $this->get('inkstand_resource_library.resource_manager')->findOneByResourceId($resourceId);
+        /** @var ResourceManagerInterface $resourceManager */
+        $resourceManager = $this->get('inkstand_resource_library.resource_manager');
+        $resource = $resourceManager->findOneByResourceId($resourceId);
 
         if($resource === null) {
             throw new NotFoundHttpException('Resource not found.');
         }
 
-        $resourceForm = $this->createForm(new ResourceType(), $resource, array(
-            'action' => $this->generateUrl('inkstand_resource_library_resource_edit', array('resourceId' => $resourceId)),
-            'method' => 'POST'
-        ));
+        $this->denyAccessUnlessGranted('edit', $resource);
+
+        /** @var FormInterface $resourceForm */
+        $resourceForm = $resourceManager->getForm($resource);
 
         $resourceForm->handleRequest($request);
 
-        // TODO: Check if the cancel button was clicked
-
         if($resourceForm->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            $em->persist($resource);
-            $em->flush();
+            // Also update tags that were manually added to form
+            $resourceManager->updateWithForm($resource, $resourceForm);
 
-            $session = $request->getSession();
-            $session->getFlashBag()->add('success', $this->get('translator')->trans('course.edited', array('%name%' => $resource->getName())));
+            $this->addSuccessMessage('resource.added');
 
             return $this->redirect($this->generateUrl('inkstand_resource_library_index'));
         }

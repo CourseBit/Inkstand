@@ -28,7 +28,8 @@ class TopicType extends AbstractType
             'required' => false
         ));
         $builder->add('description', 'textarea', array(
-            'attr' => array('class' => 'wysiwyg-editor')
+            'attr' => array('class' => 'wysiwyg-editor'),
+            'required' => false
         ));
         $builder->add('excerpt', 'textarea', array(
 

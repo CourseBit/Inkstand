@@ -2,6 +2,10 @@
 
 namespace Inkstand\ResourceLibraryBundle\Model;
 
+use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormTypeInterface;
+
 interface ResourceManagerInterface
 {
     /**
@@ -18,6 +22,12 @@ interface ResourceManagerInterface
      * @return ResourceInterface
      */
     public function findOneBy(array $criteria);
+
+    /**
+     * @param $resourceId
+     * @return mixed
+     */
+    public function findOneByResourceId($resourceId);
 
     /**
      * Return resources by criteria
@@ -40,6 +50,14 @@ interface ResourceManagerInterface
      * @param ResourceInterface $resource
      */
     public function update(ResourceInterface $resource);
+
+    /**
+     * Persist resource and any related tags in form
+     *
+     * @param ResourceInterface $resource
+     * @param FormTypeInterface $form
+     */
+    public function updateWithForm(ResourceInterface $resource, FormInterface $form);
 
     /**
      * Delete $resource

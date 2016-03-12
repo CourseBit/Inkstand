@@ -5,6 +5,15 @@ namespace Inkstand\Library\TagBundle\Model;
 interface TaggableInterface
 {
     /**
+     * Get name of taggable object.
+     *
+     * Can be a name column on the model, or something generated for user to see.
+     *
+     * @return string
+     */
+    public function getName();
+
+    /**
      * Add tagEntry
      *
      * @param TagEntryInterface $tagEntry

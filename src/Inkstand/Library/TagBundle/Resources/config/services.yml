@@ -1,9 +1,18 @@
 parameters:
     inkstand_tag.tag_manager.class: Inkstand\Library\TagBundle\Doctrine\TagManager
     inkstand_tag.model.tag.class: Inkstand\Library\TagBundle\Entity\Tag
+    inkstand_tag.voter.tag_voter.class: Inkstand\Library\TagBundle\Voter\TagVoter
 
 services:
     inkstand_tag.tag_manager:
         class: "%inkstand_tag.tag_manager.class%"
         arguments: [@form.factory, @doctrine.orm.entity_manager, "%inkstand_tag.model.tag.class%"]
 
+    # Voters
+    inkstand_tag.voter.tag_voter:
+        class:      "%inkstand_tag.voter.tag_voter.class%"
+        arguments:  [@inkstand_core.role]
+        public:     true
+        tags:
+            - { name: security.voter }
+            - { name: inkstand.voter }

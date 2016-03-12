@@ -29,17 +29,17 @@ abstract class Tag implements TagInterface
     /**
      * @var string
      */
-    protected $defaultValue;
+    protected $defaultValue = '';
 
     /**
      * @var array
      */
-    protected $choices;
+    protected $choices = '';
 
     /**
      * @var string
      */
-    protected $uniqueName;
+    protected $code;
 
     /**
      * @var boolean
@@ -154,26 +154,26 @@ abstract class Tag implements TagInterface
     }
 
     /**
-     * Set uniqueName
+     * Set code
      *
-     * @param string $uniqueName
+     * @param string $code
      * @return Tag
      */
-    public function setUniqueName($uniqueName)
+    public function setCode($code)
     {
-        $this->uniqueName = $uniqueName;
+        $this->code = $code;
 
         return $this;
     }
 
     /**
-     * Get uniqueName
+     * Get code
      *
      * @return string 
      */
-    public function getUniqueName()
+    public function getCode()
     {
-        return $this->uniqueName;
+        return $this->code;
     }
 
     /**

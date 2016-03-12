@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Inkstand\Library\TagBundle\Model\TagInterface;
 
-abstract class TagEntry// implements TagEntryInterface
+abstract class TagEntry implements TagEntryInterface
 {
     /**
      * @var integer
@@ -21,12 +21,12 @@ abstract class TagEntry// implements TagEntryInterface
     /**
      * @var integer
      */
-    protected $resourceId;
+    protected $objectId;
 
     /**
      * @var mixed
      */
-    protected $resource;
+    protected $object;
 
     /**
      * @var integer
@@ -79,6 +79,9 @@ abstract class TagEntry// implements TagEntryInterface
      */
     public function setValue($value)
     {
+        if(is_array($value)) {
+            $value = implode(PHP_EOL, $value);
+        }
         $this->value = $value;
 
         return $this;
@@ -100,9 +103,9 @@ abstract class TagEntry// implements TagEntryInterface
      * @param integer $objectId
      * @return TagEntry
      */
-    public function setResourceId($objectId)
+    public function setObjectId($objectId)
     {
-        $this->resourceId = $objectId;
+        $this->objectId = $objectId;
 
         return $this;
     }
@@ -112,9 +115,9 @@ abstract class TagEntry// implements TagEntryInterface
      *
      * @return integer
      */
-    public function getResourceId()
+    public function getObjectId()
     {
-        return $this->resourceId;
+        return $this->objectId;
     }
 
     /**
@@ -123,9 +126,9 @@ abstract class TagEntry// implements TagEntryInterface
      * @param mixed $object
      * @return TagEntry
      */
-    public function setResource($object)
+    public function setObject(TaggableInterface $object)
     {
-        $this->resource = $object;
+        $this->object = $object;
 
         return $this;
     }
@@ -133,11 +136,11 @@ abstract class TagEntry// implements TagEntryInterface
     /**
      * Get object
      *
-     * @return mixed
+     * @return TaggableInterface
      */
-    public function getResource()
+    public function getObject()
     {
-        return $this->resource;
+        return $this->object;
     }
 
     /**

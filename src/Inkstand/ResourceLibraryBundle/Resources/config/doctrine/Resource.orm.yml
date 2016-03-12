@@ -1,6 +1,7 @@
 Inkstand\ResourceLibraryBundle\Entity\Resource:
     type: entity
     table: lms_resource
+    repositoryClass: Inkstand\ResourceLibraryBundle\Entity\ResourceRepository
     id:
         resourceId:
             type: integer
@@ -42,7 +43,7 @@ Inkstand\ResourceLibraryBundle\Entity\Resource:
             scale: 0
             length: null
             unique: false
-            nullable: false
+            nullable: true
             precision: 0
         topicId:
             type: integer
@@ -60,6 +61,17 @@ Inkstand\ResourceLibraryBundle\Entity\Resource:
             nullable: true
             precision: 0
             column: rating_id
+    manyToMany:
+        topics:
+            targetEntity: Inkstand\ResourceLibraryBundle\Entity\Topic
+            joinTable:
+                name: lms_resource_topics
+                joinColumns:
+                    resource_id:
+                        referencedColumnName: resource_id
+                inverseJoinColumns:
+                    topic_id:
+                        referencedColumnName: topic_id
     manyToOne:
         resourceFileReference:
             targetEntity: Inkstand\Bundle\CoreBundle\Entity\FileReference
@@ -81,15 +93,6 @@ Inkstand\ResourceLibraryBundle\Entity\Resource:
                 resource_file_reference_id:
                     referencedColumnName: file_reference_id
             orphanRemoval: false
-        topic:
-            targetEntity: Inkstand\ResourceLibraryBundle\Entity\Topic
-            cascade: {  }
-            mappedBy: null
-            inversedBy: resources
-            joinColumns:
-                topic_id:
-                    referencedColumnName: topic_id
-            orphanRemoval: false
     oneToOne:
         rating:
             targetEntity: Inkstand\Library\RatingBundle\Entity\Rating
@@ -105,6 +108,6 @@ Inkstand\ResourceLibraryBundle\Entity\Resource:
     oneToMany:
         tagEntries:
             targetEntity: ResourceTagEntry
-            mappedBy: resource
+            mappedBy: object
             cascade: ["persist", "remove"]
     lifecycleCallbacks: {  }

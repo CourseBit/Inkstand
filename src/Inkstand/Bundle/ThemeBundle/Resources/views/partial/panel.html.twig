@@ -1,7 +1,8 @@
 <div class="panel panel-dark">
     {% if panel_title is defined %}
         <div class="panel-heading">
-            <h3 class="panel-title">{{ panel_title }}</h3>
+            <div class="toolbar pull-right">{% block toolbar %}{% endblock %}</div>
+            <h3 class="panel-title">{{ panel_title|trans }}</h3>
         </div>
     {% endif %}
     <div class="panel-body">

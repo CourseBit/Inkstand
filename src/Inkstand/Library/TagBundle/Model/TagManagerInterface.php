@@ -23,6 +23,14 @@ interface TagManagerInterface
     public function findOneBy(array $criteria);
 
     /**
+     * Return tag by code
+     *
+     * @param $code
+     * @return TagInterface
+     */
+    public function findOneByCode($code);
+
+    /**
      * Return tags by criteria
      *
      * @param array $criteria

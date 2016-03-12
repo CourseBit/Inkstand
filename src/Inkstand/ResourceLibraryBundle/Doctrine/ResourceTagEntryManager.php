@@ -40,6 +40,30 @@ class ResourceTagEntryManager extends TagEntryManager
     /**
      * {@inheritdoc}
      */
+    public function findAll()
+    {
+        return $this->repository->findAll();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findOneBy(array $criteria)
+    {
+        return $this->repository->findOneBy($criteria);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function findBy(array $criteria)
+    {
+        return $this->repository->findBy($criteria);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function update(TagEntryInterface $tag)
     {
         $this->objectManager->persist($tag);

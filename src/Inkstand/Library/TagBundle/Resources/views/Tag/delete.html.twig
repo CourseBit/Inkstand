@@ -1,0 +1,38 @@
+{% extends "InkstandThemeBundle:layout:default.html.twig" %}
+
+{% block title %}InkstandTagBundle:Tag:delete{% endblock %}
+
+{% block page_header %}{{ "tag.delete"|trans }}{% endblock %}
+
+{% set breadcrumbs = knp_menu_get("InkstandTagBundle:Builder:tagDeleteBreadcrumb") %}
+{% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
+
+{% block main_content %}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' %}
+        {% block panel_body %}
+            <p>{{ "tag.entries.deleteconfirmation"|trans }}</p>
+            {% if tag.tagEntries is not empty  %}
+                {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
+                    {% block grid_head %}
+                        <th>Name</th>
+                        <th>Value</th>
+                    {% endblock %}
+                    {% block grid_body %}
+                        {% for tagEntry in tag.tagEntries %}
+                            <tr>
+                                <td>{{ tagEntry.object.name }}</td>
+                                <td>{{ tagEntry.value }}</td>
+                            </tr>
+                        {% endfor %}
+                    {% endblock %}
+                {% endembed %}
+            {% else %}
+                <p class="text-muted">{{ "tag.entries.notfound"|trans }}</p>
+            {% endif %}
+            <hr>
+            {{ form_start(deleteForm) }}
+            {{ form_widget(deleteForm) }}
+            {{ form_end(deleteForm) }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

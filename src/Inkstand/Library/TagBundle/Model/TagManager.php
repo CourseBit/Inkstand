@@ -6,7 +6,7 @@ use Inkstand\Library\TagBundle\Form\Type\TagType;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormTypeInterface;
 
-abstract class TagManager// implements TagManagerInterface
+abstract class TagManager implements TagManagerInterface
 {
     /**
      * @var FormFactoryInterface
@@ -19,6 +19,15 @@ abstract class TagManager// implements TagManagerInterface
     public function __construct(FormFactoryInterface $formFactory)
     {
         $this->formFactory = $formFactory;
+    }
+
+    /**
+     * @param $code
+     * @return TagInterface
+     */
+    public function findOneByCode($code)
+    {
+        return $this->findOneBy(array('code' => $code));
     }
 
     /**
@@ -41,7 +50,7 @@ abstract class TagManager// implements TagManagerInterface
      * @param TagInterface $tag
      * @return FormTypeInterface
      */
-    public function getForm($tag)
+    public function getForm(TagInterface $tag)
     {
         $tagType = $this->formFactory->create(new TagType($this->getClass()), $tag);
 

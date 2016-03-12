@@ -88,21 +88,6 @@ interface ResourceInterface
     public function getResourceFileReference();
 
     /**
-     * Set topic
-     *
-     * @param \Inkstand\ResourceLibraryBundle\Entity\Topic $topic
-     * @return Resource
-     */
-    public function setTopic(\Inkstand\ResourceLibraryBundle\Entity\Topic $topic = null);
-
-    /**
-     * Get topic
-     *
-     * @return \Inkstand\ResourceLibraryBundle\Entity\Topic
-     */
-    public function getTopic();
-
-    /**
      * Set ratingId
      *
      * @param integer $ratingId
@@ -131,4 +116,26 @@ interface ResourceInterface
      * @return RatingInterface
      */
     public function getRating();
+
+    /**
+     * Add topics
+     *
+     * @param TopicInterface $topics
+     * @return Resource
+     */
+    public function addTopic(TopicInterface $topics);
+
+    /**
+     * Remove topics
+     *
+     * @param TopicInterface $topics
+     */
+    public function removeTopic(TopicInterface $topics);
+
+    /**
+     * Get topics
+     *
+     * @return \Doctrine\Common\Collections\Collection
+     */
+    public function getTopics();
 }

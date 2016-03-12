@@ -9,12 +9,13 @@ use Inkstand\Library\RatingBundle\Model\RatingInterface;
 use Inkstand\Library\TagBundle\Model\TagEntryInterface;
 use Inkstand\Library\TagBundle\Model\TaggableInterface;
 use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
+use Inkstand\ResourceLibraryBundle\Model\TopicInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Resource
  */
-class Resource implements ResourceInterface, RateableInterface//, TaggableInterface
+class Resource implements ResourceInterface, RateableInterface, TaggableInterface
 {
     /**
      * @var integer
@@ -41,12 +42,6 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
 
     /**
      * @var integer
-     *
-     */
-    private $topicId;
-
-    /**
-     * @var integer
      */
     private $ratingId;
 
@@ -58,7 +53,7 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
 
     /**
      */
-    private $topic;
+    private $topics;
 
     /**
      * @var
@@ -71,6 +66,15 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
     private $tagEntries;
 
     private $tags;
+
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->tagEntries = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->topics = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     // Important
     public function getTag()
@@ -99,14 +103,6 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
             $this->addTagEntry($tagEntry);
         }
 
-    }
-
-    /**
-     * Constructor
-     */
-    public function __construct()
-    {
-        $this->tagEntries = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -199,29 +195,6 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
     }
 
     /**
-     * Set topicId
-     *
-     * @param integer $topicId
-     * @return Resource
-     */
-    public function setTopicId($topicId)
-    {
-        $this->topicId = $topicId;
-
-        return $this;
-    }
-
-    /**
-     * Get topicId
-     *
-     * @return integer 
-     */
-    public function getTopicId()
-    {
-        return $this->topicId;
-    }
-
-    /**
      * Set resourceFileReference
      *
      * @param \Inkstand\Bundle\CoreBundle\Entity\FileReference $resourceFileReference
@@ -242,29 +215,6 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
     public function getResourceFileReference()
     {
         return $this->resourceFileReference;
-    }
-
-    /**
-     * Set topic
-     *
-     * @param \Inkstand\ResourceLibraryBundle\Entity\Topic $topic
-     * @return Resource
-     */
-    public function setTopic(\Inkstand\ResourceLibraryBundle\Entity\Topic $topic = null)
-    {
-        $this->topic = $topic;
-
-        return $this;
-    }
-
-    /**
-     * Get topic
-     *
-     * @return \Inkstand\ResourceLibraryBundle\Entity\Topic 
-     */
-    public function getTopic()
-    {
-        return $this->topic;
     }
 
     /**
@@ -319,7 +269,7 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
      * @param TagEntryInterface $tagEntry
      * @return Resource
      */
-    public function addTagEntry($tagEntry)
+    public function addTagEntry(TagEntryInterface $tagEntry)
     {
         $this->tagEntries[] = $tagEntry;
 
@@ -331,7 +281,7 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
      *
      * @param TagEntryInterface $tagEntry
      */
-    public function removeTagEntry($tagEntry)
+    public function removeTagEntry(TagEntryInterface $tagEntry)
     {
         $this->tagEntries->removeElement($tagEntry);
     }
@@ -390,5 +340,66 @@ class Resource implements ResourceInterface, RateableInterface//, TaggableInterf
     public function getThumbnailFileReference()
     {
         return $this->thumbnailFileReference;
+    }
+    /**
+     * @var integer
+     */
+    private $topicId;
+
+
+    /**
+     * Set topicId
+     *
+     * @param integer $topicId
+     * @return Resource
+     */
+    public function setTopicId($topicId)
+    {
+        $this->topicId = $topicId;
+
+        return $this;
+    }
+
+    /**
+     * Get topicId
+     *
+     * @return integer 
+     */
+    public function getTopicId()
+    {
+        return $this->topicId;
+    }
+
+    /**
+     * Add topics
+     *
+     * @param TopicInterface $topics
+     * @return Resource
+     */
+    public function addTopic(TopicInterface $topics)
+    {
+        $this->topics[] = $topics;
+
+        return $this;
+    }
+
+    /**
+     * Remove topics
+     *
+     * @param TopicInterface $topics
+     */
+    public function removeTopic(TopicInterface $topics)
+    {
+        $this->topics->removeElement($topics);
+    }
+
+    /**
+     * Get topics
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getTopics()
+    {
+        return $this->topics;
     }
 }

@@ -66,7 +66,7 @@ class ResourceTagManager extends BaseTagManager
     /**
      * {@inheritdoc}
      */
-    public function update($tag)
+    public function update(TagInterface $tag)
     {
         $this->objectManager->persist($tag);
         $this->objectManager->flush();

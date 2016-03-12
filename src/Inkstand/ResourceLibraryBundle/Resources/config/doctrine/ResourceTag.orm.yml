@@ -16,15 +16,16 @@ Inkstand\ResourceLibraryBundle\Entity\ResourceTag:
             type: string
             length: 255
         defaultValue:
-            type: string
-            length: 255
+            type: text
+            nullabe: true
             column: default_value
         choices:
             type: text
-        uniqueName:
+            nullable: true
+        code:
             type: string
             length: 255
-            column: unique_name
+            column: code
         required:
             type: boolean
     oneToMany:

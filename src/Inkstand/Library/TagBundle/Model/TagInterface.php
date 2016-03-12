@@ -76,19 +76,19 @@ interface TagInterface
     public function getChoices();
 
     /**
-     * Set uniqueName
+     * Set code
      *
-     * @param string $uniqueName
+     * @param string $code
      * @return TagInterface
      */
-    public function setUniqueName($uniqueName);
+    public function setCode($code);
 
     /**
-     * Get uniqueName
+     * Get code
      *
      * @return string
      */
-    public function getUniqueName();
+    public function getCode();
 
     /**
      * Set required

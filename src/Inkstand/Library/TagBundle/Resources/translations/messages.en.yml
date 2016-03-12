@@ -1,0 +1,23 @@
+tag:
+    tag: Tag
+    add: Add Tag
+    add.success: Tag added successfully
+    edit: Edit Tag
+    edit.success: Tag edited successfully
+    delete: Delete Tag
+    delete.success: Tag deleted successfully
+    name: Tag Name
+    code: Code
+    code.help: A unique identifier for this tag
+    type: Type
+    text: Text input
+    dropdown: Dropdown list
+    checkbox: Checkbox
+    required: Required
+    default_value: Default Value
+    choices: Choices
+    notfound: Tag could not be found
+
+    entries:
+        notfound: No tag entries found
+        deleteconfirmation: All tag entries associated with %tagname% will be deleted. See below for a preview:

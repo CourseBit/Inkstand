@@ -9,6 +9,28 @@
 
 {% block main_content %}
     {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Resources"} %}
+        {% block toolbar %}
+            {% if is_granted("add", newResource) or is_granted("add", newResourceTag) or is_granted('edit', newResourceTag) or is_granted('delete', newResourceTag) %}
+                <div class="dropdown">
+                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <i class="fa fa-cog"></i> Actions
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                        {% if is_granted('add', newResource) %}
+                            <li><a href="{{ path("inkstand_resource_library_resource_add") }}">Add Resource</a></li>
+                        {% endif %}
+                        {% if is_granted('add', newResourceTag) %}
+                            <li><a href="{{ path("inkstand_tag_add", {"tagManagerServiceId": "inkstand_resource_library.resource_tag_manager"}) }}">Add Resource Tags</a></li>
+                        {% endif %}
+                        <li role="separator" class="divider"></li>
+                        {% if is_granted('add', newResourceTag) or is_granted('edit', newResourceTag) or is_granted('delete', newResourceTag) %}
+                            <li><a href="{{ path("inkstand_tag_list", {"tagManagerServiceId": "inkstand_resource_library.resource_tag_manager"}) }}">Manage Resource Tags</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endblock %}
         {% block panel_body %}
             {% if resources is not empty  %}
                 {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
@@ -22,10 +44,12 @@
                             <tr>
                                 <td>{{ render(controller('InkstandResourceLibraryBundle:Resource:render', {'resource': resource})) }}</td>
                                 <td>
-                                    {% if resource.topic %}
-                                        {{ resource.topic.name }}
-                                    {% else %}
+                                    {% if resource.topics is empty %}
                                         <span class="text-muted">N/A</span>
+                                    {% else %}
+                                        {% for topic in resource.topics %}
+                                            <a href="{{ path("inkstand_resource_library_topic_view", {"topicId": topic.topicId}) }}">{{ topic.name }}</a><br>
+                                        {% endfor %}
                                     {% endif %}
                                 </td>
                                 <td>
@@ -58,17 +82,34 @@
                             </div>
                             <div class="modal-body">
                                 <div class="row">
-                                    <div class="col-sm-8">
+                                    <div class="col-sm-7">
                                         {{ resource.description }}
                                     </div>
-                                    <div class="col-sm-4">
-                                        <p>
-                                            Topic: {% if resource.topic %}
-                                                {{ resource.topic.name }}
-                                            {% else %}
-                                                <span class="text-muted">N/A</span>
-                                            {% endif %}
-                                        </p>
+                                    <div class="col-sm-5">
+                                        <div class="row">
+                                            <div class="col-sm-4">
+                                                <label>Topic:</label>
+                                            </div>
+                                            <div class="col-sm-8">
+                                                {% if resource.topics is empty %}
+                                                    <span class="text-muted">N/A</span>
+                                                {% else %}
+                                                    {% for topic in resource.topics %}
+                                                        <a href="{{ path("inkstand_resource_library_topic_view", {"topicId": topic.topicId}) }}">{{ topic.name }}</a><br>
+                                                    {% endfor %}
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                        {% for tagEntry in resource.tagEntries %}
+                                            <div class="row">
+                                                <div class="col-sm-4">
+                                                    <label>{{ tagEntry.tag.name }}:</label>
+                                                </div>
+                                                <div class="col-sm-8">
+                                                    {{ tagEntry.value }}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
                                     </div>
                                 </div>
                             </div>
@@ -83,41 +124,72 @@
             {% endfor %}
         {% endblock %}
     {% endembed %}
-{% endblock %}
 
-{% block extra_widgets %}
-    {% if is_granted('add', newResource) or is_granted('add', newTopic) %}
-        {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Actions"} %}
-            {% block panel_extra %}
-                <div class="list-group">
-                    {% if is_granted('add', newResource) %}
-                        <a href="{{ path("inkstand_resource_library_resource_add") }}" class="list-group-item">Add Resource</a>
-                    {% endif %}
-                    <a href="{{ path("inkstand_tag_add", {"tagManager": "inkstand_resource_library.resource_tag_manager"}) }}" class="list-group-item">Add Resource Tags</a>
-                    {% if is_granted('add', newTopic) %}
-                        <a href="{{ path("inkstand_resource_library_topic_add") }}" class="list-group-item">Add Topic</a>
-                    {% endif %}
+    {% if topics is not empty %}
+        {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Topics"} %}
+            {% block toolbar %}
+                {% if is_granted('add', newTopic) %}
+                    <div class="dropdown">
+                        <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <i class="fa fa-cog"></i> Actions
+                            <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                            {% if is_granted('add', newTopic) %}
+                                <li><a href="{{ path("inkstand_resource_library_topic_add") }}">Add Topic</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                {% endif%}
+            {% endblock %}
+            {% block panel_body %}
+                <div class="row">
+                    {% for topic in topics %}
+                        <div class="col-sm-6">
+                            <div class="media">
+                                <div class="media-left">
+                                    <a href="#">
+                                        <img width="75" class="media-object" src="{{ image(topic.thumbnailFileReference) }}" alt="">
+                                    </a>
+                                </div>
+                                <div class="media-body">
+                                    <strong><a href="{{ path('inkstand_resource_library_topic_view', {'topicId':topic.topicId}) }}">{{ topic.name }}</a></strong>
+                                    <p>{{ topic.excerpt }}</p>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
                 </div>
             {% endblock %}
         {% endembed %}
     {% endif %}
-    {% if topics is not empty %}
-        {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Topics"} %}
-            {% block panel_body %}
-                {% for topic in topics %}
-                    <div class="media">
-                        <div class="media-left">
-                            <a href="#">
-                                <img width="75" class="media-object" src="{{ image(topic.thumbnailFileReference) }}" alt="">
-                            </a>
-                        </div>
-                        <div class="media-body">
-                            <strong><a href="{{ path('inkstand_resource_library_topic_view', {'topicId':topic.topicId}) }}">{{ topic.name }}</a></strong>
-                            <p>{{ topic.excerpt }}</p>
-                        </div>
-                    </div>
-                {% endfor %}
-            {% endblock %}
-        {% endembed %}
-    {% endif %}
+
+    <div id="resource-filter-modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title"><i class="fa fa-filter"></i> Filter Resources</h4>
+                </div>
+                <div class="modal-body">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Apply Filters</button>
+                </div>
+            </div><!-- /.modal-content -->
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+{% endblock %}
+
+{% block extra_widgets %}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Filters"} %}
+        {% block panel_body %}
+            {% form_theme filterForm ":Form:bootstrap-form.html.twig" %}
+            {{ form_start(filterForm) }}
+            {{ form_widget(filterForm) }}
+            {{ form_end(filterForm) }}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

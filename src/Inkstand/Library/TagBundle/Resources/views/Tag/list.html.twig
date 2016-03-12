@@ -8,9 +8,9 @@
 {% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
 
 {% block main_content %}
-    {% embed "InkstandThemeBundle:partial:panel.html.twig" with {"panel_title":"tag.category." ~ category} %}
+    {% embed "InkstandThemeBundle:partial:panel.html.twig" with {"panel_title":"Tags"} %}
         {% block panel_body %}
-            <a class="btn btn-default" href="{{ path("inkstand_tag_add", {"category":category}) }}"><i class="fa fa-plus"></i> {{ "tag.add"|trans }}</a>
+            <a class="btn btn-default" href="{{ path("inkstand_tag_add", {"tagManagerServiceId":tagManagerServiceId}) }}"><i class="fa fa-plus"></i> {{ "tag.add"|trans }}</a>
             <hr>
             {% if tags is not empty  %}
                 {% embed 'InkstandThemeBundle:partial:grid.html.twig' %}
@@ -25,7 +25,12 @@
                                 <td>{{ tag.name }}</td>
                                 <td>{{ "tag." ~ tag.type }}</td>
                                 <td>
-                                    <a href="{{ path("inkstand_tag_edit", {"tagId": tag.tagId}) }}"><i class="fa fa-pencil fa-lg"></i></a>
+                                    {% if is_granted("edit", tag) %}
+                                        <a href="{{ path("inkstand_tag_edit", {"tagManagerServiceId":tagManagerServiceId, "tagId": tag.tagId}) }}"><i class="fa fa-pencil fa-lg"></i></a>
+                                    {% endif %}
+                                    {% if is_granted("delete", tag) %}
+                                        <a href="{{ path("inkstand_tag_delete", {"tagManagerServiceId":tagManagerServiceId, "tagId": tag.tagId}) }}"><i class="fa fa-times fa-lg"></i></a>
+                                    {% endif %}
                                 </td>
                             </tr>
                         {% endfor %}

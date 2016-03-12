@@ -81,6 +81,10 @@ ul.activities li.activity:last-child {
 	border-radius: 0;
 }
 
+.panel > .panel-heading .toolbar {
+	margin-top: -6px;
+}
+
 /* DataTables
 ----------------------------- */
 .dataTables_wrapper .sorting_asc:after {

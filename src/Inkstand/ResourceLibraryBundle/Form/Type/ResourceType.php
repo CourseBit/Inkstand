@@ -17,6 +17,8 @@ use Inkstand\Bundle\CourseBundle\Form\Type\MetricType;
 
 class ResourceType extends AbstractType
 {
+    const TAG_FIELD_PREFIX = 'resource_tag_field_';
+
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $resourceId = $options['data']->getResourceId();
@@ -32,41 +34,15 @@ class ResourceType extends AbstractType
             'required' => false
         ));
         $builder->add('description', 'textarea',array(
-            'attr' => array('class' => 'wysiwyg-editor')
+            'attr' => array('class' => 'wysiwyg-editor'),
+            'required' => false
         ));
-        $builder->add('topic', 'entity', array(
+        $builder->add('topics', 'entity', array(
             'class' => 'InkstandResourceLibraryBundle:Topic',
             'property' => 'name',
             'expanded' => false,
-            'multiple' => false
+            'multiple' => true
         ));
-
-        $builder->add('Tag' , 'entity' , array(
-            'class'    => 'InkstandResourceLibraryBundle:ResourceTag' ,
-            'property' => 'name' ,
-            'expanded' => true ,
-            'multiple' => true ,
-        ));;
-//        $builder->add('tagEntries', 'collection', array(
-//            'type' => new ResourceTagEntryType(),
-//        ));
-//
-//        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
-//            /** @var ResourceInterface $resource */
-//            $resource = $event->getData();
-//            $form = $event->getForm();
-//
-//            dump($resource->getTagEntries());
-//
-//            /** @var TagEntryInterface $tagEntry */
-//            foreach($resource->getTagEntries() as $tagEntry) {
-//                /** @var TagInterface $tag */
-//                $tag = $tagEntry->getTag();
-//                $form->add($tag->getUniqueName(), $tag->getType(), array(
-//                    'label' => $tag->getName()
-//                ));
-//            }
-//        });
     }
 
     public function getName()
@@ -77,6 +53,7 @@ class ResourceType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
+            'allow_extra_fields' => true,
             'data_class' => 'Inkstand\ResourceLibraryBundle\Entity\Resource',
         ));
     }

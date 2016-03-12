@@ -22,8 +22,9 @@ class TagType extends AbstractType
             'label' => 'tag.name',
             'required' => true
         ));
-        $builder->add('uniqueName', 'text', array(
-            'label' => 'tag.unique_name'
+        $builder->add('code', 'text', array(
+            'label' => 'tag.code',
+            'help_text' => 'tag.code.help'
         ));
         $builder->add('type', 'choice', array(
             'label' => 'tag.type',

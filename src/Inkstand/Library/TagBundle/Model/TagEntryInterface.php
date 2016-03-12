@@ -58,9 +58,12 @@ interface TagEntryInterface
 
     public function setTag(TagInterface $tag);
 
+    /**
+     * @return TagInterface
+     */
     public function getTag();
 
-    public function setObject($object);
+    public function setObject(TaggableInterface $object);
 
     public function getObject();
 }

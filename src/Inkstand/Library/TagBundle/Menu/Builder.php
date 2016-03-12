@@ -42,4 +42,15 @@ class Builder implements ContainerAwareInterface
 
         return $menu;
     }
+
+    public function tagDeleteBreadcrumb(FactoryInterface $factory, array $options)
+    {
+        $menu = $factory->createItem('root');
+
+        $menu->addChild('dashboard', array('route' => 'inkstand_dashboard'));
+        $menu->addChild('tag.tag');
+        $menu->addChild('tag.delete');
+
+        return $menu;
+    }
 }

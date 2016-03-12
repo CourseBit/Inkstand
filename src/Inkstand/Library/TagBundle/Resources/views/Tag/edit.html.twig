@@ -8,7 +8,11 @@
 {% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
 
 {% block main_content %}
-    {{ form_start(tagForm) }}
-    {{ form_widget(tagForm) }}
-    {{ form_end(tagForm) }}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "tag.tag"} %}
+        {% block panel_body %}
+            {{ form_start(tagForm) }}
+            {{ form_widget(tagForm) }}
+            {{ form_end(tagForm) }}
+        {% endblock %}
+    {% endembed %}
 {% endblock %}

@@ -9,20 +9,20 @@ Inkstand\ResourceLibraryBundle\Entity\ResourceTagEntry:
                 strategy: AUTO
             column: tag_entry_id
     fields:
-        resourceId:
+        objectId:
             type: integer
-            column: resource_id
+            column: object_id
         tagId:
             type: integer
             column: tag_id
         value:
             type: text
     manyToOne:
-        resource:
+        object:
             targetEntity: Resource
             inversedBy: tagEntries
             joinColumn:
-                name: resource_id
+                name: object_id
                 referencedColumnName: resource_id
                 nullable: false
         tag:
