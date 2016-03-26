@@ -107,10 +107,10 @@ class Course
     }
 
     /**
-     * Get courseId
-     *
-     * @return integer 
-     */
+ * Get courseId
+ *
+ * @return integer
+ */
     public function getCourseId()
     {
         return $this->courseId;
@@ -132,7 +132,7 @@ class Course
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -155,7 +155,7 @@ class Course
     /**
      * Get abbreviation
      *
-     * @return string 
+     * @return string
      */
     public function getAbbreviation()
     {
@@ -178,7 +178,7 @@ class Course
     /**
      * Get slug
      *
-     * @return string 
+     * @return string
      */
     public function getSlug()
     {
@@ -201,7 +201,7 @@ class Course
     /**
      * Get identifier
      *
-     * @return string 
+     * @return string
      */
     public function getIdentifier()
     {
@@ -224,7 +224,7 @@ class Course
     /**
      * Get description
      *
-     * @return string 
+     * @return string
      */
     public function getDescription()
     {
@@ -247,7 +247,7 @@ class Course
     /**
      * Get featuredImage
      *
-     * @return string 
+     * @return string
      */
     public function getFeaturedImage()
     {
@@ -270,7 +270,7 @@ class Course
     /**
      * Get categoryId
      *
-     * @return integer 
+     * @return integer
      */
     public function getCategoryId()
     {
@@ -316,7 +316,7 @@ class Course
     /**
      * Get category
      *
-     * @return \Inkstand\Bundle\CourseBundle\Entity\CourseCategory 
+     * @return \Inkstand\Bundle\CourseBundle\Entity\CourseCategory
      */
     public function getCategory()
     {
@@ -349,7 +349,7 @@ class Course
     /**
      * Get modules
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getModules()
     {
@@ -382,7 +382,7 @@ class Course
     /**
      * Get courseEnrollmentTypes
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCourseEnrollmentTypes()
     {
