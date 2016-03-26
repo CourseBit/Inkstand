@@ -20,10 +20,10 @@
                         {% if is_granted('add', newResource) %}
                             <li><a href="{{ path("inkstand_resource_library_resource_add") }}">Add Resource</a></li>
                         {% endif %}
+                        <li role="separator" class="divider"></li>
                         {% if is_granted('add', newResourceTag) %}
                             <li><a href="{{ path("inkstand_tag_add", {"tagManagerServiceId": "inkstand_resource_library.resource_tag_manager"}) }}">Add Resource Tags</a></li>
                         {% endif %}
-                        <li role="separator" class="divider"></li>
                         {% if is_granted('add', newResourceTag) or is_granted('edit', newResourceTag) or is_granted('delete', newResourceTag) %}
                             <li><a href="{{ path("inkstand_tag_list", {"tagManagerServiceId": "inkstand_resource_library.resource_tag_manager"}) }}">Manage Resource Tags</a></li>
                         {% endif %}
@@ -83,7 +83,7 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-sm-7">
-                                        {{ resource.description }}
+                                        {{ resource.description|raw }}
                                     </div>
                                     <div class="col-sm-5">
                                         <div class="row">
