@@ -3,6 +3,8 @@
 namespace Inkstand\ResourceLibraryBundle\Controller;
 
 use Inkstand\Bundle\CoreBundle\Controller\Controller;
+use Inkstand\Bundle\CoreBundle\Entity\Setting;
+use Inkstand\Bundle\UserBundle\Entity\User;
 use Inkstand\Library\RatingBundle\Entity\Rating;
 use Inkstand\Library\RatingBundle\Model\UserReviewInterface;
 use Inkstand\ResourceLibraryBundle\Entity\Resource;
@@ -12,6 +14,7 @@ use Inkstand\ResourceLibraryBundle\Model\ResourceManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Component\Form\FormInterface;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -188,5 +191,46 @@ class ResourceController extends Controller
         return array(
             'resource' => $resource
         );
+    }
+
+    /**
+     * @Route("/library/resource/grid-columns-form", name="inkstand_resource_library_grid_columns_form")
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function gridColumnsFormAction(Request $request)
+    {
+        /** @var ResourceManagerInterface $resourceManager */
+        $resourceManager = $this->get('inkstand_resource_library.resource_manager');
+
+        $gridColumnsForm = $resourceManager->getGridColumnsForm($this->generateUrl('inkstand_resource_library_grid_columns_form'), $this->getUser());
+
+        $gridColumnsForm->handleRequest($request);
+
+        /** @var User $user */
+        $user = $this->getUser();
+        if($user->getOrganization()) {
+            // TODO: Use organization code when it's added
+            $settingName = $user->getOrganization()->getName() . 'gridColumns';
+        } else {
+            $settingName = $user->getUsername() . 'gridColumns';
+        }
+
+        if($gridColumnsForm->isValid()) {
+            $tagCodes = json_encode($gridColumnsForm->get('tags')->getData());
+
+            $repository = $this->getDoctrine()->getRepository('Inkstand\Bundle\CoreBundle\Entity\Setting');
+            $setting = $repository->findOneBy(array('name' => $settingName));
+            if(empty($setting)) {
+                $setting = new Setting();
+            }
+
+            $setting->setName($settingName);
+            $setting->setValue($tagCodes);
+            $this->getDoctrine()->getManager()->persist($setting);
+            $this->getDoctrine()->getManager()->flush();
+        }
+
+        return $this->redirect($this->generateUrl('inkstand_resource_library_index'));
     }
 }

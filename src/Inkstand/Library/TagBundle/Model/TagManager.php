@@ -31,6 +31,23 @@ abstract class TagManager implements TagManagerInterface
     }
 
     /**
+     * Get tag options for form choices
+     *
+     * @return array
+     */
+    public function getOptions()
+    {
+        $tagArray = array();
+        $tags = $this->findAll();
+        /** @var TagInterface $tag */
+        foreach($tags as $tag) {
+            $tagArray[$tag->getCode()] = $tag->getName();
+        }
+
+        return $tagArray;
+    }
+
+    /**
      * Return new tag instance
      *
      * @return TagInterface

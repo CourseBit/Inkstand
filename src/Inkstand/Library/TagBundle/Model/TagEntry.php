@@ -16,7 +16,7 @@ abstract class TagEntry implements TagEntryInterface
     /**
      * @var string
      */
-    protected $value;
+    protected $value = null;
 
     /**
      * @var integer

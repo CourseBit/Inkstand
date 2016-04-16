@@ -2,6 +2,7 @@
 
 namespace Inkstand\ResourceLibraryBundle\Model;
 
+use Inkstand\Bundle\UserBundle\Entity\User;
 use Inkstand\ResourceLibraryBundle\Model\ResourceInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormTypeInterface;
@@ -80,4 +81,13 @@ interface ResourceManagerInterface
      * @return ResourceInterface
      */
     public function getForm(ResourceInterface $resource);
+
+    /**
+     * Get form for changing grid columns
+     *
+     * @param string $actionUrl
+     * @param User $user
+     * @return FormInterface
+     */
+    public function getGridColumnsForm($actionUrl, User $user);
 }

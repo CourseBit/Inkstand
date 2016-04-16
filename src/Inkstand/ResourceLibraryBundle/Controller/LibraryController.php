@@ -20,7 +20,7 @@ class LibraryController extends Controller
      */
     public function indexAction()
     {
-        /** @var ResourceManagerInterface $resourceService */
+        /** @var ResourceManagerInterface $resourceManager */
         $resourceManager = $this->get('inkstand_resource_library.resource_manager');
         /** @var ResourceTagManager $resourceTagManager */
         $resourceTagManager = $this->get('inkstand_resource_library.resource_tag_manager');
@@ -69,13 +69,16 @@ class LibraryController extends Controller
         ));
         $filterForm = $filterForm->getForm();
 
+        $gridColumnsForm = $resourceManager->getGridColumnsForm($this->generateUrl('inkstand_resource_library_grid_columns_form'), $this->getUser());
+
         return array(
             'resources' => $resources,
             'newResource' => new Resource(),
             'newResourceTag' => $resourceTagManager->create(),
             'newTopic' => new Topic(),
             'topics' => $topics,
-            'filterForm' => $filterForm->createView()
+            'filterForm' => $filterForm->createView(),
+            'gridColumnsForm' => $gridColumnsForm->createView()
         );
     }
 }

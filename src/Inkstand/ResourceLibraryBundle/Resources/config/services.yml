@@ -11,7 +11,7 @@ parameters:
 services:
     inkstand_resource_library.resource_manager:
         class: "%inkstand_resource_library.resource_manager.class%"
-        arguments: [@form.factory, @inkstand_resource_library.resource_tag_manager, @inkstand_resource_library.resource_tag_entry_manager, @doctrine.orm.entity_manager, "%inkstand_resource_library.model.resource.class%"]
+        arguments: [@form.factory, @inkstand_resource_library.resource_tag_manager, @inkstand_resource_library.resource_tag_entry_manager, @inkstand_core.setting, @doctrine.orm.entity_manager, "%inkstand_resource_library.model.resource.class%"]
 
     inkstand_resource_library.resource_tag_manager:
         class: "%inkstand_resource_library.resource_tag_manager.class%"
@@ -49,3 +49,11 @@ services:
         arguments: [@knp_menu.factory]
         tags:
             - { name: knp_menu.menu_builder, method: createResourceRateBreadcrumbs, alias: resource_rate_breadcrumbs }
+
+    # Twig extensions
+    inkstand_resource_library.grid_columns_extension:
+        class: Inkstand\ResourceLibraryBundle\Twig\GridColumnsExtension
+        arguments: [@inkstand_resource_library.resource_tag_manager, @inkstand_core.setting, @security.context]
+        public: false
+        tags:
+            - { name: twig.extension }

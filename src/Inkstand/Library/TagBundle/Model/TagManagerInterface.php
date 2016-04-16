@@ -39,6 +39,13 @@ interface TagManagerInterface
     public function findBy(array $criteria);
 
     /**
+     * Get tag options for form choices
+     *
+     * @return array
+     */
+    public function getOptions();
+
+    /**
      * Return new tag instance
      *
      * @return TagInterface

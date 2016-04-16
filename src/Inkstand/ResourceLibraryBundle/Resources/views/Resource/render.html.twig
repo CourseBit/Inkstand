@@ -1,12 +1,15 @@
 <div class="media">
     <div class="media-left">
         <a href="#">
-            <img width="75" class="media-object" src="{{ image(resource.thumbnailFileReference) }}" alt="">
+            {% if resource.thumbnailFileReference %}
+                <img width="75" class="media-object" src="{{ image(resource.thumbnailFileReference) }}" alt="">
+            {% else %}
+                <div style="width:75px"></div>
+            {% endif %}
         </a>
     </div>
     <div class="media-body">
         <a href="#" data-toggle="modal" data-target="#resource-{{ resource.resourceId }}-preview-modal"><h4 class="media-heading">{{ resource.name }}</h4></a>
-        {{ resource.description|raw }}
         <div>
             {{ render(controller("InkstandRatingBundle:Rating:renderRateable", {"rateable": resource})) }}
         </div>

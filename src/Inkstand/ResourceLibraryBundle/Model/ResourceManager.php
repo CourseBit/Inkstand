@@ -2,6 +2,8 @@
 
 namespace Inkstand\ResourceLibraryBundle\Model;
 
+use Inkstand\Bundle\CoreBundle\Service\SettingService;
+use Inkstand\Bundle\UserBundle\Entity\User;
 use Inkstand\Library\RatingBundle\Model\RateableInterface;
 use Inkstand\Library\TagBundle\Model\TagEntryInterface;
 use Inkstand\Library\TagBundle\Model\TagEntryManagerInterface;
@@ -34,14 +36,20 @@ abstract class ResourceManager implements ResourceManagerInterface
     private $resourceTagEntryManager;
 
     /**
+     * @var SettingService
+     */
+    private $settingService;
+
+    /**
      * @param FormFactoryInterface $formFactory
      */
     public function __construct(FormFactoryInterface $formFactory, $resourceTagManager,
-                                 $resourceTagEntryManager)
+                                 $resourceTagEntryManager, $settingService)
     {
         $this->formFactory = $formFactory;
         $this->resourceTagManager = $resourceTagManager;
         $this->resourceTagEntryManager = $resourceTagEntryManager;
+        $this->settingService = $settingService;
     }
 
     /**
@@ -71,7 +79,7 @@ abstract class ResourceManager implements ResourceManagerInterface
      * Persist resource and any related tags in form
      *
      * @param ResourceInterface $resource
-     * @param FormTypeInterface $form
+     * @param FormTypeInterface $resourceForm
      */
     public function updateWithForm(ResourceInterface $resource, FormInterface $resourceForm)
     {
@@ -134,6 +142,7 @@ abstract class ResourceManager implements ResourceManagerInterface
                         'label' => $resourceTag->getName(),
                         'mapped' => false,
                         'data' => $tagEntry->getValue(),
+                        'required' => $resourceTag->getRequired()
                     ));
                     break;
                 case TagInterface::TYPE_DROPDOWN:
@@ -148,6 +157,7 @@ abstract class ResourceManager implements ResourceManagerInterface
                         'empty_value' => 'Choose ' . $resourceTag->getName(),
                         'expanded' => false,
                         'multiple' => false,
+                        'required' => $resourceTag->getRequired()
                     ));
                     break;
                 case TagInterface::TYPE_CHECKBOX:
@@ -161,6 +171,7 @@ abstract class ResourceManager implements ResourceManagerInterface
                         'choices' => $choices,
                         'expanded' => true,
                         'multiple' => true,
+                        'required' => $resourceTag->getRequired()
                     ));
                     break;
             }
@@ -222,4 +233,44 @@ abstract class ResourceManager implements ResourceManagerInterface
 //            }
 //        }
 //    }
+
+    /**
+     * Get form for changing grid columns
+     *
+     * @param string $actionUrl
+     * @param User $user
+     * @return FormInterface
+     */
+    public function getGridColumnsForm($actionUrl, User $user)
+    {
+        $builder = $this->formFactory->createBuilder('form');
+
+        $tagOptions = $this->resourceTagManager->getOptions();
+
+        if($user->getOrganization()) {
+            // TODO: Use organization code when it's added
+            $settingName = $user->getOrganization()->getName() . 'gridColumns';
+        } else {
+            $settingName = $user->getUsername() . 'gridColumns';
+        }
+
+        $tagCodes = $this->settingService->get($settingName);
+        if(!empty($tagCodes) && !empty($tagCodes->getValue())) {
+            $choices = json_decode($tagCodes->getValue());
+        } else {
+            $choices = array();
+        }
+
+        $builder->add('tags', 'choice', array(
+            'choices' => $tagOptions,
+            'label' => '',
+            'expanded' => true,
+            'multiple' => true,
+            'data' => $choices
+        ));
+
+        $builder->setAction($actionUrl);
+
+        return $builder->getForm();
+    }
 }

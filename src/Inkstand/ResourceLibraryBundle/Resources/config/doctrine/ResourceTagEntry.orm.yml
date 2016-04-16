@@ -17,6 +17,7 @@ Inkstand\ResourceLibraryBundle\Entity\ResourceTagEntry:
             column: tag_id
         value:
             type: text
+            nullable: true
     manyToOne:
         object:
             targetEntity: Resource

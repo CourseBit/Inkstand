@@ -34,13 +34,13 @@ class ResourceManager extends BaseResourceManager
      * @param $class
      */
     public function __construct(FormFactoryInterface $formFactory,  $resourceTagManager,
-                                 $resourceTagEntryManager, ObjectManager $objectManager, $class)
+                                 $resourceTagEntryManager, $settingService, ObjectManager $objectManager, $class)
     {
         $this->objectManager = $objectManager;
         $this->class = $class;
         $this->repository = $objectManager->getRepository($class);
 
-        parent::__construct($formFactory, $resourceTagManager, $resourceTagEntryManager);
+        parent::__construct($formFactory, $resourceTagManager, $resourceTagEntryManager, $settingService);
     }
 
     /**
