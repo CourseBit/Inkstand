@@ -173,6 +173,27 @@
         {% endembed %}
     {% endif %}
 
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' with {"panel_title": "Schedule"} %}
+        {% block toolbar %}
+            {% if is_granted('add', newTopic) %}
+                <div class="dropdown">
+                    <button class="btn btn-default btn-sm dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        Actions
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu1">
+                        {% if is_granted('add', newTopic) %}
+                            <li><a href="{{ path("inkstand_resource_library_schedule") }}">Edit schedule</a></li>
+                        {% endif %}
+                    </ul>
+                </div>
+            {% endif%}
+        {% endblock %}
+        {% block panel_body %}
+            {{ render(controller('InkstandCalendarBundle:Calendar:render', { "calendar": calendar })) }}
+        {% endblock %}
+    {% endembed %}
+
     <div id="resource-filter-modal" class="modal fade" tabindex="-1" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">

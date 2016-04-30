@@ -1,0 +1,87 @@
+{% extends "InkstandThemeBundle:layout:full.html.twig" %}
+
+{% block title %}InkstandResourceLibraryBundle:Library:index{% endblock %}
+
+{% block page_header %}{{ app.user.organization.name }} Schedule{% endblock %}
+
+{% set breadcrumbs = knp_menu_get('InkstandResourceLibraryBundle:Builder:libraryScheduleBreadcrumb') %}
+{% block breadcrumbs %}{{ knp_menu_render(breadcrumbs, {}, "breadcrumb") }}{% endblock %}
+
+{% block main_content %}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' %}
+        {% block panel_body %}
+            <div class="row">
+                <div class="col-xs-6">
+                    {{ render(controller('InkstandCalendarBundle:Calendar:render', { 'calendar': calendar })) }}
+                </div>
+                <div class="col-xs-6">
+
+                    {% if resources is not empty  %}
+                        <ul class="list-group external-events">
+                        {% for resource in resources %}
+                            <li class="list-group-item external-event">{{ resource.name }}</li>
+                        {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="text-muted">No resources yet.</p>
+                    {% endif %}
+                    {% for resource in resources %}
+                        <!-- Modal -->
+                        <div class="modal fade" id="resource-{{ resource.resourceId }}-preview-modal" tabindex="-1" role="dialog" aria-labelledby="resource-preview-modal">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h4 class="modal-title" id="myModalLabel">{{ resource.name }} {{ render(controller("InkstandRatingBundle:Rating:renderRateable", {"rateable": resource})) }}</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col-sm-7">
+                                                {{ resource.description|raw }}
+                                            </div>
+                                            <div class="col-sm-5">
+                                                <div class="row">
+                                                    <div class="col-sm-4">
+                                                        <label>Topic:</label>
+                                                    </div>
+                                                    <div class="col-sm-8">
+                                                        {% if resource.topics is empty %}
+                                                            <span class="text-muted">N/A</span>
+                                                        {% else %}
+                                                            {% for topic in resource.topics %}
+                                                                <a href="{{ path("inkstand_resource_library_topic_view", {"topicId": topic.topicId}) }}">{{ topic.name }}</a><br>
+                                                            {% endfor %}
+                                                        {% endif %}
+                                                    </div>
+                                                </div>
+                                                {% for tagEntry in resource.tagEntries %}
+                                                    <div class="row">
+                                                        <div class="col-sm-4">
+                                                            <label>{{ tagEntry.tag.name }}:</label>
+                                                        </div>
+                                                        <div class="col-sm-8">
+                                                            {% if tagEntry.value %}
+                                                                {{ tagEntry.value }}
+                                                            {% else %}
+                                                                <span class="text-muted">None</span>
+                                                            {% endif %}
+                                                        </div>
+                                                    </div>
+                                                {% endfor %}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a class="btn btn-default" href="{{ path("inkstand_resource_library_resource_rate", {"resourceId": resource.resourceId}) }}"><i class="fa fa-star"></i> Rate</a>
+                                        <button type="button" class="btn btn-primary"><i class="fa fa-download"></i> Download</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

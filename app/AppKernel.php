@@ -31,6 +31,7 @@ class AppKernel extends Kernel
             new Inkstand\ResourceLibraryBundle\InkstandResourceLibraryBundle(),
             new Inkstand\Library\RatingBundle\InkstandRatingBundle(),
             new Inkstand\Library\TagBundle\InkstandTagBundle(),
+            new Inkstand\Library\CalendarBundle\InkstandCalendarBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

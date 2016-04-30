@@ -1,0 +1,13 @@
+{% extends "InkstandThemeBundle:layout:default.html.twig" %}
+
+{% block title %}Calendar{% endblock %}
+
+{% block page_header %}Calendar{% endblock %}
+
+{% block main_content %}
+    {% embed 'InkstandThemeBundle:partial:panel.html.twig' %}
+        {% block panel_body %}
+            {{ render(controller('InkstandCalendarBundle:Calendar:render', { "calendar": calendar })) }}
+        {% endblock %}
+    {% endembed %}
+{% endblock %}

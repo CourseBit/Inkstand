@@ -1,3 +1,7 @@
+inkstand_calendar:
+    resource: "@InkstandCalendarBundle/Resources/config/routing.yml"
+    prefix:   /
+
 inkstand_tag:
     resource: "@InkstandTagBundle/Resources/config/routing.yml"
     prefix:   /

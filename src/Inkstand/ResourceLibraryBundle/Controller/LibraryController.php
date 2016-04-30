@@ -2,7 +2,10 @@
 
 namespace Inkstand\ResourceLibraryBundle\Controller;
 
+use FOS\UserBundle\Model\UserInterface;
 use Inkstand\Bundle\CoreBundle\Controller\Controller;
+use Inkstand\Bundle\UserBundle\Model\OrganizationInterface;
+use Inkstand\Library\CalendarBundle\Model\CalendarManagerInterface;
 use Inkstand\Library\TagBundle\Model\TagInterface;
 use Inkstand\ResourceLibraryBundle\Doctrine\ResourceTagManager;
 use Inkstand\ResourceLibraryBundle\Entity\Resource;
@@ -71,6 +74,10 @@ class LibraryController extends Controller
 
         $gridColumnsForm = $resourceManager->getGridColumnsForm($this->generateUrl('inkstand_resource_library_grid_columns_form'), $this->getUser());
 
+        /** @var CalendarManagerInterface $calendarManager */
+        $calendarManager = $this->get('inkstand_calendar.calendar_manager');
+        $calendar = $calendarManager->findOneByCode($this->getUser()->getOrganization()->getName());
+
         return array(
             'resources' => $resources,
             'newResource' => new Resource(),
@@ -78,7 +85,36 @@ class LibraryController extends Controller
             'newTopic' => new Topic(),
             'topics' => $topics,
             'filterForm' => $filterForm->createView(),
-            'gridColumnsForm' => $gridColumnsForm->createView()
+            'gridColumnsForm' => $gridColumnsForm->createView(),
+            'calendar' => $calendar
+        );
+    }
+
+    /**
+     * @Route("/library/schedule", name="inkstand_resource_library_schedule")
+     * @Template
+     */
+    public function scheduleAction()
+    {
+        /** @var ResourceManagerInterface $resourceManager */
+        $resourceManager = $this->get('inkstand_resource_library.resource_manager');
+        /** @var CalendarManagerInterface $calendarManager */
+        $calendarManager = $this->get('inkstand_calendar.calendar_manager');
+
+        /** @var UserInterface $user */
+        $user = $this->getUser();
+
+        /** @var OrganizationInterface $organization */
+        if (!$organization = $user->getOrganization()) {
+            throw new \LogicException('You do not belong to an organization');
+        }
+
+        $calendar = $calendarManager->getCalendar($organization->getName());
+        $resources = $resourceManager->findAll();
+
+        return array(
+            'calendar' => $calendar,
+            'resources' => $resources
         );
     }
 }

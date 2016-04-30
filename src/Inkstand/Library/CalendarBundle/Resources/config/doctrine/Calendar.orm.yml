@@ -1,0 +1,21 @@
+Inkstand\Library\CalendarBundle\Entity\Calendar:
+    type: entity
+    table: lib_calendar
+    repositoryClass: Inkstand\Library\CalendarBundle\Entity\CalendarRepository
+    id:
+        calendarId:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            column: calendar_id
+    fields:
+        code:
+            type: string
+            length: 255
+    oneToMany:
+        events:
+            targetEntity: Event
+            mappedBy: calendar
+            cascade: ["persist", "remove"]
+    lifecycleCallbacks: {  }

@@ -1,0 +1,49 @@
+Inkstand\Library\CalendarBundle\Entity\Event:
+    type: entity
+    table: lib_calendar_event
+    repositoryClass: Inkstand\Library\CalendarBundle\Entity\EventRepository
+    id:
+        eventId:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+            column: event_id
+    fields:
+        calendarId:
+            type: integer
+            column: calendar_id
+        title:
+            type: string
+            length: 255
+            nullable: false
+        allDay:
+            type: boolean
+            column: all_day
+        start:
+            type: datetime
+            nullable: false
+        end:
+            type: datetime
+            nullable: true
+        url:
+            type: text
+            nullable: true
+        className:
+            type: string
+            column: class_name
+            nullable: true
+        rendering:
+            type: string
+            nullable: true
+        overlap:
+            type: boolean
+    manyToOne:
+        calendar:
+            targetEntity: Calendar
+            inversedBy: events
+            joinColumn:
+                name: calendar_id
+                referencedColumnName: calendar_id
+                nullable: false
+    lifecycleCallbacks: {  }

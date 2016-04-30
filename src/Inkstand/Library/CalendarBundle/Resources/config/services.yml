@@ -1,0 +1,22 @@
+services:
+    # Managers
+    inkstand_calendar.event_manager:
+        class: Inkstand\Library\CalendarBundle\Model\EventManager
+        arguments: [@inkstand_calendar.event_repository]
+
+    inkstand_calendar.calendar_manager:
+        class: Inkstand\Library\CalendarBundle\Model\CalendarManager
+        arguments: [@inkstand_calendar.calendar_repository]
+
+    # Repositories
+    inkstand_calendar.event_repository:
+        class: Inkstand\Library\CalendarBundle\Entity\EventRepository
+        factory: [@doctrine.orm.entity_manager, getRepository]
+        arguments:
+            - Inkstand\Library\CalendarBundle\Entity\Event
+
+    inkstand_calendar.calendar_repository:
+        class: Inkstand\Library\CalendarBundle\Entity\CalendarRepository
+        factory: [@doctrine.orm.entity_manager, getRepository]
+        arguments:
+            - Inkstand\Library\CalendarBundle\Entity\Calendar

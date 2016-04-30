@@ -5,3 +5,4 @@ resource_library:
     library: Library
     topic: Topic
     rate: Rate %name%
+    schedule: Schedule

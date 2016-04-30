@@ -1,0 +1,15 @@
+inkstand_calendar_index:
+    path: /calendar
+    defaults: { _controller: InkstandCalendarBundle:Calendar:index }
+
+inkstand_calendar_json:
+    path: /calendar/json/{calendarId}
+    defaults: { _controller: InkstandCalendarBundle:Calendar:json }
+
+inkstand_calendar_event_save:
+    path: /calendar/event/save
+    defaults: { _controller: InkstandCalendarBundle:Event:save }
+
+inkstand_calendar_event_add:
+    path: /calendar/event/add
+    defaults: { _controller: InkstandCalendarBundle:Event:add }

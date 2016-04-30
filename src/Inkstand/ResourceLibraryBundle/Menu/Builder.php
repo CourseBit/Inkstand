@@ -21,6 +21,16 @@ class Builder implements ContainerAwareInterface
         return $menu;
     }
 
+    public function libraryScheduleBreadcrumb(FactoryInterface $factory, array $optiona)
+    {
+        $menu = $factory->createItem('root');
+        $menu->addChild('dashboard', array('route' => 'inkstand_dashboard'));
+        $menu->addChild('resource_library.library', array('route' => 'inkstand_resource_library_index'));
+        $menu->addChild('resource_library.schedule');
+
+        return $menu;
+    }
+
     public function resourceRateBreadcrumb(FactoryInterface $factory, array $options)
     {
         if(!array_key_exists('resource', $options)) {
